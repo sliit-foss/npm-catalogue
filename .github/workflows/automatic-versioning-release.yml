@@ -1,0 +1,16 @@
+name: Release - [automatic-versioning]
+on:
+  push:
+    branches:
+      - main
+  workflow_dispatch:
+  paths:
+      - packages/automatic-versioning/**
+
+jobs:
+  release-automatic-versioning:
+    steps:
+        uses: ../actions/package-release
+        with:
+          package: automatic-versioning
+  

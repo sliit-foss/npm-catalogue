@@ -13,8 +13,9 @@
     "lint": {
       "outputs": []
     },
-    "dev": {
-      "cache": false
+    "release": {
+      "dependsOn": ["^release"],
+      "outputs": ["dist/**"]
     }
   }
 }
