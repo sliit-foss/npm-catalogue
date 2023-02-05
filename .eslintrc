@@ -1,0 +1,81 @@
+{
+  "extends": ["eslint:recommended", "plugin:jest/recommended"],
+  "env": {
+    "browser": false,
+    "node": true,
+    "jest": true,
+    "es6": true
+  },
+  "plugins": ["import", "jest"],
+  "parserOptions": {
+    "ecmaVersion": 2021,
+    "sourceType": "module",
+    "requireConfigFile": false
+  },
+  "rules": {
+    "arrow-body-style": ["error", "as-needed"],
+    "arrow-parens": ["error", "always"],
+    "arrow-spacing": "error",
+    "camelcase": ["off"],
+    "comma-dangle": ["error", "always-multiline"],
+    "curly": "error",
+    "default-case": "error",
+    "dot-notation": "warn",
+    "eqeqeq": "error",
+    "newline-per-chained-call": "off",
+    "no-alert": "warn",
+    "no-confusing-arrow": "off",
+    "no-console": "warn",
+    "no-duplicate-imports": [
+      "error",
+      {
+        "includeExports": true
+      }
+    ],
+    "no-else-return": "error",
+    "no-eq-null": "error",
+    "no-extra-bind": "error",
+    "no-lone-blocks": "error",
+    "no-multiple-empty-lines": "error",
+    "no-nested-ternary": ["error"],
+    "no-param-reassign": "warn",
+    "no-return-assign": "error",
+    "no-return-await": "error",
+    "no-self-compare": "error",
+    "no-template-curly-in-string": "error",
+    "no-useless-concat": "error",
+    "no-useless-constructor": "error",
+    "no-useless-escape": "error",
+    "no-var": "error",
+    "prefer-const": "error",
+    "prefer-promise-reject-errors": "off",
+    "prefer-template": "error",
+    "require-await": "warn",
+    "spaced-comment": "error",
+    "symbol-description": "error",
+    "object-curly-spacing": ["error", "always"],
+    "no-use-before-define": 0,
+    "import/extensions": "off",
+    "import/newline-after-import": [
+      "error",
+      {
+        "count": 1
+      }
+    ],
+    "import/no-dynamic-require": "off",
+    "import/no-extraneous-dependencies": "off",
+    "import/no-named-as-default": "off",
+    "import/no-unresolved": "off",
+    "import/order": "off",
+    "import/prefer-default-export": "off",
+    "import/imports-first": 0,
+    "jest/no-focused-tests": 2,
+    "jest/no-identical-title": 2,
+    "jest/lowercase-name": "error",
+    "jest/no-test-prefixes": "error",
+    "jest/prefer-to-be-null": "error",
+    "jest/prefer-to-be-undefined": "error",
+    "jest/valid-describe": "error",
+    "jest/valid-expect-in-promise": "warn"
+  }
+}
