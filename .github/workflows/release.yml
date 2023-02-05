@@ -1,0 +1,34 @@
+name: CI Release
+on:
+  push:
+    branches:
+      - main
+  workflow_dispatch:
+
+jobs:
+  release:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v3
+      - uses: actions/setup-node@v3
+        with:
+          node-version: 14
+
+      - name: Configure git
+        run: |
+          git config --global user.email "github-actions[bot]@users.noreply.github.com"
+          git config --global user.name "github-actions[bot]"
+
+      - run: git fetch --prune --unshallow
+
+      - name: Install dependencies
+        run: npm install -g pnpm && pnpm install --production --ignore-scripts
+      
+      - name: Create .npmrc
+        run: echo "//registry.npmjs.org/:_authToken=${{ secrets.NPM_TOKEN }}" > .npmrc
+
+      - name: Publish package on NPM
+        run: "pnpm release"
+
+      - name: Update repository
+        run: "git push origin main"

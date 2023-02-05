@@ -1,0 +1,20 @@
+name: CI Tests
+on:
+  pull_request:
+    branches:
+      - main
+
+jobs:
+  release:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v3
+        uses: actions/setup-node@v3
+        with:
+          node-version: 14
+
+      - name: Install dependencies
+        run: npm install -g pnpm && pnpm install --production --ignore-scripts
+      
+      - name: Run unit tests
+        run: "pnpm test"

@@ -1,11 +1,11 @@
 const exec = require('@actions/exec');
 
-const executor = ({ command, args }) => {
+const executor = (command) => {
   return new Promise((resolve, reject) => {
     let output = "";
     let err = "";
     exec
-      .exec(command, args, {
+      .exec(command, [], {
         listeners: {
           stdout: (data) => {
             output += data.toString();

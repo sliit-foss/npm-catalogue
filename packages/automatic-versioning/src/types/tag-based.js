@@ -1,10 +1,10 @@
 import run from "../utils/runner";
 
 const runner = (name) => {
-  run({ command: "npm", args: [`pkg`, "get", "version"] }).then(
+  run(`npm pkg get version`).then(
     (initialVersion) => {
       initialVersion = initialVersion.replace(/\n/g, "")?.replaceAll('"', "")?.trim();
-      run({ command: "git", args: [`tag`, "--sort=committerdate"] }).then(
+      run("git tag --sort=committerdate").then(
         (tags) => {
           let latest = tags
             .split("\n")
@@ -19,17 +19,11 @@ const runner = (name) => {
             )}-${latest[3]}`;
           }
           if (latest && latest !== initialVersion) {
-            run({
-              command: "npm",
-              args: [`version`, latest, "--no-git-tag-version"],
-            })
+            run(`npm version ${latest} --no-git-tag-version`)
               .then(() => {
-                const successMsg = `Bumped version of ${name} from ${initialVersion} to ${latest}`;
-                run({ command: "git", args: [`add`, "."] }).then(() => {
-                  run({
-                    command: "git",
-                    args: [`commit`, "-m", `${successMsg}`],
-                  }).then(() => {
+                const successMsg = `"CI: Bumped version of ${name} from ${initialVersion} to ${latest}"`;
+                run('git add .').then(() => {
+                  run(`git commit -m ${successMsg}`).then(() => {
                     console.log(successMsg.green);
                   });
                 });

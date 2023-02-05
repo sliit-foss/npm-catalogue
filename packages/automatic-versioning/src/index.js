@@ -24,7 +24,7 @@ if (!runFromRoot) {
 }
 
 if (args.includes("--tag-based")) {
-  tagBasedRunner(name, noCommitEdit);
+  tagBasedRunner(name);
 } else {
   defaultRunner(name, noCommitEdit);
 }

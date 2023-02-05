@@ -1,0 +1,5 @@
+packages/**/.turbo/
+packages/**/src/
+packages/**/test/
+packages/**/coverage
+packages/**/node_modules/

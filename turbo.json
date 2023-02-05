@@ -1,21 +1,43 @@
 {
   "$schema": "https://turbo.build/schema.json",
-  "globalDependencies": ["**/.env.*local"],
+  "globalDependencies": [
+    "**/.env.*local"
+  ],
   "pipeline": {
     "build": {
-      "dependsOn": ["^build"],
-      "outputs": ["dist/**"]
+      "dependsOn": [
+        "^build"
+      ],
+      "outputs": [
+        "dist/**"
+      ]
     },
-    "bump-version":{
-      "dependsOn": ["^bump-version"],
-      "outputs": ["package.json"]
+    "bump-version": {
+      "dependsOn": [
+        "^bump-version"
+      ],
+      "outputs": [
+        "package.json"
+      ]
     },
     "lint": {
       "outputs": []
     },
     "release": {
-      "dependsOn": ["^release"],
-      "outputs": ["dist/**"]
+      "dependsOn": [
+        "^release"
+      ],
+      "outputs": [
+        "dist/**"
+      ]
+    },
+    "test": {
+      "dependsOn": [
+        "^test"
+      ],
+      "outputs": [
+        "dist/**"
+      ]
     }
   }
 }

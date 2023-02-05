@@ -1,10 +1,10 @@
 import run from "../utils/runner";
 
 const runner = (name, noCommitEdit) => {
-  run({ command: "git", args: [`show`, `./`] }).then((diff) => {
+  run("git show ./").then((diff) => {
     if (diff) {
-      console.log(`Diff found, running post-commit for ${name}`.green);
-      run({ command: "git", args: ["log", "-1"] }).then((res) => {
+      console.log(`Diff found, running versioning for ${name}`.green);
+      run("git log -1").then((res) => {
         const commitMessage = res.split("\n")[4].trim();
         if (!commitMessage.startsWith("Merge")) {
           if (!commitMessage.startsWith("Revert")) {
@@ -29,16 +29,10 @@ const runner = (name, noCommitEdit) => {
                 console.log(`No commit prefix found in commit message, skipping version bump`.yellow);
                 return;
               }
-              run({
-                command: "npm",
-                args: [`--no-git-tag-version`, `version`, versionUpdate],
-              }).then(() => {
-                const successMsg = `CI: ${commitMessage[0] == commitMessage[0].toUpperCase() ? "B" : "b"}umped version of ${name} to match latest ${versionUpdate} release`;
-                run({ command: "git", args: [`add`, "."] }).then(() => {
-                  run({
-                    command: "git",
-                    args: [`commit`, "-m", `${successMsg}`],
-                  }).then(() => {
+              run(`npm --no-git-tag-version version ${versionUpdate}`).then(() => {
+                const successMsg = `"CI: ${commitMessage[0] == commitMessage[0].toUpperCase() ? "B" : "b"}umped version of ${name} to match latest ${versionUpdate} release"`;
+                run("git add .").then(() => {
+                  run(`git commit -m ${successMsg}`).then(() => {
                     console.log(successMsg.green);
                   });
                 });
@@ -48,15 +42,7 @@ const runner = (name, noCommitEdit) => {
                 console.log(`No bump found in commit message, skipping version bump`.yellow);
               } else {
                 console.log(`No bump found in commit message, skipping version bump and editing commit message`.yellow);
-                run({
-                  command: "git",
-                  args: [
-                    `commit`,
-                    "--amend",
-                    "-m",
-                    `${commitMessage.replaceAll("--no-bump", "")}`,
-                  ],
-                }).then(() => {
+                run(`git commit --amend -m ${commitMessage.replaceAll("--no-bump", "")}`).then(() => {
                   console.log("Successfully edited commit message".green);
                 });
               }
