@@ -1,15 +1,13 @@
-require("colors");
-const path = require("path");
+require('colors');
+import path from "path";
 
-const defaultRunner = require("./types/default");
-const tagBasedRunner = require("./types/tag-based");
+import defaultRunner from "./types/default"
+import tagBasedRunner from "./types/tag-based"
 
 const args = process.argv.slice(2);
 
-let name = "app";
-let runFromRoot = false;
-let rootDir = "../../../";
-let noCommitEdit = false;
+let name = "app", rootDir = "../../../";
+let runFromRoot = false, noCommitEdit = false;
 
 args.forEach((arg) => {
   if (arg.includes("--name=")) name = arg.replace("--name=", "");

@@ -7,9 +7,11 @@
   ],
   "scripts": {
     "build": "turbo run build",
+    "bump-version": "turbo run bump-version",
     "dev": "turbo run dev",
     "lint": "turbo run lint",
-    "format": "prettier --write \"**/*.{js,ts,tsx,md}\""
+    "format": "prettier --write \"**/*.{js,ts,tsx,md}\"",
+    "prepare": "husky install"
   },
   "devDependencies": {
     "@commitlint/cli": "17.4.2",

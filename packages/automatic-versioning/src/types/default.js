@@ -1,6 +1,6 @@
 import run from "../utils/runner";
 
-export default (name, noCommitEdit) => {
+const runner = (name, noCommitEdit) => {
   run({ command: "git", args: [`show`, `./`] }).then((diff) => {
     if (diff) {
       console.log(`Diff found, running post-commit for ${name}`.green);
@@ -26,19 +26,14 @@ export default (name, noCommitEdit) => {
               } else if (changeType.toLowerCase() == "fix") {
                 versionUpdate = "patch";
               } else {
-                console.log(
-                  `No commit prefix found in commit message, skipping version bump`
-                    .yellow
-                );
+                console.log(`No commit prefix found in commit message, skipping version bump`.yellow);
                 return;
               }
               run({
                 command: "npm",
                 args: [`--no-git-tag-version`, `version`, versionUpdate],
               }).then(() => {
-                const successMsg = `${
-                  commitMessage[0] == commitMessage[0].toUpperCase() ? "B" : "b"
-                }umped version of ${name} to match latest ${versionUpdate} release`;
+                const successMsg = `CI: ${commitMessage[0] == commitMessage[0].toUpperCase() ? "B" : "b"}umped version of ${name} to match latest ${versionUpdate} release`;
                 run({ command: "git", args: [`add`, "."] }).then(() => {
                   run({
                     command: "git",
@@ -50,15 +45,9 @@ export default (name, noCommitEdit) => {
               });
             } else {
               if (noCommitEdit) {
-                console.log(
-                  `No bump found in commit message, skipping version bump`
-                    .yellow
-                );
+                console.log(`No bump found in commit message, skipping version bump`.yellow);
               } else {
-                console.log(
-                  `No bump found in commit message, skipping version bump and editing commit message`
-                    .yellow
-                );
+                console.log(`No bump found in commit message, skipping version bump and editing commit message`.yellow);
                 run({
                   command: "git",
                   args: [
@@ -84,3 +73,5 @@ export default (name, noCommitEdit) => {
     }
   });
 };
+
+export default runner;

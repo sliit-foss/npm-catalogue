@@ -1,6 +1,6 @@
-import exec from "@actions/exec";
+const exec = require('@actions/exec');
 
-export default ({ command, args }) => {
+const executor = ({ command, args }) => {
   return new Promise((resolve, reject) => {
     let output = "";
     let err = "";
@@ -24,3 +24,5 @@ export default ({ command, args }) => {
       });
   });
 };
+
+export default executor;

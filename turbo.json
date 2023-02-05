@@ -6,6 +6,10 @@
       "dependsOn": ["^build"],
       "outputs": ["dist/**"]
     },
+    "bump-version":{
+      "dependsOn": ["^bump-version"],
+      "outputs": ["package.json"]
+    },
     "lint": {
       "outputs": []
     },

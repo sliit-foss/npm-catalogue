@@ -1,12 +1,9 @@
 import run from "../utils/runner";
 
-export default (name) => {
+const runner = (name) => {
   run({ command: "npm", args: [`pkg`, "get", "version"] }).then(
     (initialVersion) => {
-      initialVersion = initialVersion
-        .replace(/\n/g, "")
-        ?.replaceAll('"', "")
-        ?.trim();
+      initialVersion = initialVersion.replace(/\n/g, "")?.replaceAll('"', "")?.trim();
       run({ command: "git", args: [`tag`, "--sort=committerdate"] }).then(
         (tags) => {
           let latest = tags
@@ -39,12 +36,12 @@ export default (name) => {
               })
               .catch(() => {});
           } else {
-            console.log(
-              `No tag diff found, skipping version bump for ${name}`.yellow
-            );
+            console.log(`No tag diff found, skipping version bump for ${name}`.yellow);
           }
         }
       );
     }
   );
 };
+
+export default runner;
