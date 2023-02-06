@@ -42,10 +42,5 @@ jobs:
           elif [ "$releasePrefix" == "FEAT" -o "$releasePrefix" == "Feat" ]; then
               release="minor"   
           fi
-          git config pull.rebase false
           git add . && git commit -m "CI: @sliit-foss/automatic-versioning - $release release" || true
-          git pull origin main -X ours
-          if [ -z "$(git show .)" ] ; then
-              git reset --hard HEAD~1
-          fi
-          git push origin main
+          git pull && git push origin main
