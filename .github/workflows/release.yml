@@ -32,5 +32,14 @@ jobs:
       - name: Publish package on NPM
         run: pnpm release
 
-      - name: Update repository
-        run: git push origin main
+      - name: Update release info
+        run: |
+          lastCommit=$(git log -1 --pretty=%B)
+          releasePrefix=(${lastCommit//:/ })
+          release="patch"
+          if [ "$releasePrefix" == "FEAT!" -o "$releasePrefix" == "Feat!" ]; then
+              release="major"
+          elif [ "$releasePrefix" == "FEAT" -o "$releasePrefix" == "Feat" ]; then
+              release="minor"   
+          fi
+          git add . && git commit -m "CI: @sliit-foss/automatic-versioning - $release release" && git push origin main
