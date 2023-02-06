@@ -30,7 +30,7 @@ const runner = (name, noCommitEdit) => {
                 return;
               }
               run(`npm --no-git-tag-version version ${versionUpdate}`).then(() => {
-                const successMsg = `"CI: ${commitMessage[0] == commitMessage[0].toUpperCase() ? "B" : "b"}umped version of ${name} to match latest ${versionUpdate} release"`;
+                const successMsg = `"CI: ${name} - ${versionUpdate} release"`;
                 run("git add .").then(() => {
                   run(`git commit -m ${successMsg}`).then(() => {
                     console.log(successMsg.green);

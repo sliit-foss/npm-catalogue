@@ -26,9 +26,11 @@ jobs:
       
       - name: Create .npmrc
         run: echo "//registry.npmjs.org/:_authToken=${{ secrets.NPM_TOKEN }}" > .npmrc
+        
+      - run: echo "git-checks=false" >> .npmrc
 
       - name: Publish package on NPM
-        run: "pnpm release"
+        run: pnpm release
 
       - name: Update repository
-        run: "git push origin main"
+        run: git push origin main

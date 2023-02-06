@@ -1,5 +1,5 @@
-packages/**/.turbo/
-packages/**/src/
-packages/**/test/
-packages/**/coverage
-packages/**/node_modules/
+.turbo/
+src/
+test/
+coverage/
+node_modules/

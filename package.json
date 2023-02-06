@@ -12,14 +12,15 @@
     "lint": "turbo run lint",
     "format": "prettier --write \"**/*.{js,ts,tsx,md}\"",
     "prepare": "husky install",
+    "prerelease": "turbo run prerelease",
     "release": "turbo run release",
     "test": "turbo run test"
   },
   "dependencies": {
     "esbuild": "0.17.5",
+    "jest": "29.4.1",
     "prettier": "2.8.3",
-    "turbo": "1.7.3",
-    "jest": "29.4.1"
+    "turbo": "1.7.3"
   },
   "devDependencies": {
     "@commitlint/cli": "17.4.2",

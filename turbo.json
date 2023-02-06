@@ -5,38 +5,40 @@
   ],
   "pipeline": {
     "build": {
-      "dependsOn": [
-        "^build"
-      ],
+      "dependsOn": [],
       "outputs": [
         "dist/**"
       ]
     },
     "bump-version": {
       "dependsOn": [
-        "^bump-version"
+        "build"
       ],
       "outputs": [
         "package.json"
       ]
     },
-    "lint": {
-      "outputs": []
+    "format": {},
+    "lint": {},
+    "prerelease": {
+      "dependsOn": [],
+      "outputs": [
+        ".npmignore"
+      ]
     },
     "release": {
       "dependsOn": [
-        "^release"
+        "prerelease",
+        "bump-version"
       ],
-      "outputs": [
-        "dist/**"
-      ]
+      "outputs": []
     },
     "test": {
       "dependsOn": [
-        "^test"
+        "build"
       ],
       "outputs": [
-        "dist/**"
+        "coverage/**"
       ]
     }
   }
