@@ -7,8 +7,7 @@
         "build": "esbuild src/index.js --bundle --platform=node --target=node14 --outfile=dist/index.js --sourcemap --minify",
         "bump-version": "pnpm build && npx automatic-versioning --name=@sliit-foss/leaderboard",
         "prerelease": "cp ../../.npmignore .",
-        "postrelease": "git push && git fetch --prune",
-        "release": "pnpm run prerelease && pnpm run bump-version && pnpm publish --access=public --tag=latest || true && pnpm run postrelease",
+        "release": "pnpm run prerelease && pnpm run bump-version && pnpm publish --access=public --tag=latest || true",
         "test": "dotenv -- jest --coverage --verbose --runInBand --forceExit"
     },
     "dependencies": {
