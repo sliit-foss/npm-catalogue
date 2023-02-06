@@ -1,6 +1,6 @@
 {
     "name": "@sliit-foss/leaderboard",
-    "version": "0.0.0",
+    "version": "0.0.7",
     "description": "A utility package for fetching a list of contributor scores to a GitHub organization or repository",
     "main": "dist/index.js",
     "scripts": {
