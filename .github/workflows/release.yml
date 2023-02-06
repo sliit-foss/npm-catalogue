@@ -43,5 +43,5 @@ jobs:
               release="minor"   
           fi
           git config pull.rebase false
-          git add . && git commit -m "CI: @sliit-foss/automatic-versioning - $release release"
+          git add . && git commit -m "CI: @sliit-foss/automatic-versioning - $release release" || true
           git pull origin main -X ours && git push origin main
