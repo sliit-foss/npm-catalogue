@@ -5,7 +5,7 @@
   "main": "dist/index.js",
   "scripts": {
     "build": "esbuild src/index.js --bundle --platform=node --target=node14 --outfile=dist/index.js --sourcemap --minify",
-    "bump-version": "node dist/index.js --name=@sliit-foss/automatic-versioning --run-from-root",
+    "bump-version": "node dist/index.js --name=@sliit-foss/automatic-versioning",
     "prerelease": "cp ../../.npmignore .",
     "release": "pnpm publish --access=public --tag=latest || true",
     "test": "jest --coverage --verbose --runInBand --detectOpenHandles --forceExit"

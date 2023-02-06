@@ -6,8 +6,10 @@ import tagBasedRunner from "./types/tag-based"
 
 const args = process.argv.slice(2);
 
-let name = "app", rootDir = "../../../";
-let runFromRoot = false, noCommitEdit = false;
+const defaultRootDir = "../../../../";
+
+let name = "app", rootDir = defaultRootDir;
+let noCommitEdit = false;
 
 args.forEach((arg) => {
   if (arg.includes("--name=")) name = arg.replace("--name=", "");
@@ -18,7 +20,7 @@ args.forEach((arg) => {
 
 console.log(`Running version bump for ${name}`.green);
 
-if (!runFromRoot) {
+if (rootDir !== defaultRootDir) {
   const parentDir = path.resolve(__dirname, rootDir);
   process.chdir(parentDir);
 }
