@@ -32,7 +32,7 @@ yarn add @sliit-foss/automatic-versioning
 
 ```json
   "scripts": {
-      "bump-version": "yarn --cwd ./node_modules/@sliit-foss/automatic-versioning/ run bump-version --name=<package_name>"
+      "bump-version": "npx automatic-versioning --name=<package_name>"
   }
 ```
 
@@ -106,7 +106,7 @@ yarn bump-version
 - By default automatic-versioning will edit the commit message in no-bump commits and remove the no-bump part from the commit message. Sometimes such as in the case of monorepos, this can prove to be a problem. To disable this behavior, add the following to your script: "--no-commit-edit"<br/>
 
 ```bash
-  yarn --cwd ./node_modules/@sliit-foss/automatic-versioning/ run bump-version --name=<package_name> --no-commit-edit
+  npx automatic-versioning --name=<package_name> --no-commit-edit
 ```
 
 ## Custom app directory to run incrementing script<br/><br/>
@@ -114,5 +114,5 @@ yarn bump-version
 - Add the following argument to your bump script: "--rootDir=<custom_dir>"<br/>
 
 ```bash
-  yarn --cwd ./node_modules/@sliit-foss/automatic-versioning/ run bump-version --name=<package_name> --rootDir=<custom_dir>
+  npx automatic-versioning --name=<package_name> --rootDir=<custom_dir>
 ```

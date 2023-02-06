@@ -6,12 +6,14 @@ importers:
     specifiers:
       '@commitlint/cli': 17.4.2
       '@commitlint/config-conventional': 17.4.2
+      '@sliit-foss/automatic-versioning': 1.0.2
       esbuild: 0.17.5
       husky: 8.0.3
       jest: 29.4.1
       prettier: 2.8.3
       turbo: 1.7.3
     dependencies:
+      '@sliit-foss/automatic-versioning': 1.0.2
       esbuild: 0.17.5
       jest: 29.4.1
       prettier: 2.8.3
@@ -1037,6 +1039,13 @@ packages:
     resolution: {integrity: sha512-SwUDyjWnah1AaNl7kxsa7cfLhlTYoiyhDAIgyh+El30YvXs/o7OLXpYH88Zdhyx9JExKrmHDJ+10bwIcY80Jmw==}
     dependencies:
       '@sinonjs/commons': 2.0.0
+    dev: false
+
+  /@sliit-foss/automatic-versioning/1.0.2:
+    resolution: {integrity: sha512-kSTMiS0dA0V2ky9z/qZfH6rm47LZzbiX5AjdF6Gzh9ZMyJs1kGxzDhfwapkkFhuTmEiC8KDPPeqogyCl72eMqg==}
+    dependencies:
+      '@actions/exec': 1.1.1
+      colors: 1.4.0
     dev: false
 
   /@tsconfig/node10/1.0.9:

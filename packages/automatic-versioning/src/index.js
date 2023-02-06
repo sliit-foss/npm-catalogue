@@ -1,3 +1,5 @@
+#!/usr/bin/env node
+
 require('colors');
 import path from "path";
 
@@ -8,7 +10,7 @@ const args = process.argv.slice(2);
 
 const defaultRootDir = "../../../../";
 
-let name = "app", rootDir = defaultRootDir;
+let name = "@sliit-foss/automatic-versioning", rootDir = defaultRootDir;
 let noCommitEdit = false;
 
 args.forEach((arg) => {
