@@ -42,5 +42,6 @@ jobs:
           elif [ "$releasePrefix" == "FEAT" -o "$releasePrefix" == "Feat" ]; then
               release="minor"   
           fi
+          git config pull.ff true
           git add . && git commit -m "CI: @sliit-foss/automatic-versioning - $release release" || true
           git pull && git push origin main
