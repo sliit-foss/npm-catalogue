@@ -18,3 +18,5 @@ jobs:
       
       - name: Run unit tests
         run: "pnpm test"
+        env:
+          GITHUB_ACCESS_TOKEN: ${{ secrets.ACCESS_TOKEN_GITHUB }}

@@ -7,17 +7,20 @@
   ],
   "scripts": {
     "build": "turbo run build",
-    "bump-version": "turbo run bump-version",
+    "bump-version": "turbo run bump-version --concurrency=1",
     "dev": "turbo run dev",
     "lint": "turbo run lint",
     "format": "prettier --write \"**/*.{js,ts,tsx,md}\"",
     "prepare": "husky install",
     "prerelease": "turbo run prerelease",
-    "release": "turbo run release",
-    "test": "turbo run test"
+    "release": "turbo run release --concurrency=1",
+    "test": "dotenv -- turbo run test"
   },
   "dependencies": {
+    "@babel/core": "7.20.12",
+    "@babel/preset-env": "7.20.2",
     "@sliit-foss/automatic-versioning": "1.0.2",
+    "dotenv-cli": "7.0.0",
     "esbuild": "0.17.5",
     "jest": "29.4.1",
     "prettier": "2.8.3",

@@ -1,0 +1,35 @@
+{
+    "name": "@sliit-foss/leaderboard",
+    "version": "0.0.0",
+    "description": "A utility package for fetching a list of contributor scores to a GitHub organization or repository",
+    "main": "dist/index.js",
+    "scripts": {
+        "build": "esbuild src/index.js --bundle --platform=node --target=node14 --outfile=dist/index.js --sourcemap --minify",
+        "bump-version": "pnpm exec automatic-versioning --name=@sliit-foss/leaderboard",
+        "prerelease": "cp ../../.npmignore .",
+        "release": "pnpm publish --access=public --tag=latest || true",
+        "test": "dotenv -- jest --coverage --verbose --runInBand --forceExit"
+    },
+    "dependencies": {
+        "axios": "1.3.2"
+    },
+    "author": "SLIIT FOSS",
+    "license": "MIT",
+    "repository": {
+        "type": "git",
+        "url": "git+https://github.com/sliit-foss/npm-catalogue.git"
+    },
+    "homepage": "https://github.com/sliit-foss/npm-catalogue/packages/leaderboard#readme",
+    "keywords": [
+        "leaderboard",
+        "github leaderboard",
+        "organization leaderboard",
+        "repository leaderboard",
+        "github contributors",
+        "organization contributors",
+        "repository contributors"
+    ],
+    "bugs": {
+        "url": "https://github.com/sliit-foss/npm-catalogue/issues"
+    }
+}

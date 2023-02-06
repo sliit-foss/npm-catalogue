@@ -3,3 +3,6 @@ src/
 test/
 coverage/
 node_modules/
+.babelrc
+jest.config.js
+.env

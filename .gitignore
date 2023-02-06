@@ -34,4 +34,6 @@ yarn-error.log*
 
 .npmrc
 
+.env
+
 packages/**/dist/
