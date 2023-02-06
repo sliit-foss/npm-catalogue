@@ -6,9 +6,10 @@
   "bin": "dist/index.js",
   "scripts": {
     "build": "esbuild src/index.js --bundle --platform=node --target=node14 --outfile=dist/index.js --sourcemap --minify",
-    "bump-version": "node dist/index.js",
+    "bump-version": "pnpm build && node dist/index.js",
     "prerelease": "cp ../../.npmignore .",
-    "release": "pnpm publish --access=public --tag=latest || true",
+    "postrelease": "git push && git fetch --prune",
+    "release": "pnpm run prerelease && pnpm run bump-version && pnpm publish --access=public --tag=latest || true && pnpm run postrelease",
     "test": "jest --coverage --verbose --runInBand --detectOpenHandles --forceExit"
   },
   "dependencies": {

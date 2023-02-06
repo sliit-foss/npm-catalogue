@@ -37,3 +37,7 @@ yarn-error.log*
 .env
 
 packages/**/dist/
+
+packages/**/.npmignore
+
+packages/**/node_modules/

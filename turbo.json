@@ -11,9 +11,7 @@
       ]
     },
     "bump-version": {
-      "dependsOn": [
-        "build"
-      ],
+      "dependsOn": [],
       "outputs": [
         "package.json"
       ]
@@ -27,10 +25,7 @@
       ]
     },
     "release": {
-      "dependsOn": [
-        "prerelease",
-        "bump-version"
-      ],
+      "dependsOn": [],
       "outputs": []
     },
     "test": {

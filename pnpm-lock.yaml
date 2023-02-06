@@ -8,7 +8,7 @@ importers:
       '@babel/preset-env': 7.20.2
       '@commitlint/cli': 17.4.2
       '@commitlint/config-conventional': 17.4.2
-      '@sliit-foss/automatic-versioning': 1.0.2
+      '@sliit-foss/automatic-versioning': 1.0.3
       dotenv-cli: 7.0.0
       esbuild: 0.17.5
       husky: 8.0.3
@@ -2520,10 +2520,12 @@ packages:
   /dotenv-expand/10.0.0:
     resolution: {integrity: sha512-GopVGCpVS1UKH75VKHGuQFqS1Gusej0z4FyQkPdwjil2gNIv+LNsqBlboOzpJFZKVT95GkCyWJbBSdFEFUWI2A==}
     engines: {node: '>=12'}
+    dev: false
 
   /dotenv/16.0.3:
     resolution: {integrity: sha512-7GO6HghkA5fYG9TYnNxi14/7K9f5occMlp3zXAuSxn7CKCxt9xbNWG7yF8hTCSUchlfWSe3uLmlPfigevRItzQ==}
     engines: {node: '>=12'}
+    dev: false
 
   /electron-to-chromium/1.4.286:
     resolution: {integrity: sha512-Vp3CVhmYpgf4iXNKAucoQUDcCrBQX3XLBtwgFqP9BUXuucgvAV9zWp1kYU7LL9j4++s9O+12cb3wMtN4SJy6UQ==}
