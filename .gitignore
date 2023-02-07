@@ -39,5 +39,7 @@ yarn-error.log*
 packages/**/dist/
 
 packages/**/.npmignore
+packages/**/.babelrc
+packages/**/jest.config.js
 
 packages/**/node_modules/
