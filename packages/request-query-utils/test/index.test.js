@@ -45,7 +45,8 @@ describe("test getRequestFilters func", () => {
   test("test object return type - mongoose support", async () => {
     const paramObj = getRequestFilters({
       req: {
-        originalUrl: "?filter[name]=Ciri&filter[age]=10,12,13,19&sort=-id&sort=height",
+        originalUrl:
+          "?filter[name]=Ciri&filter[age]=10,12,13,19&sort=-id&sort=height",
       },
       returnObject: true,
       mongooseSupport: true,

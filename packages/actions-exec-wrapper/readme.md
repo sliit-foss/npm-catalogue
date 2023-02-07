@@ -15,6 +15,7 @@ npm install @sliit-foss/actions-exec-wrapper
 # using yarn
 yarn add @sliit-foss/actions-exec-wrapper
 ```
+
 ## Usage
 
 ```js
@@ -28,9 +29,11 @@ import exec from "@sliit-foss/actions-exec-wrapper";
 ## Example<br/>
 
 ```js
-exec('npm --version').then(result => {
-  console.log(result);
-}).catch(error => {
-  console.log(error);
-})
+exec("npm --version")
+  .then((result) => {
+    console.log(result);
+  })
+  .catch((error) => {
+    console.log(error);
+  });
 ```

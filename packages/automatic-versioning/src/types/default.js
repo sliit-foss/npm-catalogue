@@ -12,37 +12,53 @@ const runner = (name, noCommitEdit) => {
               const changeType = commitMessage.split(":")[0].trim();
               let versionUpdate;
               if (
-                changeType.toLowerCase() == "feature!" ||
-                changeType.toLowerCase() == "feat!" ||
-                changeType.toLowerCase() == "f!"
+                changeType.toLowerCase() === "feature!" ||
+                changeType.toLowerCase() === "feat!" ||
+                changeType.toLowerCase() === "f!"
               ) {
                 versionUpdate = "major";
               } else if (
-                changeType.toLowerCase() == "feature" ||
-                changeType.toLowerCase() == "feat" ||
-                changeType.toLowerCase() == "f"
+                changeType.toLowerCase() === "feature" ||
+                changeType.toLowerCase() === "feat" ||
+                changeType.toLowerCase() === "f"
               ) {
                 versionUpdate = "minor";
-              } else if (changeType.toLowerCase() == "fix") {
+              } else if (changeType.toLowerCase() === "fix") {
                 versionUpdate = "patch";
               } else {
-                console.log(`No commit prefix found in commit message, skipping version bump`.yellow);
+                console.log(
+                  `No commit prefix found in commit message, skipping version bump`
+                    .yellow
+                );
                 return;
               }
-              run(`npm --no-git-tag-version version ${versionUpdate}`).then(() => {
-                const successMsg = `"CI: ${name} - ${versionUpdate} release"`;
-                run("git add .").then(() => {
-                  run(`git commit -m ${successMsg}`).then(() => {
-                    console.log(successMsg.green);
+              run(`npm --no-git-tag-version version ${versionUpdate}`).then(
+                () => {
+                  const successMsg = `"CI: ${name} - ${versionUpdate} release"`;
+                  run("git add .").then(() => {
+                    run(`git commit -m ${successMsg}`).then(() => {
+                      console.log(successMsg.green);
+                    });
                   });
-                });
-              });
+                }
+              );
             } else {
               if (noCommitEdit) {
-                console.log(`No bump found in commit message, skipping version bump`.yellow);
+                console.log(
+                  `No bump found in commit message, skipping version bump`
+                    .yellow
+                );
               } else {
-                console.log(`No bump found in commit message, skipping version bump and editing commit message`.yellow);
-                run(`git commit --amend -m ${commitMessage.replaceAll("--no-bump", "")}`).then(() => {
+                console.log(
+                  `No bump found in commit message, skipping version bump and editing commit message`
+                    .yellow
+                );
+                run(
+                  `git commit --amend -m ${commitMessage.replaceAll(
+                    "--no-bump",
+                    ""
+                  )}`
+                ).then(() => {
                   console.log("Successfully edited commit message".green);
                 });
               }

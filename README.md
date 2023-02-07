@@ -28,15 +28,17 @@
 
 - Supported commit message prefixes for version bumping are as follows:
 
-    ```js
-    - Feat! - bump major version
-    ```
-    ```js
-    - Feat  - bump minor version
-    ```
-    ```js
-    - Fix   - bump patch version
-    ```
+  ```js
+  - Feat! - bump major version
+  ```
+
+  ```js
+  - Feat  - bump minor version
+  ```
+
+  ```js
+  - Fix   - bump patch version
+  ```
 
 - Refer the [commitlint.config.js](https://github.com/sliit-foss/npm-catalogue/commitlint.config.js) file for a full list of supported commit message prefixes
 
@@ -45,6 +47,7 @@
 ## Disable version bumping for specific commit<br/><br/>
 
 - Add the following to a commit message as follows: "--no-bump"<br/>
+
 ```bash
   git commit -m "Feat: some feature --no-bump"
 ```
