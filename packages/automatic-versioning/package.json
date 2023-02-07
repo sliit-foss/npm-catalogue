@@ -7,8 +7,7 @@
   "scripts": {
     "build": "esbuild src/index.js --bundle --platform=node --target=node14 --outfile=dist/index.js --sourcemap --minify",
     "bump-version": "pnpm build && node dist/index.js",
-    "prerelease": "cp ../../.npmignore .",
-    "release": "pnpm run prerelease && pnpm run bump-version && pnpm publish --access=public --tag=latest && git reset HEAD~1 || true ",
+    "release": "pnpm run bump-version && pnpm publish --access=public --tag=latest && git reset HEAD~1 || true ",
     "test": "jest --coverage --verbose --runInBand --forceExit"
   },
   "dependencies": {

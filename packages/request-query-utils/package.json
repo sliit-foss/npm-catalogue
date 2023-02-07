@@ -1,30 +1,29 @@
 {
-  "name": "@sliit-foss/actions-exec-wrapper",
-  "version": "0.0.1",
-  "description": "A wrapper around the @actions/exec module which promisifies the console output of a command",
+  "name": "@sliit-foss/request-query-utils",
+  "version": "0.0.0",
+  "description": "A package to isolate filters and sorts from a given request's query parameters",
   "main": "dist/index.js",
   "scripts": {
     "build": "esbuild src/index.js --bundle --platform=node --target=node14 --outfile=dist/index.js --sourcemap --minify",
-    "bump-version": "pnpm build && npx automatic-versioning --name=@sliit-foss/actions-exec-wrapper",
+    "bump-version": "pnpm build && npx automatic-versioning --name=@sliit-foss/request-query-utils",
     "release": "pnpm run bump-version && pnpm publish --access=public --tag=latest && git reset HEAD~1 || true",
     "test": "dotenv -- jest --coverage --verbose --runInBand --forceExit"
-  },
-  "dependencies": {
-    "@actions/exec": "1.1.1"
   },
   "repository": {
     "type": "git",
     "url": "git+https://github.com/sliit-foss/npm-catalogue.git"
   },
+  "homepage": "https://github.com/sliit-foss/npm-catalogue/packages/request-query-utils#readme",
   "keywords": [
-    "@actions/exec",
-    "actions-exec-wrapper",
-    "console-output"
+    "query-utils",
+    "filterquery",
+    "sortquery",
+    "filter",
+    "sort"
   ],
   "author": "SLIIT FOSS",
   "license": "MIT",
   "bugs": {
     "url": "https://github.com/sliit-foss/npm-catalogue/issues"
-  },
-  "homepage": "https://github.com/sliit-foss/npm-catalogue/packages/actions-exec-wrapper#readme"
+  }
 }
