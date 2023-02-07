@@ -41,5 +41,6 @@ packages/**/dist/
 packages/**/.npmignore
 packages/**/.babelrc
 packages/**/jest.config.js
+packages/**/LICENSE
 
 packages/**/node_modules/
