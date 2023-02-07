@@ -1,6 +1,6 @@
 {
   "name": "@sliit-foss/request-query-utils",
-  "version": "1.0.0",
+  "version": "1.0.1",
   "description": "A package to isolate filters and sorts from a given request's query parameters",
   "main": "dist/index.js",
   "scripts": {
