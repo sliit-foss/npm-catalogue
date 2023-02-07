@@ -18,7 +18,8 @@ module.exports = {
                 "Revert",
                 "CI",
                 "Test",
-                "Docs"
+                "Docs",
+                "WIP"
             ]
         ],
         "type-case": [

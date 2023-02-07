@@ -9,7 +9,7 @@
     "bump-version": "pnpm build && node dist/index.js",
     "prerelease": "cp ../../.npmignore .",
     "release": "pnpm run prerelease && pnpm run bump-version && pnpm publish --access=public --tag=latest && git reset HEAD~1 || true ",
-    "test": "jest --coverage --verbose --runInBand --detectOpenHandles --forceExit"
+    "test": "jest --coverage --verbose --runInBand --forceExit"
   },
   "dependencies": {
     "@actions/exec": "1.1.1",

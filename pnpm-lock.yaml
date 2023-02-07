@@ -8,7 +8,7 @@ importers:
       '@babel/preset-env': 7.20.2
       '@commitlint/cli': 17.4.2
       '@commitlint/config-conventional': 17.4.2
-      '@sliit-foss/automatic-versioning': 1.0.3
+      '@sliit-foss/automatic-versioning': 1.0.7
       dotenv-cli: 7.0.0
       esbuild: 0.17.5
       husky: 8.0.3
@@ -28,6 +28,12 @@ importers:
       '@commitlint/cli': 17.4.2
       '@commitlint/config-conventional': 17.4.2
       husky: 8.0.3
+
+  packages/actions-exec-wrapper:
+    specifiers:
+      '@actions/exec': 1.1.1
+    dependencies:
+      '@actions/exec': 1.1.1
 
   packages/automatic-versioning:
     specifiers:
