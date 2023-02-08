@@ -6,7 +6,7 @@
     "scripts": {
         "build": "esbuild src/index.js --bundle --platform=node --target=node14 --outfile=dist/index.js --sourcemap --minify",
         "bump-version": "pnpm build && npx automatic-versioning --name=@sliit-foss/leaderboard",
-        "lint": "eslint src --ext .js",
+        "lint": "eslint src --ext .js --fix",
         "release": "pnpm run bump-version && pnpm publish --access=public --tag=latest && git reset HEAD~1 || true",
         "test": "shx cp ../../.babelrc ../../jest.config.js . && dotenv -- jest --coverage --verbose --runInBand --forceExit && rimraf .babelrc jest.config.js"
     },
