@@ -1,0 +1,31 @@
+{
+  "name": "@sliit-foss/firebase",
+  "version": "0.0.0",
+  "description": "A wrapper around the Firebase JS SDK with firestore and realtime database support for filtering sorting, limiting, error handling, and success scenarios",
+  "main": "dist/index.js",
+  "scripts": {
+    "build": "esbuild src/index.js --bundle --platform=node --target=node14 --outfile=dist/index.js --sourcemap --minify",
+    "bump-version": "pnpm build && npx automatic-versioning --name=@sliit-foss/firebase",
+    "lint": "eslint src --ext .js",
+    "release": "pnpm run bump-version && pnpm publish --access=public --tag=latest && git reset HEAD~1 || true",
+    "test": "shx cp ../../.babelrc ../../jest.config.js . && dotenv -- jest --coverage --verbose --runInBand --forceExit && rimraf .babelrc jest.config.js"
+  },
+  "dependencies": {
+    "firebase": "9.4.1"
+  },
+  "author": "SLIIT FOSS",
+  "license": "MIT",
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/sliit-foss/npm-catalogue.git"
+  },
+  "homepage": "https://github.com/sliit-foss/npm-catalogue/packages/firebase#readme",
+  "keywords": [
+    "firebase",
+    "firestore",
+    "enchanced-firestore"
+  ],
+  "bugs": {
+    "url": "https://github.com/sliit-foss/npm-catalogue/issues"
+  }
+}
