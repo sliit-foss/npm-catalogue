@@ -1,3 +1,4 @@
+/* eslint-disable import/named */
 /* eslint-disable no-unused-vars */
 
 import { getDatabase, ref, child, get } from "firebase/database";
