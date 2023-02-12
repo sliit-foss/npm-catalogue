@@ -1,14 +1,14 @@
 {
   "name": "@sliit-foss/automatic-versioning",
-  "version": "1.0.8",
+  "version": "1.0.9",
   "description": "A script which will automatically increment your app package version in accordance with conventional commits",
   "main": "dist/index.js",
   "bin": "dist/index.js",
   "scripts": {
     "build": "esbuild src/index.js --bundle --platform=node --target=node14 --outfile=dist/index.js --sourcemap --minify",
     "bump-version": "pnpm build && node dist/index.js",
-    "lint": "eslint src --ext .js",
-    "release": "pnpm run bump-version && pnpm publish --access=public --tag=latest && git reset HEAD~1 || true ",
+    "lint": "eslint src --ext .js --fix",
+    "release": "pnpm run bump-version && pnpm publish --access=public --tag=latest || true && git reset HEAD~1 || true ",
     "test": "dotenv -- jest --coverage --verbose --runInBand --forceExit"
   },
   "dependencies": {

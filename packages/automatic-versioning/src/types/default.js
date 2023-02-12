@@ -54,8 +54,8 @@ const runner = (name, noCommitEdit) => {
                     .yellow
                 );
                 run(
-                  `git commit --amend -m ${commitMessage.replaceAll(
-                    "--no-bump",
+                  `git commit --amend -m ${commitMessage.replace(
+                    /--no-bump/g,
                     ""
                   )}`
                 ).then(() => {

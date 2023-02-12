@@ -6,21 +6,18 @@
 
 ## Getting started
 
-- Generate a npm access token from [here](https://www.npmjs.com/settings/sliit.foss/tokens)
-- Edit npmrc.sh and replace TOKEN with the newly generated token
-- Execute npmrc.sh to generate the npmrc file required for authentication with the Gitlab NPM registry
 - Run `pnpm install` to install all dependencies
 
 <br/>
 
 ## Test and Deploy
 
-- Run `pnpm test` from the root directory to run all test suites in all packages
-- Run `pnpm build` from the root directory to build all packages
-- Run `pnpm test` from inside a package directory to run test suites for that particular package
-- Run `pnpm release` from inside a package directory to publish it to the registry
+- Run `pnpm test` to run all test suites in all packages
+- Run `pnpm build` to build all packages
+- Run `pnpm --filter <package> test` to run test suites for a particular package
 
-<br/>
+- Deployment is handled automatically by [GitHub Actions](.github\workflows\release.yml) when a commit is pushed to the master branch
+  <br/>
 
 ## Git commit messages
 

@@ -28,17 +28,17 @@ import { firestoreService } from "@sliit-foss/firebase";
 
 ```js
 // read
-const users = await firestoreService.read({ collectionName: "users" });
+const users = await firestoreService.read({ collection: "users" });
 
 // write
 const result = await firestoreService.write({
-  collectionName: "users",
+  collection: "users",
   payload: { name: "Ciri", age: 19 },
 });
 
 // update
 const result = await firestoreService.update({
-  collectionName: "users",
+  collection: "users",
   payload: { age: 20 },
   filters: [
     {
@@ -50,7 +50,7 @@ const result = await firestoreService.update({
 });
 
 // delete
-const result = await firestoreService.remove({ collectionName: "users" });
+const result = await firestoreService.remove({ collection: "users" });
 ```
 
 ## Additional Options
