@@ -4,7 +4,7 @@ const runner = (name) => {
   run(`npm pkg get version`).then((initialVersion) => {
     initialVersion = initialVersion
       .replace(/\n/g, "")
-      ?.replaceAll('"', "")
+      ?.replace(/"/g, "")
       ?.trim();
     run("git tag --sort=committerdate").then((tags) => {
       let latest = tags
@@ -12,7 +12,7 @@ const runner = (name) => {
         ?.reverse()[1]
         ?.trim()
         ?.replace("v", "")
-        ?.replaceAll("_", "-");
+        ?.replace(/_/g, "-");
       if (latest && /[0-9]{1,4}.[0-9]{1,2}.[0-9]{1,2}.rc/.test(latest)) {
         latest = latest?.split(".");
         latest = `${parseInt(latest[0])}.${parseInt(latest[1])}.${parseInt(
