@@ -47,4 +47,4 @@ jobs:
           fi
           git config pull.ff true
           git add . && git commit -m "CI: @sliit-foss/automatic-versioning - $release release" || true
-          git pull && git push origin main
+          git pull --rebase && git push origin main
