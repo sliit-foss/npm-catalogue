@@ -6,7 +6,7 @@ export const getRequestFilters = ({
   const res = getRequestQueryParams({ req, returnObject });
 
   const replaceFunction = (str) =>
-    str.replaceAll("filter[", "").replaceAll("]", "");
+    str.replace(/filter\[/g, "").replace(/]/g, "");
 
   const filterCheck = (key) => key.includes("filter");
 

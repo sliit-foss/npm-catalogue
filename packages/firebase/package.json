@@ -1,29 +1,30 @@
 {
-  "name": "@sliit-foss/request-query-utils",
-  "version": "1.0.2",
-  "description": "A package to isolate filters and sorts from a given request's query parameters",
+  "name": "@sliit-foss/firebase",
+  "version": "1.0.1",
+  "description": "A wrapper around the Firebase JS SDK with firestore and realtime database support for filtering sorting, limiting, error handling, and success scenarios",
   "main": "dist/index.js",
   "scripts": {
     "build": "esbuild src/index.js --bundle --platform=node --target=node14 --outfile=dist/index.js --sourcemap --minify",
-    "bump-version": "pnpm build && npx automatic-versioning --name=@sliit-foss/request-query-utils",
+    "bump-version": "pnpm build && npx automatic-versioning --name=@sliit-foss/firebase",
     "lint": "eslint src --ext .js --fix",
     "release": "pnpm run bump-version && pnpm publish --access=public --tag=latest || true && git reset HEAD~1 || true",
     "test": "shx cp ../../.babelrc ../../jest.config.js . && dotenv -- jest --coverage --verbose --runInBand --forceExit && rimraf .babelrc jest.config.js"
   },
+  "dependencies": {
+    "firebase": "9.4.1"
+  },
+  "author": "SLIIT FOSS",
+  "license": "MIT",
   "repository": {
     "type": "git",
     "url": "git+https://github.com/sliit-foss/npm-catalogue.git"
   },
-  "homepage": "https://github.com/sliit-foss/npm-catalogue/packages/request-query-utils#readme",
+  "homepage": "https://github.com/sliit-foss/npm-catalogue/packages/firebase#readme",
   "keywords": [
-    "query-utils",
-    "filterquery",
-    "sortquery",
-    "filter",
-    "sort"
+    "firebase",
+    "firestore",
+    "enchanced-firestore"
   ],
-  "author": "SLIIT FOSS",
-  "license": "MIT",
   "bugs": {
     "url": "https://github.com/sliit-foss/npm-catalogue/issues"
   }
