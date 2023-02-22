@@ -1,6 +1,6 @@
 import run from "../utils/runner";
 
-const runner = (name, noCommitEdit) => {
+const runner = (name, noCommit, noCommitEdit) => {
   run("git show ./").then((diff) => {
     if (diff) {
       console.log(`Diff found, running versioning for ${name}`.green);
@@ -34,12 +34,14 @@ const runner = (name, noCommitEdit) => {
               }
               run(`npm --no-git-tag-version version ${versionUpdate}`).then(
                 () => {
-                  const successMsg = `"CI: ${name} - ${versionUpdate} release"`;
-                  run("git add .").then(() => {
-                    run(`git commit -m ${successMsg}`).then(() => {
-                      console.log(successMsg.green);
+                  if (!noCommit) {
+                    const successMsg = `"CI: ${name} - ${versionUpdate} release"`;
+                    run("git add .").then(() => {
+                      run(`git commit -m ${successMsg}`).then(() => {
+                        console.log(successMsg.green);
+                      });
                     });
-                  });
+                  }
                 }
               );
             } else {

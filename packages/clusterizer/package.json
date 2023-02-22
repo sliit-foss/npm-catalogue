@@ -5,9 +5,9 @@
     "main": "dist/index.js",
     "scripts": {
         "build": "esbuild src/index.js --bundle --platform=node --target=node14 --outfile=dist/index.js --sourcemap --minify",
-        "bump-version": "pnpm build && npx automatic-versioning --name=@sliit-foss/clusterizer",
+        "bump-version": "pnpm build && npx automatic-versioning --name=@sliit-foss/clusterizer --no-commit",
         "lint": "eslint src --ext .js --fix",
-        "release": "pnpm run bump-version && pnpm publish --access=public --tag=latest || true && git reset HEAD~1 || true",
+        "release": "pnpm run bump-version && pnpm publish --access=public --tag=latest || true",
         "test": "shx cp ../../.babelrc ../../jest.config.js . && dotenv -- jest --coverage --verbose --runInBand --forceExit && rimraf .babelrc jest.config.js"
     },
     "author": "SLIIT FOSS",

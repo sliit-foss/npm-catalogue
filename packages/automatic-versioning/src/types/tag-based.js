@@ -1,7 +1,7 @@
 import run from "../utils/runner";
 
 const runner = (name) => {
-  run(`npm pkg get version`).then((initialVersion) => {
+  run(`npm pkg get version`).then((initialVersion, noCommit) => {
     initialVersion = initialVersion
       .replace(/\n/g, "")
       ?.replace(/"/g, "")
@@ -22,12 +22,14 @@ const runner = (name) => {
       if (latest && latest !== initialVersion) {
         run(`npm version ${latest} --no-git-tag-version`)
           .then(() => {
-            const successMsg = `"CI: Bumped version of ${name} from ${initialVersion} to ${latest}"`;
-            run("git add .").then(() => {
-              run(`git commit -m ${successMsg}`).then(() => {
-                console.log(successMsg.green);
+            if (!noCommit) {
+              const successMsg = `"CI: Bumped version of ${name} from ${initialVersion} to ${latest}"`;
+              run("git add .").then(() => {
+                run(`git commit -m ${successMsg}`).then(() => {
+                  console.log(successMsg.green);
+                });
               });
-            });
+            }
           })
           .catch(() => {});
       } else {
