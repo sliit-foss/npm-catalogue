@@ -8,7 +8,7 @@ importers:
       '@babel/preset-env': 7.20.2
       '@commitlint/cli': 17.4.2
       '@commitlint/config-conventional': 17.4.2
-      '@sliit-foss/automatic-versioning': 1.0.9
+      '@sliit-foss/automatic-versioning': 1.1.0
       dotenv-cli: 7.0.0
       esbuild: 0.17.5
       eslint: 8.33.0

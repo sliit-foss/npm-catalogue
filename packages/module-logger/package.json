@@ -1,6 +1,6 @@
 {
   "name": "@sliit-foss/module-logger",
-  "version": "0.0.0",
+  "version": "0.0.1",
   "description": "A modularized logger wrapped around winston to make working with nodeJS microservices easier.",
   "main": "dist/index.js",
   "scripts": {
