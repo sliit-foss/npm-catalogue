@@ -1,0 +1,32 @@
+{
+  "name": "@sliit-foss/module-logger",
+  "version": "0.0.0",
+  "description": "A modularized logger wrapped around winston to make working with nodeJS microservices easier.",
+  "main": "dist/index.js",
+  "scripts": {
+    "build": "esbuild src/index.js --bundle --platform=node --target=node14 --outfile=dist/index.js --sourcemap --minify",
+    "bump-version": "pnpm build && node dist/index.js",
+    "lint": "eslint src --ext .js --fix",
+    "release": "pnpm run bump-version && pnpm publish --access=public --tag=latest || true && git reset HEAD~1 || true ",
+    "test": "shx cp ../../.babelrc ../../jest.config.js . && dotenv -- jest --coverage --verbose --runInBand --forceExit && rimraf .babelrc jest.config.js"
+  },
+  "dependencies": {
+    "express-http-context": "1.2.4",
+    "winston": "3.8.2",
+    "winston-daily-rotate-file": "4.7.1"
+  },
+  "author": "SLIIT FOSS",
+  "license": "MIT",
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/sliit-foss/npm-catalogue.git"
+  },
+  "homepage": "https://github.com/sliit-foss/npm-catalogue/packages/module-logger#readme",
+  "keywords": [
+    "logger",
+    "module-logger"
+  ],
+  "bugs": {
+    "url": "https://github.com/sliit-foss/npm-catalogue/issues"
+  }
+}
