@@ -1,7 +1,7 @@
 import run from "../utils/runner";
 
-const runner = (name) => {
-  run(`npm pkg get version`).then((initialVersion, noCommit) => {
+const runner = (name, noCommit) => {
+  run(`npm pkg get version`).then((initialVersion) => {
     initialVersion = initialVersion
       .replace(/\n/g, "")
       ?.replace(/"/g, "")
