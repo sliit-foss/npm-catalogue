@@ -48,10 +48,10 @@ importers:
   packages/automatic-versioning:
     specifiers:
       '@actions/exec': 1.1.1
-      colors: 1.4.0
+      '@colors/colors': 1.5.0
     dependencies:
       '@actions/exec': 1.1.1
-      colors: 1.4.0
+      '@colors/colors': 1.5.0
 
   packages/clusterizer:
     specifiers: {}
@@ -3127,11 +3127,6 @@ packages:
     dependencies:
       color-convert: 1.9.3
       color-string: 1.9.1
-    dev: false
-
-  /colors/1.4.0:
-    resolution: {integrity: sha512-a+UqTh4kgZg/SlGvfbzDHpgRu7AAQOmmqRHJnxhRZICKFUT91brVhNNt58CMWU9PsBbv3PDCZUHbVxuDiH2mtA==}
-    engines: {node: '>=0.1.90'}
     dev: false
 
   /colorspace/1.1.4:

@@ -13,7 +13,7 @@
   },
   "dependencies": {
     "@actions/exec": "1.1.1",
-    "colors": "1.4.0"
+    "@colors/colors": "1.5.0"
   },
   "author": "SLIIT FOSS",
   "license": "MIT",

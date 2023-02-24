@@ -5,7 +5,7 @@ import path from "path";
 import defaultRunner from "./types/default";
 import tagBasedRunner from "./types/tag-based";
 
-require("colors");
+require("@colors/colors");
 
 const args = process.argv.slice(2);
 
