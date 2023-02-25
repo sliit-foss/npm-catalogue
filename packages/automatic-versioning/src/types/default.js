@@ -23,7 +23,7 @@ const runner = (name, noCommit, noCommitEdit) => {
                 changeType.toLowerCase() === "f"
               ) {
                 versionUpdate = "minor";
-              } else if (changeType.toLowerCase() === "fix") {
+              } else if (changeType.toLowerCase() === "fix" || changeType.toLowerCase() === "patch") {
                 versionUpdate = "patch";
               } else {
                 console.log(
@@ -32,7 +32,7 @@ const runner = (name, noCommit, noCommitEdit) => {
                 );
                 return;
               }
-              run(`npm --no-git-tag-version version ${versionUpdate}`).then(
+              run(`npm --workspaces-update=false --no-git-tag-version version ${versionUpdate}`).then(
                 () => {
                   if (!noCommit) {
                     const successMsg = `"CI: ${name} - ${versionUpdate} release"`;
