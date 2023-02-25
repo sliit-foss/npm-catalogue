@@ -22,7 +22,7 @@ jobs:
       - run: git fetch --prune --unshallow
 
       - name: Install dependencies
-        run: npm install -g pnpm @sliit-foss/automatic-versioning@latest && pnpm install --production --ignore-scripts
+        run: npm install -g pnpm && pnpm install --production --ignore-scripts
       
       - name: Create .npmrc
         run: echo "//registry.npmjs.org/:_authToken=${{ secrets.NPM_TOKEN }}" > .npmrc
