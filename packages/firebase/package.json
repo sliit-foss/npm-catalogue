@@ -1,6 +1,6 @@
 {
   "name": "@sliit-foss/firebase",
-  "version": "1.0.1",
+  "version": "1.1.0",
   "description": "A wrapper around the Firebase JS SDK with firestore and realtime database support for filtering sorting, limiting, error handling, and success scenarios",
   "main": "dist/index.js",
   "scripts": {
