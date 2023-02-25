@@ -111,8 +111,16 @@ yarn bump-version
 
 ## Custom app directory to run incrementing script<br/><br/>
 
-- Add the following argument to your bump script: "--rootDir=<custom_dir>"<br/>
+- Add the following option to your bump script: "--rootDir=<custom_dir>"<br/>
 
 ```bash
   npx automatic-versioning --name=<package_name> --rootDir=<custom_dir>
+```
+
+## Recursively search commit history to find version bump trigger<br/><br/>
+
+- Add the following option to your bump script: "--recursive"<br/>
+
+```bash
+  npx automatic-versioning --name=<package_name> --recursive
 ```
