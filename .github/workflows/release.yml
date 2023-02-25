@@ -37,14 +37,6 @@ jobs:
 
       - name: Update release info
         run: |
-          lastCommit=$(git log -1 --pretty=%B)
-          releasePrefix=(${lastCommit//:/ })
-          release="patch"
-          if [ "$releasePrefix" == "FEAT!" -o "$releasePrefix" == "Feat!" ]; then
-              release="major"
-          elif [ "$releasePrefix" == "FEAT" -o "$releasePrefix" == "Feat" ]; then
-              release="minor"   
-          fi
           git config pull.ff true
-          git add . && git commit -m "CI: @sliit-foss/automatic-versioning - $release release" || true
+          git add . && git commit -m "CI: @sliit-foss/automatic-versioning - sync release" || true
           git pull --rebase && git push origin main
