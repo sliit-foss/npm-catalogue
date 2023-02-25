@@ -17,7 +17,7 @@ const getCommitPrefix = async (recursive, n = 1) => {
 };
 
 const runner = (name, noCommit, noCommitEdit, recursive = false) => {
-  run("git show ./").then(async (diff) => {
+  run("git show --first-parent ./").then(async (diff) => {
     if (diff) {
       console.log(`Diff found, running versioning for ${name}`.green);
       const { commitMessage, commitPrefix, noBump } = await getCommitPrefix(
