@@ -20,7 +20,9 @@ const runner = (name, noCommit) => {
         )}-${latest[3]}`;
       }
       if (latest && latest !== initialVersion) {
-        run(`npm version ${latest} --no-git-tag-version --workspaces-update=false`)
+        run(
+          `npm version ${latest} --no-git-tag-version --workspaces-update=false`
+        )
           .then(() => {
             if (!noCommit) {
               const successMsg = `"CI: Bumped version of ${name} from ${initialVersion} to ${latest}"`;
