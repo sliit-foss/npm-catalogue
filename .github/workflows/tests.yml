@@ -20,3 +20,4 @@ jobs:
         run: pnpm test
         env:
           GITHUB_ACCESS_TOKEN: ${{ secrets.ACCESS_TOKEN_GITHUB }}
+          FIREBASE_CONFIG: ${{ secrets.FIREBASE_CONFIG }}
