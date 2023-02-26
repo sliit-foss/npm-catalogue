@@ -19,7 +19,7 @@
         "type": "git",
         "url": "git+https://github.com/sliit-foss/npm-catalogue.git"
     },
-    "homepage": "https://github.com/sliit-foss/npm-catalogue/packages/leaderboard#readme",
+    "homepage": "https://github.com/sliit-foss/npm-catalogue/blob/main/packages/leaderboard/readme.md",
     "keywords": [
         "leaderboard",
         "github leaderboard",

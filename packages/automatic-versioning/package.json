@@ -21,7 +21,7 @@
     "type": "git",
     "url": "git+https://github.com/sliit-foss/npm-catalogue.git"
   },
-  "homepage": "https://github.com/sliit-foss/npm-catalogue/packages/automatic-versioning#readme",
+  "homepage": "https://github.com/sliit-foss/npm-catalogue/blob/main/packages/automatic-versioning/readme.md",
   "keywords": [
     "automatic-versioning",
     "semantic-versioning",

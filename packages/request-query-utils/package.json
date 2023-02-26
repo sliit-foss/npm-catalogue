@@ -14,7 +14,7 @@
     "type": "git",
     "url": "git+https://github.com/sliit-foss/npm-catalogue.git"
   },
-  "homepage": "https://github.com/sliit-foss/npm-catalogue/packages/request-query-utils#readme",
+  "homepage": "https://github.com/sliit-foss/npm-catalogue/blob/main/packages/request-query-utils/readme.md",
   "keywords": [
     "query-utils",
     "filterquery",
