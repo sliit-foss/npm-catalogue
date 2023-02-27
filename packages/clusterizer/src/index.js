@@ -32,7 +32,9 @@ const clusterize = async (
       else logger.info(`${logPrefix} Process ${process.pid} started`);
     }
   } catch (e) {
-    logger.error(`${logPrefix} Unhandled exception - ${e.message}`);
+    logger.error(
+      `${logPrefix} Unhandled exception - message: ${e.message} - stack: ${e.stack}`
+    );
   }
 };
 
