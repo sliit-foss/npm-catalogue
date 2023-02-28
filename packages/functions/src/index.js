@@ -34,6 +34,7 @@ const _asyncHandler =
       }
       next();
     } catch (err) {
+      res.errorLogged = true;
       logger.info(
         `${_fnName(fn)} execution failed - error: ${err.message} - stack: ${
           err.stack
