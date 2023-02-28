@@ -5,10 +5,10 @@
   "main": "dist/index.js",
   "bin": "dist/index.js",
   "scripts": {
-    "build": "esbuild src/index.js --bundle --platform=node --target=node14 --outfile=dist/index.js --sourcemap --minify",
+    "build": "node ../../scripts/esbuild.config.js",
     "bump-version": "pnpm build && node dist/index.js --no-commit --recursive",
-    "lint": "eslint src --ext .js --fix",
-    "release": "pnpm run bump-version && pnpm publish --access=public --tag=latest || true",
+    "lint": "sh ../../scripts/lint.sh",
+    "release": "sh ../../scripts/release.sh",
     "test": "dotenv -- jest --coverage --verbose --runInBand --forceExit"
   },
   "dependencies": {

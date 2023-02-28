@@ -4,11 +4,11 @@
   "description": "A package to isolate filters and sorts from a given request's query parameters",
   "main": "dist/index.js",
   "scripts": {
-    "build": "esbuild src/index.js --bundle --platform=node --target=node14 --outfile=dist/index.js --sourcemap --minify",
+    "build": "node ../../scripts/esbuild.config.js",
     "bump-version": "pnpm build && npx automatic-versioning --name=@sliit-foss/request-query-utils --no-commit --recursive",
-    "lint": "eslint src --ext .js --fix",
-    "release": "pnpm run bump-version && pnpm publish --access=public --tag=latest || true",
-    "test": "shx cp ../../.babelrc ../../jest.config.js . && dotenv -- jest --coverage --verbose --runInBand --forceExit && rimraf .babelrc jest.config.js"
+    "lint": "sh ../../scripts/lint.sh",
+    "release": "sh ../../scripts/release.sh",
+    "test": "sh ../../scripts/test.sh"
   },
   "repository": {
     "type": "git",
