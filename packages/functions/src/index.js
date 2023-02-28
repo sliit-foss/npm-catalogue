@@ -2,7 +2,13 @@ import { moduleLogger } from "@sliit-foss/module-logger";
 
 const logger = moduleLogger("tracer");
 
-const _fnName = (fn) => fn.name || "Unnamed function";
+const _fnName = (fn) => {
+  let name = fn.name;
+  if (!fn.name) return "Unnamed function";
+  if (name.startsWith("bound")) name = name?.replace("bound", "")?.trim();
+  if (name.startsWith(" ")) return name.slice(1);
+  return name;
+};
 
 export const traced = async (fn, loggable = {}) => {
   const startTime = performance.now();
