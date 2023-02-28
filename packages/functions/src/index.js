@@ -1,0 +1,48 @@
+import { moduleLogger } from "@sliit-foss/module-logger";
+
+const logger = moduleLogger("tracer");
+
+const _fnName = (fn) => fn.name || "Unnamed function";
+
+export const traced = async (fn, loggable = {}) => {
+  const startTime = performance.now();
+  logger.info(`${_fnName(fn)} execution initiated`, loggable);
+  const result = await fn();
+  logger.info(
+    `${_fnName(fn)} execution completed - execution_time : ${
+      performance.now() - startTime
+    }ms`,
+    loggable
+  );
+  return result;
+};
+
+const _asyncHandler =
+  (fn, trace = false) =>
+  async (req, res, next) => {
+    try {
+      if (trace) {
+        await traced(fn.bind(this, req, res, next));
+      } else {
+        await fn(req, res, next);
+      }
+      next();
+    } catch (err) {
+      logger.info(
+        `${_fnName(fn)} execution failed - error: ${err.message} - stack: ${
+          err.stack
+        }`
+      );
+      next(err);
+    }
+  };
+
+export const asyncHandler = (fn) => _asyncHandler(fn);
+
+export const tracedAsyncHandler = (fn) => _asyncHandler(fn, true);
+
+export default {
+  traced,
+  asyncHandler,
+  tracedAsyncHandler,
+};
