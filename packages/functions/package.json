@@ -1,6 +1,6 @@
 {
   "name": "@sliit-foss/functions",
-  "version": "1.0.1",
+  "version": "1.0.2",
   "description": "Just a small set of utility functions",
   "main": "dist/index.js",
   "scripts": {
