@@ -11,7 +11,7 @@
     "test": "sh ../../scripts/test.sh"
   },
   "dependencies": {
-    "@sliit-foss/module-logger": "1.1.1"
+    "@sliit-foss/module-logger": "1.1.2"
   },
   "repository": {
     "type": "git",

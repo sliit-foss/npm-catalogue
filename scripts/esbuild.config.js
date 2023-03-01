@@ -1,4 +1,7 @@
+const execSync = require("child_process").execSync;
 const { globPlugin } = require("esbuild-plugin-glob");
+
+execSync("npx rimraf ./dist && mkdir dist");
 
 require("esbuild")
   .build({
