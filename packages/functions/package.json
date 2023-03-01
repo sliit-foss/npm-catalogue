@@ -11,7 +11,8 @@
     "test": "sh ../../scripts/test.sh"
   },
   "dependencies": {
-    "@sliit-foss/module-logger": "1.1.2"
+    "@sliit-foss/module-logger": "1.1.2",
+    "express-http-context": "1.2.4"
   },
   "repository": {
     "type": "git",

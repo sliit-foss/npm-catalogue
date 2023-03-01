@@ -1,3 +1,4 @@
+import context from "express-http-context";
 import { moduleLogger } from "@sliit-foss/module-logger";
 
 const logger = moduleLogger("tracer");
@@ -48,8 +49,24 @@ export const asyncHandler = (fn) => _asyncHandler(fn);
 
 export const tracedAsyncHandler = (fn) => _asyncHandler(fn, true);
 
+export const cached = (key, fn) => {
+  let res = context.get(key);
+  if (!res) {
+    if (fn.constructor.name === "AsyncFunction") {
+      return fn().then((res) => {
+        context.set(key, res);
+        return res;
+      });
+    }
+    res = fn();
+    context.set(key, res);
+  }
+  return res;
+};
+
 export default {
   traced,
   asyncHandler,
   tracedAsyncHandler,
+  cached,
 };
