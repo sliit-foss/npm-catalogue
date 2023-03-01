@@ -1,8 +1,7 @@
 import crypto from "crypto";
+import context from "express-http-context";
 import * as winston from "winston";
 import "winston-daily-rotate-file";
-
-const httpContext = require("express-http-context");
 
 let _logger;
 
@@ -48,10 +47,10 @@ const _createLogger = () => {
   _logger = winston.createLogger({
     format: winston.format.combine(
       winston.format((infoObj) => {
-        let correlationId = httpContext.get("correlationId");
+        let correlationId = context.get("correlationId");
         if (!correlationId) {
           correlationId = crypto.randomBytes(16).toString("hex");
-          httpContext.set("correlationId", correlationId);
+          context.set("correlationId", correlationId);
         }
         infoObj["correlationId"] = correlationId;
         return { ...infoObj, ...(_defaultConfig.globalAttributes ?? {}) };
