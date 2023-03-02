@@ -11,12 +11,13 @@ const _fnName = (fn) => {
   return name;
 };
 
-export const traced = async (fn, loggable = {}) => {
+export const _traced = async (fn, loggable = {}, fnName) => {
+  fnName = fnName ?? _fnName(fn);
+  logger.info(`${fnName} execution initiated`, loggable);
   const startTime = performance.now();
-  logger.info(`${_fnName(fn)} execution initiated`, loggable);
   const result = await fn();
   logger.info(
-    `${_fnName(fn)} execution completed - execution_time : ${
+    `${fnName} execution completed - execution_time : ${
       performance.now() - startTime
     }ms`,
     loggable
@@ -27,23 +28,26 @@ export const traced = async (fn, loggable = {}) => {
 const _asyncHandler =
   (fn, trace = false) =>
   async (req, res, next) => {
+    let fnName;
     try {
       if (trace) {
-        await traced(fn.bind(this, req, res, next));
+        fnName = _fnName(fn);
+        await _traced(fn.bind(this, req, res, next), {}, fnName);
       } else {
         await fn(req, res, next);
       }
       next();
     } catch (err) {
+      fnName = fnName ?? _fnName(fn);
       res.errorLogged = true;
       logger.info(
-        `${_fnName(fn)} execution failed - error: ${err.message} - stack: ${
-          err.stack
-        }`
+        `${fnName} execution failed - error: ${err.message} - stack: ${err.stack}`
       );
       next(err);
     }
   };
+
+export const traced = (fn, loggable) => _traced(fn, loggable);
 
 export const asyncHandler = (fn) => _asyncHandler(fn);
 
