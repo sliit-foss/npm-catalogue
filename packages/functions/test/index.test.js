@@ -1,5 +1,6 @@
 const mockLogger = {
   info: jest.fn(),
+  error: jest.fn(),
 };
 
 const { traced, asyncHandler, tracedAsyncHandler, cached } = require("../src");
@@ -66,7 +67,7 @@ describe("asyncHandler", () => {
       throw new Error("test error");
     }
     await asyncHandler(testFunction)(mockReq, mockRes, mockNext);
-    expect(mockLogger.info).toBeCalled();
+    expect(mockLogger.error).toBeCalled();
     expect(mockNext).toBeCalled();
   });
   test("test traced async handler", async () => {

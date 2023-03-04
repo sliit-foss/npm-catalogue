@@ -21,15 +21,23 @@ export const _traced = async (fn, loggable = {}, fnName) => {
     logger.info(`${fnName} execution initiated`, loggable);
     startTime = performance.now();
   }
-  const result = await fn();
-  !disableTracing &&
-    logger.info(
-      `${fnName} execution completed - execution_time : ${
-        performance.now() - startTime
-      }ms`,
-      loggable
-    );
-  return result;
+  try {
+    const result = await fn();
+    !disableTracing &&
+      logger.info(
+        `${fnName} execution completed - execution_time : ${
+          performance.now() - startTime
+        }ms`,
+        loggable
+      );
+    return result;
+  } catch (err) {
+    !disableTracing &&
+      logger.error(
+        `${fnName} execution failed - error: ${err.message} - stack: ${err.stack}`
+      );
+    throw err;
+  }
 };
 
 const _asyncHandler =
@@ -45,11 +53,13 @@ const _asyncHandler =
       }
       next();
     } catch (err) {
-      fnName = fnName ?? _fnName(fn);
+      if (!trace) {
+        fnName = fnName ?? _fnName(fn);
+        logger.error(
+          `${fnName} execution failed - error: ${err.message} - stack: ${err.stack}`
+        );
+      }
       res.errorLogged = true;
-      logger.info(
-        `${fnName} execution failed - error: ${err.message} - stack: ${err.stack}`
-      );
       next(err);
     }
   };
