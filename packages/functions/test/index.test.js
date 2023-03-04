@@ -40,6 +40,12 @@ describe("traced", () => {
       {}
     );
   });
+  test("test disabled tracing", async () => {
+    process.env.DISABLE_FUNCTION_TRACING = "true";
+    await traced(() => "test");
+    expect(mockLogger.info).not.toBeCalled();
+    delete process.env.DISABLE_FUNCTION_TRACING;
+  });
 });
 
 describe("asyncHandler", () => {

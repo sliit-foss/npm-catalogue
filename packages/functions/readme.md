@@ -60,3 +60,7 @@ asyncHandler(async function hello(req, res) => {
   res.send("Hello World");
 });
 ```
+
+## Disabling tracing<br/><br/>
+
+- Set the environment variable `DISABLE_FUNCTION_TRACING` to `true` or `1` to disable tracing.

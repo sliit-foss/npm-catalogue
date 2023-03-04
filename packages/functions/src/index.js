@@ -12,16 +12,23 @@ const _fnName = (fn) => {
 };
 
 export const _traced = async (fn, loggable = {}, fnName) => {
-  fnName = fnName ?? _fnName(fn);
-  logger.info(`${fnName} execution initiated`, loggable);
-  const startTime = performance.now();
+  let startTime;
+  const disableTracing =
+    process.env.DISABLE_FUNCTION_TRACING === "true" ||
+    process.env.DISABLE_FUNCTION_TRACING === "1";
+  if (!disableTracing) {
+    fnName = fnName ?? _fnName(fn);
+    logger.info(`${fnName} execution initiated`, loggable);
+    startTime = performance.now();
+  }
   const result = await fn();
-  logger.info(
-    `${fnName} execution completed - execution_time : ${
-      performance.now() - startTime
-    }ms`,
-    loggable
-  );
+  !disableTracing &&
+    logger.info(
+      `${fnName} execution completed - execution_time : ${
+        performance.now() - startTime
+      }ms`,
+      loggable
+    );
   return result;
 };
 
