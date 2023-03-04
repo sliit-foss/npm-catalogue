@@ -50,3 +50,20 @@ describe("service-connector", () => {
     );
   });
 });
+
+describe("service-connector resolver", () => {
+  test("successful request", async () => {
+    const mockData = {
+      data: {
+        name: "John Doe",
+      },
+      message: "Successfully fetched data from the server",
+    };
+    connector.get = jest.fn().mockResolvedValue({
+      status: 200,
+      data: mockData,
+    });
+    const response = await connector.resolve(() => connector.get("/"));
+    expect(response).toStrictEqual(mockData.data);
+  });
+});
