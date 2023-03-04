@@ -47,3 +47,20 @@ const connector = serviceConnector({
 // use the service connector as you would use axios
 const response = await connector.get("/api/v1/users");
 ```
+
+## Resolver function
+
+- The connector has a resolver function that can be used to directly resolve the data from the API response if it comes in the following format.
+
+  ```json
+  {
+    "data": { ... }, // data coming from the API inside a nested data object
+    "message": "Data retrieved successfully"
+  }
+  ```
+
+- The following will return the above data object directly without the need of calling **response.data.data** manually.
+
+  ```js
+  const data = await connector.get("/api/v1/users").then(connector.resolve);
+  ```

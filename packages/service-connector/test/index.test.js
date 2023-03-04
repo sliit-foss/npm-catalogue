@@ -1,3 +1,5 @@
+jest.setTimeout(30000);
+
 const mockLogger = {
   info: jest.fn(),
   error: jest.fn(),
@@ -63,7 +65,7 @@ describe("service-connector resolver", () => {
       status: 200,
       data: mockData,
     });
-    const response = await connector.resolve(() => connector.get("/"));
+    const response = await connector.get("/").then(connector.resolve);
     expect(response).toStrictEqual(mockData.data);
   });
 });

@@ -2,7 +2,7 @@ import axios from "axios";
 import context from "express-http-context";
 import createError from "http-errors";
 import { moduleLogger } from "@sliit-foss/module-logger";
-import { resolver, formatLogs } from "./helpers";
+import { formatLogs } from "./helpers";
 
 const serviceConnector = ({
   service,
@@ -53,7 +53,7 @@ const serviceConnector = ({
       return Promise.reject(customError);
     }
   );
-  instance.resolve = resolver;
+  instance.resolve = (response) => response?.data?.data ?? response?.data;
   return instance;
 };
 
