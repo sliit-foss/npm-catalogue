@@ -5,8 +5,8 @@ const logger = moduleLogger("tracer");
 
 const _fnName = (fn) => {
   let name = fn.name;
-  if (!fn.name) return "Unnamed function";
   if (name.startsWith("bound")) name = name?.replace("bound", "")?.trim();
+  if (!name) return "Unnamed function";
   if (name.startsWith(" ")) return name.slice(1);
   return name;
 };
@@ -54,7 +54,10 @@ const _asyncHandler =
     }
   };
 
-export const traced = (fn, loggable) => _traced(fn, loggable);
+export const traced =
+  (fn, loggable) =>
+  (...params) =>
+    _traced(fn.bind(this, ...params), loggable);
 
 export const asyncHandler = (fn) => _asyncHandler(fn);
 

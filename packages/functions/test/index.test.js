@@ -19,7 +19,7 @@ describe("traced", () => {
     function testFunction() {
       return "test";
     }
-    await traced(testFunction);
+    await traced(testFunction)();
     expect(mockLogger.info).toBeCalledWith(
       "_testFunction execution initiated",
       {}
@@ -27,14 +27,14 @@ describe("traced", () => {
   });
   test("test arrow function", async () => {
     const testArrowFunction = () => "test";
-    await traced(testArrowFunction);
+    await traced(testArrowFunction)();
     expect(mockLogger.info).toBeCalledWith(
       "testArrowFunction execution initiated",
       {}
     );
   });
   test("test unnamed function", async () => {
-    await traced(() => "test");
+    await traced(() => "test")();
     expect(mockLogger.info).toBeCalledWith(
       "Unnamed function execution initiated",
       {}
@@ -42,7 +42,7 @@ describe("traced", () => {
   });
   test("test disabled tracing", async () => {
     process.env.DISABLE_FUNCTION_TRACING = "true";
-    await traced(() => "test");
+    await traced(() => "test")();
     expect(mockLogger.info).not.toBeCalled();
     delete process.env.DISABLE_FUNCTION_TRACING;
   });
