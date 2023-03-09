@@ -54,6 +54,19 @@ const serviceConnector = ({
     }
   );
   instance.resolve = (response) => response?.data?.data ?? response?.data;
+  instance.proxy = async (host, req, res) => {
+    delete req.headers["content-length"];
+    const response = await instance({
+      baseURL: host,
+      url: req.originalUrl,
+      method: req.method,
+      headers: req.headers,
+      params: req.params,
+      data: req.body,
+    });
+    if (!res) return response;
+    return res.status(response.status).json(response.data);
+  };
   return instance;
 };
 
