@@ -10,7 +10,7 @@ const serviceConnector = ({
   loggable,
   logs = true,
   ...axiosOptions
-}) => {
+} = {}) => {
   const logger = moduleLogger(service ?? "Service-Connector");
   const instance = axios.create(axiosOptions);
   instance.interceptors.request.use((config) => {
