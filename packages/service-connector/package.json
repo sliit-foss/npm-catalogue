@@ -1,6 +1,6 @@
 {
   "name": "@sliit-foss/service-connector",
-  "version": "1.1.2",
+  "version": "1.2.0",
   "description": "A package to isolate filters and sorts from a given request's query parameters",
   "main": "dist/index.js",
   "scripts": {
