@@ -16,7 +16,9 @@ const serviceConnector = ({
   instance.interceptors.request.use((config) => {
     logs &&
       logger.info(
-        `Request initiated - method: ${config.method} - url: ${config.baseURL}${config.url}`,
+        `Request initiated - method: ${config.method} - url: ${
+          config.baseURL ?? ""
+        }${config.url}`,
         formatLogs(loggable, config)
       );
     config.headers["x-correlation-id"] = context.get("correlationId");
@@ -32,7 +34,9 @@ const serviceConnector = ({
     (response) => {
       logs &&
         logger.info(
-          `Request completed - method: ${response.config.method} - url: ${response.config.baseURL}${response.config.url}`,
+          `Request completed - method: ${response.config.method} - url: ${
+            response.config.baseURL ?? ""
+          }${response.config.url}`,
           formatLogs(loggable, response.config, response)
         );
       return response;
@@ -41,7 +45,9 @@ const serviceConnector = ({
       const errorMessage = error.response?.data?.message ?? error.message;
       logs &&
         logger.error(
-          `Request failed - method: ${error.config.method} - url: ${error.config.baseURL}${error.config.url} - message: ${errorMessage}`,
+          `Request failed - method: ${error.config.method} - url: ${
+            error.config.baseURL ?? ""
+          }${error.config.url} - message: ${errorMessage}`,
           formatLogs(loggable, error.config, error.response, true)
         );
       const customError = createError(
