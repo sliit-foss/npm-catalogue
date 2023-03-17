@@ -36,9 +36,9 @@ const connector = serviceConnector({
   // optional module specific configurations
 
   service: "service-name",
-  headerIntercepts: {
+  headerIntercepts: () => ({
     "x-api-key": "1234567890",
-  },
+  }),
   loggable: (response) => {
     // do something with the response, both success and error
   },
