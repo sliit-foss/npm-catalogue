@@ -23,7 +23,12 @@ export const _traced = async (fn, loggable = {}, fnName) => {
     startTime = performance.now();
   }
   try {
-    const result = await fn();
+    let result;
+    if (fn.constructor.name === "AsyncFunction") {
+      result = await fn();
+    } else {
+      result = fn();
+    }
     !disableTracing &&
       logger.info(
         `${fnName} execution completed - execution_time : ${
