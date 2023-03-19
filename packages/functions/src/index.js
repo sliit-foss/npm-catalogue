@@ -1,3 +1,4 @@
+import { performance } from "perf_hooks";
 import context from "express-http-context";
 import { moduleLogger } from "@sliit-foss/module-logger";
 

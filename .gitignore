@@ -38,12 +38,12 @@ yarn-error.log*
 
 .vscode
 
-packages/**/dist/
+p*/**/dist/
 
-packages/**/.npmignore
-packages/**/.babelrc
-packages/**/jest.config.js
-packages/**/LICENSE
+p*/**/.npmignore
+p*/**/.babelrc
+p*/**/jest.config.js
+p*/**/LICENSE
 
-packages/**/node_modules/
-packages/**/logs/
+p*/**/node_modules/
+p*/**/logs/
