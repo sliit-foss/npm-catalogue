@@ -30,8 +30,9 @@ jobs:
       - run: echo "git-checks=false" >> .npmrc
 
       - name: Populate prerequisities
-        run: cd packages && for p in *; do if [ -d "$p" ]; then cp ../.npmignore ../LICENSE $p/; fi; done && cd ..
-        run: cd plugins && for p in *; do if [ -d "$p" ]; then cp ../.npmignore ../LICENSE $p/; fi; done && cd ..
+        run: |
+          cd packages && for p in *; do if [ -d "$p" ]; then cp ../.npmignore ../LICENSE $p/; fi; done && cd ..
+          cd plugins && for p in *; do if [ -d "$p" ]; then cp ../.npmignore ../LICENSE $p/; fi; done && cd ..
           
       - name: Publish package on NPM
         run: pnpm release
