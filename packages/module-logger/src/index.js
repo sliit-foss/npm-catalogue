@@ -19,24 +19,30 @@ let _defaultConfig = {
 };
 
 const _createLogger = () => {
-  let transports = [
-    new winston.transports.Console({
-      handleRejections: true,
-      handleExceptions: true,
-      ...(_defaultConfig.console?.options ?? {}),
-    }),
-    new winston.transports.DailyRotateFile({
-      filename: "%DATE%.log",
-      datePattern: "YYYY-MM-DD",
-      zippedArchive: false,
-      maxFiles: "7d",
-      dirname: "./logs",
-      ...(_defaultConfig.file?.options ?? {}),
-    }),
-  ];
+  let transports = [];
 
-  if (!_defaultConfig.console?.enabled) transports.shift();
-  if (!_defaultConfig.file?.enabled) transports.pop();
+  if (_defaultConfig.console?.enabled) {
+    transports.push(
+      new winston.transports.Console({
+        handleRejections: true,
+        handleExceptions: true,
+        ...(_defaultConfig.console?.options ?? {}),
+      })
+    );
+  }
+
+  if (_defaultConfig.file?.enabled) {
+    transports.push(
+      new winston.transports.DailyRotateFile({
+        filename: "%DATE%.log",
+        datePattern: "YYYY-MM-DD",
+        zippedArchive: false,
+        maxFiles: "7d",
+        dirname: "./logs",
+        ...(_defaultConfig.file?.options ?? {}),
+      })
+    );
+  }
 
   if (_defaultConfig.transportOverrides?.length)
     transports = [..._defaultConfig.transportOverrides];
