@@ -4,7 +4,8 @@ const getCommitPrefix = async (recursive, n = 1) => {
   const log = await run(`git show -s --format='%s' -${n}`);
   const commits = log?.split("\n") || [];
   commits.splice(-1);
-  const commitMessage = commits.pop()?.trim().slice(1, -1);
+  const commitMessage = commits.pop()?.trim()
+.slice(1, -1);
   const commitPrefix = commitMessage?.includes(":")
     ? commitMessage?.split(":")?.[0]?.trim()?.toLowerCase()
     : "";

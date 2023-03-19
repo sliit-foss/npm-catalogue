@@ -1,0 +1,42 @@
+{
+  "name": "@sliit-foss/babel-plugin-transform-trace",
+  "version": "0.0.0",
+  "description": "Adds tracing to the source code during transformation",
+  "main": "dist/index.js",
+  "scripts": {
+    "build": "node ../../scripts/esbuild.config.js",
+    "build:watch":  "sh ../../scripts/esbuild.watch.sh",
+    "bump-version": "pnpm build && npx automatic-versioning --name=@sliit-foss/babel-plugin-transform-trace --no-commit --recursive",
+    "lint": "sh ../../scripts/lint.sh",
+    "release": "sh ../../scripts/release.sh",
+    "test": "dotenv -- jest --coverage --verbose --runInBand --forceExit"
+  },
+  "keywords": [
+    "babel-plugin",
+    "babel-plugin-transform",
+    "babel-plugin-transform-trace",
+    "transform-trace"
+  ],
+  "dependencies": {
+    "@babel/helper-plugin-utils": "7.10.1",
+    "@babel/template": "7.20.7",
+    "@sliit-foss/functions": "*"
+  },
+  "peerDependencies": {
+    "@babel/core": "^7.0.0-0"
+  },
+  "devDependencies": {
+    "@babel/core": "7.10.1",
+    "@babel/helper-plugin-test-runner": "7.10.1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/sliit-foss/npm-catalogue.git"
+  },
+  "homepage": "https://github.com/sliit-foss/npm-catalogue/blob/main/plugins/babel-plugin-transform-trace/readme.md",
+  "author": "SLIIT FOSS",
+  "license": "MIT",
+  "bugs": {
+    "url": "https://github.com/sliit-foss/npm-catalogue/issues"
+  }
+}

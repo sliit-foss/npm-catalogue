@@ -3,7 +3,8 @@
   "version": "1.0.0",
   "private": true,
   "workspaces": [
-    "packages/*"
+    "packages/*",
+    "plugins/*"
   ],
   "scripts": {
     "build": "turbo run build",
@@ -35,7 +36,8 @@
     "eslint": "8.33.0",
     "eslint-config-turbo": "0.0.7",
     "eslint-plugin-import": "2.27.5",
-    "husky": "8.0.3"
+    "husky": "8.0.3",
+    "nodemon": "2.0.21"
   },
   "engines": {
     "node": ">=14.0.0"
