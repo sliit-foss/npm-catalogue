@@ -21,7 +21,11 @@ export default declare((api) => {
 
         const exclusions = ["traced", "require"];
 
-        if (!t.isCallExpression(node) || exclusions.includes(callee.name))
+        if (
+          !t.isCallExpression(node) ||
+          !callee.name ||
+          exclusions.includes(callee.name)
+        )
           return;
 
         path.replaceWith(
