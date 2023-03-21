@@ -1,0 +1,31 @@
+{
+  "name": "@sliit-foss/eslint-config-internal",
+  "version": "0.0.0",
+  "description": "Custom ESLint config for SLIIT FOSS",
+  "main": "dist/index.js",
+  "scripts": {
+    "build": "node ../../scripts/esbuild.config.js",
+    "build:watch": "sh ../../scripts/esbuild.watch.sh",
+    "bump-version": "pnpm build && npx automatic-versioning --name=@sliit-foss/eslint-config-internal --no-commit --recursive",
+    "lint": "sh ../../scripts/lint.sh",
+    "release": "sh ../../scripts/release.sh",
+    "test": "dotenv -- jest --coverage --verbose --runInBand --forceExit"
+  },
+  "keywords": [
+    "eslint-plugin",
+    "eslint"
+  ],
+  "devDependencies": {
+    "eslint": "^8.36.0"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/sliit-foss/npm-catalogue.git"
+  },
+  "homepage": "https://github.com/sliit-foss/npm-catalogue/blob/main/plugins/eslint-config-internal/readme.md",
+  "author": "SLIIT FOSS",
+  "license": "MIT",
+  "bugs": {
+    "url": "https://github.com/sliit-foss/npm-catalogue/issues"
+  }
+}
