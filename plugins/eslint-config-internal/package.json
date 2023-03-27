@@ -19,10 +19,6 @@
     "eslint": "^8.36.0",
     "eslint-plugin-import": "^2.27.5"
   },
-  "peerDependencies": {
-    "eslint": "^8.36.0",
-    "eslint-plugin-import": "^2.27.5"
-  },
   "repository": {
     "type": "git",
     "url": "git+https://github.com/sliit-foss/npm-catalogue.git"
