@@ -14,7 +14,6 @@ module.exports = {
   rules: {
     "arrow-parens": ["error", "always"],
     "arrow-spacing": "error",
-    camelcase: ["error"],
     "default-case": "error",
     "newline-per-chained-call": ["error", { ignoreChainWithDepth: 2 }],
     "no-confusing-arrow": "error",
