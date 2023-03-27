@@ -36,7 +36,6 @@
     "@sliit-foss/eslint-config-internal": "workspace:*",
     "eslint": "8.33.0",
     "eslint-config-turbo": "0.0.7",
-    "eslint-plugin-import": "2.27.5",
     "husky": "8.0.3",
     "nodemon": "2.0.21"
   },

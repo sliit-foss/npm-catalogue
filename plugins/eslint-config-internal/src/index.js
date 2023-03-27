@@ -1,5 +1,6 @@
 module.exports = {
   extends: ["eslint:recommended"],
+  plugins: ["import"],
   env: {
     browser: false,
     node: true,
