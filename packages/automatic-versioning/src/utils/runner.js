@@ -1,3 +1,5 @@
+/* eslint-disable no-console */
+
 const exec = require("@actions/exec");
 
 const executor = (command) => {

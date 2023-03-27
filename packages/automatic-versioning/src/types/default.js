@@ -1,3 +1,5 @@
+/* eslint-disable no-console */
+
 import run from "../utils/runner";
 
 const getCommitPrefix = async (recursive, n = 1) => {

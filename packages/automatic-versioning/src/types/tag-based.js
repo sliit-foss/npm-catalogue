@@ -1,3 +1,5 @@
+/* eslint-disable no-console */
+
 import run from "../utils/runner";
 
 const runner = (name, noCommit) => {
