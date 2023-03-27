@@ -33,6 +33,7 @@
   "devDependencies": {
     "@commitlint/cli": "17.4.2",
     "@commitlint/config-conventional": "17.4.2",
+    "@sliit-foss/eslint-config-internal": "workspace:*",
     "eslint": "8.33.0",
     "eslint-config-turbo": "0.0.7",
     "eslint-plugin-import": "2.27.5",

@@ -1,4 +1,15 @@
 module.exports = {
+  extends: ["eslint:recommended"],
+  env: {
+    browser: false,
+    node: true,
+    es6: true,
+  },
+  parserOptions: {
+    ecmaVersion: 2021,
+    sourceType: "module",
+    requireConfigFile: false,
+  },
   rules: {
     "arrow-parens": ["error", "always"],
     "arrow-spacing": "error",
