@@ -5,6 +5,7 @@
   "main": "dist/index.js",
   "scripts": {
     "build": "node ../../scripts/esbuild.config.js",
+    "build:watch": "sh ../../scripts/esbuild.watch.sh",
     "bump-version": "pnpm build && npx automatic-versioning --name=@sliit-foss/functions --no-commit --recursive",
     "lint": "sh ../../scripts/lint.sh",
     "release": "sh ../../scripts/release.sh",
