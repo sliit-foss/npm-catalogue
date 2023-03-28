@@ -14,7 +14,7 @@ runs:
         registry-url: 'https://registry.npmjs.org'
 
     - name: Install dependencies
-      run: npm install -g pnpm && pnpm install
+      run: npm install -g pnpm@7.5.0 && pnpm install
       shell: bash
 
     - name: Run unit tests
