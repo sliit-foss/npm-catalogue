@@ -1,6 +1,6 @@
 import { moduleLogger } from "@sliit-foss/module-logger";
 
-const logger = moduleLogger("Framework");
+const logger = moduleLogger("framework");
 
 const defaultProperties = ["path", "method", "query", "params"];
 
@@ -21,7 +21,7 @@ const httpLogger =
     if (whitelists.find((route) => req.path.match(new RegExp(route))))
       return next();
 
-    logger.info(`Request Initiated`, info);
+    logger.info(`request initiated`, info);
 
     const onFinish = (err) => {
       res.removeListener("error", onFinish);
@@ -30,7 +30,7 @@ const httpLogger =
       const error = err || res.err;
 
       if (error || res.statusCode >= 500) {
-        logger.error("Request error", {
+        logger.error("request error", {
           ...info,
           status: res.statusCode,
           error: error,
@@ -38,7 +38,7 @@ const httpLogger =
         return;
       }
 
-      logger.info("Request Completed", info);
+      logger.info("request completed", info);
     };
 
     res.on("finish", onFinish);
