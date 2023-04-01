@@ -1,0 +1,32 @@
+{
+  "name": "@sliit-foss/http-logger",
+  "version": "0.0.0",
+  "description": "Http logging middleware for Express.js",
+  "main": "dist/index.js",
+  "scripts": {
+    "build": "node ../../scripts/esbuild.config.js",
+    "build:watch": "sh ../../scripts/esbuild.watch.sh",
+    "bump-version": "pnpm build && npx automatic-versioning --name=@sliit-foss/http-logger --no-commit --recursive",
+    "lint": "sh ../../scripts/lint.sh",
+    "release": "sh ../../scripts/release.sh",
+    "test": "sh ../../scripts/test.sh"
+  },
+  "dependencies": {
+    "@sliit-foss/module-logger": "1.1.3"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/sliit-foss/npm-catalogue.git"
+  },
+  "homepage": "https://github.com/sliit-foss/npm-catalogue/blob/main/packages/http-logger/readme.md",
+  "keywords": [
+    "logging",
+    "http-logging",
+    "middleware"
+  ],
+  "author": "SLIIT FOSS",
+  "license": "MIT",
+  "bugs": {
+    "url": "https://github.com/sliit-foss/npm-catalogue/issues"
+  }
+}
