@@ -26,10 +26,10 @@ import { traced, asyncHandler, tracedAsyncHandler } from "@sliit-foss/functions"
 
 ## Example<br/><br/>
 
-- ### traced
+- ### trace
 
 ```js
-traced(function foo() {
+trace(function foo() {
   console.log(123);
 });
 
@@ -37,6 +37,35 @@ traced(function foo() {
   _foo execution initiated
   _foo execution completed - execution_time : 0.2069999985396862
 */
+```
+
+- ### traced `(Same as trace but returns a decorated function)`
+
+```js
+traced(function foo() {
+  console.log(123);
+})();
+
+/*
+  _foo execution initiated
+  _foo execution completed - execution_time : 0.2069999985396862
+*/
+```
+
+- ### bindKey `(Creates a bounded function from a passed object and function key with its context preserved)`
+  <br/>
+  - This method is distint from the `bindKey` function of lodash as this preserves the function's `name` property where lodash sets it as `wrapper`
+
+```js
+const obj = {
+  name: "test-object",
+  foo() {
+    console.log(`Inside ${this.name} function foo`);
+  },
+};
+const preserved = bindKey(obj, "foo");
+setTimeout(preserved, 0); // Outputs `Inside test-object function foo`
+console.log(preserved.name); // Outputs `bound foo`
 ```
 
 - ### tracedAsyncHandler
@@ -51,9 +80,7 @@ tracedAsyncHandler(async function hello(req, res) => {
 */
 ```
 
-- ### asyncHandler
-
-  - Same as tracedAsyncHandler but without the tracing. Useful when you don't want to trace the execution time of the function.
+- ### asyncHandler `(Same as tracedAsyncHandler but without the tracing. Useful when you don't want to trace the execution time of the function)`
 
 ```js
 asyncHandler(async function hello(req, res) => {

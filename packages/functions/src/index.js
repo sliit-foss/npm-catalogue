@@ -6,7 +6,12 @@ const logger = moduleLogger("tracer");
 
 const _fnName = (fn) => {
   let name = fn.name;
-  if (name.startsWith("bound")) name = name?.replace("bound", "")?.trim();
+  while (1) {
+    const replaced = name?.replace("bound", "");
+    if (name.startsWith("bound") && replaced?.startsWith(" "))
+      name = replaced?.trim();
+    else break;
+  }
   if (!name) return "Unnamed function";
   if (name.startsWith(" ")) return name.slice(1);
   return name;
@@ -74,6 +79,13 @@ export const traced =
   (fn, loggable) =>
   (...params) =>
     _traced(fn.bind(this, ...params), loggable);
+
+export const trace = (fn, loggable) => _traced(fn, loggable);
+
+export const bindKey = (object, key, ...partials) => {
+  const temp = { [key]: object[key].bind(object, ...partials) };
+  return temp[key];
+};
 
 export const asyncHandler = (fn) => _asyncHandler(fn);
 

@@ -3,7 +3,14 @@ const mockLogger = {
   error: jest.fn(),
 };
 
-const { traced, asyncHandler, tracedAsyncHandler, cached } = require("../src");
+const {
+  traced,
+  trace,
+  bindKey,
+  asyncHandler,
+  tracedAsyncHandler,
+  cached,
+} = require("../src");
 
 jest.mock("@sliit-foss/module-logger", () => ({
   moduleLogger: () => mockLogger,
@@ -48,7 +55,27 @@ describe("traced", () => {
     delete process.env.DISABLE_FUNCTION_TRACING;
   });
 });
-
+describe("trace", () => {
+  test("test trace execution", async () => {
+    function foo() {
+      return "test";
+    }
+    await trace(foo);
+    expect(mockLogger.info).toBeCalledWith("_foo execution initiated", {});
+  });
+});
+describe("bindKey", () => {
+  test("test-successfull-bind", async () => {
+    const obj = {
+      name: "test-object",
+      foo() {
+        mockLogger.info(`Inside ${this.name} function foo`);
+      },
+    };
+    const preserved = bindKey(obj, "foo");
+    expect(preserved.name).toBe("bound foo");
+  });
+});
 describe("asyncHandler", () => {
   const mockReq = {};
   const mockRes = {};

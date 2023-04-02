@@ -1,3 +1,9 @@
 {
-  "extends": ["@sliit-foss/eslint-config-internal", "turbo"]
+  "extends": [
+    "@sliit-foss/eslint-config-internal",
+    "turbo"
+  ],
+  "rules": {
+    "no-constant-condition": "off"
+  }
 }
