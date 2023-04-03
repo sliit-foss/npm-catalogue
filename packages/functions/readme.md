@@ -18,13 +18,13 @@ yarn add @sliit-foss/functions
 
 ```js
 # using require
-const { traced, asyncHandler, tracedAsyncHandler } = require("@sliit-foss/functions");
+const { trace, traced, bindKey, asyncHandler, tracedAsyncHandler } = require("@sliit-foss/functions");
 
 # using import
-import { traced, asyncHandler, tracedAsyncHandler } from "@sliit-foss/functions";
+import { trace, traced, bindKey, asyncHandler, tracedAsyncHandler } from "@sliit-foss/functions";
 ```
 
-## Example<br/><br/>
+## Examples<br/><br/>
 
 - ### trace
 
