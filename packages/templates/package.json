@@ -2,8 +2,7 @@
   "name": "@sliit-foss/templates",
   "version": "0.0.0-dev.1",
   "description": "A simple template generator which can be invoked via the CLI",
-  "exports": "./dist/index.js",
-  "bin": "npx plop dist/index.js",
+  "bin": "npm run generate",
   "scripts": {
     "bump-version": "pnpm build && npx automatic-versioning --name=@sliit-foss/templates --no-commit --recursive",
     "generate": "plop --plopfile src/index.js",
