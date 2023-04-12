@@ -4,7 +4,7 @@
   "description": "A simple template generator which can be invoked via the CLI",
   "bin": "npm run generate",
   "scripts": {
-    "bump-version": "pnpm build && npx automatic-versioning --name=@sliit-foss/templates --no-commit --recursive",
+    "bump-version": "npx automatic-versioning --name=@sliit-foss/templates --no-commit --recursive",
     "generate": "plop --plopfile src/index.js",
     "lint": "sh ../../scripts/lint.sh",
     "release": "sh ../../scripts/release.sh",
