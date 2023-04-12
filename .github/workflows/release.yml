@@ -29,6 +29,11 @@ jobs:
         
       - run: echo "git-checks=false" >> .npmrc
 
+      - name: Fetch submodules
+        run: |
+          git submodule init
+          git submodule update
+
       - name: Populate prerequisities
         run: |
           cd packages && for p in *; do if [ -d "$p" ]; then cp ../.npmignore ../LICENSE $p/; fi; done && cd ..
