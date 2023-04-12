@@ -1,8 +1,9 @@
 {
   "name": "@sliit-foss/templates",
-  "version": "0.0.0-dev.2",
+  "version": "1.0.5",
   "description": "A simple template generator which can be invoked via the CLI",
-  "bin": "npm run generate",
+  "main": "src/index.js",
+  "bin": "bin/index.js",  
   "scripts": {
     "bump-version": "npx automatic-versioning --name=@sliit-foss/templates --no-commit --recursive",
     "generate": "plop --plopfile src/index.js",
@@ -12,6 +13,7 @@
   },
   "type": "module",
   "dependencies": {
+    "app-root-path": "3.0.0",
     "plop": "3.1.2"
   },
   "repository": {
@@ -29,6 +31,10 @@
     "url": "https://github.com/sliit-foss/npm-catalogue/issues"
   },
   "files": [
+    "bin/index.js",
     "src/**/**.js"
-  ]
+  ],
+  "publishConfig": {
+    "registry": "http://localhost:4873"
+  }
 }
