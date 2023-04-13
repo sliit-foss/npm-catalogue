@@ -8,10 +8,10 @@
 
 ```bash
 # using npm
-npm install @sliit-foss/templates
+npm install -g @sliit-foss/templates
 
 # using yarn
-yarn add @sliit-foss/templates
+yarn global add @sliit-foss/templates
 ```
 
 ## Usage
@@ -19,5 +19,5 @@ yarn add @sliit-foss/templates
 - Execute the following command in your terminal to see a list of available options
 
 ```bash
-npx @sliit-foss/templates
+npx sft
 ```

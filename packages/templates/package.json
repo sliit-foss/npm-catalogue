@@ -1,6 +1,6 @@
 {
   "name": "@sliit-foss/templates",
-  "version": "0.0.0-dev.5",
+  "version": "0.0.0-dev.6",
   "description": "A simple template generator which can be invoked via the CLI",
   "main": "src/index.js",
   "bin": {
@@ -34,7 +34,6 @@
     "url": "https://github.com/sliit-foss/npm-catalogue/issues"
   },
   "files": [
-    "bin/index.js",
-    "src/**/**.js"
+    "src/**/**"
   ]
 }
