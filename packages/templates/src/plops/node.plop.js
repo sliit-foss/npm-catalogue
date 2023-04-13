@@ -22,20 +22,24 @@ export default function (plop) {
       const path = templates.find(
         (template) => template.name === config.template
       )?.path;
-      if (fs.existsSync(`./${path}`)) {
-        console.info(
-          "There already is a folder named in the current directory. Skipping template generation..."
-        );
-      } else {
+      if (!fs.existsSync(`./${path}`)) {
         return [
           {
             type: "addMany",
             destination: `.`,
             base: `../stacks/${global.stack}`,
-            templateFiles: `../stacks/${global.stack}/${path}/**`,
+            templateFiles: [
+              `../stacks/${global.stack}/${path}/.*`,
+              `../stacks/${global.stack}/${path}/.*/*`,
+              `../stacks/${global.stack}/${path}/**`,
+            ],
           },
         ];
       }
+      console.info(
+        "Project already exists in the current directory. Skipping template generation..."
+      );
+      return [];
     },
   });
 }
