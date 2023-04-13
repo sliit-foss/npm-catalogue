@@ -36,8 +36,5 @@
   "files": [
     "bin/index.js",
     "src/**/**.js"
-  ],
-  "publishConfig": {
-    "registry": "http://localhost:4873"
-  }
+  ]
 }
