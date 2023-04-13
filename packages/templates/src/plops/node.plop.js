@@ -1,9 +1,5 @@
 import fs from "fs";
 
-let appRoot = require("app-root-path");
-
-appRoot = appRoot?.path ?? appRoot;
-
 const templates = [
   {
     name: "Express microservice",
@@ -25,8 +21,8 @@ export default function (plop) {
     actions(config) {
       const path = templates.find(
         (template) => template.name === config.template
-      );
-      if (fs.existsSync(`${appRoot}/${path}`)) {
+      )?.path;
+      if (fs.existsSync(`./${path}`)) {
         console.info(
           "There already is a folder named in the current directory. Skipping template generation..."
         );
@@ -34,8 +30,9 @@ export default function (plop) {
         return [
           {
             type: "addMany",
-            destination: `${appRoot}/${path}`,
-            templateFiles: `../stacks/${config.name}/${path}/**/*.js`,
+            destination: `.`,
+            base: `../stacks/${global.stack}`,
+            templateFiles: `../stacks/${global.stack}/${path}/**/*`,
           },
         ];
       }

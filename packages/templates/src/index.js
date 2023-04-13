@@ -1,32 +1,33 @@
-import { launchPlop } from "./utils";
+import path from "node:path";
+import { fileURLToPath } from "node:url";
+import minimist from "minimist";
+import { Plop, run } from "plop";
 
-export default function (plop) {
-  plop.setActionType("stack-resolver", (config) => {
-    switch (config.stack) {
-      case "Node.js":
-        return launchPlop(`./plops/node.plop.js`);
-      default:
-        console.info(
-          "Requested stack is not available in the current version of this generator"
-        );
-        break;
-    }
-  });
+const args = process.argv.slice(2);
 
-  plop.setGenerator("templates", {
-    description: "Generator options",
-    prompts: [
-      {
-        type: "list",
-        name: "stack",
-        message: "Which tech stack are you interested in ?",
-        choices: ["Node.js"],
-      },
-    ],
-    actions: [
-      {
-        type: "stack-resolver",
-      },
-    ],
-  });
-}
+const argv = minimist(args);
+
+const __filename = fileURLToPath(import.meta.url);
+
+const __dirname = path.dirname(__filename);
+
+export const launchPlop = (plopFilePath) => {
+  Plop.prepare(
+    {
+      cwd: argv.cwd,
+      configPath: path.join(__dirname, plopFilePath),
+      preload: argv.preload || [],
+      completion: argv.completion,
+    },
+    (env) =>
+      Plop.execute(env, (env) => {
+        const options = {
+          ...env,
+          dest: process.cwd(),
+        };
+        return run(options, undefined, true);
+      })
+  );
+};
+
+launchPlop("./plops/index.plop.js");
