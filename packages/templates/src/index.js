@@ -1,21 +1,33 @@
-console.log(423);
+import path from "node:path";
+import { fileURLToPath } from "node:url";
+import minimist from "minimist";
+import { Plop, run } from "plop";
 
-export default function (plop) {
-  plop.setGenerator("controller", {
-    description: "application controller logic",
-    prompts: [
-      {
-        type: "input",
-        name: "name",
-        message: "controller name please",
-      },
-    ],
-    actions: [
-      {
-        type: "add",
-        path: "src/{{name}}.js",
-        templateFile: "plop-templates/controller.hbs",
-      },
-    ],
-  });
-}
+const args = process.argv.slice(2);
+
+const argv = minimist(args);
+
+const __filename = fileURLToPath(import.meta.url);
+
+const __dirname = path.dirname(__filename);
+
+export const launchPlop = (plopFilePath) => {
+  Plop.prepare(
+    {
+      cwd: argv.cwd,
+      configPath: path.join(__dirname, plopFilePath),
+      preload: argv.preload || [],
+      completion: argv.completion,
+    },
+    (env) =>
+      Plop.execute(env, (env) => {
+        const options = {
+          ...env,
+          dest: process.cwd(),
+        };
+        return run(options, undefined, true);
+      })
+  );
+};
+
+launchPlop("./plops/index.plop.js");
