@@ -8,7 +8,7 @@ const stacks = [
 ];
 
 export default function (plop) {
-  plop.setActionType("stack-resolver", (config) => {
+  plop.setActionType("select-tech-stack", (config) => {
     global.stack = stacks.find((stack) => stack.name === config.stack)?.path;
     if (global.stack) {
       return launchPlop(`./plops/${global.stack}.plop.js`);
@@ -30,7 +30,7 @@ export default function (plop) {
     ],
     actions: [
       {
-        type: "stack-resolver",
+        type: "select-tech-stack",
       },
     ],
   });
