@@ -32,7 +32,7 @@ export default function (plop) {
             type: "addMany",
             destination: `.`,
             base: `../stacks/${global.stack}`,
-            templateFiles: `../stacks/${global.stack}/${path}/**/*`,
+            templateFiles: `../stacks/${global.stack}/${path}/**`,
           },
         ];
       }
