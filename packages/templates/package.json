@@ -34,6 +34,7 @@
     "url": "https://github.com/sliit-foss/npm-catalogue/issues"
   },
   "files": [
-    "src/**/**"
+    "src/**/**",
+    "src/**/.*"
   ]
 }
