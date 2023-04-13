@@ -1,6 +1,6 @@
 {
   "name": "@sliit-foss/templates",
-  "version": "0.0.0-dev.6",
+  "version": "0.0.0-dev.7",
   "description": "A simple template generator which can be invoked via the CLI",
   "main": "src/index.js",
   "bin": {
