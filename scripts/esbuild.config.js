@@ -5,7 +5,7 @@ execSync("npx rimraf ./dist && mkdir dist");
 
 require("esbuild")
   .build({
-    entryPoints: ["./src/**/*.js"],
+    entryPoints: ["./src/**/*.js", "./types/**/*.d.ts"],
     bundle: false,
     outdir: "./dist",
     platform: "node",
@@ -14,6 +14,9 @@ require("esbuild")
     minify: true,
     sourcemap: true,
     keepNames: true,
+    loader: {
+      ".d.ts": "copy",
+    },
     plugins: [globPlugin()],
   })
   .catch(() => process.exit(1));
