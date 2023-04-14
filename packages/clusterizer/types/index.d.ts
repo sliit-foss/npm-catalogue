@@ -10,7 +10,7 @@ interface ClusterizerOptions {
    */
   logger?: Logger;
   /**
-   * A specific number of workers to run parallelly in the cluster
+   * A specific number of workers to run parallelly in the cluster.
    * This defaults to the number of cores in your machine.
    * Providing a number of workers higher than this core count will have no effect on the cluster.
    */
