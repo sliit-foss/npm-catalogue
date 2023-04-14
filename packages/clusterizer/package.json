@@ -1,6 +1,6 @@
 {
     "name": "@sliit-foss/clusterizer",
-    "version": "1.1.2",
+    "version": "1.2.0",
     "description": "A wrapper around the node cluster module to make it easier to bootstrap a clusterized application",
     "main": "dist/index.js",
     "types": "types/index.d.ts",
