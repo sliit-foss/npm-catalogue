@@ -10,8 +10,8 @@
   "scripts": {
     "bump-version": "npx automatic-versioning --name=@sliit-foss/templates --no-commit --recursive",
     "generate": "plop --plopfile src/index.js",
-    "lint": "sh ../../scripts/lint.sh",
-    "release": "sh ../../scripts/release.sh",
+    "lint": "bash ../../scripts/lint.sh",
+    "release": "bash ../../scripts/release.sh",
     "test": "dotenv -- jest --coverage --verbose --runInBand --forceExit"
   },
   "type": "module",
