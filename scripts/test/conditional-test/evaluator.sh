@@ -1,3 +1,5 @@
+#!/bin/bash
+
 # parse keys
 
 while getopts k: flag
@@ -21,7 +23,7 @@ while IFS=';' read -ra ADDR; do
 done <<< "$keys"
 
 if [ $check == true ]; then
-    ../../scripts/test/test.sh
+    bash ../../scripts/test/test.sh
 else 
     echo "skipped as the required environment variables are not present"
 fi
