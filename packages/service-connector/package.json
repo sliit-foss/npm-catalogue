@@ -9,7 +9,7 @@
     "bump-version": "pnpm build && npx automatic-versioning --name=@sliit-foss/service-connector --no-commit --recursive",
     "lint": "sh ../../scripts/lint.sh",
     "release": "sh ../../scripts/release.sh",
-    "test": "sh ../../scripts/test.sh"
+    "test": "sh ../../scripts/test/test.sh"
   },
   "dependencies": {
     "@sliit-foss/module-logger": "1.1.2",
