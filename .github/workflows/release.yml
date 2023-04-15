@@ -22,29 +22,28 @@ jobs:
       - run: git fetch --prune --unshallow
 
       - name: Install dependencies
-        run: npm install -g pnpm @sliit-foss/automatic-versioning@1.0.8 && pnpm install --production --ignore-scripts
+        run: npm install -g pnpm@7.5.0 @sliit-foss/automatic-versioning@latest && pnpm install --production --ignore-scripts
       
       - name: Create .npmrc
         run: echo "//registry.npmjs.org/:_authToken=${{ secrets.NPM_TOKEN }}" > .npmrc
         
       - run: echo "git-checks=false" >> .npmrc
 
+      - name: Fetch submodules
+        run: |
+          git submodule init
+          git submodule update
+
       - name: Populate prerequisities
-        run: cd packages && for p in *; do if [ -d "$p" ]; then cp ../.npmignore ../LICENSE $p/; fi; done && cd ..
+        run: |
+          cd packages && for p in *; do if [ -d "$p" ]; then cp ../.npmignore ../LICENSE $p/; fi; done && cd ..
+          cd plugins && for p in *; do if [ -d "$p" ]; then cp ../.npmignore ../LICENSE $p/; fi; done && cd ..
           
       - name: Publish package on NPM
         run: pnpm release
 
       - name: Update release info
         run: |
-          lastCommit=$(git log -1 --pretty=%B)
-          releasePrefix=(${lastCommit//:/ })
-          release="patch"
-          if [ "$releasePrefix" == "FEAT!" -o "$releasePrefix" == "Feat!" ]; then
-              release="major"
-          elif [ "$releasePrefix" == "FEAT" -o "$releasePrefix" == "Feat" ]; then
-              release="minor"   
-          fi
           git config pull.ff true
-          git add . && git commit -m "CI: @sliit-foss/automatic-versioning - $release release" || true
-          git pull && git push origin main
+          git add . && git commit -m "CI: @sliit-foss/automatic-versioning - sync release" || true
+          git pull --rebase && git push origin main

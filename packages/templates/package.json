@@ -1,0 +1,40 @@
+{
+  "name": "@sliit-foss/templates",
+  "version": "0.0.0-dev.8",
+  "description": "A simple template generator which can be invoked via the CLI",
+  "main": "src/index.js",
+  "bin": {
+    "sft": "src/index.js"
+  },
+  "preferGlobal": true,
+  "scripts": {
+    "bump-version": "npx automatic-versioning --name=@sliit-foss/templates --no-commit --recursive",
+    "generate": "plop --plopfile src/index.js",
+    "lint": "bash ../../scripts/lint.sh",
+    "release": "bash ../../scripts/release.sh",
+    "test": "dotenv -- jest --coverage --verbose --runInBand --forceExit"
+  },
+  "type": "module",
+  "dependencies": {
+    "minimist": "1.2.8",
+    "plop": "3.1.2"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/sliit-foss/npm-catalogue.git"
+  },
+  "homepage": "https://github.com/sliit-foss/npm-catalogue/blob/main/packages/templates/readme.md",
+  "keywords": [
+    "utilities",
+    "template-generator"
+  ],
+  "author": "SLIIT FOSS",
+  "license": "MIT",
+  "bugs": {
+    "url": "https://github.com/sliit-foss/npm-catalogue/issues"
+  },
+  "files": [
+    "src/**/**",
+    "src/**/.*"
+  ]
+}

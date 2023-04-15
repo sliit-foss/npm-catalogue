@@ -1,6 +1,8 @@
+/* eslint-disable no-console */
+
 import run from "../utils/runner";
 
-const runner = (name) => {
+const runner = (name, noCommit) => {
   run(`npm pkg get version`).then((initialVersion) => {
     initialVersion = initialVersion
       .replace(/\n/g, "")
@@ -20,14 +22,18 @@ const runner = (name) => {
         )}-${latest[3]}`;
       }
       if (latest && latest !== initialVersion) {
-        run(`npm version ${latest} --no-git-tag-version`)
+        run(
+          `npm version ${latest} --no-git-tag-version --workspaces-update=false`
+        )
           .then(() => {
-            const successMsg = `"CI: Bumped version of ${name} from ${initialVersion} to ${latest}"`;
-            run("git add .").then(() => {
-              run(`git commit -m ${successMsg}`).then(() => {
-                console.log(successMsg.green);
+            if (!noCommit) {
+              const successMsg = `"CI: Bumped version of ${name} from ${initialVersion} to ${latest}"`;
+              run("git add .").then(() => {
+                run(`git commit -m ${successMsg}`).then(() => {
+                  console.log(successMsg.green);
+                });
               });
-            });
+            }
           })
           .catch(() => {});
       } else {

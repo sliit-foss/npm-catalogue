@@ -36,11 +36,14 @@ yarn-error.log*
 
 .env
 
-packages/**/dist/
+.vscode
 
-packages/**/.npmignore
-packages/**/.babelrc
-packages/**/jest.config.js
-packages/**/LICENSE
+p*/**/dist/
 
-packages/**/node_modules/
+p*/**/.npmignore
+p*/**/.babelrc
+p*/**/jest.config.js
+p*/**/LICENSE
+
+p*/**/node_modules/
+p*/**/logs/

@@ -1,0 +1,3 @@
+[submodule "packages/templates/src/stacks/node"]
+	path = packages/templates/src/stacks/node
+	url = https://github.com/sliit-foss/nodejs-templates.git

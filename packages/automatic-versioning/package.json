@@ -1,19 +1,20 @@
 {
   "name": "@sliit-foss/automatic-versioning",
-  "version": "1.0.9",
+  "version": "1.2.1",
   "description": "A script which will automatically increment your app package version in accordance with conventional commits",
   "main": "dist/index.js",
   "bin": "dist/index.js",
   "scripts": {
-    "build": "esbuild src/index.js --bundle --platform=node --target=node14 --outfile=dist/index.js --sourcemap --minify",
-    "bump-version": "pnpm build && node dist/index.js",
-    "lint": "eslint src --ext .js --fix",
-    "release": "pnpm run bump-version && pnpm publish --access=public --tag=latest || true && git reset HEAD~1 || true ",
+    "build": "node ../../scripts/esbuild.config.js",
+    "build:watch": "bash ../../scripts/esbuild.watch.sh",
+    "bump-version": "pnpm build && node dist/index.js --no-commit --recursive",
+    "lint": "bash ../../scripts/lint.sh",
+    "release": "bash ../../scripts/release.sh",
     "test": "dotenv -- jest --coverage --verbose --runInBand --forceExit"
   },
   "dependencies": {
     "@actions/exec": "1.1.1",
-    "colors": "1.4.0"
+    "@colors/colors": "1.5.0"
   },
   "author": "SLIIT FOSS",
   "license": "MIT",
@@ -21,7 +22,7 @@
     "type": "git",
     "url": "git+https://github.com/sliit-foss/npm-catalogue.git"
   },
-  "homepage": "https://github.com/sliit-foss/npm-catalogue/packages/automatic-versioning#readme",
+  "homepage": "https://github.com/sliit-foss/npm-catalogue/blob/main/packages/automatic-versioning/readme.md",
   "keywords": [
     "automatic-versioning",
     "semantic-versioning",

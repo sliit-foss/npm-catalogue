@@ -1,24 +1,30 @@
 #!/usr/bin/env node
 
+/* eslint-disable no-console */
+
 import path from "path";
 
 import defaultRunner from "./types/default";
 import tagBasedRunner from "./types/tag-based";
 
-require("colors");
+require("@colors/colors");
 
 const args = process.argv.slice(2);
 
 const defaultRootDir = "../../../../";
 
-let name = "@sliit-foss/automatic-versioning",
-  rootDir = defaultRootDir;
-let noCommitEdit = false;
+let name = "@sliit-foss/automatic-versioning";
+let rootDir = defaultRootDir;
+let noCommitEdit = false,
+  noCommit = false,
+  recursive = false;
 
 args.forEach((arg) => {
   if (arg.includes("--name=")) name = arg.replace("--name=", "");
   if (arg.includes("--rootDir=")) rootDir += arg.replace("--rootDir=", "");
   if (arg.includes("--no-commit-edit")) noCommitEdit = true;
+  if (arg.includes("--no-commit")) noCommit = true;
+  if (arg.includes("--recursive")) recursive = true;
 });
 
 console.log(`Running version bump for ${name}`.green);
@@ -29,7 +35,7 @@ if (rootDir !== defaultRootDir) {
 }
 
 if (args.includes("--tag-based")) {
-  tagBasedRunner(name);
+  tagBasedRunner(name, noCommit);
 } else {
-  defaultRunner(name, noCommitEdit);
+  defaultRunner(name, noCommit, noCommitEdit, recursive);
 }

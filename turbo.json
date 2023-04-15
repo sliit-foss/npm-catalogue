@@ -1,40 +1,29 @@
 {
   "$schema": "https://turbo.build/schema.json",
-  "globalDependencies": [
-    "**/.env.*local"
-  ],
+  "globalDependencies": ["**/.env.*local"],
   "pipeline": {
     "build": {
       "dependsOn": [],
-      "outputs": [
-        "dist/**"
-      ]
+      "outputs": ["dist/**"]
     },
     "bump-version": {
       "dependsOn": [],
-      "outputs": [
-        "package.json"
-      ]
+      "outputs": ["package.json"]
     },
-    "format": {},
+    "format": { "cache": false },
     "lint": {},
     "prerelease": {
       "dependsOn": [],
-      "outputs": [
-        ".npmignore"
-      ]
+      "outputs": [".npmignore"]
     },
     "release": {
       "dependsOn": [],
       "outputs": []
     },
     "test": {
-      "dependsOn": [
-        "build"
-      ],
-      "outputs": [
-        "coverage/**"
-      ]
+      "dependsOn": ["build"],
+      "outputs": ["coverage/**"]
     }
-  }
+  },
+  "globalEnv": ["DISABLE_FUNCTION_TRACING"]
 }

@@ -1,0 +1,31 @@
+{
+  "name": "@sliit-foss/functions",
+  "version": "2.1.1",
+  "description": "Just a small set of utility functions",
+  "main": "dist/index.js",
+  "scripts": {
+    "build": "node ../../scripts/esbuild.config.js",
+    "build:watch": "bash ../../scripts/esbuild.watch.sh",
+    "bump-version": "pnpm build && npx automatic-versioning --name=@sliit-foss/functions --no-commit --recursive",
+    "lint": "bash ../../scripts/lint.sh",
+    "release": "bash ../../scripts/release.sh",
+    "test": "bash ../../scripts/test/test.sh"
+  },
+  "dependencies": {
+    "@sliit-foss/module-logger": "1.1.3",
+    "express-http-context": "1.2.4"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/sliit-foss/npm-catalogue.git"
+  },
+  "homepage": "https://github.com/sliit-foss/npm-catalogue/blob/main/packages/functions/readme.md",
+  "keywords": [
+    "utilities"
+  ],
+  "author": "SLIIT FOSS",
+  "license": "MIT",
+  "bugs": {
+    "url": "https://github.com/sliit-foss/npm-catalogue/issues"
+  }
+}
