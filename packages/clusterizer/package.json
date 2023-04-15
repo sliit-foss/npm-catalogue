@@ -10,7 +10,7 @@
         "bump-version": "pnpm build && npx automatic-versioning --name=@sliit-foss/clusterizer --no-commit --recursive",
         "lint": "sh ../../scripts/lint.sh",
         "release": "sh ../../scripts/release.sh",
-        "test": "sh ../../scripts/test.sh"
+        "test": "sh ../../scripts/test/test.sh"
     },
     "author": "SLIIT FOSS",
     "license": "MIT",
