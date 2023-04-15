@@ -1,5 +1,3 @@
-#!/bin/bash
-
 # parse keys
 
 while getopts k: flag
