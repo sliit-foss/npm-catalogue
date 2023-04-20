@@ -1,3 +1,5 @@
+/* eslint-disable no-console */
+
 import fs from "fs";
 
 const generator = (plop, templates) => {

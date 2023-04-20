@@ -2,7 +2,7 @@ import { generator } from "./utils/index.js";
 
 const templates = [
   {
-    name: "Cat Facts",
+    name: "Cat facts",
     path: "cat-facts",
   },
 ];
