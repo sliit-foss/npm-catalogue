@@ -26,6 +26,7 @@ const generator = (plop, templates) => {
             templateFiles: [
               `../stacks/${global.stack}/${path}/.*`,
               `../stacks/${global.stack}/${path}/.*/*`,
+              `../stacks/${global.stack}/${path}/**/.*`,
               `../stacks/${global.stack}/${path}/**`,
             ],
           },

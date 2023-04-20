@@ -35,6 +35,7 @@
   },
   "files": [
     "src/**/**",
-    "src/**/.*"
+    "src/**/.*",
+    "src/**/.gitignore"
   ]
 }
