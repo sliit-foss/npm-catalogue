@@ -2,8 +2,8 @@ import { generator } from "./utils";
 
 const templates = [
   {
-    name: "Express microservice",
-    path: "express-microservice",
+    name: "Cat Facts",
+    path: "cat-facts",
   },
 ];
 

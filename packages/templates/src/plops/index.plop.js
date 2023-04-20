@@ -5,6 +5,10 @@ const stacks = [
     name: "Node.js",
     path: "node",
   },
+  {
+    name: "Flutter",
+    path: "flutter",
+  },
 ];
 
 export default function (plop) {
