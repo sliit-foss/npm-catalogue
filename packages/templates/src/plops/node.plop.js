@@ -1,4 +1,4 @@
-import { generator } from "./utils";
+import { generator } from "./utils/index";
 
 const templates = [
   {
