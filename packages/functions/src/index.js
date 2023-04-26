@@ -73,7 +73,10 @@ const _asyncHandler =
     }
   };
 
-export const traced = (fn, loggable) => _traced.bind(this, fn, loggable);
+export const traced =
+  (fn, loggable) =>
+  (...params) =>
+    _traced(fn.bind(this, ...params), loggable);
 
 export const trace = (fn, loggable) => _traced(fn, loggable);
 
