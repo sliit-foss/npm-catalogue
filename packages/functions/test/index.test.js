@@ -1,6 +1,6 @@
 const mockLogger = {
-  info: jest.fn(),
-  error: jest.fn(),
+  info: jest.fn().mockImplementation((msg) => console.info(msg)),
+  error: jest.fn().mockImplementation((msg) => console.error(msg)),
 };
 
 const {
@@ -53,6 +53,16 @@ describe("traced", () => {
     await traced(() => "test")();
     expect(mockLogger.info).not.toBeCalled();
     delete process.env.DISABLE_FUNCTION_TRACING;
+  });
+  test("test cascading errors", async () => {
+    const tracedOuterFn = traced(async function outerFn() {
+      await traced(function innerFn() {
+        throw new Error("Failure in innner function");
+      })();
+    });
+    await tracedOuterFn().catch(() => {
+      expect(mockLogger.error).toBeCalledTimes(1);
+    });
   });
 });
 describe("trace", () => {

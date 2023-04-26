@@ -28,12 +28,8 @@ export const _traced = async (fn, loggable = {}, fnName) => {
     startTime = performance.now();
   }
   try {
-    let result;
-    if (fn.constructor.name === "AsyncFunction") {
-      result = await fn();
-    } else {
-      result = fn();
-    }
+    let result = fn();
+    if (result instanceof Promise) result = await result;
     !disableTracing &&
       logger.info(
         `${fnName} execution completed - execution_time : ${
@@ -43,10 +39,12 @@ export const _traced = async (fn, loggable = {}, fnName) => {
       );
     return result;
   } catch (err) {
-    !disableTracing &&
+    if (!disableTracing && !err.isLogged) {
       logger.error(
         `${fnName} execution failed - error: ${err.message} - stack: ${err.stack}`
       );
+      err.isLogged = true;
+    }
     throw err;
   }
 };
@@ -75,10 +73,7 @@ const _asyncHandler =
     }
   };
 
-export const traced =
-  (fn, loggable) =>
-  (...params) =>
-    _traced(fn.bind(this, ...params), loggable);
+export const traced = (fn, loggable) => _traced.bind(this, fn, loggable);
 
 export const trace = (fn, loggable) => _traced(fn, loggable);
 
@@ -108,6 +103,7 @@ export const cached = (key, fn) => {
 
 export default {
   traced,
+  trace,
   asyncHandler,
   tracedAsyncHandler,
   cached,
