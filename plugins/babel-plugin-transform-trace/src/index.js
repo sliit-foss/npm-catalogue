@@ -9,10 +9,21 @@ export default declare((api) => {
     name: "transform-trace",
     visitor: {
       Program(path) {
-        const importNode = template.ast(
-          `const { traced } = require('@sliit-foss/functions') ;\n`
-        );
-        path.node.body.unshift(importNode);
+        let tracedImportExists = false;
+        path.traverse({
+          Identifier(p) {
+            if (p.node.name === "traced") {
+              tracedImportExists = true;
+              p.stop();
+            }
+          },
+        });
+        if (!tracedImportExists) {
+          const tracedImport = template.ast(
+            `const { traced } = require('@sliit-foss/functions') ;\n`
+          );
+          path.node.body.unshift(tracedImport);
+        }
       },
       CallExpression: {
         enter(path) {

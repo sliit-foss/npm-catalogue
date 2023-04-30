@@ -12,6 +12,7 @@ module.exports = {
         "Feat",
         "Fix",
         "Patch",
+        "Prerelease",
         "Chore",
         "Build",
         "Refactor",
