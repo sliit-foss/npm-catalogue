@@ -30,11 +30,9 @@ export default declare((api) => {
             return;
 
           path.replaceWith(
-            t.awaitExpression(
-              t.callExpression(
-                t.callExpression(t.identifier("traced"), [node.callee]),
-                node.arguments
-              )
+            t.callExpression(
+              t.callExpression(t.identifier("traced"), [node.callee]),
+              node.arguments
             )
           );
         },

@@ -17,7 +17,3 @@ or using yarn:
 ```sh
 yarn add @sliit-foss/babel-plugin-transform-trace --dev
 ```
-
-## Note
-
-- The transpiled code uses top level awaits which in order to be run will require Node.JS version >= 14 and the `type` to be specified as `module` in your package.json file
