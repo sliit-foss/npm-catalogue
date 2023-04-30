@@ -19,10 +19,11 @@ export default declare((api) => {
           },
         });
         if (!tracedImportExists) {
-          const tracedImport = template.ast(
-            `const { traced } = require('@sliit-foss/functions') ;\n`
+          path.node.body.unshift(
+            template.ast(
+              `const { traced } = require('@sliit-foss/functions') ;\n`
+            )
           );
-          path.node.body.unshift(tracedImport);
         }
       },
       CallExpression: {
