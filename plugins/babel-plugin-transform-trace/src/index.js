@@ -14,26 +14,30 @@ export default declare((api) => {
         );
         path.node.body.unshift(importNode);
       },
-      CallExpression(path) {
-        const { node } = path;
+      CallExpression: {
+        enter(path) {
+          const { node } = path;
 
-        const callee = node.callee?.callee ?? node.callee;
+          const callee = node.callee?.callee ?? node.callee;
 
-        const exclusions = ["traced", "require"];
+          const exclusions = ["traced", "require"];
 
-        if (
-          !t.isCallExpression(node) ||
-          !callee.name ||
-          exclusions.includes(callee.name)
-        )
-          return;
-
-        path.replaceWith(
-          t.callExpression(
-            t.callExpression(t.identifier("traced"), [node.callee]),
-            node.arguments
+          if (
+            !t.isCallExpression(node) ||
+            !callee.name ||
+            exclusions.includes(callee.name)
           )
-        );
+            return;
+
+          path.replaceWith(
+            t.awaitExpression(
+              t.callExpression(
+                t.callExpression(t.identifier("traced"), [node.callee]),
+                node.arguments
+              )
+            )
+          );
+        },
       },
     },
   };
