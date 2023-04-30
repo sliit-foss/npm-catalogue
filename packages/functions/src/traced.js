@@ -4,7 +4,7 @@ import { fnName as _fnName } from "./utils";
 
 const logger = moduleLogger("tracer");
 
-export const _traced = async (fn, loggable = {}, fnName) => {
+export const _traced = (fn, loggable = {}, fnName) => {
   let startTime;
   const disableTracing =
     process.env.DISABLE_FUNCTION_TRACING === "true" ||
@@ -14,9 +14,7 @@ export const _traced = async (fn, loggable = {}, fnName) => {
     logger.info(`${fnName} execution initiated`, loggable);
     startTime = performance.now();
   }
-  try {
-    let result = fn();
-    if (result instanceof Promise) result = await result;
+  const completionLog = () => {
     !disableTracing &&
       logger.info(
         `${fnName} execution completed - execution_time : ${
@@ -24,8 +22,8 @@ export const _traced = async (fn, loggable = {}, fnName) => {
         }ms`,
         loggable
       );
-    return result;
-  } catch (err) {
+  };
+  const failureLog = (err) => {
     if (!disableTracing && !err.isLogged) {
       logger.error(
         `${fnName} execution failed - error: ${err.message} - stack: ${err.stack}`
@@ -33,6 +31,21 @@ export const _traced = async (fn, loggable = {}, fnName) => {
       err.isLogged = true;
     }
     throw err;
+  };
+  try {
+    const result = fn();
+    if (result instanceof Promise) {
+      return result
+        .then((res) => {
+          completionLog();
+          return res;
+        })
+        .catch((err) => failureLog(err));
+    }
+    completionLog();
+    return result;
+  } catch (err) {
+    failureLog(err);
   }
 };
 
