@@ -9,31 +9,45 @@ export default declare((api) => {
     name: "transform-trace",
     visitor: {
       Program(path) {
-        const importNode = template.ast(
-          `const { traced } = require('@sliit-foss/functions') ;\n`
-        );
-        path.node.body.unshift(importNode);
+        let tracedImportExists = false;
+        path.traverse({
+          Identifier(p) {
+            if (p.node.name === "traced") {
+              tracedImportExists = true;
+              p.stop();
+            }
+          },
+        });
+        if (!tracedImportExists) {
+          path.node.body.unshift(
+            template.ast(
+              `const { traced } = require('@sliit-foss/functions') ;\n`
+            )
+          );
+        }
       },
-      CallExpression(path) {
-        const { node } = path;
+      CallExpression: {
+        enter(path) {
+          const { node } = path;
 
-        const callee = node.callee?.callee ?? node.callee;
+          const callee = node.callee?.callee ?? node.callee;
 
-        const exclusions = ["traced", "require"];
+          const exclusions = ["traced", "require"];
 
-        if (
-          !t.isCallExpression(node) ||
-          !callee.name ||
-          exclusions.includes(callee.name)
-        )
-          return;
-
-        path.replaceWith(
-          t.callExpression(
-            t.callExpression(t.identifier("traced"), [node.callee]),
-            node.arguments
+          if (
+            !t.isCallExpression(node) ||
+            !callee.name ||
+            exclusions.includes(callee.name)
           )
-        );
+            return;
+
+          path.replaceWith(
+            t.callExpression(
+              t.callExpression(t.identifier("traced"), [node.callee]),
+              node.arguments
+            )
+          );
+        },
       },
     },
   };

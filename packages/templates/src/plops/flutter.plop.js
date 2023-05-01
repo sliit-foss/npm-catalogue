@@ -2,13 +2,9 @@ import { generator } from "./utils/index.js";
 
 const templates = [
   {
-    name: "Express microservice",
-    path: "express-microservice",
+    name: "Cat facts",
+    path: "cat-facts",
   },
-  {
-    name: "package-kit",
-    path: "package-kit",
-  }
 ];
 
 export default function (plop) {

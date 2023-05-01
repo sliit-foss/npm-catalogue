@@ -19,5 +19,5 @@ yarn global add @sliit-foss/templates
 - Execute the following command in your terminal to see a list of available options
 
 ```bash
-npx sft
+sft
 ```
