@@ -12,10 +12,6 @@
     },
     "format": { "cache": false },
     "lint": {},
-    "prerelease": {
-      "dependsOn": [],
-      "outputs": [".npmignore"]
-    },
     "release": {
       "dependsOn": [],
       "outputs": []
