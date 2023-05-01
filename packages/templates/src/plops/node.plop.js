@@ -6,8 +6,8 @@ const templates = [
     path: "express-microservice",
   },
   {
-    name: "npm-package",
-    path: "npm-package",
+    name: "package-kit",
+    path: "package-kit",
   }
 ];
 
