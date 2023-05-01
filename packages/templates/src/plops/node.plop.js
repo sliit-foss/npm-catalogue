@@ -5,6 +5,10 @@ const templates = [
     name: "Express microservice",
     path: "express-microservice",
   },
+  {
+    name: "npm-package",
+    path: "npm-package",
+  }
 ];
 
 export default function (plop) {
