@@ -4,7 +4,11 @@
 
 > The transformed code will need the following package installed to be able to successfully run :- [@sliit-foss/functions]('https://www.npmjs.com/package/@sliit-foss/functions')
 
+<br/>
+
 ## Install
+
+<br/>
 
 Using npm:
 
@@ -17,3 +21,26 @@ or using yarn:
 ```sh
 yarn add @sliit-foss/babel-plugin-transform-trace --dev
 ```
+
+<br/>
+
+## Options
+
+- **ignore-functions**: Array of function names to ignore when adding tracing
+
+---
+
+- Example babel config:-
+
+  ```json
+  {
+    "plugins": [
+      [
+        "@sliit-foss/babel-plugin-transform-trace",
+        {
+          "ignore-functions": ["foo", "bar"]
+        }
+      ]
+    ]
+  }
+  ```
