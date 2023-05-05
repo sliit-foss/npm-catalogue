@@ -8,7 +8,7 @@ const templates = [
   {
     name: "Package Kit",
     path: "package-kit",
-  }
+  },
 ];
 
 export default function (plop) {
