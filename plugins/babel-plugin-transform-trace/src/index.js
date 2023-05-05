@@ -10,6 +10,9 @@ export default declare((api) => {
 
   return {
     name: "transform-trace",
+    pre(state) {
+      if (state.opts["ignore-functions"]) exclusions.push(...state.opts["ignore-functions"]);
+    },
     visitor: {
       Program(path, state) {
         const tracer = state.opts.clean ? "cleanTraced" : "traced";
@@ -25,7 +28,6 @@ export default declare((api) => {
         if (!tracedImportExists) {
           path.node.body.unshift(template.ast(`const { ${tracer} } = require('@sliit-foss/functions') ;\n`));
         }
-        if (state.opts["ignore-functions"]) exclusions.push(...state.opts["ignore-functions"]);
       },
       CallExpression: {
         enter(path, state) {
