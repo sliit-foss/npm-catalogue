@@ -48,7 +48,25 @@ export const traced =
 
 export const trace = (fn, loggable) => _traced(fn, loggable);
 
+export const cleanTrace = (fn, loggable) => {
+  if (fn.name) {
+    return _traced(fn, loggable);
+  }
+  return fn();
+};
+
+export const cleanTraced =
+  (fn, loggable) =>
+  (...params) => {
+    if (fn.name) {
+      return _traced(fn.bind(this, ...params), loggable);
+    }
+    return fn.bind(this, ...params);
+  };
+
 export default {
   traced,
-  trace
+  trace,
+  cleanTrace,
+  cleanTraced
 };
