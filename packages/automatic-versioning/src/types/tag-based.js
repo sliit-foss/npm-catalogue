@@ -4,11 +4,9 @@ import run from "../utils/runner";
 
 const runner = (name, noCommit) => {
   run(`npm pkg get version`).then((initialVersion) => {
-    initialVersion = initialVersion.replace(/\n/g, "")?.replace(/"/g, "")
-?.trim();
+    initialVersion = initialVersion.replace(/\n/g, "")?.replace(/"/g, "")?.trim();
     run("git tag --sort=committerdate").then((tags) => {
-      let latest = tags.split("\n")?.reverse()[1]?.trim()?.replace("v", "")
-?.replace(/_/g, "-");
+      let latest = tags.split("\n")?.reverse()[1]?.trim()?.replace("v", "")?.replace(/_/g, "-");
       if (latest && /[0-9]{1,4}.[0-9]{1,2}.[0-9]{1,2}.rc/.test(latest)) {
         latest = latest?.split(".");
         latest = `${parseInt(latest[0])}.${parseInt(latest[1])}.${parseInt(latest[2])}-${latest[3]}`;
