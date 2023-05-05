@@ -18,10 +18,10 @@ yarn add @sliit-foss/functions
 
 ```js
 # using require
-const { trace, traced, bindKey, asyncHandler, tracedAsyncHandler } = require("@sliit-foss/functions");
+const { trace, traced, cleanTraced, cleanTrace, bindKey, asyncHandler, tracedAsyncHandler } = require("@sliit-foss/functions");
 
 # using import
-import { trace, traced, bindKey, asyncHandler, tracedAsyncHandler } from "@sliit-foss/functions";
+import { trace, traced, cleanTraced, cleanTrace, bindKey, asyncHandler, tracedAsyncHandler } from "@sliit-foss/functions";
 ```
 
 ## Examples<br/><br/>
@@ -34,8 +34,9 @@ trace(function foo() {
 });
 
 /*
-  _foo execution initiated
-  _foo execution completed - execution_time : 0.2069999985396862
+  foo execution initiated
+  123
+  foo execution completed - execution_time : 0.2069999985396862
 */
 ```
 
@@ -47,10 +48,13 @@ traced(function foo() {
 })();
 
 /*
-  _foo execution initiated
-  _foo execution completed - execution_time : 0.2069999985396862
+  foo execution initiated
+  123
+  foo execution completed - execution_time : 0.2069999985396862
 */
 ```
+
+- ### cleanTraced and cleanTrace `(Same as the above two but ignores tracing for anonymous functions to avoid polluting the logs)`
 
 - ### bindKey `(Creates a bounded function from a passed object and function key with its context preserved)`
   <br/>
@@ -75,8 +79,8 @@ tracedAsyncHandler(async function hello(req, res) => {
   res.send("Hello World");
 });
 /*
-  _hello execution initiated
-  _hello execution completed - execution_time : 0.2069999985396862
+  hello execution initiated
+  hello execution completed - execution_time : 0.2069999985396862
 */
 ```
 
