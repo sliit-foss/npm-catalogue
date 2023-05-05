@@ -61,7 +61,7 @@ export const cleanTraced =
     if (fn.name) {
       return _traced(fn.bind(this, ...params), loggable);
     }
-    return fn.bind(this, ...params);
+    return fn.call(this, ...params);
   };
 
 export default {
