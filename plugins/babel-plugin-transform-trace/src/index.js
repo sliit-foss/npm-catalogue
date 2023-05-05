@@ -27,12 +27,15 @@ export default declare((api) => {
         }
       },
       CallExpression: {
-        enter(path) {
+        enter(path, state) {
           const { node } = path;
 
           const callee = node.callee?.callee ?? node.callee;
 
-          const exclusions = ["traced", "require"];
+          let exclusions = ["traced", "require"];
+
+          if (state.opts["ignore-functions"])
+            exclusions = exclusions.concat(state.opts["ignore-functions"]);
 
           if (
             !t.isCallExpression(node) ||
