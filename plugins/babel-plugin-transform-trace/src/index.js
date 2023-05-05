@@ -8,18 +8,19 @@ export default declare((api) => {
   return {
     name: "transform-trace",
     visitor: {
-      Program(path) {
+      Program(path, state) {
+        const tracer = state.opts.clean ? "cleanTraced" : "traced";
         let tracedImportExists = false;
         path.traverse({
           Identifier(p) {
-            if (p.node.name === "traced") {
+            if (p.node.name === tracer) {
               tracedImportExists = true;
               p.stop();
             }
           }
         });
         if (!tracedImportExists) {
-          path.node.body.unshift(template.ast(`const { traced } = require('@sliit-foss/functions') ;\n`));
+          path.node.body.unshift(template.ast(`const { ${tracer} } = require('@sliit-foss/functions') ;\n`));
         }
       },
       CallExpression: {
@@ -28,13 +29,18 @@ export default declare((api) => {
 
           const callee = node.callee?.callee ?? node.callee;
 
-          let exclusions = ["traced", "require"];
+          let exclusions = ["traced", "trace", "cleanTrace", "cleanTraced", "require", "import"];
 
           if (state.opts["ignore-functions"]) exclusions = exclusions.concat(state.opts["ignore-functions"]);
 
           if (!t.isCallExpression(node) || !callee.name || exclusions.includes(callee.name)) return;
 
-          path.replaceWith(t.callExpression(t.callExpression(t.identifier("traced"), [node.callee]), node.arguments));
+          path.replaceWith(
+            t.callExpression(
+              t.callExpression(t.identifier(state.opts.clean ? "cleanTraced" : "traced"), [node.callee]),
+              node.arguments
+            )
+          );
         }
       }
     }
