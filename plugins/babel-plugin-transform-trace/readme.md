@@ -27,6 +27,7 @@ yarn add @sliit-foss/babel-plugin-transform-trace --dev
 ## Options
 
 - **ignore-functions**: Array of function names to ignore when adding tracing
+- **clean**: Boolean value which when `true` omits the default behaviour of tracing anonymous functions which can pollute the logs
 
 ---
 
@@ -38,7 +39,8 @@ yarn add @sliit-foss/babel-plugin-transform-trace --dev
       [
         "@sliit-foss/babel-plugin-transform-trace",
         {
-          "ignore-functions": ["foo", "bar"]
+          "ignore-functions": ["foo", "bar"],
+          "clean": true
         }
       ]
     ]
