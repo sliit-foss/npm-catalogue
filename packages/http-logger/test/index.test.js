@@ -2,11 +2,11 @@ import { req, res } from "./__mocks";
 
 const mockLogger = {
   info: jest.fn(),
-  error: jest.fn(),
+  error: jest.fn()
 };
 
 jest.mock("@sliit-foss/module-logger", () => ({
-  moduleLogger: () => mockLogger,
+  moduleLogger: () => mockLogger
 }));
 
 const httpLogger = require("../src").default;

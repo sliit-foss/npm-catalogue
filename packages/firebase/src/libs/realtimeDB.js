@@ -16,13 +16,13 @@ export const read = async ({ path }) => {
       if (snapshot.exists())
         result = {
           success: true,
-          data: snapshot.val(),
+          data: snapshot.val()
         };
     })
     .catch((error) => {
       result = {
         success: false,
-        error,
+        error
       };
     });
   return result;

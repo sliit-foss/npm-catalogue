@@ -4,28 +4,20 @@ import createError from "http-errors";
 import { moduleLogger } from "@sliit-foss/module-logger";
 import { formatLogs } from "./helpers";
 
-const serviceConnector = ({
-  service,
-  headerIntercepts,
-  loggable,
-  logs = true,
-  ...axiosOptions
-} = {}) => {
+const serviceConnector = ({ service, headerIntercepts, loggable, logs = true, ...axiosOptions } = {}) => {
   const logger = moduleLogger(service ?? "Service-Connector");
   const instance = axios.create(axiosOptions);
   instance.interceptors.request.use((config) => {
     logs &&
       logger.info(
-        `Request initiated - method: ${config.method} - url: ${
-          config.baseURL ?? ""
-        }${config.url}`,
+        `Request initiated - method: ${config.method} - url: ${config.baseURL ?? ""}${config.url}`,
         formatLogs(loggable, config)
       );
     config.headers["x-correlation-id"] = context.get("correlationId");
     if (headerIntercepts) {
       config.headers = {
         ...config.headers,
-        ...headerIntercepts(config.headers),
+        ...headerIntercepts(config.headers)
       };
     }
     return config;
@@ -34,9 +26,9 @@ const serviceConnector = ({
     (response) => {
       logs &&
         logger.info(
-          `Request completed - method: ${response.config.method} - url: ${
-            response.config.baseURL ?? ""
-          }${response.config.url}`,
+          `Request completed - method: ${response.config.method} - url: ${response.config.baseURL ?? ""}${
+            response.config.url
+          }`,
           formatLogs(loggable, response.config, response)
         );
       return response;
@@ -45,16 +37,12 @@ const serviceConnector = ({
       const errorMessage = error.response?.data?.message ?? error.message;
       logs &&
         logger.error(
-          `Request failed - method: ${error.config.method} - url: ${
-            error.config.baseURL ?? ""
-          }${error.config.url} - message: ${errorMessage}`,
+          `Request failed - method: ${error.config.method} - url: ${error.config.baseURL ?? ""}${
+            error.config.url
+          } - message: ${errorMessage}`,
           formatLogs(loggable, error.config, error.response, true)
         );
-      const customError = createError(
-        error.response?.status ?? 500,
-        errorMessage,
-        { response: error.response }
-      );
+      const customError = createError(error.response?.status ?? 500, errorMessage, { response: error.response });
       customError.response = error.response;
       return Promise.reject(customError);
     }
@@ -68,7 +56,7 @@ const serviceConnector = ({
       method: req.method,
       headers: req.headers,
       params: req.params,
-      data: req.body,
+      data: req.body
     });
     if (!res) return response;
     return res.status(response.status).json(response.data);

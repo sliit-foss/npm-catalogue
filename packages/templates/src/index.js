@@ -19,13 +19,13 @@ export const launchPlop = (plopFilePath) => {
       cwd: argv.cwd,
       configPath: path.join(__dirname, plopFilePath),
       preload: argv.preload || [],
-      completion: argv.completion,
+      completion: argv.completion
     },
     (env) =>
       Plop.execute(env, (env) => {
         const options = {
           ...env,
-          dest: process.cwd(),
+          dest: process.cwd()
         };
         return run(options, undefined, true);
       })

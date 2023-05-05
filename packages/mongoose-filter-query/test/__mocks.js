@@ -12,9 +12,9 @@ export const basicFilterReq = {
       birthdate: "lte(2000-01-01)",
       isAlive: "exists(true)",
       isVerified: "eq(true)",
-      isDeleted: "false",
-    },
-  },
+      isDeleted: "false"
+    }
+  }
 };
 
 export const basicFilterResult = {
@@ -29,21 +29,21 @@ export const basicFilterResult = {
   birthdate: { $lte: "2000-01-01" },
   isAlive: { $exists: true },
   isVerified: { $eq: true },
-  isDeleted: "false",
+  isDeleted: "false"
 };
 
 export const complexFilterReq = {
   query: {
     filter: {
       name: "and(eq(John),ne(Doe))",
-      lastName: "or(eq(Doe),ne(John))",
-    },
-  },
+      lastName: "or(eq(Doe),ne(John))"
+    }
+  }
 };
 
 export const complexFilterResult = {
   $and: [{ name: { $eq: "John" } }, { name: { $ne: "Doe" } }],
-  $or: [{ lastName: { $eq: "Doe" } }, { lastName: { $ne: "John" } }],
+  $or: [{ lastName: { $eq: "Doe" } }, { lastName: { $ne: "John" } }]
 };
 
 export const sortsReq = {
@@ -52,22 +52,22 @@ export const sortsReq = {
       name: "1",
       lastName: "-1",
       weight: "asc",
-      height: "desc",
-    },
-  },
+      height: "desc"
+    }
+  }
 };
 
 export const sortResult = {
   name: 1,
   lastName: -1,
   weight: "asc",
-  height: "desc",
+  height: "desc"
 };
 
 export const req = {
   query: {
     filter: {
-      name: "Aka",
-    },
-  },
+      name: "Aka"
+    }
+  }
 };

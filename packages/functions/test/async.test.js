@@ -32,10 +32,7 @@ describe("asyncHandler", () => {
       return "test";
     }
     await tracedAsyncHandler(testTracedFunction)(mockReq, mockRes, mockNext);
-    expect(mockLogger.info).toBeCalledWith(
-      "_testTracedFunction execution initiated",
-      {}
-    );
+    expect(mockLogger.info).toBeCalledWith("_testTracedFunction execution initiated", {});
     expect(mockNext).toBeCalled();
   });
 });

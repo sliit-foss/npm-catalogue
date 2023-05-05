@@ -5,9 +5,7 @@ export const initializeFirebase = () => {
   const firebaseConfig =
     typeof window !== "undefined"
       ? JSON.parse(atob(process.env.FIREBASE_CONFIG))
-      : JSON.parse(
-          Buffer.from(process.env.FIREBASE_CONFIG, "base64").toString()
-        );
+      : JSON.parse(Buffer.from(process.env.FIREBASE_CONFIG, "base64").toString());
   return initializeApp(firebaseConfig);
 };
 
@@ -21,7 +19,7 @@ const dataToFill = [
   { name: "Kasun", age: 23, weight: 80 },
   { name: "Bandu", age: 19, weight: 60, height: 6.0 },
   { name: "Kavindu", age: 19, weight: 60, height: 7.1 },
-  { name: "Himash", age: 19, weight: 50, height: 5.2 },
+  { name: "Himash", age: 19, weight: 50, height: 5.2 }
 ];
 
 export const fillFirestore = async () => {
@@ -53,5 +51,5 @@ export default {
   fillFirestore,
   resetFirestore,
   fillDatabase,
-  resetDatabase,
+  resetDatabase
 };

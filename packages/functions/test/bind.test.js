@@ -8,7 +8,7 @@ describe("bindKey", () => {
       name: "test-object",
       foo() {
         mockLogger.info(`Inside ${this.name} function foo`);
-      },
+      }
     };
     const preserved = bindKey(obj, "foo");
     expect(preserved.name).toBe("bound foo");

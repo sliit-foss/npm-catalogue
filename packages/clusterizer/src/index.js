@@ -5,10 +5,7 @@ const cpuCount = cpus().length;
 
 const logPrefix = "Clusterizer -";
 
-const clusterize = async (
-  app,
-  { logger, workers, onMaster, onWorker, onWorkerExit } = {}
-) => {
+const clusterize = async (app, { logger, workers, onMaster, onWorker, onWorkerExit } = {}) => {
   if (!logger) logger = console;
   try {
     workers = workers ?? cpuCount;
@@ -21,10 +18,7 @@ const clusterize = async (
 
       cluster.on("exit", (worker, code, signal) => {
         if (onWorkerExit) onWorkerExit(worker, code, signal);
-        else
-          logger.info(
-            `${logPrefix} Worker ${worker.process.pid} died - code: ${code} - signal: ${signal}`
-          );
+        else logger.info(`${logPrefix} Worker ${worker.process.pid} died - code: ${code} - signal: ${signal}`);
       });
     } else {
       await app();
@@ -32,9 +26,7 @@ const clusterize = async (
       else logger.info(`${logPrefix} Process ${process.pid} started`);
     }
   } catch (e) {
-    logger.error(
-      `${logPrefix} Unhandled exception - message: ${e.message} - stack: ${e.stack}`
-    );
+    logger.error(`${logPrefix} Unhandled exception - message: ${e.message} - stack: ${e.stack}`);
   }
 };
 

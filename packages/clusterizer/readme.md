@@ -64,6 +64,6 @@ clusterize(server, {
   },
   onExit: (worker, code, signal) => {
     console.log("Worker process exited");
-  },
+  }
 });
 ```

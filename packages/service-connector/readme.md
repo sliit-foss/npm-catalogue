@@ -37,11 +37,11 @@ const connector = serviceConnector({
 
   service: "service-name",
   headerIntercepts: () => ({
-    "x-api-key": "1234567890",
+    "x-api-key": "1234567890"
   }),
   loggable: (response) => {
     // do something with the response, both success and error
-  },
+  }
 });
 
 // use the service connector as you would use axios

@@ -13,13 +13,9 @@ const generateInfoObject = (req, properties) =>
 const httpLogger =
   ({ whitelists = [], loggable = [] } = {}) =>
   (req, res, next) => {
-    const info = generateInfoObject(
-      req,
-      loggable.length ? [...defaultProperties, ...loggable] : defaultProperties
-    );
+    const info = generateInfoObject(req, loggable.length ? [...defaultProperties, ...loggable] : defaultProperties);
 
-    if (whitelists.find((route) => req.path.match(new RegExp(route))))
-      return next();
+    if (whitelists.find((route) => req.path.match(new RegExp(route)))) return next();
 
     logger.info(`request initiated`, info);
 
@@ -33,7 +29,7 @@ const httpLogger =
         logger.error("request error", {
           ...info,
           status: res.statusCode,
-          error: error,
+          error: error
         });
         return;
       }

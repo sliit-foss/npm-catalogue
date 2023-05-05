@@ -3,12 +3,12 @@ import { launchPlop } from "../index.js";
 const stacks = [
   {
     name: "Node.js",
-    path: "node",
+    path: "node"
   },
   {
     name: "Flutter",
-    path: "flutter",
-  },
+    path: "flutter"
+  }
 ];
 
 export default function (plop) {
@@ -17,9 +17,7 @@ export default function (plop) {
     if (global.stack) {
       return launchPlop(`./plops/${global.stack}.plop.js`);
     }
-    return console.info(
-      "Requested stack is not available in the current version of this generator"
-    );
+    return console.info("Requested stack is not available in the current version of this generator");
   });
 
   plop.setGenerator("templates", {
@@ -29,13 +27,13 @@ export default function (plop) {
         type: "list",
         name: "stack",
         message: "Which tech stack are you interested in?",
-        choices: stacks.map((stack) => stack.name),
-      },
+        choices: stacks.map((stack) => stack.name)
+      }
     ],
     actions: [
       {
-        type: "Select tech stack",
-      },
-    ],
+        type: "Select tech stack"
+      }
+    ]
   });
 }

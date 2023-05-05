@@ -33,7 +33,7 @@ const users = await firestoreService.read({ collection: "users" });
 // write
 const result = await firestoreService.write({
   collection: "users",
-  payload: { name: "Ciri", age: 19 },
+  payload: { name: "Ciri", age: 19 }
 });
 
 // update
@@ -44,9 +44,9 @@ const result = await firestoreService.update({
     {
       key: "name",
       operator: "==",
-      value: "Ciri",
-    },
-  ],
+      value: "Ciri"
+    }
+  ]
 });
 
 // delete

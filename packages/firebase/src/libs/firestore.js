@@ -12,7 +12,7 @@ import {
   query,
   where,
   orderBy,
-  limit,
+  limit
 } from "firebase/firestore";
 
 let databaseInstance;
@@ -21,52 +21,30 @@ export const initialize = (app) => {
   databaseInstance = getFirestore(app);
 };
 
-export const read = ({
-  collection,
-  filters = [],
-  sorts = [],
-  recordLimit,
-  onSuccess,
-  onError,
-}) => {
+export const read = ({ collection, filters = [], sorts = [], recordLimit, onSuccess, onError }) => {
   let q = getFilteredQuery({ collection, filters, sorts });
   if (recordLimit) q = query(q, limit(recordLimit));
   return request({ func: () => getDocs(q), onSuccess, onError });
 };
 
-export const write = ({
-  collection,
-  documentId,
-  payload,
-  merge = false,
-  onSuccess,
-  onError,
-}) => {
+export const write = ({ collection, documentId, payload, merge = false, onSuccess, onError }) => {
   let writeFunc;
   if (documentId)
     writeFunc = () =>
       setDoc(doc(databaseInstance, `${collection}/${documentId}`), payload, {
-        merge,
+        merge
       });
-  else
-    writeFunc = () =>
-      addDoc(firebaseCollection(databaseInstance, collection), payload);
+  else writeFunc = () => addDoc(firebaseCollection(databaseInstance, collection), payload);
   return request({ func: writeFunc, onSuccess, onError });
 };
 
-export const update = ({
-  collection,
-  payload,
-  filters = [],
-  onSuccess,
-  onError,
-}) => {
+export const update = ({ collection, payload, filters = [], onSuccess, onError }) => {
   return updateOrDelete({
     collection,
     filters,
     onSuccess,
     onError,
-    func: (id) => updateDoc(doc(databaseInstance, collection, id), payload),
+    func: (id) => updateDoc(doc(databaseInstance, collection, id), payload)
   });
 };
 
@@ -76,7 +54,7 @@ export const remove = ({ collection, filters = [], onSuccess, onError }) => {
     filters,
     onSuccess,
     onError,
-    func: (id) => deleteDoc(doc(databaseInstance, collection, id)),
+    func: (id) => deleteDoc(doc(databaseInstance, collection, id))
   });
 };
 
@@ -102,25 +80,19 @@ const request = ({ func, onSuccess, onError }) => {
       if (onSuccess) onSuccess(res);
       return {
         success: true,
-        data: res || false,
+        data: res || false
       };
     })
     .catch((error) => {
       if (onError) onError(error);
       return {
         success: false,
-        error,
+        error
       };
     });
 };
 
-const updateOrDelete = async ({
-  func,
-  collection,
-  filters = [],
-  onSuccess,
-  onError,
-}) => {
+const updateOrDelete = async ({ func, collection, filters = [], onSuccess, onError }) => {
   const res = await read({ collection, filters });
   if (res.success) {
     const modifiedIds = [];
@@ -141,7 +113,7 @@ const updateOrDelete = async ({
       return {
         success: false,
         error: errors,
-        data: modifiedIds,
+        data: modifiedIds
       };
     }
     if (onSuccess) onSuccess(modifiedIds);

@@ -1,12 +1,7 @@
-export const getRequestFilters = ({
-  req,
-  returnObject = false,
-  mongooseSupport = false,
-}) => {
+export const getRequestFilters = ({ req, returnObject = false, mongooseSupport = false }) => {
   const res = getRequestQueryParams({ req, returnObject });
 
-  const replaceFunction = (str) =>
-    str.replace(/filter\[/g, "").replace(/]/g, "");
+  const replaceFunction = (str) => str.replace(/filter\[/g, "").replace(/]/g, "");
 
   const filterCheck = (key) => key.includes("filter");
 
@@ -48,23 +43,18 @@ export const getRequestSorts = ({ req, returnObject = false }) => {
     }
     return {
       key: value,
-      value: direction,
+      value: direction
     };
   };
 
   if (returnObject) {
     const sortObject = {};
     Object.keys(res).forEach((key) => {
-      if (sortCheck(key))
-        sortObject[getFormattedSort(res[key]).key] = getFormattedSort(
-          res[key]
-        ).value;
+      if (sortCheck(key)) sortObject[getFormattedSort(res[key]).key] = getFormattedSort(res[key]).value;
     });
     return sortObject;
   }
-  return res
-    .filter((filter) => sortCheck(filter.key))
-    .map((filter) => getFormattedSort(filter.value));
+  return res.filter((filter) => sortCheck(filter.key)).map((filter) => getFormattedSort(filter.value));
 };
 
 export const getRequestQueryParams = ({ req, returnObject = false }) => {
@@ -107,5 +97,5 @@ export default {
   getRequestFilters,
   getRequestSorts,
   getRequestQueryParams,
-  mapToFilterQuery,
+  mapToFilterQuery
 };

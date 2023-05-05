@@ -9,13 +9,13 @@ let _defaultConfig = {
   transportOverrides: [],
   console: {
     enabled: true,
-    options: {},
+    options: {}
   },
   file: {
     enabled: false,
-    options: {},
+    options: {}
   },
-  globalAttributes: {},
+  globalAttributes: {}
 };
 
 const _createLogger = () => {
@@ -26,7 +26,7 @@ const _createLogger = () => {
       new winston.transports.Console({
         handleRejections: true,
         handleExceptions: true,
-        ...(_defaultConfig.console?.options ?? {}),
+        ...(_defaultConfig.console?.options ?? {})
       })
     );
   }
@@ -39,16 +39,14 @@ const _createLogger = () => {
         zippedArchive: false,
         maxFiles: "7d",
         dirname: "./logs",
-        ...(_defaultConfig.file?.options ?? {}),
+        ...(_defaultConfig.file?.options ?? {})
       })
     );
   }
 
-  if (_defaultConfig.transportOverrides?.length)
-    transports = [..._defaultConfig.transportOverrides];
+  if (_defaultConfig.transportOverrides?.length) transports = [..._defaultConfig.transportOverrides];
 
-  if (!transports.length)
-    throw new Error("No transports configured for logger");
+  if (!transports.length) throw new Error("No transports configured for logger");
 
   _logger = winston.createLogger({
     format: winston.format.combine(
@@ -64,7 +62,7 @@ const _createLogger = () => {
       winston.format.timestamp(),
       winston.format.json()
     ),
-    transports,
+    transports
   });
 
   _logger.exitOnError = false;
@@ -81,14 +79,11 @@ export const moduleLogger = (moduleName) => {
   const prefix = moduleName ? `[${moduleName}] - ` : "";
   return {
     ..._logger,
-    ...["debug", "info", "trace", "warn", "error", "log"].reduce(
-      (acc, level) => {
-        acc[level] = (message, infoObj = {}) => {
-          _logger[level](`${prefix}${message}`, infoObj);
-        };
-        return acc;
-      },
-      {}
-    ),
+    ...["debug", "info", "trace", "warn", "error", "log"].reduce((acc, level) => {
+      acc[level] = (message, infoObj = {}) => {
+        _logger[level](`${prefix}${message}`, infoObj);
+      };
+      return acc;
+    }, {})
   };
 };

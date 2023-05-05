@@ -12,25 +12,16 @@ describe("traced", () => {
       return "test";
     }
     await traced(testFunction)();
-    expect(mockLogger.info).toBeCalledWith(
-      "_testFunction execution initiated",
-      {}
-    );
+    expect(mockLogger.info).toBeCalledWith("_testFunction execution initiated", {});
   });
   test("test arrow function", async () => {
     const testArrowFunction = () => "test";
     await traced(testArrowFunction)();
-    expect(mockLogger.info).toBeCalledWith(
-      "testArrowFunction execution initiated",
-      {}
-    );
+    expect(mockLogger.info).toBeCalledWith("testArrowFunction execution initiated", {});
   });
   test("test unnamed function", async () => {
     await traced(() => "test")();
-    expect(mockLogger.info).toBeCalledWith(
-      "Unnamed function execution initiated",
-      {}
-    );
+    expect(mockLogger.info).toBeCalledWith("Unnamed function execution initiated", {});
   });
   test("test disabled tracing", async () => {
     process.env.DISABLE_FUNCTION_TRACING = "true";

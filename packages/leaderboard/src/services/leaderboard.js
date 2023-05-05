@@ -6,7 +6,7 @@ export const generateLeaderboardRecords = (pullRequests) => {
       leaderboard[_author] = {
         url: p.node.author.avatarUrl,
         login: p.node.author.login,
-        points: 10,
+        points: 10
       };
     } else {
       leaderboard[_author].points += 10;

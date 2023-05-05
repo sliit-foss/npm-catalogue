@@ -7,13 +7,11 @@ const mongooseFilterQuery = (req, res, next) => {
     if (req.query.filter) {
       Object.keys(req.query.filter).forEach((key) => {
         const value = req.query.filter[key];
-        const complexOp = complexOperators.find((op) =>
-          value.startsWith(`${op}(`)
-        );
+        const complexOp = complexOperators.find((op) => value.startsWith(`${op}(`));
         if (complexOp) {
           const values = replaceOperator(value, complexOp)?.split(",");
           req.query.filter[`$${complexOp}`] = values.map((subValue) => ({
-            [key]: mapValue(subValue),
+            [key]: mapValue(subValue)
           }));
           delete req.query.filter[key];
         } else {
@@ -34,10 +32,7 @@ const mongooseFilterQuery = (req, res, next) => {
       req.query.sort = {};
     }
   } catch (e) {
-    console.error(
-      "[ Mongoose-FilterQuery ] - Failed to parse filters from query",
-      e
-    );
+    console.error("[ Mongoose-FilterQuery ] - Failed to parse filters from query", e);
   }
   next();
 };

@@ -16,14 +16,10 @@ export default declare((api) => {
               tracedImportExists = true;
               p.stop();
             }
-          },
+          }
         });
         if (!tracedImportExists) {
-          path.node.body.unshift(
-            template.ast(
-              `const { traced } = require('@sliit-foss/functions') ;\n`
-            )
-          );
+          path.node.body.unshift(template.ast(`const { traced } = require('@sliit-foss/functions') ;\n`));
         }
       },
       CallExpression: {
@@ -34,21 +30,11 @@ export default declare((api) => {
 
           const exclusions = ["traced", "require"];
 
-          if (
-            !t.isCallExpression(node) ||
-            !callee.name ||
-            exclusions.includes(callee.name)
-          )
-            return;
+          if (!t.isCallExpression(node) || !callee.name || exclusions.includes(callee.name)) return;
 
-          path.replaceWith(
-            t.callExpression(
-              t.callExpression(t.identifier("traced"), [node.callee]),
-              node.arguments
-            )
-          );
-        },
-      },
-    },
+          path.replaceWith(t.callExpression(t.callExpression(t.identifier("traced"), [node.callee]), node.arguments));
+        }
+      }
+    }
   };
 });

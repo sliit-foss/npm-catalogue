@@ -14,6 +14,6 @@ require("esbuild")
     minify: true,
     sourcemap: true,
     keepNames: true,
-    plugins: [globPlugin()],
+    plugins: [globPlugin()]
   })
   .catch(() => process.exit(1));

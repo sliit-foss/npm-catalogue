@@ -35,8 +35,8 @@ leaderboard
     orgs: "sliit-foss",
     filters: {
       between: "2021-10-14..2021-10-31",
-      label: "hacktoberfest-accepted",
-    },
+      label: "hacktoberfest-accepted"
+    }
   })
   .then((results) => console.log(results));
 
@@ -47,8 +47,8 @@ leaderboard
     repository: "sliitfoss",
     filters: {
       between: "2021-10-14..2021-10-31",
-      label: "hacktoberfest-accepted",
-    },
+      label: "hacktoberfest-accepted"
+    }
   })
   .then((results) => console.log(results));
 
@@ -58,8 +58,8 @@ leaderboard
     orgs: "sliit-foss",
     filters: {
       pageSize: 10,
-      pageLimit: 2,
-    },
+      pageLimit: 2
+    }
   })
   .then((results) => console.log(results)); //returns 20 results
 ```

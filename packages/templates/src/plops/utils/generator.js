@@ -10,13 +10,11 @@ const generator = (plop, templates) => {
         type: "list",
         name: "template",
         message: "Which template do you want to generate ?",
-        choices: templates.map((template) => template.name),
-      },
+        choices: templates.map((template) => template.name)
+      }
     ],
     actions(config) {
-      const path = templates.find(
-        (template) => template.name === config.template
-      )?.path;
+      const path = templates.find((template) => template.name === config.template)?.path;
       if (!fs.existsSync(`./${path}`)) {
         return [
           {
@@ -27,16 +25,14 @@ const generator = (plop, templates) => {
               `../stacks/${global.stack}/${path}/.*`,
               `../stacks/${global.stack}/${path}/.*/*`,
               `../stacks/${global.stack}/${path}/**/.*`,
-              `../stacks/${global.stack}/${path}/**`,
-            ],
-          },
+              `../stacks/${global.stack}/${path}/**`
+            ]
+          }
         ];
       }
-      console.info(
-        "Project already exists in the current directory. Skipping template generation..."
-      );
+      console.info("Project already exists in the current directory. Skipping template generation...");
       return [];
-    },
+    }
   });
 };
 

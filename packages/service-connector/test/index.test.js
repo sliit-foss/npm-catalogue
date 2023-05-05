@@ -2,17 +2,17 @@ jest.setTimeout(30000);
 
 const mockLogger = {
   info: jest.fn(),
-  error: jest.fn(),
+  error: jest.fn()
 };
 
 jest.mock("@sliit-foss/module-logger", () => ({
-  moduleLogger: () => mockLogger,
+  moduleLogger: () => mockLogger
 }));
 
 const serviceConnector = require("../src").default;
 
 const connector = serviceConnector({
-  baseURL: "https://google.com",
+  baseURL: "https://google.com"
 });
 
 beforeEach(() => {
@@ -23,14 +23,12 @@ describe("service-connector", () => {
   test("successful request", async () => {
     const response = await connector.get("/");
     expect(response.status).toEqual(200);
-    expect(mockLogger.info).toBeCalledWith(
-      "Request initiated - method: get - url: https://google.com/",
-      { params: undefined }
-    );
-    expect(mockLogger.info).toBeCalledWith(
-      "Request completed - method: get - url: https://google.com/",
-      { params: undefined }
-    );
+    expect(mockLogger.info).toBeCalledWith("Request initiated - method: get - url: https://google.com/", {
+      params: undefined
+    });
+    expect(mockLogger.info).toBeCalledWith("Request completed - method: get - url: https://google.com/", {
+      params: undefined
+    });
   });
   test("failed request", async () => {
     let error;
@@ -40,7 +38,7 @@ describe("service-connector", () => {
       params: undefined,
       status: error.response?.status,
       response_data: error.response?.data,
-      request_headers: error.response?.headers,
+      request_headers: error.response?.headers
     };
     expect(mockLogger.info).toBeCalledWith(
       "Request initiated - method: get - url: https://google.com/non-existant-route/1/2/3",
@@ -57,13 +55,13 @@ describe("service-connector resolver", () => {
   test("successful request", async () => {
     const mockData = {
       data: {
-        name: "John Doe",
+        name: "John Doe"
       },
-      message: "Successfully fetched data from the server",
+      message: "Successfully fetched data from the server"
     };
     connector.get = jest.fn().mockResolvedValue({
       status: 200,
-      data: mockData,
+      data: mockData
     });
     const response = await connector.get("/").then(connector.resolve);
     expect(response).toStrictEqual(mockData.data);

@@ -1,14 +1,14 @@
 export const req = {
   query: {
     filter: {
-      name: "eq(John)",
-    },
+      name: "eq(John)"
+    }
   },
   path: "/users/list",
-  method: "GET",
+  method: "GET"
 };
 
 export const res = {
   on: jest.fn(),
-  removeListener: jest.fn(),
+  removeListener: jest.fn()
 };

@@ -4,12 +4,12 @@ module.exports = {
   env: {
     browser: false,
     node: true,
-    es6: true,
+    es6: true
   },
   parserOptions: {
     ecmaVersion: 2021,
     sourceType: "module",
-    requireConfigFile: false,
+    requireConfigFile: false
   },
   rules: {
     "arrow-parens": ["error", "always"],
@@ -21,8 +21,8 @@ module.exports = {
     "no-duplicate-imports": [
       "error",
       {
-        includeExports: true,
-      },
+        includeExports: true
+      }
     ],
     "no-else-return": "error",
     "no-eq-null": "error",
@@ -48,10 +48,10 @@ module.exports = {
     "import/newline-after-import": [
       "error",
       {
-        count: 1,
-      },
+        count: 1
+      }
     ],
     "import/order": 2,
-    "import/first": 2,
-  },
+    "import/first": 2
+  }
 };

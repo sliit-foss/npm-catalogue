@@ -16,5 +16,5 @@ export const cached = (key, fn) => {
 };
 
 export default {
-  cached,
+  cached
 };

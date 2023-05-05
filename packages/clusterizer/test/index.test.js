@@ -16,7 +16,7 @@ jest.mock("node:cluster", () => ({
       eventEmmiterFired = true;
       cb(...params);
     });
-  }),
+  })
 }));
 
 const app = jest.fn();

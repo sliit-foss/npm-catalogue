@@ -22,7 +22,7 @@ describe("read", () => {
   test("read users collection with record limit", async () => {
     const res = await firestoreService.read({
       collection: "users",
-      recordLimit: 1,
+      recordLimit: 1
     });
     expect(res.success).toBe(true);
   });
@@ -33,13 +33,13 @@ describe("read", () => {
         {
           key: "name",
           operator: "==",
-          value: "Akalanka",
+          value: "Akalanka"
         },
         {
           key: "age",
-          value: 19,
-        },
-      ],
+          value: 19
+        }
+      ]
     });
     expect(res.success).toBe(true);
   });
@@ -50,14 +50,14 @@ describe("read", () => {
       sorts: [
         {
           key: "name",
-          direction: "desc",
+          direction: "desc"
         },
         {
-          key: "age",
-        },
+          key: "age"
+        }
       ],
       onSuccess: () => (indexErrorOccurred = false),
-      onError: () => (indexErrorOccurred = true),
+      onError: () => (indexErrorOccurred = true)
     });
     expect(res.success).toBe(false);
     expect(res.error?.message).toMatch(/The query requires an index/);
@@ -68,7 +68,7 @@ describe("read", () => {
     const res = await firestoreService.read({
       collection: "users",
       onSuccess: () => (succeeded = true),
-      onError: () => (succeeded = false),
+      onError: () => (succeeded = false)
     });
     expect(res.success).toBe(true);
     expect(succeeded).toBe(true);

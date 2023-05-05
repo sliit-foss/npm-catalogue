@@ -10,8 +10,8 @@ const executor = (command) => {
         listeners: {
           stdout: (data) => {
             output += data.toString();
-          },
-        },
+          }
+        }
       })
       .then(() => {
         return resolve(output);

@@ -47,9 +47,9 @@ configure({
   file: {
     enabled: true,
     options: {
-      filename: "my-custom-log-file.log",
-    },
-  },
+      filename: "my-custom-log-file.log"
+    }
+  }
 });
 
 const logger = moduleLogger("MY-MODULE-NAME");

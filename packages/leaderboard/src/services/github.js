@@ -6,18 +6,8 @@ export const getOrganizationPRs = (orgs, filters, afterCursor) => {
   return axios.post("", { query });
 };
 
-export const getRepositoryPRs = (
-  _orgs,
-  filters,
-  afterCursor,
-  owner,
-  repository
-) => {
-  const query = `query { ${_searchQuery(
-    `repo:${owner}/${repository}`,
-    filters,
-    afterCursor
-  )} }`;
+export const getRepositoryPRs = (_orgs, filters, afterCursor, owner, repository) => {
+  const query = `query { ${_searchQuery(`repo:${owner}/${repository}`, filters, afterCursor)} }`;
   return axios.post("", { query });
 };
 
@@ -26,9 +16,7 @@ const _searchQuery = (searchEntity, filters, afterCursor) => {
   return `
   search(first: ${pageSize}, type: ISSUE, query: "${searchEntity} is:pr is:merged ${
     filters.between ? `created:${filters.between}` : ""
-  } ${filters.label ? `label:${filters.label}` : ""}", ${
-    afterCursor !== "" ? `after: "${afterCursor}"` : ""
-  }) {
+  } ${filters.label ? `label:${filters.label}` : ""}", ${afterCursor !== "" ? `after: "${afterCursor}"` : ""}) {
     issueCount
     edges {
       node {

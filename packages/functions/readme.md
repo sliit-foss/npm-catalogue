@@ -61,7 +61,7 @@ const obj = {
   name: "test-object",
   foo() {
     console.log(`Inside ${this.name} function foo`);
-  },
+  }
 };
 const preserved = bindKey(obj, "foo");
 setTimeout(preserved, 0); // Outputs `Inside test-object function foo`

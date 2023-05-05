@@ -19,7 +19,7 @@ describe("Write", () => {
   test("add user to user collection", async () => {
     const res = await firestoreService.write({
       collection: "users",
-      payload: { name, age },
+      payload: { name, age }
     });
     expect(res.success).toBe(true);
   });
@@ -27,7 +27,7 @@ describe("Write", () => {
     const res = await firestoreService.write({
       collection: "users",
       payload: { name, age },
-      documentId: "customId",
+      documentId: "customId"
     });
     expect(res.success).toBe(true);
   });

@@ -7,7 +7,7 @@ import {
   complexFilterResult,
   sortsReq,
   sortResult,
-  req,
+  req
 } from "./__mocks";
 
 describe("test mongoose-filter-query", () => {

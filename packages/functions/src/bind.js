@@ -4,5 +4,5 @@ export const bindKey = (object, key, ...partials) => {
 };
 
 export default {
-  bindKey,
+  bindKey
 };

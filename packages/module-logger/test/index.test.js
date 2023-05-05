@@ -15,11 +15,11 @@ describe("module-logger", () => {
   it("should-log-to-file", () => {
     configure({
       file: {
-        enabled: true,
+        enabled: true
       },
       console: {
-        enabled: false,
-      },
+        enabled: false
+      }
     });
     const mLogger = moduleLogger("file-logger");
     expect(() => mLogger.info("hello-world")).not.toThrow(Error);
@@ -30,11 +30,11 @@ describe("module-logger", () => {
     configure({
       transportOverrides: [],
       console: {
-        enabled: false,
+        enabled: false
       },
       file: {
-        enabled: false,
-      },
+        enabled: false
+      }
     });
     expect(() => moduleLogger("this logger has no transports")).toThrow(Error);
   });
@@ -44,21 +44,19 @@ describe("module-logger", () => {
         new transports.Http({
           host: "localhost",
           port: 8080,
-          path: "/logs",
-        }),
+          path: "/logs"
+        })
       ],
-      globalAttributes: null,
+      globalAttributes: null
     });
     const mLogger = moduleLogger("file-logger");
-    expect(() =>
-      mLogger.info("this logger has a custom http transport")
-    ).not.toThrow(Error);
+    expect(() => mLogger.info("this logger has a custom http transport")).not.toThrow(Error);
   });
   it("should-log-global-attributes", () => {
     configure({
       globalAttributes: {
-        global: "attribute",
-      },
+        global: "attribute"
+      }
     });
     const mLogger = moduleLogger();
     expect(() => mLogger.info("hello-world")).not.toThrow(Error);

@@ -19,9 +19,7 @@ const _asyncHandler =
     } catch (err) {
       if (!trace) {
         fnName = fnName ?? _fnName(fn);
-        logger.error(
-          `${fnName} execution failed - error: ${err.message} - stack: ${err.stack}`
-        );
+        logger.error(`${fnName} execution failed - error: ${err.message} - stack: ${err.stack}`);
       }
       res.errorLogged = true;
       next(err);
@@ -34,5 +32,5 @@ export const tracedAsyncHandler = (fn) => _asyncHandler(fn, true);
 
 export default {
   asyncHandler,
-  tracedAsyncHandler,
+  tracedAsyncHandler
 };

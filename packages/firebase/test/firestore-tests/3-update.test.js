@@ -19,14 +19,14 @@ describe("Update", () => {
     {
       key: "name",
       operator: "==",
-      value: "Akalanka",
-    },
+      value: "Akalanka"
+    }
   ];
   // Read and check value before update
   test("pre-read", async () => {
     const res = await firestoreService.read({
       collection: "users",
-      filters: filters,
+      filters: filters
     });
     expect(res.success).toBe(true);
     expect(res.data.docs[0].data().age).toBe(19);
@@ -36,7 +36,7 @@ describe("Update", () => {
     const res = await firestoreService.update({
       collection: "users",
       payload: { age: 20 },
-      filters: filters,
+      filters: filters
     });
     expect(res.success).toBe(true);
   });
@@ -48,7 +48,7 @@ describe("Update", () => {
       filters: filters,
       onSuccess: (result) => {
         ids = [...result];
-      },
+      }
     });
     expect(res.success).toBe(true);
     expect(ids.length).toBeGreaterThan(0);
@@ -57,7 +57,7 @@ describe("Update", () => {
   test("post-read", async () => {
     const res = await firestoreService.read({
       collection: "users",
-      filters: filters,
+      filters: filters
     });
     expect(res.success).toBe(true);
     expect(res.data.docs[0].data().age).toBe(20);
