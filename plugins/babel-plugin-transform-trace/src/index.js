@@ -1,6 +1,9 @@
 import template from "@babel/template";
 import { declare } from "@babel/helper-plugin-utils";
 import { types as t } from "@babel/core";
+import { default as defaultExclusions } from "./exclusions";
+
+const exclusions = defaultExclusions;
 
 export default declare((api) => {
   api.assertVersion(7);
@@ -22,16 +25,13 @@ export default declare((api) => {
         if (!tracedImportExists) {
           path.node.body.unshift(template.ast(`const { ${tracer} } = require('@sliit-foss/functions') ;\n`));
         }
+        if (state.opts["ignore-functions"]) exclusions.push(...state.opts["ignore-functions"]);
       },
       CallExpression: {
         enter(path, state) {
           const { node } = path;
 
           const callee = node.callee?.callee ?? node.callee;
-
-          let exclusions = ["traced", "trace", "cleanTrace", "cleanTraced", "require", "import"];
-
-          if (state.opts["ignore-functions"]) exclusions = exclusions.concat(state.opts["ignore-functions"]);
 
           if (!t.isCallExpression(node) || !callee.name || exclusions.includes(callee.name)) return;
 
