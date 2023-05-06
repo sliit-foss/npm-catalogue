@@ -23,7 +23,7 @@ runs:
       shell: bash
 
     - name: Install dependencies
-      run: npm install -g pnpm@8 @sliit-foss/automatic-versioning@blizzard && pnpm install --production --ignore-scripts
+      run: npm install -g pnpm@8 @sliit-foss/automatic-versioning@latest && pnpm install --production --ignore-scripts
       shell: bash
 
     - name: Create .npmrc

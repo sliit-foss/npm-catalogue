@@ -37,7 +37,6 @@ const runner = (name, noCommit, noCommitEdit, recursive = false, prereleaseTag, 
         }
         if (prereleaseBranch && ["major", "minor", "patch"].includes(versionUpdate)) {
           const currentBranch = (await run("git rev-parse --abbrev-ref HEAD"))?.trim();
-          console.log(1234, currentBranch);
           if (currentBranch === prereleaseBranch) {
             let prerelease = false;
             const currentVersion = (await run("npm version"))
