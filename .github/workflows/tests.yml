@@ -19,7 +19,7 @@ jobs:
       
       - name: Run unit tests
         shell: bash
-        run: pnpm --filter "[${{ github.ref_name }}]" test
+        run: pnpm test
         env:
           GITHUB_ACCESS_TOKEN: ${{ secrets.ACCESS_TOKEN_GITHUB }}
           FIREBASE_CONFIG: ${{ secrets.FIREBASE_CONFIG }}
