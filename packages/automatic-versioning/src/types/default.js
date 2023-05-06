@@ -23,18 +23,13 @@ const runner = (name, noCommit, noCommitEdit, recursive = false, prereleaseTag) 
       const { commitMessage, commitPrefix, noBump } = await getCommitPrefix(recursive);
       if (!noBump) {
         let versionUpdate;
-        if (commitPrefix === "feature!" || commitPrefix === "feat!" || commitPrefix === "f!") {
+        if (["feature!", "feat!", "f!"].includes(commitPrefix)) {
           versionUpdate = "major";
-        } else if (commitPrefix === "feature" || commitPrefix === "feat" || commitPrefix === "f") {
+        } else if (["feature", "feat", "f"].includes(commitPrefix)) {
           versionUpdate = "minor";
-        } else if (commitPrefix === "fix" || commitPrefix === "patch") {
+        } else if (["fix", "patch"].includes(commitPrefix)) {
           versionUpdate = "patch";
-        } else if (
-          commitPrefix === "prerelease" ||
-          commitPrefix === "premajor" ||
-          commitPrefix === "preminor" ||
-          commitPrefix === "prepatch"
-        ) {
+        } else if (["prerelease", "prepatch", "preminor", "premajor"].includes(commitPrefix)) {
           versionUpdate = commitPrefix;
         } else {
           console.log(`No suitable commit prefix found in commit message, skipping version bump`.yellow);
