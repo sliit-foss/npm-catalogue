@@ -132,3 +132,15 @@ yarn bump-version
 ```bash
   npx automatic-versioning --name=<package_name> --prerelease-tag=<name>
 ```
+
+## Prerelease branch<br/>
+
+- If this option is specified and the current branch matches it, the versioning will be evaluated as follows <br/>
+
+  - Feat! --> Premajor
+  - Feat --> Preminor
+  - Fix --> Prepatch
+
+```bash
+  npx automatic-versioning --name=<package_name> --prerelease-branch=<branch_name>
+```
