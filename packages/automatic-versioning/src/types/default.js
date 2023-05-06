@@ -16,7 +16,7 @@ const getCommitPrefix = async (recursive, n = 1) => {
   return getCommitPrefix(recursive, n + 1);
 };
 
-const runner = (name, noCommit, noCommitEdit, recursive = false) => {
+const runner = (name, noCommit, noCommitEdit, recursive = false, prereleaseTag) => {
   run("git show --first-parent ./").then(async (diff) => {
     if (diff) {
       console.log(`Diff found, running versioning for ${name}`.green);
@@ -29,11 +29,22 @@ const runner = (name, noCommit, noCommitEdit, recursive = false) => {
           versionUpdate = "minor";
         } else if (commitPrefix === "fix" || commitPrefix === "patch") {
           versionUpdate = "patch";
+        } else if (
+          commitPrefix === "prerelease" ||
+          commitPrefix === "premajor" ||
+          commitPrefix === "preminor" ||
+          commitPrefix === "prepatch"
+        ) {
+          versionUpdate = commitPrefix;
         } else {
           console.log(`No suitable commit prefix found in commit message, skipping version bump`.yellow);
           return;
         }
-        run(`npm --workspaces-update=false --no-git-tag-version version ${versionUpdate}`).then(() => {
+        run(
+          `npm --workspaces-update=false --no-git-tag-version version ${versionUpdate} ${
+            prereleaseTag ? `--preid=${prereleaseTag}` : ""
+          }`
+        ).then(() => {
           if (!noCommit) {
             const successMsg = `"CI: ${name} - ${versionUpdate} release"`;
             run("git add .").then(() => {
