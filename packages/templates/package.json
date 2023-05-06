@@ -8,7 +8,7 @@
   },
   "preferGlobal": true,
   "scripts": {
-    "bump-version": "npx automatic-versioning --name=@sliit-foss/templates --no-commit --recursive",
+    "bump-version": "bash ../../scripts/bump-version.sh --name=@sliit-foss/templates",
     "generate": "plop --plopfile src/index.js",
     "lint": "bash ../../scripts/lint.sh",
     "release": "bash ../../scripts/release.sh",

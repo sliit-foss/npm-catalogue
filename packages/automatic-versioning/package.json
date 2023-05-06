@@ -7,7 +7,7 @@
   "scripts": {
     "build": "node ../../scripts/esbuild.config.js",
     "build:watch": "bash ../../scripts/esbuild.watch.sh",
-    "bump-version": "pnpm build && node dist/index.js --no-commit --recursive",
+    "bump-version": "pnpm build && node dist/index.js --no-commit --recursive --prerelease-tag=thunderbolt",
     "lint": "bash ../../scripts/lint.sh",
     "release": "bash ../../scripts/release.sh",
     "test": "dotenv -- jest --coverage --verbose --runInBand --forceExit"
