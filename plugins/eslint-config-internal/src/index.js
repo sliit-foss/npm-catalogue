@@ -15,7 +15,7 @@ module.exports = {
     "arrow-parens": ["error", "always"],
     "arrow-spacing": "error",
     "default-case": "error",
-    "newline-per-chained-call": ["error", { ignoreChainWithDepth: 2 }],
+    "newline-per-chained-call": ["error", { ignoreChainWithDepth: 5 }],
     "no-confusing-arrow": "error",
     "no-console": "warn",
     "no-duplicate-imports": [
