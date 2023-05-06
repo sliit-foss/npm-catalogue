@@ -44,9 +44,7 @@ runs:
       shell: bash
 
     - name: Publish packages on NPM
-      run: |
-        commit_before_last=$(git log -n 2 --pretty=format:%H | tail -1)
-        pnpm --filter "[$commit_before_last]" release
+      run: pnpm release
       shell: bash
 
     - name: Update release info
