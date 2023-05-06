@@ -44,7 +44,7 @@ runs:
       shell: bash
 
     - name: Publish packages on NPM
-      run: pnpm release
+      run: pnpm --filter "[${{ github.ref_name }}]" release
       shell: bash
 
     - name: Update release info
