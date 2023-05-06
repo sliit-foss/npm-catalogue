@@ -17,7 +17,6 @@ const runner = (name, noCommit) => {
             if (!noCommit) {
               const successMsg = `"CI: Bumped version of ${name} from ${initialVersion} to ${latest}"`;
               run("git add .").then(() => {
-                
                 run(`git commit -m ${successMsg}`).then(() => {
                   console.log(successMsg.green);
                 });
