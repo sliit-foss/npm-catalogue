@@ -41,7 +41,9 @@ const runner = (name, noCommit, noCommitEdit, recursive = false, prereleaseTag) 
           }`
         ).then(() => {
           if (!noCommit) {
-            const successMsg = `"CI: ${name} - ${versionUpdate} release"`;
+            const successMsg = `"CI: ${name} - ${
+              versionUpdate === "prerelease" ? versionUpdate : `${versionUpdate} release`
+            }"`;
             run("git add .").then(() => {
               run(`git commit -m ${successMsg}`).then(() => {
                 console.log(successMsg.green);

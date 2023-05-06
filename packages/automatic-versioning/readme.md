@@ -93,15 +93,21 @@ yarn bump-version
     - Fix   - bump patch version
 ```
 
-## Disable version bumping for specific commit<br/><br/>
+## Disable commit <br/>
 
-- Add the following to your commit message: "--no-bump"<br/>
+- By default automatic-versioning will commit the newly incremented version to source control. To disable this behavior, add the following to your script: "--no-commit"<br/>
+
+```bash
+  npx automatic-versioning --name=<package_name> --no-commit
+```
+
+## Disable version bumping for specific commit<br/>
 
 ```bash
   git commit -m "Feat: some feature --no-bump"
 ```
 
-## Disable --no-bump commit message edit <br/><br/>
+## Disable --no-bump commit message edit <br/>
 
 - By default automatic-versioning will edit the commit message in no-bump commits and remove the no-bump part from the commit message. Sometimes such as in the case of monorepos, this can prove to be a problem. To disable this behavior, add the following to your script: "--no-commit-edit"<br/>
 
@@ -109,18 +115,20 @@ yarn bump-version
   npx automatic-versioning --name=<package_name> --no-commit-edit
 ```
 
-## Custom app directory to run incrementing script<br/><br/>
-
-- Add the following option to your bump script: "--rootDir=<custom_dir>"<br/>
+## Custom app directory to run incrementing script<br/>
 
 ```bash
   npx automatic-versioning --name=<package_name> --rootDir=<custom_dir>
 ```
 
-## Recursively search commit history to find version bump trigger<br/><br/>
-
-- Add the following option to your bump script: "--recursive"<br/>
+## Recursively search commit history to find version bump trigger<br/>
 
 ```bash
   npx automatic-versioning --name=<package_name> --recursive
+```
+
+## Custom prerelease tag<br/>
+
+```bash
+  npx automatic-versioning --name=<package_name> --prerelease-tag=<name>
 ```
