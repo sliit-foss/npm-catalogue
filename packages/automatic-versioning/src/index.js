@@ -27,7 +27,7 @@ args.forEach((arg) => {
   if (arg.includes("--no-commit")) noCommit = true;
   if (arg.includes("--recursive")) recursive = true;
   if (arg.includes("--prerelease-tag=")) prereleaseTag = arg.replace("--prerelease-tag=", "");
-  if (arg.includes("--prerelease-branch=")) prereleaseTag = arg.replace("--prerelease-branch=", "");
+  if (arg.includes("--prerelease-branch=")) prereleaseBranch = arg.replace("--prerelease-branch=", "");
 });
 
 console.log(`Running version bump for ${name}`.green);

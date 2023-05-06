@@ -37,10 +37,15 @@ const runner = (name, noCommit, noCommitEdit, recursive = false, prereleaseTag, 
           return;
         }
         if (prereleaseBranch && ["major", "minor", "patch"].includes(versionUpdate)) {
-          const currentBranch = await run("git rev-parse --abbrev-ref HEAD");
+          const currentBranch = (await run("git rev-parse --abbrev-ref HEAD"))?.trim();
           if (currentBranch === prereleaseBranch) {
             let prerelease = false;
-            if (process.env.npm_package_version.includes(prereleaseTag)) {
+            const currentVersion = (await run("npm version"))
+              ?.replace("{", "")
+              ?.split(",")?.[0]
+              ?.split(":")?.[1]
+              ?.trim();
+            if (currentVersion.includes(prereleaseTag)) {
               const [, minor, patch] = process.env.npm_package_version?.split("-")?.[0]?.split(".") ?? [];
               if (
                 versionUpdate === "patch" ||
