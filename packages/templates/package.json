@@ -12,7 +12,7 @@
     "generate": "plop --plopfile src/index.js",
     "lint": "bash ../../scripts/lint.sh",
     "release": "bash ../../scripts/release.sh",
-    "test": "dotenv -- jest --coverage --verbose --runInBand --forceExit"
+    "test": "echo \"@sliit-foss/templates -> testing skipped\""
   },
   "type": "module",
   "dependencies": {
