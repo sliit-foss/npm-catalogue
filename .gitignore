@@ -38,12 +38,15 @@ yarn-error.log*
 
 .vscode
 
+release.txt
+
 p*/**/dist/
 
 p*/**/.npmignore
 p*/**/.babelrc
 p*/**/jest.config.js
+p*/**/release.txt
 p*/**/LICENSE
 
 p*/**/node_modules/
-p*/**/logs/
+p*/**/logs/.turbo

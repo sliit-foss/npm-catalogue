@@ -1,0 +1,1 @@
+npx automatic-versioning --no-commit --recursive --prerelease-tag=blizzard --prerelease-branch=development $1

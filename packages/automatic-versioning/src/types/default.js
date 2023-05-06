@@ -3,7 +3,7 @@
 import run from "../utils/runner";
 
 const getCommitPrefix = async (recursive, n = 1) => {
-  const log = await run(`git show -s --format='%s' -${n}`);
+  const log = await run(`git show -s --format='%s' -${n} ./`);
   const commits = log?.split("\n") || [];
   commits.splice(-1);
   const latestCommitInfo = commits.pop()?.trim();
@@ -16,7 +16,7 @@ const getCommitPrefix = async (recursive, n = 1) => {
   return getCommitPrefix(recursive, n + 1);
 };
 
-const runner = (name, noCommit, noCommitEdit, recursive = false, prereleaseTag) => {
+const runner = (name, noCommit, noCommitEdit, recursive = false, prereleaseTag, prereleaseBranch) => {
   run("git show --first-parent ./").then(async (diff) => {
     if (diff) {
       console.log(`Diff found, running versioning for ${name}`.green);
@@ -35,13 +35,37 @@ const runner = (name, noCommit, noCommitEdit, recursive = false, prereleaseTag) 
           console.log(`No suitable commit prefix found in commit message, skipping version bump`.yellow);
           return;
         }
+        if (prereleaseBranch && ["major", "minor", "patch"].includes(versionUpdate)) {
+          const currentBranch = (await run("git rev-parse --abbrev-ref HEAD"))?.trim();
+          if (currentBranch === prereleaseBranch) {
+            let prerelease = false;
+            const currentVersion = (await run("npm version"))
+              ?.replace("{", "")
+              ?.split(",")?.[0]
+              ?.split(":")?.[1]
+              ?.trim();
+            if (currentVersion.includes(prereleaseTag)) {
+              const [, minor, patch] = currentVersion?.split("-")?.[0]?.split(".") ?? [];
+              if (
+                versionUpdate === "patch" ||
+                (versionUpdate === "minor" && patch === "0") ||
+                (versionUpdate === "major" && minor === "0")
+              ) {
+                prerelease = true;
+              }
+            }
+            versionUpdate = prerelease ? "prerelease" : `pre${versionUpdate}`;
+          }
+        }
         run(
           `npm --workspaces-update=false --no-git-tag-version version ${versionUpdate} ${
             prereleaseTag ? `--preid=${prereleaseTag}` : ""
           }`
         ).then(() => {
           if (!noCommit) {
-            const successMsg = `"CI: ${name} - ${versionUpdate} release"`;
+            const successMsg = `"CI: ${name} - ${
+              versionUpdate === "prerelease" ? versionUpdate : `${versionUpdate} release`
+            }"`;
             run("git add .").then(() => {
               run(`git commit -m ${successMsg}`).then(() => {
                 console.log(successMsg.green);
