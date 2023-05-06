@@ -35,6 +35,7 @@ const runner = (name, noCommit, noCommitEdit, recursive = false, prereleaseTag, 
           console.log(`No suitable commit prefix found in commit message, skipping version bump`.yellow);
           return;
         }
+        console.log(1122, prereleaseBranch, versionUpdate);
         if (prereleaseBranch && ["major", "minor", "patch"].includes(versionUpdate)) {
           const currentBranch = (await run("git rev-parse --abbrev-ref HEAD"))?.trim();
           console.log(1234, currentBranch);
