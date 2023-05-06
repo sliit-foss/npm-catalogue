@@ -11,7 +11,7 @@ jobs:
     env:
       TURBO_TOKEN: ${{ secrets.TURBO_TOKEN }}
       TURBO_TEAM: ${{ secrets.TURBO_TEAM }}
-      tag: blizzard
+      TAG: blizzard
     steps:
       - uses: actions/checkout@v3
       - uses: ./.github/actions/release
