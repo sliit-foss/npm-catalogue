@@ -10,40 +10,6 @@ jobs:
     runs-on: ubuntu-latest
     steps:
       - uses: actions/checkout@v3
-      - uses: actions/setup-node@v3
+      - uses: ./.github/actions/release
         with:
-          node-version: 16
-
-      - name: Configure git
-        run: |
-          git config --global user.email "github-actions[bot]@users.noreply.github.com"
-          git config --global user.name "github-actions[bot]"
-
-      - run: git fetch --prune --unshallow
-
-      - name: Install dependencies
-        run: npm install -g pnpm@8 @sliit-foss/automatic-versioning@latest && pnpm install --production --ignore-scripts
-      
-      - name: Create .npmrc
-        run: echo "//registry.npmjs.org/:_authToken=${{ secrets.NPM_TOKEN }}" > .npmrc
-        
-      - run: echo "git-checks=false" >> .npmrc
-
-      - name: Fetch submodules
-        run: |
-          git submodule init
-          git submodule update
-
-      - name: Populate prerequisities
-        run: |
-          cd packages && for p in *; do if [ -d "$p" ]; then cp ../.npmignore ../LICENSE $p/; fi; done && cd ..
-          cd plugins && for p in *; do if [ -d "$p" ]; then cp ../.npmignore ../LICENSE $p/; fi; done && cd ..
-          
-      - name: Publish package on NPM
-        run: pnpm release
-
-      - name: Update release info
-        run: |
-          git config pull.ff true
-          git add . && git commit -m "CI: @sliit-foss/automatic-versioning - sync release" || true
-          git pull --rebase && git push origin main
+          npm_token: ${{ secrets.NPM_TOKEN }}
