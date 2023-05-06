@@ -21,5 +21,5 @@
       "outputs": ["coverage/**"]
     }
   },
-  "globalEnv": ["DISABLE_FUNCTION_TRACING"]
+  "globalEnv": ["DISABLE_FUNCTION_TRACING", "npm_package_version"]
 }
