@@ -8,12 +8,12 @@
   ],
   "scripts": {
     "build": "turbo run build",
-    "bump-version": "turbo run bump-version --concurrency=1",
+    "bump-version": "turbo run bump-version",
     "dev": "turbo run dev",
     "lint": "turbo run lint",
     "format": "prettier --write \"**/*.{js,ts,tsx,md}\"",
     "prepare": "husky install",
-    "release": "turbo run release --concurrency=1",
+    "release": "turbo run release",
     "sync-submodules": "git submodule init && git submodule update",
     "test": "dotenv -- turbo run test"
   },
