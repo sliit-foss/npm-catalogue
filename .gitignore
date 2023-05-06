@@ -46,4 +46,4 @@ p*/**/jest.config.js
 p*/**/LICENSE
 
 p*/**/node_modules/
-p*/**/logs/
+p*/**/logs/.turbo
