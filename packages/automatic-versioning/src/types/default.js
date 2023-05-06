@@ -21,7 +21,6 @@ const runner = (name, noCommit, noCommitEdit, recursive = false, prereleaseTag, 
     if (diff) {
       console.log(`Diff found, running versioning for ${name}`.green);
       const { commitMessage, commitPrefix, noBump } = await getCommitPrefix(recursive);
-
       if (!noBump) {
         let versionUpdate;
         if (["feature!", "feat!", "f!"].includes(commitPrefix)) {
@@ -38,6 +37,7 @@ const runner = (name, noCommit, noCommitEdit, recursive = false, prereleaseTag, 
         }
         if (prereleaseBranch && ["major", "minor", "patch"].includes(versionUpdate)) {
           const currentBranch = (await run("git rev-parse --abbrev-ref HEAD"))?.trim();
+          console.log(123, currentBranch);
           if (currentBranch === prereleaseBranch) {
             let prerelease = false;
             const currentVersion = (await run("npm version"))
