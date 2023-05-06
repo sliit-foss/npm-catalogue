@@ -1,0 +1,17 @@
+name: CI Prerelease
+on:
+  push:
+    branches:
+      - development
+  workflow_dispatch:
+
+jobs:
+  release:
+    runs-on: ubuntu-latest
+    env:
+      tag: blizzard
+    steps:
+      - uses: actions/checkout@v3
+      - uses: ./.github/actions/release
+        with:
+          npm_token: ${{ secrets.NPM_TOKEN }}
