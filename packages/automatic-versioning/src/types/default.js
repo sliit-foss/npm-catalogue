@@ -45,7 +45,7 @@ const runner = (name, noCommit, noCommitEdit, recursive = false, prereleaseTag, 
               ?.split(":")?.[1]
               ?.trim();
             if (currentVersion.includes(prereleaseTag)) {
-              const [, minor, patch] = process.env.npm_package_version?.split("-")?.[0]?.split(".") ?? [];
+              const [, minor, patch] = currentVersion?.split("-")?.[0]?.split(".") ?? [];
               if (
                 versionUpdate === "patch" ||
                 (versionUpdate === "minor" && patch === "0") ||
