@@ -7,7 +7,7 @@
       "outputs": ["dist/**"]
     },
     "bump-version": {
-      "dependsOn": ["^build", "build"],
+      "dependsOn": ["build"],
       "outputs": ["package.json"]
     },
     "format": { "cache": false },
