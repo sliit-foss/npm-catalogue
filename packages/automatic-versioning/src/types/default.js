@@ -50,7 +50,9 @@ const runner = (name, noCommit, noCommitEdit, recursive = false, prereleaseTag, 
               ?.replace(/[{}'']/g, "")
               ?.trim();
             if (currentVersion?.includes(prereleaseTag)) {
-              await run(`npm --workspaces-update=false --no-git-tag-version version ${currentVersion}`);
+              await run(
+                `npm --workspaces-update=false --no-git-tag-version version --allow-same-version ${currentVersion}`
+              );
               const [, minor, patch] = currentVersion?.split("-")?.[0]?.split(".") ?? [];
               if (
                 versionUpdate === "patch" ||
