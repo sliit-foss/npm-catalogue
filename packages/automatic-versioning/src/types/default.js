@@ -7,7 +7,10 @@ const getCommitPrefix = async (recursive, ignorePrefixes, n = 1) => {
   const commits = log?.split("\n") || [];
   commits.splice(-1);
   const commitMessage = commits.pop()?.trim()?.slice(1, -1);
-  const commitPrefix = commitMessage?.includes(":") ? commitMessage?.split(":")?.[0]?.trim()?.toLowerCase() : "";
+  let commitPrefix = commitMessage?.includes(":") ? commitMessage?.split(":")?.[0]?.trim()?.toLowerCase() : "";
+  if (commitPrefix.includes("(") && commitPrefix.includes(")")) {
+    commitPrefix = commitPrefix?.split("(")?.[0]?.trim();
+  }
   const noBump = commitMessage?.includes("--no-bump");
   if ((commitPrefix && !ignorePrefixes.includes(commitPrefix)) || !recursive) {
     return { commitPrefix, commitMessage, noBump };
