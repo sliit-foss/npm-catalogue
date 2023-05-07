@@ -45,7 +45,9 @@ runs:
       shell: bash
 
     - name: Publish packages on NPM
-      run: pnpm release
+      run: |
+        pnpm --filter @sliit-foss/automatic-versioning build
+        pnpm release
       shell: bash
 
     - name: Update release info
