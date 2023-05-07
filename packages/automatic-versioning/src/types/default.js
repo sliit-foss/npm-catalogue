@@ -8,6 +8,7 @@ const getCommitPrefix = async (recursive, ignorePrefixes, n = 1) => {
   commits.splice(-1);
   const commitMessage = commits.pop()?.trim()?.slice(1, -1);
   let commitPrefix = commitMessage?.includes(":") ? commitMessage?.split(":")?.[0]?.trim()?.toLowerCase() : "";
+  if (commitPrefix.includes("https")) commitPrefix = "";
   if (commitPrefix.includes("(")) {
     commitPrefix = commitPrefix?.split("(")?.[0]?.trim();
   }
