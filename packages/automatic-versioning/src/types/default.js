@@ -2,24 +2,24 @@
 
 import run from "../utils/runner";
 
-const getCommitPrefix = async (recursive, n = 1) => {
+const getCommitPrefix = async (recursive, ignorePrefixes, n = 1) => {
   const log = await run(`git show -s --format='%s' -${n} ./`);
   const commits = log?.split("\n") || [];
   commits.splice(-1);
   const commitMessage = commits.pop()?.trim()?.slice(1, -1);
   const commitPrefix = commitMessage?.includes(":") ? commitMessage?.split(":")?.[0]?.trim()?.toLowerCase() : "";
   const noBump = commitMessage?.includes("--no-bump");
-  if (commitPrefix || !recursive) {
+  if ((commitPrefix && !ignorePrefixes.includes(commitPrefix)) || !recursive) {
     return { commitPrefix, commitMessage, noBump };
   }
-  return getCommitPrefix(recursive, n + 1);
+  return getCommitPrefix(recursive, ignorePrefixes, n + 1);
 };
 
-const runner = (name, noCommit, noCommitEdit, recursive = false, prereleaseTag, prereleaseBranch) => {
+const runner = (name, noCommit, noCommitEdit, recursive = false, prereleaseTag, prereleaseBranch, ignorePrefixes) => {
   run("git show --first-parent ./").then(async (diff) => {
     if (diff) {
       console.log(`Diff found, running versioning for ${name}`.green);
-      const { commitMessage, commitPrefix, noBump } = await getCommitPrefix(recursive);
+      const { commitMessage, commitPrefix, noBump } = await getCommitPrefix(recursive, ignorePrefixes);
       if (!noBump) {
         let versionUpdate;
         if (["feature!", "feat!", "f!"].includes(commitPrefix)) {
