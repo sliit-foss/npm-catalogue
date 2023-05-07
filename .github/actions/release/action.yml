@@ -46,7 +46,7 @@ runs:
 
     - name: Publish packages on NPM
       run: |
-        pnpm --filter @sliit-foss/automatic-versioning build && pnpm add -g ./packages/automatic-versioning
+        pnpm --filter @sliit-foss/automatic-versioning build && npm i -g ./packages/automatic-versioning
         pnpm release
       shell: bash
 
