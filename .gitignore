@@ -38,14 +38,11 @@ yarn-error.log*
 
 .vscode
 
-cache-control.js
-
 p*/**/dist/
 
 p*/**/.npmignore
 p*/**/.babelrc
 p*/**/jest.config.js
-p*/**/cache-control.js
 p*/**/LICENSE
 
 p*/**/node_modules/
