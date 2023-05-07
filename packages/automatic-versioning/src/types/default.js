@@ -7,7 +7,11 @@ const getCommitPrefix = async (recursive, ignorePrefixes, n = 1) => {
   const commits = log?.split("\n") || [];
   commits.splice(-1);
   const commitMessage = commits.pop()?.trim()?.slice(1, -1);
-  const commitPrefix = commitMessage?.includes(":") ? commitMessage?.split(":")?.[0]?.trim()?.toLowerCase() : "";
+  let commitPrefix = commitMessage?.includes(":") ? commitMessage?.split(":")?.[0]?.trim()?.toLowerCase() : "";
+  if (commitPrefix.includes("https")) commitPrefix = "";
+  if (commitPrefix.includes("(")) {
+    commitPrefix = commitPrefix?.split("(")?.[0]?.trim();
+  }
   const noBump = commitMessage?.includes("--no-bump");
   if ((commitPrefix && !ignorePrefixes.includes(commitPrefix)) || !recursive) {
     return { commitPrefix, commitMessage, noBump };
@@ -38,12 +42,17 @@ const runner = (name, noCommit, noCommitEdit, recursive = false, prereleaseTag, 
           const currentBranch = (await run("git rev-parse --abbrev-ref HEAD"))?.trim();
           if (currentBranch === prereleaseBranch) {
             let prerelease = false;
-            const currentVersion = (await run("npm version"))
-              ?.replace("{", "")
-              ?.split(",")?.[0]
-              ?.split(":")?.[1]
+            const currentVersion = (
+              await run(`npm view ${name} time`)
+                .then((res) => res?.split(",")?.pop()?.split(":")?.[0])
+                .catch(async () => (await run("npm version"))?.split(",")?.[0]?.split(":")?.[1])
+            )
+              ?.replace(/[{}'']/g, "")
               ?.trim();
-            if (currentVersion.includes(prereleaseTag)) {
+            if (currentVersion?.includes(prereleaseTag)) {
+              await run(
+                `npm --workspaces-update=false --no-git-tag-version version --allow-same-version ${currentVersion}`
+              );
               const [, minor, patch] = currentVersion?.split("-")?.[0]?.split(".") ?? [];
               if (
                 versionUpdate === "patch" ||

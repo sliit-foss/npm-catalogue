@@ -7,13 +7,13 @@
       "outputs": ["dist/**"]
     },
     "bump-version": {
-      "dependsOn": [],
+      "dependsOn": ["build"],
       "outputs": ["package.json"]
     },
     "format": { "cache": false },
     "lint": {},
     "release": {
-      "dependsOn": [],
+      "dependsOn": ["bump-version"],
       "outputs": []
     },
     "test": {

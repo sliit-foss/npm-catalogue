@@ -1,30 +1,30 @@
 {
-    "name": "@sliit-foss/clusterizer",
-    "version": "1.2.2",
-    "description": "A wrapper around the node cluster module to make it easier to bootstrap a clusterized application",
-    "main": "dist/index.js",
-    "types": "types/index.d.ts",
-    "scripts": {
-        "build": "node ../../scripts/esbuild.config.js",
-        "build:watch": "bash ../../scripts/esbuild.watch.sh",
-        "bump-version": "pnpm build && bash ../../scripts/bump-version.sh --name=@sliit-foss/clusterizer",
-        "lint": "bash ../../scripts/lint.sh",
-        "release": "bash ../../scripts/release.sh",
-        "test": "bash ../../scripts/test/test.sh"
-    },
-    "author": "SLIIT FOSS",
-    "license": "MIT",
-    "repository": {
-        "type": "git",
-        "url": "git+https://github.com/sliit-foss/npm-catalogue.git"
-    },
-    "homepage": "https://github.com/sliit-foss/npm-catalogue/blob/main/packages/clusterizer/readme.md",
-    "keywords": [
-        "clusterizer",
-        "node:cluster",
-        "multi-processing"
-    ],
-    "bugs": {
-        "url": "https://github.com/sliit-foss/npm-catalogue/issues"
-    }
+  "name": "@sliit-foss/clusterizer",
+  "version": "1.2.2",
+  "description": "A wrapper around the node cluster module to make it easier to bootstrap a clusterized application",
+  "main": "dist/index.js",
+  "types": "types/index.d.ts",
+  "scripts": {
+    "build": "node ../../scripts/esbuild.config.js",
+    "build:watch": "bash ../../scripts/esbuild.watch.sh",
+    "bump-version": "bash ../../scripts/bump-version.sh --name=@sliit-foss/clusterizer",
+    "lint": "bash ../../scripts/lint.sh",
+    "release": "bash ../../scripts/release.sh",
+    "test": "bash ../../scripts/test/test.sh"
+  },
+  "author": "SLIIT FOSS",
+  "license": "MIT",
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/sliit-foss/npm-catalogue.git"
+  },
+  "homepage": "https://github.com/sliit-foss/npm-catalogue/blob/main/packages/clusterizer/readme.md",
+  "keywords": [
+    "clusterizer",
+    "node:cluster",
+    "multi-processing"
+  ],
+  "bugs": {
+    "url": "https://github.com/sliit-foss/npm-catalogue/issues"
+  }
 }

@@ -8,6 +8,7 @@
   },
   "preferGlobal": true,
   "scripts": {
+    "build": "echo \"@sliit-foss/templates -> building skipped\"",
     "bump-version": "bash ../../scripts/bump-version.sh --name=@sliit-foss/templates",
     "generate": "plop --plopfile src/index.js",
     "lint": "bash ../../scripts/lint.sh",
