@@ -41,12 +41,15 @@ const runner = (name, noCommit, noCommitEdit, recursive = false, prereleaseTag, 
           const currentBranch = (await run("git rev-parse --abbrev-ref HEAD"))?.trim();
           if (currentBranch === prereleaseBranch) {
             let prerelease = false;
-            const currentVersion = (await run("npm version"))
-              ?.replace("{", "")
-              ?.split(",")?.[0]
-              ?.split(":")?.[1]
+            const currentVersion = (
+              await run(`npm view ${name} time`)
+                .then((res) => res?.split(",")?.pop()?.split(":")?.[0])
+                .catch(async () => (await run("npm version"))?.split(",")?.[0]?.split(":")?.[1])
+            )
+              ?.replace(/[{}'']/g, "")
               ?.trim();
-            if (currentVersion.includes(prereleaseTag)) {
+            if (currentVersion?.includes(prereleaseTag)) {
+              await run(`npm --workspaces-update=false --no-git-tag-version version ${currentVersion}`);
               const [, minor, patch] = currentVersion?.split("-")?.[0]?.split(".") ?? [];
               if (
                 versionUpdate === "patch" ||
