@@ -8,7 +8,7 @@ const getCommitPrefix = async (recursive, ignorePrefixes, n = 1) => {
   commits.splice(-1);
   const commitMessage = commits.pop()?.trim()?.slice(1, -1);
   let commitPrefix = commitMessage?.includes(":") ? commitMessage?.split(":")?.[0]?.trim()?.toLowerCase() : "";
-  if (commitPrefix.includes("(") && commitPrefix.includes(")")) {
+  if (commitPrefix.includes("(")) {
     commitPrefix = commitPrefix?.split("(")?.[0]?.trim();
   }
   const noBump = commitMessage?.includes("--no-bump");
