@@ -13,7 +13,9 @@ const args = process.argv.slice(2);
 
 const defaultRootDir = "../../../../";
 
-let prereleaseTag, prereleaseBranch;
+let prereleaseTag,
+  prereleaseBranch,
+  ignorePrefixes = [];
 let name = "@sliit-foss/automatic-versioning";
 let rootDir = defaultRootDir;
 let noCommitEdit = false,
@@ -28,6 +30,7 @@ args.forEach((arg) => {
   if (arg.includes("--recursive")) recursive = true;
   if (arg.includes("--prerelease-tag=")) prereleaseTag = arg.replace("--prerelease-tag=", "");
   if (arg.includes("--prerelease-branch=")) prereleaseBranch = arg.replace("--prerelease-branch=", "");
+  if (arg.includes("--ignore-prefixes=")) ignorePrefixes = arg.replace("--ignore-prefixes=", "")?.split(",") ?? [];
 });
 
 console.log(`Running version bump for ${name}`.green);
@@ -40,5 +43,5 @@ if (rootDir !== defaultRootDir) {
 if (args.includes("--tag-based")) {
   tagBasedRunner(name, noCommit);
 } else {
-  defaultRunner(name, noCommit, noCommitEdit, recursive, prereleaseTag, prereleaseBranch);
+  defaultRunner(name, noCommit, noCommitEdit, recursive, prereleaseTag, prereleaseBranch, ignorePrefixes);
 }

@@ -144,3 +144,11 @@ yarn bump-version
 ```bash
   npx automatic-versioning --name=<package_name> --prerelease-branch=<branch_name>
 ```
+
+## Ignore prefixes<br/>
+
+- A list of comma separated prefixes to ignore when evaluating the commit message. By default we stop searching for commits once we come across any prefix considered by commitlint as valid prefixes. You can use this option to ignore a few of them if the need arises<br/>
+
+```bash
+  npx automatic-versioning --name=<package_name> --ignore-prefixes=ci,docs
+```
