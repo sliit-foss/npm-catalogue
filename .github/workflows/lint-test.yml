@@ -1,4 +1,4 @@
-name: CI Tests
+name: CI Code Quality + Tests
 on:
   pull_request:
     branches:
@@ -6,8 +6,11 @@ on:
       - development
 
 jobs:
-  unit-tests:
+  scripts:
     runs-on: ubuntu-latest
+    strategy:
+      matrix:
+        command: ['lint', 'test']
     env:
       TURBO_TOKEN: ${{ secrets.TURBO_TOKEN }}
       TURBO_TEAM: ${{ secrets.TURBO_TEAM }}
@@ -20,9 +23,11 @@ jobs:
       - name: Install dependencies
         run: npm install -g pnpm@8 && pnpm install --ignore-scripts
       
-      - name: Run unit tests
+      - name: Run checks
         shell: bash
-        run: pnpm test
+        run: |
+          pnpm --filter @sliit-foss/eslint-config-internal build
+          pnpm ${{ matrix.command }}
         env:
           GITHUB_ACCESS_TOKEN: ${{ secrets.ACCESS_TOKEN_GITHUB }}
           FIREBASE_CONFIG: ${{ secrets.FIREBASE_CONFIG }}
