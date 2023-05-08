@@ -6,7 +6,7 @@ on:
       - development
 
 jobs:
-  unit-tests:
+  scripts:
     runs-on: ubuntu-latest
     strategy:
       matrix:
