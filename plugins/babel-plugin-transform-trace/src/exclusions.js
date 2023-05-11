@@ -62,9 +62,12 @@ export default [
   "helmet",
   "express",
   "expressHealth",
+  "expressMiddleware",
   "middlewareWrapper",
   "morgan",
+  "multer",
   "next",
+  "session",
   // @ End express middleware
 
   // @ Start tracing Functions
