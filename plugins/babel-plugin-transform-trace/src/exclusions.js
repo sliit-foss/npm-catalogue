@@ -67,6 +67,7 @@ export default [
   "morgan",
   "multer",
   "next",
+  "serveStatic",
   "session",
   // @ End express middleware
 
