@@ -75,7 +75,7 @@ const runner = (name, noCommit, noCommitEdit, recursive = false, prereleaseTag, 
               versionUpdate === "prerelease" ? versionUpdate : `${versionUpdate} release`
             }"`;
             run("git add .").then(() => {
-              run(`git commit -m ${successMsg}`).then(() => {
+              run(`git commit -m ${successMsg} --no-verify`).then(() => {
                 console.log(successMsg.green);
               });
             });
