@@ -1,4 +1,4 @@
-import { Logger } from 'winston';
+import { Logger } from "winston";
 declare interface Config {
   transportOverrides?: any;
   console?: {
@@ -22,7 +22,4 @@ declare function configure(userConfig: Config): void;
  */
 declare function moduleLogger(moduleName?: string): Logger;
 
-export {
-  configure,
-  moduleLogger,
-};
+export { configure, moduleLogger };
