@@ -15,11 +15,9 @@ declare interface Config {
 /**
  * Configures the module logger with a given user configuration.
  */
-declare function configure(userConfig: Config): void;
+export function configure(userConfig: Config): void;
 
 /**
  * Returns a modularized logger instance for a given module name.
  */
-declare function moduleLogger(moduleName?: string): Logger;
-
-export { configure, moduleLogger };
+export function moduleLogger(moduleName?: string): Logger;
