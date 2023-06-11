@@ -1,6 +1,8 @@
 [submodule "packages/templates/src/stacks/node"]
 	path = packages/templates/src/stacks/node
 	url = https://github.com/sliit-foss/nodejs-templates.git
+	branch = main
 [submodule "packages/templates/src/stacks/flutter"]
 	path = packages/templates/src/stacks/flutter
 	url = https://github.com/sliit-foss/flutter-templates.git
+	branch = main
