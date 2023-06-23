@@ -1,4 +1,3 @@
-
 ![Banner](https://github.com/sliit-foss/npm-catalogue/assets/73662613/328f6449-69ec-40b0-a988-4e7875f49afb)
 
 # npm-catalogue
