@@ -51,6 +51,7 @@ export default [
   "tryCatch",
   "values",
   "wrap",
+  "createFormatWrap",
 
   // @ Start express middleware
   "bodyParser",
