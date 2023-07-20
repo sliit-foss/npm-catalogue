@@ -31,6 +31,16 @@ const mongooseFilterQuery = (req, res, next) => {
     } else {
       req.query.sort = {};
     }
+    if (req.query.select) {
+      Object.keys(req.query.select).forEach((key) => {
+        const value = req.query.sort[key];
+        if (value === "true") 
+          req.query.select[key] = 1;
+        else if (value === "false") 
+          req.query.select[key] = 0;        
+      });
+      
+    }
   } catch (e) {
     console.error("[ Mongoose-FilterQuery ] - Failed to parse filters from query", e);
   }
