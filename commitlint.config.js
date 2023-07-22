@@ -5,9 +5,6 @@ module.exports = {
       2,
       "always",
       [
-        "FEAT!",
-        "FEAT",
-        "FIX",
         "Feat!",
         "Feat",
         "Fix",

@@ -43,9 +43,11 @@ trace(function foo() {
 - ### traced `(Same as trace but returns a decorated function)`
 
 ```js
-traced(function foo() {
+const tracedFoo = traced(function foo() {
   console.log(123);
 })();
+
+tracedFoo();
 
 /*
   foo execution initiated

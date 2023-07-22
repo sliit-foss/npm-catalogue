@@ -13,6 +13,9 @@ coverage
 out/
 build
 
+# IntelliJ
+.idea
+
 # misc
 .DS_Store
 *.pem
