@@ -43,4 +43,17 @@ app.use(httpLogger({
     "body"
   ], // An array of extra propeties in the request object to log. Defaults to the following: ['path', 'method', 'query', 'params']
 }));
+
+// or
+
+app.use(httpLogger({
+  whitelists: ["/public/*"],
+  loggable: ({headers, body} => {
+    // Pick the properties you want to log
+    return {
+      headers,
+      body
+    }
+  }),
+}));
 ```

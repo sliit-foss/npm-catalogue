@@ -34,4 +34,11 @@ describe("test http-logger", () => {
     expect(mockLogger.info).toBeCalledTimes(0);
     expect(mockLogger.error).toBeCalledTimes(0);
   });
+  test("test-loggable-function", async () => {
+    const loggable = jest.fn().mockImplementation(({ headers }) => ({ "x-user-email": headers["x-user-email"] }));
+    httpLogger({ loggable })(req, res, () => {});
+    expect(loggable).toBeCalledTimes(1);
+    expect(mockLogger.info).toBeCalledTimes(2);
+    expect(mockLogger.error).toBeCalledTimes(0);
+  });
 });

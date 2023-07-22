@@ -13,7 +13,17 @@ const generateInfoObject = (req, properties) =>
 const httpLogger =
   ({ whitelists = [], loggable = [] } = {}) =>
   (req, res, next) => {
-    const info = generateInfoObject(req, loggable.length ? [...defaultProperties, ...loggable] : defaultProperties);
+    let info;
+
+    if (loggable) {
+      if (Array.isArray(loggable)) {
+        info = generateInfoObject(req, loggable.length ? [...defaultProperties, ...loggable] : defaultProperties);
+      } else {
+        info = { ...generateInfoObject(req, defaultProperties), ...loggable({ headers: req.headers, body: req.body }) };
+      }
+    } else {
+      info = generateInfoObject(req, defaultProperties);
+    }
 
     if (whitelists.find((route) => req.path.match(new RegExp(route)))) return next();
 
