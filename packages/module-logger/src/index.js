@@ -87,3 +87,5 @@ export const moduleLogger = (moduleName) => {
     }, {})
   };
 };
+
+export default _logger;
