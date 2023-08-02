@@ -1,6 +1,15 @@
 ![Banner](https://github.com/sliit-foss/npm-catalogue/assets/73662613/328f6449-69ec-40b0-a988-4e7875f49afb)
 
-# npm-catalogue
+<p align="left">
+  <a aria-label="CI Release" href="https://github.com/sliit-foss/npm-catalogue/actions/workflows/release.yml">
+    <img alt="" src="https://github.com/sliit-foss/npm-catalogue/actions/workflows/release.yml/badge.svg">
+  </a>
+  <a aria-label="CI Prerelease" href="https://github.com/sliit-foss/npm-catalogue/actions/workflows/prerelease.yml">
+    <img alt="" src="https://github.com/sliit-foss/npm-catalogue/actions/workflows/prerelease.yml/badge.svg">
+  </a>
+</p>
+
+# Catalogue
 
 ### A curated list of NPM packages developed by the SLIIT FOSS community
 
@@ -18,14 +27,15 @@
 - Run `pnpm build` to build all packages
 - Run `pnpm --filter <package> test` to run test suites for a particular package
 
-- Deployment is handled automatically by [GitHub Actions](.github\workflows\release.yml) when a commit is pushed to the master branch
-  <br/>
+- Deployment is handled automatically by [GitHub Actions](.github\workflows\release.yml) when a commit is pushed to the `main` branch
+
+<br/>
 
 ## Git commit messages
 
 - We follow conventional commits during our development workflow as it helps us automate our release process. More information can be found at their official [documentation](https://www.conventionalcommits.org/en/v1.0.0-beta.4/#examples)
 
-- Supported commit message prefixes for version bumping are as follows:
+- Primary commit message prefixes for version bumping are as follows:
 
   ```js
   - Feat! - bump major version
@@ -39,7 +49,7 @@
   - Fix   - bump patch version
   ```
 
-- Refer the [commitlint.config.js](https://github.com/sliit-foss/npm-catalogue/commitlint.config.js) file for a full list of supported commit message prefixes
+- Refer the [commitlint.config.js](https://github.com/sliit-foss/npm-catalogue/blob/main/commitlint.config.js) file for a full list of supported commit message prefixes
 
 <br/>
 
