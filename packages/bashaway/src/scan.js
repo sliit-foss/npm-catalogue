@@ -1,8 +1,8 @@
 import fs from "fs";
 import { globSync } from "glob";
 
-export const scanDir = (pattern = "**", exclusions = []) => {
-  const excludedPatterns = [
+export const scan = (pattern = "**", exclusions = []) => {
+  exclusions = [
     ".turbo/**",
     "node_modules/**",
     "test/**",
@@ -19,12 +19,17 @@ export const scanDir = (pattern = "**", exclusions = []) => {
     "*.md",
     ...exclusions
   ];
-  const paths = globSync(pattern, { cwd: ".", ignore: excludedPatterns });
+  const paths = globSync(pattern, { cwd: ".", ignore: exclusions });
   return paths.filter((path) => fs.statSync(path).isFile());
 };
 
-export const shellFiles = (exclusions = []) => scanDir("**/*.sh", exclusions);
+export const scanPure = (pattern = "**", exclusions = []) => {
+  const paths = globSync(pattern, { cwd: ".", ignore: exclusions });
+  return paths.filter((path) => fs.statSync(path).isFile());
+};
 
-export const jsFiles = (exclusions = []) => scanDir("**/*.js", exclusions);
+export const shellFiles = (exclusions = []) => scan("**/*.sh", exclusions);
 
-export const pyFiles = (exclusions = []) => scanDir("**/*.py", exclusions);
+export const jsFiles = (exclusions = []) => scan("**/*.js", exclusions);
+
+export const pyFiles = (exclusions = []) => scan("**/*.py", exclusions);

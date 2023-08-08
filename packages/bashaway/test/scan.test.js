@@ -1,20 +1,28 @@
-import { scanDir, jsFiles, pyFiles, shellFiles } from "../src";
+import { scan, scanPure, jsFiles, pyFiles, shellFiles } from "../src";
 
-describe("test directory scan", () => {
+describe("test root directory scan", () => {
   test("test file count", () => {
-    const files = scanDir();
+    const files = scan();
     expect(files.length).toBe(2);
   });
   test("test file names", () => {
-    const files = scanDir();
+    const files = scan();
     expect(files.find((file) => file.includes("index.js"))).toBeTruthy();
     expect(files.find((file) => file.includes("scan.js"))).toBeTruthy();
   });
 });
-describe("test directory scan with exclusions", () => {
+describe("test root directory scan with exclusions", () => {
   test("test file count", () => {
-    const files = scanDir("**", ["src/**"]);
+    const files = scan("**", ["src/**"]);
     expect(files.length).toBe(0);
+  });
+});
+describe("test pure directory scan", () => {
+  test("test normal scan results to be 0", () => {
+    expect(scan("./test").length).toBe(0);
+  });
+  test("test pure scan results to be 1", () => {
+    expect(scanPure("./test/**").length).toBe(1);
   });
 });
 describe("test language specific scans", () => {
