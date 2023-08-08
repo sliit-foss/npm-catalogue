@@ -1,1 +1,1 @@
-/// <reference types="./scan.d.ts" />
+export * from "./scan.d.ts";
