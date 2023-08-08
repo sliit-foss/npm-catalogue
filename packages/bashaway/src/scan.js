@@ -7,6 +7,7 @@ export const scanDir = (pattern = "**", exclusions = []) => {
     "node_modules/**",
     "test/**",
     "coverage/**",
+    "types/**",
     "dist/**",
     "out/**",
     ".babelrc",
@@ -22,8 +23,8 @@ export const scanDir = (pattern = "**", exclusions = []) => {
   return paths.filter((path) => fs.statSync(path).isFile());
 };
 
-export const shellFiles = () => scanDir("**/*.sh");
+export const shellFiles = (exclusions = []) => scanDir("**/*.sh", exclusions);
 
-export const jsFiles = () => scanDir("**/*.js");
+export const jsFiles = (exclusions = []) => scanDir("**/*.js", exclusions);
 
-export const pyFiles = () => scanDir("**/*.py");
+export const pyFiles = (exclusions = []) => scanDir("**/*.py", exclusions);
