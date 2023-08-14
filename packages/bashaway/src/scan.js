@@ -11,6 +11,8 @@ export const scan = (pattern = "**", exclusions = []) => {
     "dist/**",
     "out/**",
     ".babelrc",
+    ".gitignore",
+    ".gitkeep",
     "jest.config.js",
     "package.json",
     "package-lock.json",
