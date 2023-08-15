@@ -1,11 +1,11 @@
 {
   "name": "@sliit-foss/bashaway",
-  "version": "1.2.1",
+  "version": "1.2.2-blizzard.0",
   "description": "Utility functions for SLIIT Bashaway test automation",
   "main": "dist/index.js",
   "types": "types/index.d.ts",
   "scripts": {
-    "build": "node ../../scripts/esbuild.config.js",
+    "build": "node ./esbuild.config.js",
     "build:watch": "bash ../../scripts/esbuild.watch.sh",
     "bump-version": "bash ../../scripts/bump-version.sh --name=@sliit-foss/bashaway",
     "lint": "bash ../../scripts/lint.sh",
@@ -13,6 +13,7 @@
     "test": "bash ../../scripts/test/test.sh"
   },
   "dependencies": {
+    "@sliit-foss/actions-exec-wrapper": "1.1.1",
     "glob": "10.3.3"
   },
   "repository": {

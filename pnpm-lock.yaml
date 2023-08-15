@@ -81,6 +81,9 @@ importers:
 
   packages/bashaway:
     dependencies:
+      '@sliit-foss/actions-exec-wrapper':
+        specifier: 1.1.1
+        version: link:../actions-exec-wrapper
       glob:
         specifier: 10.3.3
         version: 10.3.3

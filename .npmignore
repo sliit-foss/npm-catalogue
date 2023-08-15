@@ -4,6 +4,7 @@ test/
 coverage/
 node_modules/
 .babelrc
+esbuild.config.js
 jest.config.js
 cache-control.json
 .env
