@@ -15,14 +15,14 @@ const _asyncHandler =
       } else {
         await fn(req, res, next);
       }
-      next();
+      if (!res.headersSent) next();
     } catch (err) {
       if (!trace) {
         fnName = fnName ?? _fnName(fn);
         logger.error(`${fnName} execution failed - error: ${err.message} - stack: ${err.stack}`);
       }
       res.errorLogged = true;
-      next(err);
+      if (!res.headersSent) next(err);
     }
   };
 
