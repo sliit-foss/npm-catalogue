@@ -50,5 +50,3 @@ p*/**/LICENSE
 
 p*/**/node_modules/
 p*/**/logs/.turbo
-
-packages/bashaway/src/_
