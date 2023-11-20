@@ -17,7 +17,7 @@ const serviceConnector = ({ service, headerIntercepts, loggable, logs = true, ..
     if (headerIntercepts) {
       config.headers = {
         ...config.headers,
-        ...headerIntercepts(config.headers)
+        ...headerIntercepts(config)
       };
     }
     return config;
