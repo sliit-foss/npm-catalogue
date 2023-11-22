@@ -86,7 +86,7 @@ const runner = (name, noCommit, noCommitEdit, recursive = false, prereleaseTag, 
           console.log(`No bump found in commit message, skipping version bump`.yellow);
         } else {
           console.log(`No bump found in commit message, skipping version bump and editing commit message`.yellow);
-          run(`git commit --amend -m ${commitMessage.replace(/--no-bump/g, "")}`).then(() => {
+          run(`git commit --amend -m "${commitMessage.replace(/--no-bump/g, "")}"`).then(() => {
             console.log("Successfully edited commit message".green);
           });
         }

@@ -1,6 +1,6 @@
 {
   "name": "@sliit-foss/babel-plugin-transform-trace",
-  "version": "0.1.0",
+  "version": "0.1.1",
   "description": "Adds tracing to the source code during transformation",
   "main": "dist/index.js",
   "scripts": {
@@ -20,7 +20,7 @@
   "dependencies": {
     "@babel/helper-plugin-utils": "7.21.5",
     "@babel/template": "7.20.7",
-    "@sliit-foss/functions": "2.2.1"
+    "@sliit-foss/functions": "2.2.3"
   },
   "peerDependencies": {
     "@babel/core": "^7.0.0-0",

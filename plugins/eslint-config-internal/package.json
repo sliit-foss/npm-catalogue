@@ -1,12 +1,12 @@
 {
   "name": "@sliit-foss/eslint-config-internal",
-  "version": "1.1.4",
+  "version": "1.1.6",
   "description": "Custom ESLint config for SLIIT FOSS",
   "main": "dist/index.js",
   "scripts": {
     "build": "node ../../scripts/esbuild.config.js",
     "build:watch": "bash ../../scripts/esbuild.watch.sh",
-    "bump-version": "bash ../../scripts/bump-version.sh --name=@sliit-foss/eslint-config-internal2",
+    "bump-version": "bash ../../scripts/bump-version.sh --name=@sliit-foss/eslint-config-internal",
     "lint": "bash ../../scripts/lint.sh",
     "release": "bash ../../scripts/release.sh",
     "test": "dotenv -- jest --coverage --verbose --runInBand --forceExit"
