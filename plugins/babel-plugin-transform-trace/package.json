@@ -1,6 +1,6 @@
 {
   "name": "@sliit-foss/babel-plugin-transform-trace",
-  "version": "0.1.1",
+  "version": "0.1.2",
   "description": "Adds tracing to the source code during transformation",
   "main": "dist/index.js",
   "scripts": {
