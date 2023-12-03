@@ -9,7 +9,7 @@
     "bump-version": "bash ../../scripts/bump-version.sh --name=@sliit-foss/babel-plugin-transform-trace",
     "lint": "bash ../../scripts/lint.sh",
     "release": "bash ../../scripts/release.sh",
-    "test": "dotenv -- jest --coverage --verbose --runInBand --forceExit"
+    "test": "bash ../../scripts/test/test.sh"
   },
   "keywords": [
     "babel-plugin",
