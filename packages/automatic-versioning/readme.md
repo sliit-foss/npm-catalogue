@@ -93,12 +93,12 @@ yarn bump-version
     - Fix   - bump patch version
 ```
 
-## Disable commit <br/>
+## Skip commit <br/>
 
-- By default automatic-versioning will commit the newly incremented version to source control. To disable this behavior, add the following to your script: "--no-commit"<br/>
+- By default automatic-versioning will commit the newly incremented version to source control. To disable this behavior, add the following to your script: "--skip-commit"<br/>
 
 ```bash
-  npx automatic-versioning --name=<package_name> --no-commit
+  npx automatic-versioning --name=<package_name> --skip-commit
 ```
 
 ## Disable version bumping for specific commit<br/>
@@ -107,21 +107,13 @@ yarn bump-version
   git commit -m "Feat: some feature --no-bump"
 ```
 
-## Disable --no-bump commit message edit <br/>
-
-- By default automatic-versioning will edit the commit message in no-bump commits and remove the no-bump part from the commit message. Sometimes such as in the case of monorepos, this can prove to be a problem. To disable this behavior, add the following to your script: "--no-commit-edit"<br/>
+## Custom app directory to run versioning script<br/>
 
 ```bash
-  npx automatic-versioning --name=<package_name> --no-commit-edit
+  npx automatic-versioning --name=<package_name> --root=<custom_dir>
 ```
 
-## Custom app directory to run incrementing script<br/>
-
-```bash
-  npx automatic-versioning --name=<package_name> --rootDir=<custom_dir>
-```
-
-## Recursively search commit history to find version bump trigger<br/>
+## Recursively search commit history to find a supporting prefix to trigger a version bump<br/>
 
 ```bash
   npx automatic-versioning --name=<package_name> --recursive
@@ -152,3 +144,10 @@ yarn bump-version
 ```bash
   npx automatic-versioning --name=<package_name> --ignore-prefixes=ci,docs
 ```
+
+---
+
+## Migration from V1 to V2
+
+- `--no-commit-edit` option has been removed as commits no longer cause problems with the versioning script
+- `--no-commit` option has been renamed to `--skip-commit`
