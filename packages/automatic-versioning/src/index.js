@@ -39,7 +39,7 @@ const defaultRootDir = "../../../../";
 opts.root ??= defaultRootDir;
 opts.ignorePrefixes = opts.ignorePrefixes?.split(",") ?? [];
 
-console.log(`Running versioning script for ${opts.name}`.green);
+console.info(`Running versioning script for ${opts.name}`.green);
 
 if (opts.root !== defaultRootDir) {
   const parentDir = path.resolve(__dirname, opts.root);
