@@ -17,7 +17,7 @@ const executor = (command) => {
         return resolve(output);
       })
       .catch((error) => {
-        if (error) console.log(error.red);
+        if (error) console.error(error.red);
         return reject(error);
       });
   });

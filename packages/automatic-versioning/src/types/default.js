@@ -22,7 +22,7 @@ const getCommitPrefix = async (recursive, ignorePrefixes, n = 1) => {
 const runner = (name, noCommit, recursive = false, prereleaseTag, prereleaseBranch, ignorePrefixes) => {
   run("git show --first-parent ./").then(async (diff) => {
     if (diff) {
-      console.log(`Diff found, running versioning for ${name}`.green);
+      console.info(`Diff found, running versioning for ${name}`.green);
       const { commitMessage, commitPrefix, noBump } = await getCommitPrefix(recursive, ignorePrefixes);
       if (!noBump) {
         let versionUpdate;
@@ -35,7 +35,7 @@ const runner = (name, noCommit, recursive = false, prereleaseTag, prereleaseBran
         } else if (["prerelease", "prepatch", "preminor", "premajor"].includes(commitPrefix)) {
           versionUpdate = commitPrefix;
         } else {
-          console.log(`No suitable commit prefix found in commit message, skipping version bump`.yellow);
+          console.info(`No suitable commit prefix found in commit message, skipping version bump`.yellow);
           return;
         }
         if (prereleaseBranch && ["major", "minor", "patch"].includes(versionUpdate)) {
@@ -84,19 +84,19 @@ const runner = (name, noCommit, recursive = false, prereleaseTag, prereleaseBran
             }"`;
             run("git add .").then(() => {
               run(`git commit -m ${successMsg} --no-verify`).then(() => {
-                console.log(successMsg.green);
+                console.info(successMsg.green);
               });
             });
           }
         });
       } else {
-        console.log(`No bump found in commit message, skipping version bump and editing commit message`.yellow);
+        console.info(`No bump found in commit message, skipping version bump and editing commit message`.yellow);
         run(`git commit --amend -m "${commitMessage.replace(/--no-bump/g, "")}"`).then(() => {
-          console.log("Successfully edited commit message".green);
+          console.info("Successfully edited commit message".green);
         });
       }
     } else {
-      console.log(`No diff found, skipping version bump for ${name}`.yellow);
+      console.info(`No diff found, skipping version bump for ${name}`.yellow);
     }
   });
 };

@@ -18,14 +18,14 @@ const runner = (name, noCommit) => {
               const successMsg = `"CI: Bumped version of ${name} from ${initialVersion} to ${latest}"`;
               run("git add .").then(() => {
                 run(`git commit -m ${successMsg}`).then(() => {
-                  console.log(successMsg.green);
+                  console.info(successMsg.green);
                 });
               });
             }
           })
           .catch(() => {});
       } else {
-        console.log(`No tag diff found, skipping version bump for ${name}`.yellow);
+        console.info(`No tag diff found, skipping version bump for ${name}`.yellow);
       }
     });
   });
