@@ -24,7 +24,7 @@ program
 
 [
   new Option("--recursive", "recursively search for a matching commit prefix"),
-  new Option("--prerelease-tag <string>", "prerelease tag to use when running on a prerelease branch"),
+  new Option("--prerelease-tag <string>", "prerelease identifier to use when creating a prerelease"),
   new Option("--prerelease-branch <string>", "run prereleases on this branch"),
   new Option(
     "--ignore-prefixes <string>",
