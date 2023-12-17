@@ -46,15 +46,23 @@ if (opts.root !== defaultRootDir) {
   process.chdir(parentDir);
 }
 
-if (opts.tagBased) {
-  tagBasedRunner(opts.name, opts.skipCommit);
-} else {
-  defaultRunner(
-    opts.name,
-    opts.skipCommit,
-    opts.recursive,
-    opts.prereleaseTag,
-    opts.prereleaseBranch,
-    opts.ignorePrefixes
-  );
+const run = async () => {
+  if (opts.tagBased) {
+    await tagBasedRunner(opts.name, opts.skipCommit);
+  } else {
+    await defaultRunner(
+      opts.name,
+      opts.skipCommit,
+      opts.recursive,
+      opts.prereleaseTag,
+      opts.prereleaseBranch,
+      opts.ignorePrefixes
+    );
+  }
+};
+
+if (!process.env.AUTOMATIC_VERSIONING_IS_TEST) {
+  run();
 }
+
+export default run;

@@ -20,7 +20,7 @@ const getCommitPrefix = async (recursive, ignorePrefixes, n = 1) => {
 };
 
 const runner = (name, noCommit, recursive = false, prereleaseTag, prereleaseBranch, ignorePrefixes) => {
-  run("git show --first-parent ./").then(async (diff) => {
+  return run("git show --first-parent ./").then(async (diff) => {
     if (diff) {
       console.info(`Diff found, running versioning for ${name}`.green);
       const { commitMessage, commitPrefix, noBump } = await getCommitPrefix(recursive, ignorePrefixes);
@@ -73,17 +73,17 @@ const runner = (name, noCommit, recursive = false, prereleaseTag, prereleaseBran
             versionUpdate = prerelease ? "prerelease" : `pre${versionUpdate}`;
           }
         }
-        run(
+        await run(
           `npm --workspaces-update=false --no-git-tag-version version ${versionUpdate} ${
             prereleaseTag ? `--preid=${prereleaseTag}` : ""
           }`
-        ).then(() => {
+        ).then(async () => {
           if (!noCommit) {
             const successMsg = `"CI: ${name} - ${
               versionUpdate === "prerelease" ? versionUpdate : `${versionUpdate} release`
             }"`;
-            run("git add .").then(() => {
-              run(`git commit -m ${successMsg} --no-verify`).then(() => {
+            await run("git add .").then(async () => {
+              await run(`git commit -m ${successMsg} --no-verify`).then(() => {
                 console.info(successMsg.green);
               });
             });
@@ -91,7 +91,7 @@ const runner = (name, noCommit, recursive = false, prereleaseTag, prereleaseBran
         });
       } else {
         console.info(`No bump found in commit message, skipping version bump and editing commit message`.yellow);
-        run(`git commit --amend -m "${commitMessage.replace(/--no-bump/g, "")}"`).then(() => {
+        await run(`git commit --amend -m "${commitMessage.replace(/--no-bump/g, "")}"`).then(() => {
           console.info("Successfully edited commit message".green);
         });
       }
