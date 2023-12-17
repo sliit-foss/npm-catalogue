@@ -12,6 +12,8 @@ beforeAll(async () => {
   fs.mkdirSync("./tmp");
   process.chdir("./tmp");
   await run("git init");
+  await run("git config user.email 'infosliitfoss@gmail.com'");
+  await run("git config user.name 'SLIIT FOSS'");
   resetPackageJson();
   process.env.AUTOMATIC_VERSIONING_IS_TEST = "true";
 });
