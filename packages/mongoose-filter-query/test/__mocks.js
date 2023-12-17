@@ -64,6 +64,22 @@ export const sortResult = {
   height: "desc"
 };
 
+export const includeReq = {
+  query: {
+    include: "posts,comments"
+  }
+};
+
+export const includeResult = ["posts", "comments"];
+
+export const selectReq = {
+  query: {
+    select: "first_name,last_name"
+  }
+};
+
+export const selectResult = "first_name last_name";
+
 export const req = {
   query: {
     filter: {
