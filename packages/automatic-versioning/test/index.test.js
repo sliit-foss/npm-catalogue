@@ -126,7 +126,7 @@ describe("tag-based", () => {
     await executeVersionScript("--tag-based");
     expect(getPackageVersion()).toBe("0.0.2-alpha.0");
     expect(await getLastCommitMessage()).toBe(
-      "CI: Bumped version of @sliit-foss/automatic-versioning from 0.0.0 to 0.0.2-alpha.0"
+      "CI: bumped version of @sliit-foss/automatic-versioning from 0.0.0 to 0.0.2-alpha.0"
     );
   });
   it("no commit", async () => {

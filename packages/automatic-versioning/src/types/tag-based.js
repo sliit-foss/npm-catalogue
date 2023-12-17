@@ -15,7 +15,7 @@ const runner = (name, noCommit) => {
         await run(`npm version ${latest} --no-git-tag-version --workspaces-update=false`)
           .then(async () => {
             if (!noCommit) {
-              const successMsg = `"CI: Bumped version of ${name} from ${initialVersion} to ${latest}"`;
+              const successMsg = `"CI: bumped version of ${name} from ${initialVersion} to ${latest}"`;
               await run("git add .").then(async () => {
                 await run(`git commit -m ${successMsg}`).then(() => console.info(successMsg.green));
               });
