@@ -34,6 +34,7 @@ export default [
   "defineProperty",
   "defineProperties",
   "doneResult",
+  "getOwnPropertyNames",
   "getProto",
   "getPrototypeOf",
   "handle",

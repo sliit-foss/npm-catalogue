@@ -1,8 +1,0 @@
-{
-  "presets": ["@babel/preset-env"],
-  "plugins": [
-    [
-      "@sliit-foss/babel-plugin-transform-trace"
-    ]
-  ]
-}

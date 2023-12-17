@@ -10,7 +10,7 @@
     "bump-version": "bash ../../scripts/bump-version.sh",
     "lint": "bash ../../scripts/lint.sh",
     "release": "bash ../../scripts/release.sh",
-    "test": "dotenv -- jest --coverage --verbose --runInBand --forceExit"
+    "test": "rimraf ./babel.config.js && dotenv -- jest --coverage --verbose --runInBand --forceExit"
   },
   "dependencies": {
     "@babel/cli": "7.23.4",
