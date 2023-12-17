@@ -78,6 +78,9 @@ importers:
       '@colors/colors':
         specifier: 1.5.0
         version: 1.5.0
+      commander:
+        specifier: 11.1.0
+        version: 11.1.0
 
   packages/clusterizer: {}
 
@@ -91,7 +94,7 @@ importers:
     dependencies:
       '@sliit-foss/module-logger':
         specifier: 1.1.5
-        version: link:../module-logger
+        version: 1.1.5
       express-http-context:
         specifier: 1.2.4
         version: 1.2.4
@@ -100,7 +103,7 @@ importers:
     dependencies:
       '@sliit-foss/module-logger':
         specifier: 1.1.5
-        version: link:../module-logger
+        version: 1.1.5
 
   packages/leaderboard:
     dependencies:
@@ -128,7 +131,7 @@ importers:
     dependencies:
       '@sliit-foss/module-logger':
         specifier: 1.1.5
-        version: link:../module-logger
+        version: 1.1.5
       axios:
         specifier: 1.3.2
         version: 1.3.2
@@ -158,7 +161,7 @@ importers:
         version: 7.20.7
       '@sliit-foss/functions':
         specifier: 2.2.3
-        version: link:../../packages/functions
+        version: 2.2.3
     devDependencies:
       '@babel/core':
         specifier: 7.21.5
@@ -2890,6 +2893,21 @@ packages:
       '@sinonjs/commons': 2.0.0
     dev: false
 
+  /@sliit-foss/functions@2.2.3:
+    resolution: {integrity: sha512-SH4ymghdrpBFQj6h/TkfG+uO/NG180PT0P7a/MYyeNBu4YYbIjkE6jQJ76RaXAoMwZjtPHsKLmW8FT8OJL8DLQ==}
+    dependencies:
+      '@sliit-foss/module-logger': 1.1.5
+      express-http-context: 1.2.4
+    dev: false
+
+  /@sliit-foss/module-logger@1.1.5:
+    resolution: {integrity: sha512-bKpKi0Yp/ZDYP3yaZTT2zw2f2c49qIkCK5NLKE+qs4UctZtWc1cRSDZZVDP/QAEQ7UMeIECFKX5l+ig8obMvlQ==}
+    dependencies:
+      express-http-context: 1.2.4
+      winston: 3.8.2
+      winston-daily-rotate-file: 4.7.1(winston@3.8.2)
+    dev: false
+
   /@tsconfig/node10@1.0.9:
     resolution: {integrity: sha512-jNsYVVxU8v5g43Erja32laIDHXeoNvFEpX33OK4d6hljo3jDhCBDhx5dhCCTMWUojscpAagGiRkBKxpdl9fxqA==}
 
@@ -3687,6 +3705,11 @@ packages:
     engines: {node: '>= 0.8'}
     dependencies:
       delayed-stream: 1.0.0
+    dev: false
+
+  /commander@11.1.0:
+    resolution: {integrity: sha512-yPVavfyCcRhmorC7rWlkHn15b4wDVgVmBA7kV4QVBsF7kv/9TKJAbAXVTxvTnwP8HHKjRCJDClKbciiYS7p0DQ==}
+    engines: {node: '>=16'}
     dev: false
 
   /compare-func@2.0.0:
