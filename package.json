@@ -19,8 +19,8 @@
     "test": "dotenv -- turbo run test"
   },
   "dependencies": {
-    "@babel/core": "7.20.12",
-    "@babel/preset-env": "7.20.2",
+    "@babel/core": "7.23.6",
+    "@babel/preset-env": "7.23.6",
     "@sliit-foss/automatic-versioning": "workspace:*",
     "dotenv-cli": "7.0.0",
     "esbuild": "0.17.5",
