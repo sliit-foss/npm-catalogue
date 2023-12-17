@@ -17,15 +17,13 @@ const runner = (name, noCommit) => {
             if (!noCommit) {
               const successMsg = `"CI: Bumped version of ${name} from ${initialVersion} to ${latest}"`;
               await run("git add .").then(async () => {
-                await run(`git commit -m ${successMsg}`).then(() => {
-                  console.info(successMsg.green);
-                });
+                await run(`git commit -m ${successMsg}`).then(() => console.info(successMsg.green));
               });
             }
           })
-          .catch(() => {});
+          .catch();
       } else {
-        console.info(`No tag diff found, skipping version bump for ${name}`.yellow);
+        console.info(`No tag diff found, skipping versioning for ${name}`.yellow);
       }
     });
   });

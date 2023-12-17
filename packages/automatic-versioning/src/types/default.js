@@ -83,20 +83,18 @@ const runner = (name, noCommit, recursive = false, prereleaseTag, prereleaseBran
               versionUpdate === "prerelease" ? versionUpdate : `${versionUpdate} release`
             }"`;
             await run("git add .").then(async () => {
-              await run(`git commit -m ${successMsg} --no-verify`).then(() => {
-                console.info(successMsg.green);
-              });
+              await run(`git commit -m ${successMsg} --no-verify`).then(() => console.info(successMsg.green));
             });
           }
         });
       } else {
-        console.info(`No bump found in commit message, skipping version bump and editing commit message`.yellow);
-        await run(`git commit --amend -m "${commitMessage.replace(/--no-bump/g, "")}"`).then(() => {
-          console.info("Successfully edited commit message".green);
-        });
+        console.info(`No bump found in commit message, skipping versioning and editing commit message`.yellow);
+        await run(`git commit --amend -m "${commitMessage.replace(/--no-bump/g, "")}"`).then(() =>
+          console.info("Successfully edited commit message".green)
+        );
       }
     } else {
-      console.info(`No diff found, skipping version bump for ${name}`.yellow);
+      console.info(`No diff found, skipping versioning for ${name}`.yellow);
     }
   });
 };
