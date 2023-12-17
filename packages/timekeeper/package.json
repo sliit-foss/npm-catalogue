@@ -1,7 +1,7 @@
 {
-  "name": "@sliit-foss/automatic-versioning",
-  "version": "2.0.1",
-  "description": "A script which will automatically increment your app package version in accordance with conventional commits",
+  "name": "@sliit-foss/timekeeper",
+  "version": "0.0.0",
+  "description": "CLI tool for automated function tracing",
   "main": "dist/index.js",
   "bin": "dist/index.js",
   "scripts": {
@@ -10,11 +10,15 @@
     "bump-version": "bash ../../scripts/bump-version.sh",
     "lint": "bash ../../scripts/lint.sh",
     "release": "bash ../../scripts/release.sh",
-    "test": "bash ../../scripts/test/test.sh"
+    "test": "rimraf ./babel.config.js && dotenv -- jest --coverage --verbose --runInBand --forceExit"
   },
   "dependencies": {
-    "@actions/exec": "1.1.1",
+    "@babel/cli": "7.23.4",
+    "@babel/core": "7.23.6",
+    "@babel/preset-env": "7.23.6",
     "@colors/colors": "1.5.0",
+    "@sliit-foss/babel-plugin-transform-trace": "workspace:*",
+    "@sliit-foss/functions": "workspace:*",
     "commander": "11.1.0"
   },
   "author": "SLIIT FOSS",
@@ -23,11 +27,10 @@
     "type": "git",
     "url": "git+https://github.com/sliit-foss/npm-catalogue.git"
   },
-  "homepage": "https://github.com/sliit-foss/npm-catalogue/blob/main/packages/automatic-versioning/readme.md",
+  "homepage": "https://github.com/sliit-foss/npm-catalogue/blob/main/packages/timekeeper/readme.md",
   "keywords": [
-    "automatic-versioning",
-    "semantic-versioning",
-    "bump-version"
+    "tracing",
+    "automated-tracing"
   ],
   "bugs": {
     "url": "https://github.com/sliit-foss/npm-catalogue/issues"
