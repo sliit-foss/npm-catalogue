@@ -1,6 +1,6 @@
 {
   "name": "@sliit-foss/automatic-versioning",
-  "version": "2.0.0-blizzard.0",
+  "version": "2.0.0",
   "description": "A script which will automatically increment your app package version in accordance with conventional commits",
   "main": "dist/index.js",
   "bin": "dist/index.js",
@@ -10,7 +10,7 @@
     "bump-version": "bash ../../scripts/bump-version.sh",
     "lint": "bash ../../scripts/lint.sh",
     "release": "bash ../../scripts/release.sh",
-    "test": "dotenv -- jest --coverage --verbose --runInBand --forceExit"
+    "test": "bash ../../scripts/test/test.sh"
   },
   "dependencies": {
     "@actions/exec": "1.1.1",
