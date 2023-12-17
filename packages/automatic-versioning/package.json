@@ -10,7 +10,7 @@
     "bump-version": "bash ../../scripts/bump-version.sh",
     "lint": "bash ../../scripts/lint.sh",
     "release": "bash ../../scripts/release.sh",
-    "test": "dotenv -- jest --coverage --verbose --runInBand --forceExit"
+    "test": "bash ../../scripts/test/test.sh"
   },
   "dependencies": {
     "@actions/exec": "1.1.1",

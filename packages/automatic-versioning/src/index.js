@@ -24,7 +24,7 @@ program
 
 [
   new Option("--recursive", "recursively search for a matching commit prefix"),
-  new Option("--prerelease-tag <string>", "prerelease tag to use when running on a prerelease branch"),
+  new Option("--prerelease-tag <string>", "prerelease identifier to use when creating a prerelease"),
   new Option("--prerelease-branch <string>", "run prereleases on this branch"),
   new Option(
     "--ignore-prefixes <string>",
@@ -46,15 +46,23 @@ if (opts.root !== defaultRootDir) {
   process.chdir(parentDir);
 }
 
-if (opts.tagBased) {
-  tagBasedRunner(opts.name, opts.skipCommit);
-} else {
-  defaultRunner(
-    opts.name,
-    opts.skipCommit,
-    opts.recursive,
-    opts.prereleaseTag,
-    opts.prereleaseBranch,
-    opts.ignorePrefixes
-  );
+const run = async () => {
+  if (opts.tagBased) {
+    await tagBasedRunner(opts.name, opts.skipCommit);
+  } else {
+    await defaultRunner(
+      opts.name,
+      opts.skipCommit,
+      opts.recursive,
+      opts.prereleaseTag,
+      opts.prereleaseBranch,
+      opts.ignorePrefixes
+    );
+  }
+};
+
+if (!process.env.AUTOMATIC_VERSIONING_IS_TEST) {
+  run();
 }
+
+export default run;

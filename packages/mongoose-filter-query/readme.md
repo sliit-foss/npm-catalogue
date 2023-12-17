@@ -148,3 +148,35 @@ console.log(data);
 ```
 
 - This will return all users with the first name John and sorted by age in descending order<br><br>
+
+## Selection Support<br><br>
+
+```javascript
+"http://localhost:3000/api/users?filter[first_name]=eq(John)&select=first_name,last_name";
+```
+
+- This will return all users with the first name John and only the first_name and last_name attributes will be returned<br><br>
+
+```
+"http://localhost:3000/api/users?filter[first_name]=eq(John)&select=-first_name,-last_name";
+```
+
+- This will return all users with the first name John and all attributes except the first_name and last_name attributes will be returned<br><br>
+
+## Population Support<br><br>
+
+```javascript
+"http://localhost:3000/api/users?filter[first_name]=eq(John)&include=posts";
+```
+
+- This will return all users with the first name John and the posts attribute will be populated<br><br>
+
+```javascript
+"http://localhost:3000/api/users?filter[first_name]=eq(John)&include=posts,comments";
+```
+
+- This will return all users with the first name John and the posts and comments attributes will be populated<br><br>
+
+```javascript
+
+```
