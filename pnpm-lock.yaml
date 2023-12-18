@@ -166,10 +166,10 @@ importers:
         specifier: 1.5.0
         version: 1.5.0
       '@sliit-foss/babel-plugin-transform-trace':
-        specifier: workspace:*
+        specifier: 0.1.2
         version: link:../../plugins/babel-plugin-transform-trace
       '@sliit-foss/functions':
-        specifier: workspace:*
+        specifier: 2.2.4
         version: link:../functions
       commander:
         specifier: 11.1.0
