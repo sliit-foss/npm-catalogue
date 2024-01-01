@@ -11,23 +11,24 @@ const config = {
   plugins: [["@sliit-foss/babel-plugin-transform-trace"]]
 };
 
+const outputDir = path.join(__dirname, "..", "out");
+const configPath = path.join(__dirname, "..", "babel.config.js");
+
 const runner = async (p, options) => {
   config.plugins[0].push({
     "ignore-functions": options.ignoreFunctions?.split(",") ?? [],
     clean: options.clean ?? false
   });
 
-  fs.writeFileSync(path.join(__dirname, "..", "babel.config.js"), `module.exports = ${JSON.stringify(config)}`);
+  fs.writeFileSync(configPath, `module.exports = ${JSON.stringify(config)}`);
 
   console.info(`[Timekeeper] transpiling...`.green);
 
-  await exec(
-    `npx babel ${p} --out-dir ./out --copy-files --config-file=${path.join(__dirname, "..", "babel.config.js")}`
-  );
+  await exec(`npx babel ${p} --out-dir ${outputDir} --copy-files --config-file=${configPath}`);
 
   console.info(`[Timekeeper] executing...`.green);
 
-  await exec(`bash -c "node out/${path.basename(p)}"`).then(({ stdout, stderr }) => {
+  await exec(`bash -c "node ${outputDir}/${path.basename(p)}"`).then(({ stdout, stderr }) => {
     if (stdout) console.log(stdout);
     if (stderr) console.error(stderr.red);
   });
