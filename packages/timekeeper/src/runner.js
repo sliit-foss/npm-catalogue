@@ -21,7 +21,9 @@ const runner = async (p, options) => {
 
   console.info(`[Timekeeper] transpiling...`.green);
 
-  await exec(`npx babel ${p} --out-dir ./out --copy-files --config-file=./babel.config.js`);
+  await exec(
+    `npx babel ${p} --out-dir ./out --copy-files --config-file=${path.join(__dirname, "..", "babel.config.js")}`
+  );
 
   console.info(`[Timekeeper] executing...`.green);
 
