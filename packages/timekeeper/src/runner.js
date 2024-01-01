@@ -11,8 +11,8 @@ const config = {
   plugins: [["@sliit-foss/babel-plugin-transform-trace"]]
 };
 
-const outputDir = path.join(__dirname, "..", "out");
-const configPath = path.join(__dirname, "..", "babel.config.js");
+const outputDir = path.join(__dirname, "..", "out").replace(/\\/g, path.sep);
+const configPath = path.join(__dirname, "..", "babel.config.js").replace(/\\/g, path.sep);
 
 const runner = async (p, options) => {
   config.plugins[0].push({
@@ -28,7 +28,7 @@ const runner = async (p, options) => {
 
   console.info(`[Timekeeper] executing...`.green);
 
-  await exec(`bash -c "node ${outputDir}/${path.basename(p)}"`).then(({ stdout, stderr }) => {
+  await exec(`bash -c "node '${outputDir}${path.sep}${path.basename(p)}'"`).then(({ stdout, stderr }) => {
     if (stdout) console.log(stdout);
     if (stderr) console.error(stderr.red);
   });
