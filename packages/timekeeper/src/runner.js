@@ -17,7 +17,7 @@ const runner = async (p, options) => {
     clean: options.clean ?? false
   });
 
-  fs.writeFileSync("./babel.config.js", `module.exports = ${JSON.stringify(config)}`);
+  fs.writeFileSync(path.join(__dirname, "..", "babel.config.js"), `module.exports = ${JSON.stringify(config)}`);
 
   console.info(`[Timekeeper] transpiling...`.green);
 
