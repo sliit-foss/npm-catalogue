@@ -28,7 +28,7 @@ const runner = async (p, options) => {
 
   console.info(`[Timekeeper] executing...`.green);
 
-  await exec(`bash -c "node '${outputDir}${path.sep}${path.basename(p)}'"`).then(({ stdout, stderr }) => {
+  await exec(`node "${outputDir}${path.sep}${path.basename(p)}"`).then(({ stdout, stderr }) => {
     if (stdout) console.log(stdout);
     if (stderr) console.error(stderr.red);
   });
