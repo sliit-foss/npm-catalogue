@@ -1,6 +1,6 @@
 {
   "name": "@sliit-foss/timekeeper",
-  "version": "0.0.3-blizzard.0",
+  "version": "0.0.4-blizzard.0",
   "description": "CLI tool for automated function tracing",
   "main": "dist/index.js",
   "bin": "dist/index.js",
