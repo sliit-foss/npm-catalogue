@@ -49,6 +49,7 @@ const runner = (name, noCommit, recursive = false, prereleaseTag, prereleaseBran
                   .replace(/{|}|,|'/g, "")
                   .trim()
                   .split("\n")
+                  .filter((v) => !v.includes("modified:") && !v.includes("created:"))
               );
               versions.sort(
                 (v1, v2) => new Date(v1.trim().split(" ")[1]).getTime() - new Date(v2.trim().split(" ")[1]).getTime()
