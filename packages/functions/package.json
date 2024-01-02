@@ -3,6 +3,7 @@
   "version": "2.2.4",
   "description": "Just a small set of utility functions",
   "main": "dist/index.js",
+  "types": "types/index.d.ts",
   "scripts": {
     "build": "node ../../scripts/esbuild.config.js",
     "build:watch": "bash ../../scripts/esbuild.watch.sh",
