@@ -169,8 +169,8 @@ importers:
         specifier: 7.20.7
         version: 7.20.7
       '@sliit-foss/functions':
-        specifier: 2.2.3
-        version: 2.2.3
+        specifier: 2.4.0
+        version: link:../../packages/functions
     devDependencies:
       '@babel/core':
         specifier: 7.21.5
@@ -2945,21 +2945,6 @@ packages:
     resolution: {integrity: sha512-SwUDyjWnah1AaNl7kxsa7cfLhlTYoiyhDAIgyh+El30YvXs/o7OLXpYH88Zdhyx9JExKrmHDJ+10bwIcY80Jmw==}
     dependencies:
       '@sinonjs/commons': 2.0.0
-    dev: false
-
-  /@sliit-foss/functions@2.2.3:
-    resolution: {integrity: sha512-SH4ymghdrpBFQj6h/TkfG+uO/NG180PT0P7a/MYyeNBu4YYbIjkE6jQJ76RaXAoMwZjtPHsKLmW8FT8OJL8DLQ==}
-    dependencies:
-      '@sliit-foss/module-logger': 1.1.5
-      express-http-context: 1.2.4
-    dev: false
-
-  /@sliit-foss/module-logger@1.1.5:
-    resolution: {integrity: sha512-bKpKi0Yp/ZDYP3yaZTT2zw2f2c49qIkCK5NLKE+qs4UctZtWc1cRSDZZVDP/QAEQ7UMeIECFKX5l+ig8obMvlQ==}
-    dependencies:
-      express-http-context: 1.2.4
-      winston: 3.8.2
-      winston-daily-rotate-file: 4.7.1(winston@3.8.2)
     dev: false
 
   /@tsconfig/node10@1.0.9:
