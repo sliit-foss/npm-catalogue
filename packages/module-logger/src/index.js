@@ -67,7 +67,7 @@ const _createLogger = () => {
       winston.format.colorize({ all: true }),
       winston.format.printf((info) => {
         return `${[..._defaultKeys, ...Object.keys(info)].reduce((acc, key, i) => {
-          if ((_defaultKeys.includes(key) && i <= 3) || (i > 3 && !_defaultKeys.includes(key))) {
+          if ((info?.[key] && _defaultKeys.includes(key) && i <= 3) || (i > 3 && !_defaultKeys.includes(key))) {
             if (i > 0) acc += ", ";
             return (acc += `"${chalk.gray(key)}": "${info[key]}"`);
           }
