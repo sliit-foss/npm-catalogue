@@ -133,11 +133,14 @@ importers:
   packages/service-connector:
     dependencies:
       '@sliit-foss/module-logger':
-        specifier: 1.1.5
-        version: 1.1.5
+        specifier: 1.2.1
+        version: 1.2.1
       axios:
         specifier: 1.6.0
         version: 1.6.0
+      chalk:
+        specifier: 4.1.2
+        version: 4.1.2
       express-http-context:
         specifier: 1.2.4
         version: 1.2.4
@@ -2951,6 +2954,15 @@ packages:
   /@sliit-foss/module-logger@1.1.5:
     resolution: {integrity: sha512-bKpKi0Yp/ZDYP3yaZTT2zw2f2c49qIkCK5NLKE+qs4UctZtWc1cRSDZZVDP/QAEQ7UMeIECFKX5l+ig8obMvlQ==}
     dependencies:
+      express-http-context: 1.2.4
+      winston: 3.8.2
+      winston-daily-rotate-file: 4.7.1(winston@3.8.2)
+    dev: false
+
+  /@sliit-foss/module-logger@1.2.1:
+    resolution: {integrity: sha512-SCVyR/moXZZv2JBCIzS43HQs7GrWITKxDYsR4MEUb7f51uTubrdl3MCW9G9q9wlz0gYwSTZrbYR+kCvVp1OpOw==}
+    dependencies:
+      chalk: 4.1.2
       express-http-context: 1.2.4
       winston: 3.8.2
       winston-daily-rotate-file: 4.7.1(winston@3.8.2)
@@ -6404,7 +6416,7 @@ packages:
       is-unicode-supported: 1.3.0
       log-symbols: 5.1.0
       stdin-discarder: 0.1.0
-      strip-ansi: 7.0.1
+      strip-ansi: 7.1.0
       wcwidth: 1.0.1
     dev: false
 
@@ -7214,8 +7226,8 @@ packages:
     dependencies:
       ansi-regex: 5.0.1
 
-  /strip-ansi@7.0.1:
-    resolution: {integrity: sha512-cXNxvT8dFNRVfhVME3JAe98mkXDYN2O1l7jmcwMnOslDeESg1rF/OZMtK0nRAhiari1unG5cD4jG3rapUAkLbw==}
+  /strip-ansi@7.1.0:
+    resolution: {integrity: sha512-iq6eVVI64nQQTRYq2KtEg2d2uU7LElhTJwsH4YzIHZshxlgZms/wIc4VoDQTlG/IvVIrBKG06CrZnp0qv7hkcQ==}
     engines: {node: '>=12'}
     dependencies:
       ansi-regex: 6.0.1

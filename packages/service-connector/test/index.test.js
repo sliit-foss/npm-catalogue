@@ -1,3 +1,5 @@
+import { coloredString } from "../src/helpers";
+
 jest.setTimeout(30000);
 
 const mockLogger = {
@@ -23,12 +25,22 @@ describe("service-connector", () => {
   test("successful request", async () => {
     const response = await connector.get("/");
     expect(response.status).toEqual(200);
-    expect(mockLogger.info).toBeCalledWith("Request initiated - method: get - url: https://google.com/", {
-      params: undefined
-    });
-    expect(mockLogger.info).toBeCalledWith("Request completed - method: get - url: https://google.com/", {
-      params: undefined
-    });
+    expect(mockLogger.info).toBeCalledWith(
+      `Request initiated - ${coloredString("method")}: ${coloredString("get")} - ${coloredString(
+        "url"
+      )}: ${coloredString("https://google.com/", "url-value")}`,
+      {
+        params: undefined
+      }
+    );
+    expect(mockLogger.info).toBeCalledWith(
+      `Request completed - ${coloredString("method")}: ${coloredString("get")} - ${coloredString(
+        "url"
+      )}: ${coloredString("https://google.com/", "url-value")}`,
+      {
+        params: undefined
+      }
+    );
   });
   test("failed request", async () => {
     let error;
@@ -41,11 +53,16 @@ describe("service-connector", () => {
       request_headers: error.response?.headers
     };
     expect(mockLogger.info).toBeCalledWith(
-      "Request initiated - method: get - url: https://google.com/non-existant-route/1/2/3",
+      `Request initiated - ${coloredString("method")}: ${coloredString("get")} - ${coloredString(
+        "url"
+      )}: ${coloredString("https://google.com/non-existant-route/1/2/3", "url-value")}`,
       { params: undefined }
     );
     expect(mockLogger.error).toBeCalledWith(
-      "Request failed - method: get - url: https://google.com/non-existant-route/1/2/3 - message: Request failed with status code 404",
+      `Request failed - ${coloredString("method")}: ${coloredString("get")} - ${coloredString("url")}: ${coloredString(
+        "https://google.com/non-existant-route/1/2/3",
+        "url-value"
+      )} - ${coloredString("message")}: Request failed with status code 404`,
       loggable
     );
   });

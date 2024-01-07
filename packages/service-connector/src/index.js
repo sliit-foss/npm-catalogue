@@ -1,16 +1,19 @@
 import axios from "axios";
+import chalk from "chalk";
 import context from "express-http-context";
 import createError from "http-errors";
 import { moduleLogger } from "@sliit-foss/module-logger";
-import { formatLogs } from "./helpers";
+import { formatLogs, coloredString } from "./helpers";
 
 const serviceConnector = ({ service, headerIntercepts, loggable, logs = true, ...axiosOptions } = {}) => {
-  const logger = moduleLogger(service ?? "Service-Connector");
+  const logger = moduleLogger(chalk.bold(service ?? "Service-Connector"));
   const instance = axios.create(axiosOptions);
   instance.interceptors.request.use((config) => {
     logs &&
       logger.info(
-        `Request initiated - method: ${config.method} - url: ${config.baseURL ?? ""}${config.url}`,
+        `Request initiated - ${coloredString("method")}: ${coloredString(config.method)} - ${coloredString(
+          "url"
+        )}: ${coloredString(`${config.baseURL ?? ""}${config.url}`, "url-value")}`,
         formatLogs(loggable, config)
       );
     config.headers["x-correlation-id"] = context.get("correlationId");
@@ -26,9 +29,9 @@ const serviceConnector = ({ service, headerIntercepts, loggable, logs = true, ..
     (response) => {
       logs &&
         logger.info(
-          `Request completed - method: ${response.config.method} - url: ${response.config.baseURL ?? ""}${
-            response.config.url
-          }`,
+          `Request completed - ${coloredString("method")}: ${coloredString(response.config.method)} - ${coloredString(
+            "url"
+          )}: ${coloredString(`${response.config.baseURL ?? ""}${response.config.url}`, "url-value")}`,
           formatLogs(loggable, response.config, response)
         );
       return response;
@@ -37,9 +40,11 @@ const serviceConnector = ({ service, headerIntercepts, loggable, logs = true, ..
       const errorMessage = error.response?.data?.message ?? error.message;
       logs &&
         logger.error(
-          `Request failed - method: ${error.config.method} - url: ${error.config.baseURL ?? ""}${
-            error.config.url
-          } - message: ${errorMessage}`,
+          `Request failed - ${coloredString("method")}: ${coloredString(error.config.method)} - ${coloredString(
+            "url"
+          )}: ${coloredString(`${error.config.baseURL ?? ""}${error.config.url}`, "url-value")} - ${coloredString(
+            "message"
+          )}: ${errorMessage}`,
           formatLogs(loggable, error.config, error.response, true)
         );
       const customError = createError(error.response?.status ?? 500, errorMessage, { response: error.response });
