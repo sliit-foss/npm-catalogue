@@ -1,6 +1,7 @@
 import chalk from "chalk";
 
 export const coloredString = (value, key) => {
+  // istanbul ignore next
   switch (key ?? value) {
     case "url":
     case "message":

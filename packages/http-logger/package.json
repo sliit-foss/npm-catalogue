@@ -12,7 +12,7 @@
     "test": "bash ../../scripts/test/test.sh"
   },
   "dependencies": {
-    "@sliit-foss/module-logger": "1.2.0"
+    "@sliit-foss/module-logger": "1.2.3"
   },
   "repository": {
     "type": "git",
