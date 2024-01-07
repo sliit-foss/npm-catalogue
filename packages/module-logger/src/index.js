@@ -66,17 +66,15 @@ const _createLogger = () => {
       winston.format.json(),
       winston.format.colorize({ all: true }),
       winston.format.printf((info) => {
-        return (
-          `${[..._defaultKeys, ...Object.keys(info)].reduce((acc, key, i) => {
-            if ((_defaultKeys.includes(key) && i <= 3) || (i > 3 && !_defaultKeys.includes(key))) {
-              if (i > 0) acc += ", ";
-              return (acc += _defaultKeys.includes(key)
-                ? `"${chalk.gray(key)}": "${info[key]}"`
-                : `"${chalk.gray(chalk.underline(key))}": "${chalk.underline(info[key])}"`);
-            }
-            return acc;
-          }, "{ ")  } }`
-        );
+        return `${[..._defaultKeys, ...Object.keys(info)].reduce((acc, key, i) => {
+          if ((_defaultKeys.includes(key) && i <= 3) || (i > 3 && !_defaultKeys.includes(key))) {
+            if (i > 0) acc += ", ";
+            return (acc += _defaultKeys.includes(key)
+              ? `"${chalk.gray(key)}": "${info[key]}"`
+              : `"${chalk.gray(chalk.underline(key))}": "${chalk.underline(info[key])}"`);
+          }
+          return acc;
+        }, "{ ")} }`;
       })
     ),
     transports
