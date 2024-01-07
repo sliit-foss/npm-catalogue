@@ -1,4 +1,5 @@
 import crypto from "crypto";
+import chalk from "chalk";
 import context from "express-http-context";
 import * as winston from "winston";
 import "winston-daily-rotate-file";
@@ -17,6 +18,8 @@ let _defaultConfig = {
   },
   globalAttributes: {}
 };
+
+const _defaultKeys = ["level", "correlationId", "timestamp", "message"];
 
 const _createLogger = () => {
   let transports = [];
@@ -56,11 +59,25 @@ const _createLogger = () => {
           correlationId = crypto.randomBytes(16).toString("hex");
           context.set("correlationId", correlationId);
         }
-        infoObj["correlationId"] = correlationId;
+        infoObj["correlationId"] = chalk.blue(correlationId);
         return { ...infoObj, ...(_defaultConfig.globalAttributes ?? {}) };
       })(),
       winston.format.timestamp(),
-      winston.format.json()
+      winston.format.json(),
+      winston.format.colorize({ all: true }),
+      winston.format.printf((info) => {
+        return (
+          `${[..._defaultKeys, ...Object.keys(info)].reduce((acc, key, i) => {
+            if ((_defaultKeys.includes(key) && i <= 3) || (i > 3 && !_defaultKeys.includes(key))) {
+              if (i > 0) acc += ", ";
+              return (acc += _defaultKeys.includes(key)
+                ? `"${chalk.gray(key)}": "${info[key]}"`
+                : `"${chalk.gray(chalk.underline(key))}": "${chalk.underline(info[key])}"`);
+            }
+            return acc;
+          }, "{ ")  } }`
+        );
+      })
     ),
     transports
   });
