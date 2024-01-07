@@ -1,4 +1,5 @@
 import { performance } from "perf_hooks";
+import { default as chalk } from "chalk";
 import { moduleLogger } from "@sliit-foss/module-logger";
 import { fnName as _fnName } from "./utils";
 
@@ -15,11 +16,18 @@ export const _traced = (fn, loggable = {}, fnName) => {
   }
   const completionLog = () => {
     !disableTracing &&
-      logger.info(`${fnName} execution completed - execution_time : ${performance.now() - startTime}ms`, loggable);
+      logger.info(
+        `${fnName} execution completed - ${chalk.bold(chalk.magentaBright("execution_time"))} : ${chalk.bold(
+          `${performance.now() - startTime}ms`
+        )}`,
+        loggable
+      );
   };
   const failureLog = (err) => {
     if (!disableTracing && !err.isLogged) {
-      logger.error(`${fnName} execution failed - error: ${err.message} - stack: ${err.stack}`);
+      logger.error(
+        `${fnName} execution failed - ${chalk.bold("error")}: ${err.message} - ${chalk.bold("stack")}: ${err.stack}`
+      );
       err.isLogged = true;
     }
     throw err;
