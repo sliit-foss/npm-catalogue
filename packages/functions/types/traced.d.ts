@@ -12,7 +12,7 @@ export function trace(fn: Function, loggable?: Record<any, any>): Promise<void>;
  * @param loggable Object with extra information to be logged
  * @returns Returns the new function
  */
-export function traced(fn: Function, loggable?: Record<any, any>): Function;
+export function traced<T extends (...args: any[]) => any>(fn: T, loggable?: Record<any, any>): T;
 
 /**
  * @description Invokes the given function with tracing. Tracing is however ignored if the function is an anonymous function
@@ -28,7 +28,7 @@ export function cleanTrace(fn: Function, loggable?: Record<any, any>): Promise<v
  * @param loggable Object with extra information to be logged
  * @returns Returns the new function
  */
-export function cleanTraced(fn: Function, loggable?: Record<any, any>): Function;
+export function cleanTraced<T extends (...args: any[]) => any>(fn: T, loggable?: Record<any, any>): T;
 
 export default {
   traced,
