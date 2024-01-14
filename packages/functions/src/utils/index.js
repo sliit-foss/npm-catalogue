@@ -1,15 +1,15 @@
 import chalk from "chalk";
 
-export const fnName = (fn) => {
+export const fnName = (fn, prefix) => {
   let name = fn.name;
   while (1) {
     const replaced = name?.replace("bound", "");
     if (name.startsWith("bound") && replaced?.startsWith(" ")) name = replaced?.trim();
     else break;
   }
-  if (!name) return coloredFnName("Unnamed function");
+  if (!name) return coloredFnName("Unnamed function", prefix);
   if (name.startsWith(" ")) return name.slice(1);
-  return coloredFnName(name);
+  return coloredFnName(name, prefix);
 };
 
-export const coloredFnName = (fn) => chalk.bold(chalk.magentaBright(fn));
+export const coloredFnName = (fn, prefix) => chalk.bold(chalk.magentaBright(prefix ? `${prefix}->${fn}` : fn));

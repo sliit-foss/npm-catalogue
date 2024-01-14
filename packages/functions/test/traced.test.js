@@ -24,6 +24,16 @@ describe("traced", () => {
     expect(res).toStrictEqual(_mockResult);
     expect(mockLogger.info).toBeCalledWith(`${coloredFnName("testFunction")} execution initiated`, {});
   });
+  test("test function with layer log", async () => {
+    const res = await traced(
+      async function testFunction() {
+        return _mockResult;
+      },
+      { layer: "controller" }
+    )();
+    expect(res).toStrictEqual(_mockResult);
+    expect(mockLogger.info).toBeCalledWith(`${coloredFnName("controller->testFunction")} execution initiated`, {});
+  });
   test("test arrow function", () => {
     const testArrowFunction = () => _mockResult;
     const res = traced(testArrowFunction)();

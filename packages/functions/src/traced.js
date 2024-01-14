@@ -10,7 +10,8 @@ export const _traced = (fn, loggable = {}, fnName) => {
   const disableTracing =
     process.env.DISABLE_FUNCTION_TRACING === "true" || process.env.DISABLE_FUNCTION_TRACING === "1";
   if (!disableTracing) {
-    fnName = fnName ?? _fnName(fn);
+    fnName = fnName ?? _fnName(fn, loggable.layer);
+    delete loggable.layer;
     logger.info(`${fnName} execution initiated`, loggable);
     startTime = performance.now();
   }
