@@ -69,7 +69,9 @@ const _createLogger = () => {
         return `${[..._defaultKeys, ...Object.keys(info)].reduce((acc, key, i) => {
           if ((info?.[key] && _defaultKeys.includes(key) && i <= 3) || (i > 3 && !_defaultKeys.includes(key))) {
             if (i > 0) acc += ", ";
-            return (acc += `"${chalk.gray(key)}": "${typeof info[key] === 'object' ? JSON.stringify(info[key]) : info[key]}"`);
+            return (acc += `"${chalk.gray(key)}": "${
+              typeof info[key] === "object" ? JSON.stringify(info[key]) : info[key]
+            }"`);
           }
           return acc;
         }, "{ ")} }`;
