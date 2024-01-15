@@ -12,4 +12,4 @@ export const fnName = (fn, prefix) => {
   return coloredFnName(name, prefix);
 };
 
-export const coloredFnName = (fn, prefix) => chalk.bold(chalk.magentaBright(prefix ? `${prefix}->${fn}` : fn));
+export const coloredFnName = (fn, prefix) => chalk.bold(chalk.magentaBright(prefix ? `${prefix} >>> ${fn}` : fn));

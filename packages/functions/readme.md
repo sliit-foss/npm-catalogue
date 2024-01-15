@@ -58,6 +58,22 @@ tracedFoo();
 
 - ### cleanTraced and cleanTrace `(Same as the above two but ignores tracing for anonymous functions to avoid polluting the logs)`
 
+- ### tracing a function with a layer prefix (Works for all 4 functions above)
+
+```js
+const tracedFoo = traced["controller"](function foo() {
+  console.log(123);
+})();
+
+tracedFoo();
+
+/*
+  controller >>> foo execution initiated
+  123
+  controller >>> foo execution completed - execution_time : 0.2069999985396862
+*/
+```
+
 - ### bindKey `(Creates a bounded function from a passed object and function key with its context preserved)`
   <br/>
   - This method is distint from the `bindKey` function of lodash as this preserves the function's `name` property where lodash sets it as `wrapper`
