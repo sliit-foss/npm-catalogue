@@ -5,13 +5,12 @@ import { fnName as _fnName } from "./utils";
 
 const logger = moduleLogger("tracer");
 
-export const _traced = (fn, loggable = {}, fnName) => {
+export const _traced = (fn, loggable = {}, fnName, layer) => {
   let startTime;
   const disableTracing =
     process.env.DISABLE_FUNCTION_TRACING === "true" || process.env.DISABLE_FUNCTION_TRACING === "1";
   if (!disableTracing) {
-    fnName = fnName ?? _fnName(fn, loggable.layer);
-    delete loggable.layer;
+    fnName = fnName ?? _fnName(fn, layer);
     logger.info(`${fnName} execution initiated`, loggable);
     startTime = performance.now();
   }
@@ -50,28 +49,30 @@ export const _traced = (fn, loggable = {}, fnName) => {
   }
 };
 
-export const traced =
-  (fn, loggable) =>
-  (...params) =>
-    _traced(fn.bind(this, ...params), loggable);
+const _proxyHandlers = { get: (target, prop) => (fn, loggable) => target(fn, loggable, prop) };
 
-export const trace = (fn, loggable) => _traced(fn, loggable);
+export const traced = new Proxy(
+  (fn, loggable, layer) =>
+    (...params) =>
+      _traced(fn.bind(this, ...params), loggable, null, layer),
+  _proxyHandlers
+);
 
-export const cleanTrace = (fn, loggable) => {
-  if (fn.name) {
-    return _traced(fn, loggable);
-  }
+export const trace = new Proxy((fn, loggable, layer) => _traced(fn, loggable, null, layer), _proxyHandlers);
+
+export const cleanTrace = new Proxy((fn, loggable, layer) => {
+  if (fn.name) return _traced(fn, loggable, null, layer);
   return fn();
-};
+}, _proxyHandlers);
 
-export const cleanTraced =
-  (fn, loggable) =>
-  (...params) => {
-    if (fn.name) {
-      return _traced(fn.bind(this, ...params), loggable);
-    }
-    return fn.call(this, ...params);
-  };
+export const cleanTraced = new Proxy(
+  (fn, loggable, layer) =>
+    (...params) => {
+      if (fn.name) return _traced(fn.bind(this, ...params), loggable, null, layer);
+      return fn.call(this, ...params);
+    },
+  _proxyHandlers
+);
 
 export default {
   traced,
