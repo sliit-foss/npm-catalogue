@@ -1,3 +1,9 @@
+type BaseTracedFunction = <T extends (...args: any[]) => any>(fn: T, loggable?: Record<any, any>) => T;
+
+interface TracedFunction extends BaseTracedFunction {
+  [key: string]: BaseTracedFunction;
+}
+
 /**
  * @description Invokes the given function with tracing
  * @param fn The function to be invoked asynchronously
@@ -12,7 +18,7 @@ export function trace(fn: Function, loggable?: Record<any, any>): Promise<void>;
  * @param loggable Object with extra information to be logged
  * @returns Returns the new function
  */
-export function traced<T extends (...args: any[]) => any>(fn: T, loggable?: Record<any, any>): T;
+export const traced: TracedFunction;
 
 /**
  * @description Invokes the given function with tracing. Tracing is however ignored if the function is an anonymous function
@@ -28,11 +34,4 @@ export function cleanTrace(fn: Function, loggable?: Record<any, any>): Promise<v
  * @param loggable Object with extra information to be logged
  * @returns Returns the new function
  */
-export function cleanTraced<T extends (...args: any[]) => any>(fn: T, loggable?: Record<any, any>): T;
-
-export default {
-  traced,
-  trace,
-  cleanTraced,
-  cleanTrace
-};
+export const cleanTraced: TracedFunction;
