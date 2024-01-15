@@ -10,7 +10,10 @@ describe("module-logger", () => {
   });
   it("should-log-to-console", () => {
     const mLogger = moduleLogger("console-logger");
-    expect(() => mLogger.info("hello-world")).not.toThrow(Error);
+    expect(() => mLogger.info("this is an info message")).not.toThrow(Error);
+    expect(() => mLogger.error("this is an error message")).not.toThrow(Error);
+    expect(() => mLogger.warn("this is a warning message")).not.toThrow(Error);
+    expect(() => mLogger.info("this is a message with a custom object", { custom: "object" })).not.toThrow(Error);
   });
   it("should-log-to-file", () => {
     configure({

@@ -1,6 +1,7 @@
 const { mockLogger } = require("./__mocks__");
 
 const { asyncHandler, tracedAsyncHandler } = require("../src");
+const { coloredFnName } = require("../src/utils");
 
 beforeEach(() => {
   jest.clearAllMocks();
@@ -31,7 +32,7 @@ describe("asyncHandler", () => {
     await tracedAsyncHandler(function testTracedFunction() {
       return "test";
     })(mockReq, mockRes, mockNext);
-    expect(mockLogger.info).toBeCalledWith("testTracedFunction execution initiated", {});
+    expect(mockLogger.info).toBeCalledWith(`${coloredFnName("testTracedFunction")} execution initiated`, {});
     expect(mockNext).toBeCalled();
   });
 });

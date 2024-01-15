@@ -1,6 +1,7 @@
 const { mockLogger } = require("./__mocks__");
 
 const { traced, trace, cleanTrace, cleanTraced } = require("../src");
+const { coloredFnName } = require("../src/utils");
 
 beforeEach(() => {
   jest.clearAllMocks();
@@ -14,25 +15,35 @@ describe("traced", () => {
       return _mockResult;
     })();
     expect(res).toStrictEqual(_mockResult);
-    expect(mockLogger.info).toBeCalledWith("testFunction execution initiated", {});
+    expect(mockLogger.info).toBeCalledWith(`${coloredFnName("testFunction")} execution initiated`, {});
   });
   test("test async function", async () => {
     const res = await traced(async function testFunction() {
       return _mockResult;
     })();
     expect(res).toStrictEqual(_mockResult);
-    expect(mockLogger.info).toBeCalledWith("testFunction execution initiated", {});
+    expect(mockLogger.info).toBeCalledWith(`${coloredFnName("testFunction")} execution initiated`, {});
+  });
+  test("test function with layer log", async () => {
+    const res = await traced(
+      async function testFunction() {
+        return _mockResult;
+      },
+      { layer: "controller" }
+    )();
+    expect(res).toStrictEqual(_mockResult);
+    expect(mockLogger.info).toBeCalledWith(`${coloredFnName("controller->testFunction")} execution initiated`, {});
   });
   test("test arrow function", () => {
     const testArrowFunction = () => _mockResult;
     const res = traced(testArrowFunction)();
     expect(res).toStrictEqual(_mockResult);
-    expect(mockLogger.info).toBeCalledWith("testArrowFunction execution initiated", {});
+    expect(mockLogger.info).toBeCalledWith(`${coloredFnName("testArrowFunction")} execution initiated`, {});
   });
   test("test unnamed function", () => {
     const res = traced(() => _mockResult)();
     expect(res).toStrictEqual(_mockResult);
-    expect(mockLogger.info).toBeCalledWith("Unnamed function execution initiated", {});
+    expect(mockLogger.info).toBeCalledWith(`${coloredFnName("Unnamed function")} execution initiated`, {});
   });
   test("test disabled tracing", () => {
     process.env.DISABLE_FUNCTION_TRACING = "true";
@@ -61,7 +72,7 @@ describe("trace", () => {
       return _mockResult;
     });
     expect(res).toStrictEqual(_mockResult);
-    expect(mockLogger.info).toBeCalledWith("foo execution initiated", {});
+    expect(mockLogger.info).toBeCalledWith(`${coloredFnName("foo")} execution initiated`, {});
   });
 });
 
@@ -71,7 +82,7 @@ describe("clean-trace", () => {
       return _mockResult;
     });
     expect(res).toStrictEqual(_mockResult);
-    expect(mockLogger.info).toBeCalledWith("namedFunction execution initiated", {});
+    expect(mockLogger.info).toBeCalledWith(`${coloredFnName("namedFunction")} execution initiated`, {});
   });
   test("test unnamed function", () => {
     const res = cleanTrace(() => _mockResult);
@@ -86,7 +97,7 @@ describe("clean-traced", () => {
       return _mockResult;
     })();
     expect(res).toStrictEqual(_mockResult);
-    expect(mockLogger.info).toBeCalledWith("namedFunction execution initiated", {});
+    expect(mockLogger.info).toBeCalledWith(`${coloredFnName("namedFunction")} execution initiated`, {});
   });
   test("test unnamed function", () => {
     const res = cleanTraced(() => _mockResult)();

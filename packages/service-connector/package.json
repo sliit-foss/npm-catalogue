@@ -1,8 +1,9 @@
 {
   "name": "@sliit-foss/service-connector",
-  "version": "2.0.1",
+  "version": "2.1.2",
   "description": "A package to isolate filters and sorts from a given request's query parameters",
   "main": "dist/index.js",
+  "types": "types/index.d.ts",
   "scripts": {
     "build": "node ../../scripts/esbuild.config.js",
     "build:watch": "bash ../../scripts/esbuild.watch.sh",
@@ -12,8 +13,9 @@
     "test": "bash ../../scripts/test/test.sh"
   },
   "dependencies": {
-    "@sliit-foss/module-logger": "1.1.5",
+    "@sliit-foss/module-logger": "1.2.4",
     "axios": "1.6.0",
+    "chalk": "4.1.2",
     "express-http-context": "1.2.4",
     "http-errors": "2.0.0"
   },
