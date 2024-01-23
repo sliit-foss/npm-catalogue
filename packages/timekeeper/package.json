@@ -1,0 +1,38 @@
+{
+  "name": "@sliit-foss/timekeeper",
+  "version": "0.0.8-blizzard.0",
+  "description": "CLI tool for automated function tracing",
+  "main": "dist/index.js",
+  "bin": "dist/index.js",
+  "scripts": {
+    "build": "node ../../scripts/esbuild.config.js",
+    "build:watch": "bash ../../scripts/esbuild.watch.sh",
+    "bump-version": "bash ../../scripts/bump-version.sh --name=@sliit-foss/timekeeper",
+    "lint": "bash ../../scripts/lint.sh",
+    "release": "bash ../../scripts/release.sh",
+    "test": "rimraf ./babel.config.js && dotenv -- jest --coverage --verbose --runInBand --forceExit"
+  },
+  "dependencies": {
+    "@babel/cli": "7.23.4",
+    "@babel/core": "7.23.6",
+    "@babel/preset-env": "7.23.6",
+    "@colors/colors": "1.5.0",
+    "@sliit-foss/babel-plugin-transform-trace": "0.1.2",
+    "@sliit-foss/functions": "2.2.4",
+    "commander": "11.1.0"
+  },
+  "author": "SLIIT FOSS",
+  "license": "MIT",
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/sliit-foss/npm-catalogue.git"
+  },
+  "homepage": "https://github.com/sliit-foss/npm-catalogue/blob/main/packages/timekeeper/readme.md",
+  "keywords": [
+    "tracing",
+    "automated-tracing"
+  ],
+  "bugs": {
+    "url": "https://github.com/sliit-foss/npm-catalogue/issues"
+  }
+}
