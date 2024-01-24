@@ -31,8 +31,8 @@ const mongooseFilterQuery = (req, res, next) => {
     } else {
       req.query.sort = {};
     }
-    req.query.include = req.query.include?.split(",") ?? [];
-    req.query.select = req.query.select?.split(",")?.join(" ") ?? "";
+    req.query.include = req.query.include?.split(",");
+    req.query.select = req.query.select?.split(",")?.join(" ");
   } catch (e) {
     console.error("[ FilterQuery ] - Failed to parse query", e);
   }

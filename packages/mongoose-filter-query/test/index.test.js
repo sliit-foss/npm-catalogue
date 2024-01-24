@@ -46,7 +46,7 @@ describe("test mongoose-filter-query", () => {
     });
     test("undefined", async () => {
       mongooseFilterQuery(req, {}, () => {});
-      expect(req.query.include).toEqual([]);
+      expect(req.query.include).toEqual(undefined);
     });
   });
   describe("select", () => {
@@ -56,7 +56,7 @@ describe("test mongoose-filter-query", () => {
     });
     test("undefined", async () => {
       mongooseFilterQuery(req, {}, () => {});
-      expect(req.query.select).toEqual("");
+      expect(req.query.select).toEqual(undefined);
     });
   });
   test("handle error", async () => {
