@@ -26,7 +26,7 @@ const runner = (name, noCommit, recursive = false, prereleaseTag, prereleaseBran
       const { commitMessage, commitPrefix, noBump } = await getCommitPrefix(recursive, ignorePrefixes);
       if (!noBump) {
         let versionUpdate;
-        if (["feature!", "feat!", "f!"].includes(commitPrefix)) {
+        if (["feature!", "feat!", "f!", "fix!", "patch!"].includes(commitPrefix)) {
           versionUpdate = "major";
         } else if (["feature", "feat", "f"].includes(commitPrefix)) {
           versionUpdate = "minor";
