@@ -82,15 +82,15 @@ yarn bump-version
 ## Commit message prefixes and associated version bumping
 
 ```bash
-    - Feat! - bump major version
+    - Feature! | Feat! | Fix! | Patch!     - bump major version
 ```
 
 ```bash
-    - Feat  - bump minor version
+    - Feature | Feat                       - bump minor version
 ```
 
 ```bash
-    - Fix   - bump patch version
+    - Fix | Patch                          - bump patch version
 ```
 
 ## Skip commit <br/>
