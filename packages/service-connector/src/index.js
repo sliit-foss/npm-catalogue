@@ -8,7 +8,7 @@ import { formatLogs, coloredString } from "./helpers";
 const serviceConnector = ({ service, headerIntercepts, loggable, logs = true, ...axiosOptions } = {}) => {
   const logger = moduleLogger(chalk.bold(service ?? "Service-Connector"));
   const instance = axios.create(axiosOptions);
-  instance.interceptors.request.use((config) => {
+  instance.interceptors.request.use(async (config) => {
     logs &&
       logger.info(
         `Request initiated - ${coloredString("method")}: ${coloredString(config.method)} - ${coloredString(
@@ -20,7 +20,7 @@ const serviceConnector = ({ service, headerIntercepts, loggable, logs = true, ..
     if (headerIntercepts) {
       config.headers = {
         ...config.headers,
-        ...headerIntercepts(config)
+        ...(await headerIntercepts(config))
       };
     }
     return config;
