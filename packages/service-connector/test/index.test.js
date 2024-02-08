@@ -66,6 +66,39 @@ describe("service-connector", () => {
       loggable
     );
   });
+  test("successful request with header interceptor", async () => {
+    const interceptedConnector = serviceConnector({
+      baseURL: "https://google.com",
+      headerIntercepts: () => ({
+        "x-api-key": "123456"
+      })
+    });
+    const response = await interceptedConnector.get("/");
+    expect(response.status).toEqual(200);
+  });
+  test("successful request with async header interceptor", async () => {
+    const asyncInterceptedConnector = serviceConnector({
+      baseURL: "https://google.com",
+      headerIntercepts: async () => {
+        await new Promise((resolve) => setTimeout(resolve, 50));
+        return;
+      }
+    });
+    const response = await asyncInterceptedConnector.get("/");
+    expect(response.status).toEqual(200);
+  });
+  test("successful request ignoring error in async header interceptor", async () => {
+    const asyncInterceptedConnector = serviceConnector({
+      baseURL: "https://google.com",
+      headerIntercepts: async () => {
+        await new Promise((_, reject) => setTimeout(reject, 50));
+        return;
+      }
+    });
+    const response = await asyncInterceptedConnector.get("/");
+    expect(response.status).toEqual(200);
+    expect(mockLogger.error).toBeCalledWith(`Failed to intercept headers`, undefined);
+  });
 });
 
 describe("service-connector resolver", () => {
