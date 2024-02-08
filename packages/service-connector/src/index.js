@@ -18,9 +18,12 @@ const serviceConnector = ({ service, headerIntercepts, loggable, logs = true, ..
       );
     config.headers["x-correlation-id"] = context.get("correlationId");
     if (headerIntercepts) {
+      let intercepts = headerIntercepts(config);
+      if (intercepts instanceof Promise)
+        intercepts = await intercepts.catch((e) => logger.error("Failed to intercept headers", e));
       config.headers = {
         ...config.headers,
-        ...(await headerIntercepts(config))
+        ...intercepts
       };
     }
     return config;
