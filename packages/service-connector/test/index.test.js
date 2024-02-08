@@ -97,7 +97,12 @@ describe("service-connector", () => {
     });
     const response = await asyncInterceptedConnector.get("/");
     expect(response.status).toEqual(200);
-    expect(mockLogger.error).toBeCalledWith(`Failed to intercept headers`, undefined);
+    expect(mockLogger.error).toBeCalledWith(
+      `Failed to intercept headers - ${coloredString("method")}: ${coloredString("get")} - ${coloredString(
+        "url"
+      )}: ${coloredString("https://google.com/", "url-value")}`,
+      undefined
+    );
   });
 });
 
