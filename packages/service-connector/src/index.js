@@ -20,7 +20,7 @@ const serviceConnector = ({ service, headerIntercepts, loggable, logs = true, ..
     if (headerIntercepts) {
       let intercepts = headerIntercepts(config);
       if (intercepts instanceof Promise)
-        intercepts = await intercepts.catch((e) => logger.error("Failed to intercept headers", e));
+        intercepts = await intercepts.catch((e) => logger.error("Failed to intercept headers", e?.message));
       config.headers = {
         ...config.headers,
         ...intercepts
