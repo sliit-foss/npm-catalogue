@@ -1,6 +1,13 @@
 export const replaceOperator = (value, operator) => {
   value = value.replace(`${operator}(`, "").slice(0, -1);
-  return isNaN(value) ? value : Number(value);
+  if (isNaN(value)) {
+    if (!isNaN(Date.parse(value))) {
+      value = new Date(value);
+    }
+  } else {
+    value = Number(value);
+  }
+  return value;
 };
 
 export const mapValue = (value) => {

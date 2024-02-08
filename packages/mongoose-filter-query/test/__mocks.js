@@ -26,7 +26,7 @@ export const basicFilterResult = {
   address: { $in: ["address1", "address2", "address3"] },
   weight: { $gte: 50 },
   height: { $lt: 180 },
-  birthdate: { $lte: "2000-01-01" },
+  birthdate: { $lte: new Date("2000-01-01") },
   isAlive: { $exists: true },
   isVerified: { $eq: true },
   isDeleted: "false"
