@@ -20,7 +20,8 @@ program
   )
   .option("-r, --root <string>", "root directory to use when executing the script")
   .option("--skip-commit", "do not commit the incremented version")
-  .option("--tag-based", "run versioning based on git tags");
+  .option("--tag-based", "run versioning based on git tags")
+  .option("--disable-auto-sync", "disable aligning the package version with the last published version");
 
 [
   new Option("--recursive", "recursively search for a matching commit prefix"),
@@ -54,6 +55,7 @@ const run = async () => {
       opts.name,
       opts.skipCommit,
       opts.recursive,
+      opts.disableAutoSync,
       opts.prereleaseTag,
       opts.prereleaseBranch,
       opts.ignorePrefixes
