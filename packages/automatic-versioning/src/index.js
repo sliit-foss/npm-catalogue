@@ -25,8 +25,9 @@ program
 
 [
   new Option("--recursive", "recursively search for a matching commit prefix"),
+  new Option("--prerelease <boolean>", "run a prerelase version bump"),
   new Option("--prerelease-tag <string>", "prerelease identifier to use when creating a prerelease"),
-  new Option("--prerelease-branch <string>", "run prereleases on this branch"),
+  new Option("--prerelease-branch <string>", "run prereleases on this branch. This is useful for CI/CD workflows"),
   new Option(
     "--ignore-prefixes <string>",
     "comma separated list of commit prefixes to ignore when searching for a matching prefix"
@@ -56,6 +57,7 @@ const run = async () => {
       opts.skipCommit,
       opts.recursive,
       opts.disableAutoSync,
+      opts.prerelease,
       opts.prereleaseTag,
       opts.prereleaseBranch,
       opts.ignorePrefixes

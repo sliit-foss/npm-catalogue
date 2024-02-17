@@ -49,6 +49,7 @@ const runner = (
   noCommit,
   recursive = false,
   disableAutoSync,
+  prerelease,
   prereleaseTag,
   prereleaseBranch,
   ignorePrefixes
@@ -71,10 +72,13 @@ const runner = (
           console.info(`No suitable commit prefix found in commit message, skipping version bump`.yellow);
           return;
         }
-        if (prereleaseBranch && ["major", "minor", "patch"].includes(versionUpdate)) {
-          const currentBranch = (await run("git rev-parse --abbrev-ref HEAD"))?.trim();
-          if (currentBranch === prereleaseBranch) {
-            let prerelease = false;
+        if ((prerelease || prereleaseBranch) && ["major", "minor", "patch"].includes(versionUpdate)) {
+          if (!prerelease) {
+            const currentBranch = (await run("git rev-parse --abbrev-ref HEAD"))?.trim();
+            prerelease = currentBranch === prereleaseBranch;
+          }
+          if (prerelease) {
+            prerelease = false;
             const currentVersion = await getPackageVersion(name, disableAutoSync);
             if (currentVersion?.includes(prereleaseTag)) {
               await run(
