@@ -16,13 +16,14 @@ let _defaultConfig = {
     enabled: false,
     options: {}
   },
-  globalAttributes: {}
+  globalAttributes: {},
+  traceKey: "correlationId"
 };
-
-const _defaultKeys = ["level", "correlationId", "timestamp", "message"];
 
 const _createLogger = () => {
   let transports = [];
+
+  const _defaultKeys = ["level", _defaultConfig.traceKey, "timestamp", "message"];
 
   if (_defaultConfig.console?.enabled) {
     transports.push(
@@ -54,12 +55,12 @@ const _createLogger = () => {
   _logger = winston.createLogger({
     format: winston.format.combine(
       winston.format((infoObj) => {
-        let correlationId = context.get("correlationId");
+        let correlationId = context.get(_defaultConfig.traceKey);
         if (!correlationId) {
           correlationId = crypto.randomBytes(16).toString("hex");
-          context.set("correlationId", correlationId);
+          context.set(_defaultConfig.traceKey, correlationId);
         }
-        infoObj["correlationId"] = chalk.blue(correlationId);
+        infoObj[_defaultConfig.traceKey] = chalk.blue(correlationId);
         return { ...infoObj, ...(_defaultConfig.globalAttributes ?? {}) };
       })(),
       winston.format.timestamp(),

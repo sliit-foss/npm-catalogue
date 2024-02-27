@@ -84,6 +84,7 @@ logger.info("This is a modularized info log written to a file");
     },
   },
   transportOverrides: [], // array of transport overrides
-  globalAttributes: {}, // attributes which will be added to all logs
+  globalAttributes: {}, // attributes which will be added to all logs,
+  traceKey: "correlationId", // key to be used for tracing
 }
 ```
