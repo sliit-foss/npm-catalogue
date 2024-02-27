@@ -10,6 +10,7 @@ declare interface Config {
     options?: any;
   };
   globalAttributes?: any;
+  traceKey?: string;
 }
 
 /**
