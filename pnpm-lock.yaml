@@ -99,8 +99,8 @@ importers:
   packages/functions:
     dependencies:
       '@sliit-foss/module-logger':
-        specifier: 1.2.4
-        version: 1.2.4
+        specifier: 1.3.0
+        version: link:../module-logger
       chalk:
         specifier: 4.1.2
         version: 4.1.2
@@ -111,8 +111,8 @@ importers:
   packages/http-logger:
     dependencies:
       '@sliit-foss/module-logger':
-        specifier: 1.2.4
-        version: 1.2.4
+        specifier: 1.3.0
+        version: link:../module-logger
 
   packages/leaderboard:
     dependencies:
@@ -142,8 +142,8 @@ importers:
   packages/service-connector:
     dependencies:
       '@sliit-foss/module-logger':
-        specifier: 1.2.4
-        version: 1.2.4
+        specifier: 1.3.0
+        version: link:../module-logger
       axios:
         specifier: 1.6.0
         version: 1.6.0
@@ -2963,15 +2963,6 @@ packages:
 
   /@sliit-foss/module-logger@1.2.3:
     resolution: {integrity: sha512-CCoNI6B1ROIxn9NfdOs+yA5iEnchWsMFHwP9nGwXbl0xYLblqo4fLZnRG3KM2cdmH9brKrlmrFu7gvU2XKHBRw==}
-    dependencies:
-      chalk: 4.1.2
-      express-http-context: 1.2.4
-      winston: 3.8.2
-      winston-daily-rotate-file: 4.7.1(winston@3.8.2)
-    dev: false
-
-  /@sliit-foss/module-logger@1.2.4:
-    resolution: {integrity: sha512-RFe5GT2SOqBLTpQfjC3SgRydsip78CaUTXtyrwmFCLWRB63Y5dqYS4tIzmuxmElhEBzLLJBfR9v0omqYFpr46w==}
     dependencies:
       chalk: 4.1.2
       express-http-context: 1.2.4
