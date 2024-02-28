@@ -38,8 +38,9 @@ export const ns = null;
 
 export default {
   middleware,
-  get: get,
-  set: set,
-  store: store,
+  isolate,
+  get,
+  set,
+  store,
   ns: null
 };

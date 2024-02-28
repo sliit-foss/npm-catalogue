@@ -18,6 +18,7 @@ export const ns = null;
 
 export default {
   middleware,
+  isolate,
   get,
   set,
   store: null,
