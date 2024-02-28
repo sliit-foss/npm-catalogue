@@ -4,6 +4,9 @@ import { AsyncLocalStorage } from "async_hooks";
 /** Express.js middleware that is responsible for initializing the context for each request. */
 export declare function middleware(req: Request, res: Response, next: NextFunction): void;
 
+/** Runs a given function in an isolated context */
+export declare function isolate(fn: Function): void;
+
 /**
  * Gets a value from the context by key.  Will return undefined if the context has not yet been initialized for this request or if a value is not found for the specified key.
  */
