@@ -1,0 +1,10 @@
+{
+  "extends": [
+    "@sliit-foss/eslint-config-internal",
+    "turbo"
+  ],
+  "ignorePatterns": ["packages/templates/src/stacks/**"],
+  "rules": {
+    "no-constant-condition": "off"
+  }
+}

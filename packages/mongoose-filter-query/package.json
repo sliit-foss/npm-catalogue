@@ -1,0 +1,30 @@
+{
+  "name": "@sliit-foss/mongoose-filter-query",
+  "version": "4.0.0",
+  "description": "Middleware which implements a standardized format and maps an incoming http request's query params to a format which is supported by mongoose",
+  "main": "dist/index.js",
+  "scripts": {
+    "build": "node ../../scripts/esbuild.config.js",
+    "build:watch": "bash ../../scripts/esbuild.watch.sh",
+    "bump-version": "bash ../../scripts/bump-version.sh --name=@sliit-foss/mongoose-filter-query",
+    "lint": "bash ../../scripts/lint.sh",
+    "release": "bash ../../scripts/release.sh",
+    "test": "bash ../../scripts/test/test.sh"
+  },
+  "author": "SLIIT FOSS",
+  "license": "MIT",
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/sliit-foss/npm-catalogue.git"
+  },
+  "homepage": "https://github.com/sliit-foss/npm-catalogue/blob/main/packages/mongoose-filter-query/readme.md",
+  "keywords": [
+    "filterquery",
+    "sortquery",
+    "filter",
+    "sort"
+  ],
+  "bugs": {
+    "url": "https://github.com/sliit-foss/npm-catalogue/issues"
+  }
+}

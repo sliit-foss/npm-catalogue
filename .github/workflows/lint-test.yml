@@ -1,0 +1,35 @@
+name: CI Code Quality + Tests
+on:
+  pull_request:
+    branches:
+      - main
+      - development
+
+jobs:
+  scripts:
+    runs-on: ubuntu-latest
+    strategy:
+      matrix:
+        command: ['lint', 'test']
+    env:
+      TURBO_TOKEN: ${{ secrets.TURBO_TOKEN }}
+      TURBO_TEAM: ${{ secrets.TURBO_TEAM }}
+    steps:
+      - name: Checkout repository 🛎️
+        uses: actions/checkout@v3
+
+      - name: Setup Node.js 16 📗
+        uses: actions/setup-node@v3
+        with:
+          node-version: 16
+
+      - name: Install dependencies 📦
+        run: npm install -g pnpm@8 && pnpm install --ignore-scripts
+      
+      - name: Run checks 🧪
+        run: |
+          pnpm --filter @sliit-foss/eslint-config-internal build
+          pnpm ${{ matrix.command }}
+        env:
+          GITHUB_ACCESS_TOKEN: ${{ secrets.ACCESS_TOKEN_GITHUB }}
+          FIREBASE_CONFIG: ${{ secrets.FIREBASE_CONFIG }}

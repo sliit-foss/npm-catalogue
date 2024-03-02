@@ -1,0 +1,35 @@
+{
+  "name": "@sliit-foss/automatic-versioning",
+  "version": "2.3.1",
+  "description": "A script which will automatically increment your app package version in accordance with conventional commits",
+  "main": "dist/index.js",
+  "bin": "dist/index.js",
+  "scripts": {
+    "build": "node ../../scripts/esbuild.config.js",
+    "build:watch": "bash ../../scripts/esbuild.watch.sh",
+    "bump-version": "bash ../../scripts/bump-version.sh",
+    "lint": "bash ../../scripts/lint.sh",
+    "release": "bash ../../scripts/release.sh",
+    "test": "bash ../../scripts/test/test.sh"
+  },
+  "dependencies": {
+    "@actions/exec": "1.1.1",
+    "@colors/colors": "1.5.0",
+    "commander": "11.1.0"
+  },
+  "author": "SLIIT FOSS",
+  "license": "MIT",
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/sliit-foss/npm-catalogue.git"
+  },
+  "homepage": "https://github.com/sliit-foss/npm-catalogue/blob/main/packages/automatic-versioning/readme.md",
+  "keywords": [
+    "automatic-versioning",
+    "semantic-versioning",
+    "bump-version"
+  ],
+  "bugs": {
+    "url": "https://github.com/sliit-foss/npm-catalogue/issues"
+  }
+}

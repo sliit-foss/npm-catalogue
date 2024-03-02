@@ -1,0 +1,25 @@
+{
+  "$schema": "https://turbo.build/schema.json",
+  "globalDependencies": ["**/.env.*local"],
+  "pipeline": {
+    "build": {
+      "dependsOn": [],
+      "outputs": ["dist/**"]
+    },
+    "bump-version": {
+      "dependsOn": ["build"],
+      "outputs": ["package.json"]
+    },
+    "format": { "cache": false },
+    "lint": {},
+    "release": {
+      "dependsOn": ["bump-version"],
+      "outputs": []
+    },
+    "test": {
+      "dependsOn": ["build"],
+      "outputs": ["coverage/**"]
+    }
+  },
+  "globalEnv": ["DISABLE_FUNCTION_TRACING", "AUTOMATIC_VERSIONING_IS_TEST", "npm_package_version"]
+}

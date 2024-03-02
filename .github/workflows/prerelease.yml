@@ -1,0 +1,22 @@
+name: CI Prerelease
+on:
+  push:
+    branches:
+      - development
+  workflow_dispatch:
+
+jobs:
+  release:
+    runs-on: ubuntu-latest
+    env:
+      TURBO_TOKEN: ${{ secrets.TURBO_TOKEN }}
+      TURBO_TEAM: ${{ secrets.TURBO_TEAM }}
+      TAG: blizzard
+    steps:
+      - name: Checkout repository 🛎️
+        uses: actions/checkout@v3
+
+      - name: Release packages 🚀
+        uses: ./.github/actions/release
+        with:
+          npm_token: ${{ secrets.NPM_TOKEN }}

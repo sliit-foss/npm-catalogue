@@ -1,0 +1,65 @@
+name: release
+description: Base package release action
+inputs:
+  npm_token:
+    description: "Token to authenticate with the npm registry"
+    required: true
+runs:
+  using: composite
+  steps:
+    - name: Setup Node
+      uses: actions/setup-node@v3
+      with:
+        node-version: '16.x'
+        registry-url: 'https://registry.npmjs.org'
+
+    - name: Configure git
+      run: |
+        git config --global user.email "github-actions[bot]@users.noreply.github.com"
+        git config --global user.name "github-actions[bot]"
+      shell: bash
+
+    - run: git fetch --prune --unshallow
+      shell: bash
+
+    - name: Install dependencies
+      run: npm install -g pnpm@8 && pnpm install --production --ignore-scripts
+      shell: bash
+
+    - name: Create .npmrc
+      run: echo "//registry.npmjs.org/:_authToken=${{ inputs.npm_token }}" > .npmrc
+      shell: bash
+
+    - run: echo "git-checks=false" >> .npmrc
+      shell: bash
+
+    - name: Load submodules
+      run: pnpm submodules:load
+      shell: bash
+
+    - name: Populate prerequisities
+      run: |
+        echo "{\"release_tag\":\"$TAG\"}" > cache-control.json
+        for dir in packages plugins; do
+          cd "$dir" && for p in */; do
+            cp ../{.npmignore,LICENSE,cache-control.json} "$p"
+          done && cd ..
+        done
+      shell: bash
+
+    - name: Publish packages on NPM
+      run: |
+        pnpm --filter @sliit-foss/automatic-versioning build && npm i -g ./packages/automatic-versioning
+        pnpm release
+      shell: bash
+
+    - name: Cleanup
+      run: rm -rf cache-control.json && rm -rf p*/**/cache-control.json
+      shell: bash
+
+    - name: Update release info
+      run: |
+        git config pull.ff true
+        git add . && git commit -m "CI: @sliit-foss/automatic-versioning - sync release" || true
+        git pull --rebase && git push origin
+      shell: bash

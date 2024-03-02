@@ -1,0 +1,32 @@
+{
+  "name": "@sliit-foss/actions-exec-wrapper",
+  "version": "1.1.1",
+  "description": "A wrapper around the @actions/exec module which promisifies the console output of a command",
+  "main": "dist/index.js",
+  "scripts": {
+    "build": "node ../../scripts/esbuild.config.js",
+    "build:watch": "bash ../../scripts/esbuild.watch.sh",
+    "bump-version": "bash ../../scripts/bump-version.sh --name=@sliit-foss/actions-exec-wrapper",
+    "lint": "bash ../../scripts/lint.sh",
+    "release": "bash ../../scripts/release.sh",
+    "test": "bash ../../scripts/test/test.sh"
+  },
+  "dependencies": {
+    "@actions/exec": "1.1.1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/sliit-foss/npm-catalogue.git"
+  },
+  "keywords": [
+    "@actions/exec",
+    "actions-exec-wrapper",
+    "console-output"
+  ],
+  "author": "SLIIT FOSS",
+  "license": "MIT",
+  "bugs": {
+    "url": "https://github.com/sliit-foss/npm-catalogue/issues"
+  },
+  "homepage": "https://github.com/sliit-foss/npm-catalogue/blob/main/packages/actions-exec-wrapper/readme.md"
+}

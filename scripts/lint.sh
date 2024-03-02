@@ -1,0 +1,1 @@
+eslint src --ext .js --fix

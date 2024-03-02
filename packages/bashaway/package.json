@@ -1,0 +1,34 @@
+{
+  "name": "@sliit-foss/bashaway",
+  "version": "1.6.0-blizzard.5",
+  "description": "Utility functions for SLIIT Bashaway test automation",
+  "main": "dist/index.js",
+  "types": "types/index.d.ts",
+  "scripts": {
+    "build": "node ./esbuild.config.js",
+    "build:watch": "bash ../../scripts/esbuild.watch.sh",
+    "bump-version": "bash ../../scripts/bump-version.sh --name=@sliit-foss/bashaway",
+    "lint": "bash ../../scripts/lint.sh",
+    "release": "bash ../../scripts/release.sh",
+    "test": "bash ../../scripts/test/test.sh"
+  },
+  "dependencies": {
+    "@sliit-foss/actions-exec-wrapper": "1.1.1",
+    "axios": "1.6.0",
+    "glob": "10.3.3"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/sliit-foss/npm-catalogue.git"
+  },
+  "keywords": [
+    "bashaway",
+    "utilities"
+  ],
+  "author": "SLIIT FOSS",
+  "license": "MIT",
+  "bugs": {
+    "url": "https://github.com/sliit-foss/npm-catalogue/issues"
+  },
+  "homepage": "https://github.com/sliit-foss/npm-catalogue/blob/main/packages/bashaway/readme.md"
+}

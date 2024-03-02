@@ -1,0 +1,22 @@
+name: CI Release
+on:
+  push:
+    branches:
+      - main
+  workflow_dispatch:
+
+jobs:
+  release:
+    runs-on: ubuntu-latest
+    env:
+      TURBO_TOKEN: ${{ secrets.TURBO_TOKEN }}
+      TURBO_TEAM: ${{ secrets.TURBO_TEAM }}
+      TAG: latest
+    steps:
+      - name: Checkout repository 🛎️
+        uses: actions/checkout@v3
+
+      - name: Release packages 🚀
+        uses: ./.github/actions/release
+        with:
+          npm_token: ${{ secrets.NPM_TOKEN }}
