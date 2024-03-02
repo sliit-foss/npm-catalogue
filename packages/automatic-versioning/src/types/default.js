@@ -106,7 +106,9 @@ const runner = (
               versionUpdate === "prerelease" ? versionUpdate : `${versionUpdate} release`
             }"`;
             await run("git add .").then(async () => {
-              await run(`git commit -m ${successMsg} --no-verify`).then(() => console.info(successMsg.green));
+              await run(`git commit -m ${successMsg} --trailer "skip-checks:true" --no-verify`).then(() =>
+                console.info(successMsg.green)
+              );
             });
           }
         });
