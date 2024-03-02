@@ -102,9 +102,9 @@ const runner = (
           }`
         ).then(async () => {
           if (!noCommit) {
-            const successMsg = `$'CI: ${name} - ${
+            const successMsg = `"CI: ${name} - ${
               versionUpdate === "prerelease" ? versionUpdate : `${versionUpdate} release`
-            }\\n\\n\\nskip-checks: true'`;
+            }\n\n\nskip-checks: true"`;
             await run("git add .").then(async () => {
               await run(`git commit -m ${successMsg} --no-verify --cleanup=verbatim`).then(() =>
                 console.info(successMsg.green)
