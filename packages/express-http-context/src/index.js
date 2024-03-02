@@ -6,9 +6,12 @@ export const store = new AsyncLocalStorage();
 
 /** Express.js middleware that is responsible for initializing the context for each request. */
 export const middleware = (req, res, next) => {
-  store.run({}, () => {
-    next();
-  });
+  store.run({}, next);
+};
+
+/** Runs a given function in an isolated context */
+export const isolate = (fn) => {
+  store.run({}, fn);
 };
 
 /**
@@ -35,8 +38,9 @@ export const ns = null;
 
 export default {
   middleware,
-  get: get,
-  set: set,
-  store: store,
+  isolate,
+  get,
+  set,
+  store,
   ns: null
 };

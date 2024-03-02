@@ -99,8 +99,8 @@ importers:
   packages/functions:
     dependencies:
       '@sliit-foss/module-logger':
-        specifier: 1.2.4
-        version: 1.2.4
+        specifier: 1.3.1
+        version: link:../module-logger
       chalk:
         specifier: 4.1.2
         version: 4.1.2
@@ -111,8 +111,8 @@ importers:
   packages/http-logger:
     dependencies:
       '@sliit-foss/module-logger':
-        specifier: 1.2.4
-        version: 1.2.4
+        specifier: 1.3.1
+        version: link:../module-logger
 
   packages/leaderboard:
     dependencies:
@@ -142,8 +142,8 @@ importers:
   packages/service-connector:
     dependencies:
       '@sliit-foss/module-logger':
-        specifier: 1.2.4
-        version: 1.2.4
+        specifier: 1.3.1
+        version: link:../module-logger
       axios:
         specifier: 1.6.0
         version: 1.6.0
@@ -199,8 +199,8 @@ importers:
         specifier: 7.20.7
         version: 7.20.7
       '@sliit-foss/functions':
-        specifier: 2.4.0
-        version: 2.4.0
+        specifier: 2.7.0
+        version: 2.7.0
     devDependencies:
       '@babel/core':
         specifier: 7.21.5
@@ -2930,10 +2930,10 @@ packages:
       express-http-context: 1.2.4
     dev: false
 
-  /@sliit-foss/functions@2.4.0:
-    resolution: {integrity: sha512-sxtuZaltx7cwadoUv/PTyS1s2lg07FR2fRAZ59tNjjUDwFSpBrrMqMZ/baPQ6qFMjNGE2FTLwleZnhLxjJlU6A==}
+  /@sliit-foss/functions@2.7.0:
+    resolution: {integrity: sha512-xL2XMTQQgDnObC3NSgzt9HPmd5GlJFVHm9SLxi/2rFJoYWzYOwLdEbw5Ssyn0WSL/N+PxFYG49DUDESt9aYyzQ==}
     dependencies:
-      '@sliit-foss/module-logger': 1.2.3
+      '@sliit-foss/module-logger': 1.3.0
       chalk: 4.1.2
       express-http-context: 1.2.4
     dev: false
@@ -2946,17 +2946,8 @@ packages:
       winston-daily-rotate-file: 4.7.1(winston@3.8.2)
     dev: false
 
-  /@sliit-foss/module-logger@1.2.3:
-    resolution: {integrity: sha512-CCoNI6B1ROIxn9NfdOs+yA5iEnchWsMFHwP9nGwXbl0xYLblqo4fLZnRG3KM2cdmH9brKrlmrFu7gvU2XKHBRw==}
-    dependencies:
-      chalk: 4.1.2
-      express-http-context: 1.2.4
-      winston: 3.8.2
-      winston-daily-rotate-file: 4.7.1(winston@3.8.2)
-    dev: false
-
-  /@sliit-foss/module-logger@1.2.4:
-    resolution: {integrity: sha512-RFe5GT2SOqBLTpQfjC3SgRydsip78CaUTXtyrwmFCLWRB63Y5dqYS4tIzmuxmElhEBzLLJBfR9v0omqYFpr46w==}
+  /@sliit-foss/module-logger@1.3.0:
+    resolution: {integrity: sha512-xthp1pxXsR9/ZlB1pXlklMl1BrhfiJoNp1EqPM3vvbPf1NRVAGNUnx9V7lWu2IHGwiwvAs1BBxmIrFmMZ3esDQ==}
     dependencies:
       chalk: 4.1.2
       express-http-context: 1.2.4

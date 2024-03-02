@@ -82,15 +82,15 @@ yarn bump-version
 ## Commit message prefixes and associated version bumping
 
 ```bash
-    - Feat! - bump major version
+    - Feature! | Feat! | Fix! | Patch!     - bump major version
 ```
 
 ```bash
-    - Feat  - bump minor version
+    - Feature | Feat                       - bump minor version
 ```
 
 ```bash
-    - Fix   - bump patch version
+    - Fix | Patch                          - bump patch version
 ```
 
 ## Skip commit <br/>
@@ -119,12 +119,6 @@ yarn bump-version
   npx automatic-versioning --name=<package_name> --recursive
 ```
 
-## Custom prerelease tag<br/>
-
-```bash
-  npx automatic-versioning --name=<package_name> --prerelease-tag=<name>
-```
-
 ## Prerelease branch<br/>
 
 - If this option is specified and the current branch matches it, the versioning will be evaluated as follows <br/>
@@ -135,6 +129,20 @@ yarn bump-version
 
 ```bash
   npx automatic-versioning --name=<package_name> --prerelease-branch=<branch_name>
+```
+
+## Prerelease<br/>
+
+- If this is specified, the versioning will always be one of prerelease, premajor, preminor or prepatch depending on the above commit mapping
+
+```bash
+  npx automatic-versioning --name=<package_name> --prerelease
+```
+
+## Custom prerelease tag<br/>
+
+```bash
+  npx automatic-versioning --name=<package_name> --prerelease-tag=<name>
 ```
 
 ## Ignore prefixes<br/>

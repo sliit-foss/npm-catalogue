@@ -19,14 +19,48 @@ const getCommitPrefix = async (recursive, ignorePrefixes, n = 1) => {
   return getCommitPrefix(recursive, ignorePrefixes, n + 1);
 };
 
-const runner = (name, noCommit, recursive = false, prereleaseTag, prereleaseBranch, ignorePrefixes) => {
+const getCurrentVersion = async () =>
+  (await run("npm version"))?.split(",")?.[0]?.split(":")?.[1]?.replace(/'/g, "")?.trim();
+
+const getPackageVersion = async (name, disableAutoSync) => {
+  if (!disableAutoSync) {
+    try {
+      const versions = await run(`npm view ${name} time`).then((res) =>
+        res
+          .replace(/{|}|,|'/g, "")
+          .trim()
+          .split("\n")
+          .filter((v) => !v.includes("modified:") && !v.includes("created:"))
+      );
+      versions.sort(
+        (v1, v2) => new Date(v1.trim().split(" ")[1]).getTime() - new Date(v2.trim().split(" ")[1]).getTime()
+      );
+      return versions.pop().split(":")?.[0].trim();
+    } catch (e) {
+      return getCurrentVersion();
+    }
+  } else {
+    return getCurrentVersion();
+  }
+};
+
+const runner = (
+  name,
+  noCommit,
+  recursive = false,
+  disableAutoSync,
+  prerelease,
+  prereleaseTag,
+  prereleaseBranch,
+  ignorePrefixes
+) => {
   return run("git show --first-parent ./").then(async (diff) => {
     if (diff) {
       console.info(`Diff found, running versioning for ${name}`.green);
       const { commitMessage, commitPrefix, noBump } = await getCommitPrefix(recursive, ignorePrefixes);
       if (!noBump) {
         let versionUpdate;
-        if (["feature!", "feat!", "f!"].includes(commitPrefix)) {
+        if (["feature!", "feat!", "f!", "fix!", "patch!"].includes(commitPrefix)) {
           versionUpdate = "major";
         } else if (["feature", "feat", "f"].includes(commitPrefix)) {
           versionUpdate = "minor";
@@ -38,26 +72,14 @@ const runner = (name, noCommit, recursive = false, prereleaseTag, prereleaseBran
           console.info(`No suitable commit prefix found in commit message, skipping version bump`.yellow);
           return;
         }
-        if (prereleaseBranch && ["major", "minor", "patch"].includes(versionUpdate)) {
-          const currentBranch = (await run("git rev-parse --abbrev-ref HEAD"))?.trim();
-          if (currentBranch === prereleaseBranch) {
-            let prerelease = false;
-            let currentVersion;
-            try {
-              const versions = await run(`npm view ${name} time`).then((res) =>
-                res
-                  .replace(/{|}|,|'/g, "")
-                  .trim()
-                  .split("\n")
-                  .filter((v) => !v.includes("modified:") && !v.includes("created:"))
-              );
-              versions.sort(
-                (v1, v2) => new Date(v1.trim().split(" ")[1]).getTime() - new Date(v2.trim().split(" ")[1]).getTime()
-              );
-              currentVersion = versions.pop().split(":")?.[0].trim();
-            } catch (e) {
-              currentVersion = (await run("npm version"))?.split(",")?.[0]?.split(":")?.[1]?.replace(/'/g, "")?.trim();
-            }
+        if ((prerelease || prereleaseBranch) && ["major", "minor", "patch"].includes(versionUpdate)) {
+          if (!prerelease) {
+            const currentBranch = (await run("git rev-parse --abbrev-ref HEAD"))?.trim();
+            prerelease = currentBranch === prereleaseBranch;
+          }
+          if (prerelease) {
+            prerelease = false;
+            const currentVersion = await getPackageVersion(name, disableAutoSync);
             if (currentVersion?.includes(prereleaseTag)) {
               await run(
                 `npm --workspaces-update=false --no-git-tag-version version --allow-same-version ${currentVersion}`
@@ -84,7 +106,9 @@ const runner = (name, noCommit, recursive = false, prereleaseTag, prereleaseBran
               versionUpdate === "prerelease" ? versionUpdate : `${versionUpdate} release`
             }"`;
             await run("git add .").then(async () => {
-              await run(`git commit -m ${successMsg} --no-verify`).then(() => console.info(successMsg.green));
+              await run(`git commit -m ${successMsg} --trailer "skip-checks:true" --no-verify`).then(() =>
+                console.info(successMsg.green)
+              );
             });
           }
         });

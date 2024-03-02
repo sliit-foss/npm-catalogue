@@ -25,7 +25,7 @@ declare module "axios" {
 
 interface ServiceConnectorOptions extends CreateAxiosDefaults {
   service?: string;
-  headerIntercepts?: (config: InternalAxiosRequestConfig) => Record<string, string>;
+  headerIntercepts?: (config: InternalAxiosRequestConfig) => Record<string, string> | Promise<Record<string, string>>;
   loggable?: (response: AxiosResponse) => Record<string, string>;
   logs?: boolean;
 }

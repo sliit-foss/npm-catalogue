@@ -20,12 +20,14 @@ program
   )
   .option("-r, --root <string>", "root directory to use when executing the script")
   .option("--skip-commit", "do not commit the incremented version")
-  .option("--tag-based", "run versioning based on git tags");
+  .option("--tag-based", "run versioning based on git tags")
+  .option("--disable-auto-sync", "disable aligning the package version with the last published version");
 
 [
   new Option("--recursive", "recursively search for a matching commit prefix"),
+  new Option("--prerelease <boolean>", "run a prerelase version bump"),
   new Option("--prerelease-tag <string>", "prerelease identifier to use when creating a prerelease"),
-  new Option("--prerelease-branch <string>", "run prereleases on this branch"),
+  new Option("--prerelease-branch <string>", "run prereleases on this branch. This is useful for CI/CD workflows"),
   new Option(
     "--ignore-prefixes <string>",
     "comma separated list of commit prefixes to ignore when searching for a matching prefix"
@@ -54,6 +56,8 @@ const run = async () => {
       opts.name,
       opts.skipCommit,
       opts.recursive,
+      opts.disableAutoSync,
+      opts.prerelease,
       opts.prereleaseTag,
       opts.prereleaseBranch,
       opts.ignorePrefixes
