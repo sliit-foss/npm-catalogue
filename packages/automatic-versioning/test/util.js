@@ -6,7 +6,7 @@ export const commit = async (message, empty) => {
   await run(`git commit -m "${message}" ${empty ? "--allow-empty" : ""}`);
 };
 
-export const getLastCommitMessage = async () => (await run("git log -1 --pretty=%B"))?.trim();
+export const getLastCommitMessage = async () => (await run("git log -1 --pretty=%B"))?.split("\n")?.[0]?.trim();
 
 export const getCurrentBranch = async () => (await run("git rev-parse --abbrev-ref HEAD"))?.trim();
 
