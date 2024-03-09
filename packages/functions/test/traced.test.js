@@ -44,7 +44,7 @@ describe("traced", () => {
   });
   test("test disabled tracing", () => {
     process.env.DISABLE_FUNCTION_TRACING = "true";
-    const res = traced(() => _mockResult)();
+    const res = require("../src").traced(() => _mockResult)();
     expect(res).toStrictEqual(_mockResult);
     expect(mockLogger.info).not.toBeCalled();
     delete process.env.DISABLE_FUNCTION_TRACING;

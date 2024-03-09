@@ -1,6 +1,6 @@
 const { mockLogger } = require("./__mocks__");
 
-const { asyncHandler, tracedAsyncHandler, plainAsyncHandler } = require("../src");
+const { asyncHandler, tracedAsyncHandler, fallibleAsyncHandler, plainAsyncHandler } = require("../src");
 const { coloredFnName } = require("../src/utils");
 
 beforeEach(() => {
@@ -33,6 +33,13 @@ describe("asyncHandler", () => {
       return "test";
     })(mockReq, mockRes, mockNext);
     expect(mockLogger.info).toHaveBeenCalledWith(`${coloredFnName("testTracedFunction")} execution initiated`, {});
+    expect(mockNext).toHaveBeenCalled();
+  });
+  test("test fallible async handler", async () => {
+    await fallibleAsyncHandler(function testTracedFunction() {
+      throw new Error("test error");
+    })(mockReq, mockRes, mockNext);
+    expect(mockLogger.warn).toHaveBeenCalled();
     expect(mockNext).toHaveBeenCalled();
   });
   test("test plain async handler with async function", async () => {
