@@ -5,10 +5,9 @@ import { fnName as _fnName } from "./utils";
 
 const logger = moduleLogger("tracer");
 
-export const _traced = (fn, loggable = {}, fnName, layer) => {
+export const _traced = (fn, loggable = {}, fnName, layer, fallible) => {
   let startTime;
-  const disableTracing =
-    process.env.DISABLE_FUNCTION_TRACING === "true" || process.env.DISABLE_FUNCTION_TRACING === "1";
+  const disableTracing = process.env.DISABLE_FUNCTION_TRACING === "true" || process.env.DISABLE_FUNCTION_TRACING === "1";
   if (!disableTracing) {
     fnName = fnName ?? _fnName(fn, layer);
     logger.info(`${fnName} execution initiated`, loggable);
@@ -25,7 +24,7 @@ export const _traced = (fn, loggable = {}, fnName, layer) => {
   };
   const failureLog = (err) => {
     if (!disableTracing && !err.isLogged) {
-      logger.error(
+      logger[fallible ? "warn" : "error"](
         `${fnName} execution failed - ${chalk.bold("error")}: ${err.message} - ${chalk.bold("stack")}: ${err.stack}`
       );
       err.isLogged = true;
