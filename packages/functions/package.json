@@ -1,6 +1,6 @@
 {
   "name": "@sliit-foss/functions",
-  "version": "2.8.0",
+  "version": "2.9.0",
   "description": "Just a small set of utility functions",
   "main": "dist/index.js",
   "types": "types/index.d.ts",
