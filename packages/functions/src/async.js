@@ -30,7 +30,17 @@ export const asyncHandler = (fn) => _asyncHandler(fn);
 
 export const tracedAsyncHandler = (fn) => _asyncHandler(fn, true);
 
+export const plainAsyncHandler = (fn) => async (req, res, next) => {
+  try {
+    const result = fn(req, res, next)
+    if (result instanceof Promise) await result;
+  } catch (e) {
+    next(e)
+  }
+}
+
 export default {
   asyncHandler,
-  tracedAsyncHandler
+  tracedAsyncHandler,
+  plainAsyncHandler,
 };
