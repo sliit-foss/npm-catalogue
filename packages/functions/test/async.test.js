@@ -44,13 +44,13 @@ describe("asyncHandler", () => {
   });
   test("test plain async handler with async function", async () => {
     await plainAsyncHandler(async () => {
-      throw new Error("test")
+      throw new Error("test");
     })(mockReq, mockRes, mockNext);
     expect(mockNext).toHaveBeenCalled();
   });
   test("test plain async handler with normal function", async () => {
     await plainAsyncHandler(() => {
-      throw new Error("test")
+      throw new Error("test");
     })(mockReq, mockRes, mockNext);
     expect(mockNext).toHaveBeenCalled();
   });
