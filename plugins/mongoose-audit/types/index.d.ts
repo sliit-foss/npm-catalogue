@@ -10,7 +10,7 @@ interface Audit {
   created_at: string;
 }
 
-interface PluginOptions {
+export interface Options {
   /**  The user extractor function to use. This probably will be fetching the current user from a context or something similar. */
   getUser?: () => any;
   /**  The types of audit to record. */
@@ -26,7 +26,7 @@ interface PluginOptions {
 }
 
 /** Registers the plugin with the provided options. */
-export declare function plugin(schema: mongoose.Schema, options: PluginOptions): void;
+export declare function plugin(schema: mongoose.Schema, options: Options): void;
 
 /**
  * The Audit model.
