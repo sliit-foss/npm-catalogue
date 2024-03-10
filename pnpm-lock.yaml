@@ -1,4 +1,4 @@
-lockfileVersion: '6.1'
+lockfileVersion: '6.0'
 
 settings:
   autoInstallPeers: true
@@ -197,8 +197,14 @@ importers:
   plugins/mongoose-audit:
     dependencies:
       deep-diff:
-        specifier: ^1.0.2
+        specifier: 1.0.2
         version: 1.0.2
+      dot-object:
+        specifier: 2.1.4
+        version: 2.1.4
+      lodash:
+        specifier: 4.17.10
+        version: 4.17.10
       mongoose:
         specifier: '>=5'
         version: 5.0.0
@@ -3354,7 +3360,7 @@ packages:
   /async@2.1.4:
     resolution: {integrity: sha512-ZAxi5cea9DNM37Ld7lIj7c8SmOVaK/ns1pTiNI8vnQbyGsS5WuL+ImnU5UVECiIw43wlx9Wnr9iXn7MJymXacA==}
     dependencies:
-      lodash: 4.17.21
+      lodash: 4.17.10
     dev: false
 
   /async@3.2.4:
@@ -4139,6 +4145,14 @@ packages:
     dependencies:
       no-case: 3.0.4
       tslib: 2.5.0
+    dev: false
+
+  /dot-object@2.1.4:
+    resolution: {integrity: sha512-7FXnyyCLFawNYJ+NhkqyP9Wd2yzuo+7n9pGiYpkmXCTYa8Ci2U0eUNDVg5OuO5Pm6aFXI2SWN8/N/w7SJWu1WA==}
+    hasBin: true
+    dependencies:
+      commander: 4.1.1
+      glob: 7.2.3
     dev: false
 
   /dot-prop@5.3.0:
@@ -6228,6 +6242,10 @@ packages:
   /lodash.upperfirst@4.3.1:
     resolution: {integrity: sha512-sReKOYJIJf74dhJONhU4e0/shzi1trVbSWDOhKYE5XV2O+H7Sb2Dihwuc7xWxVl+DgFPyTqIN3zMfT9cq5iWDg==}
     dev: true
+
+  /lodash@4.17.10:
+    resolution: {integrity: sha512-UejweD1pDoXu+AD825lWwp4ZGtSwgnpZxb3JDViD7StjQz+Nb/6l093lx4OQ0foGWNRoc19mWy7BzL+UAK2iVg==}
+    dev: false
 
   /lodash@4.17.21:
     resolution: {integrity: sha512-v2kDEe57lecTulaDIuNTPy3Ry4gLGJ6Z1O3vE1krgXZNrsQ+LFTGHVxVjcXPs17LhbZVGedAJv8XZ1tvj5FvSg==}
