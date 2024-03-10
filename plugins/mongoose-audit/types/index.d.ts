@@ -15,8 +15,10 @@ interface PluginOptions {
   getUser?: () => any;
   /**  The types of audit to record. */
   types?: auditType[];
-  /**  The fields to exclude from the audit. */
+  /**  The fields to exclude from the audit. Cannot be used along with include. */
   exclude?: string[];
+  /**  The fields to consider for the audit. Cannot be used along with exclude. */
+  include?: string[];
   /**  Called before persisting the audit is saved. Use this to use your own audit model instead of the default one. */
   onAudit?: (audit: Audit) => Promise<any>;
   /**  By default audit logs are persisted asynchronously in the background. Change this to false if you want it to be synchronous" */

@@ -8,8 +8,6 @@ import { extractArray, filter, flattenObject } from "./utils";
 const options = {
   getUser: () => undefined,
   types: [AuditType.Add, AuditType.Edit, AuditType.delete],
-  exclude: [],
-  onAudit: undefined,
   background: true
 };
 
@@ -21,6 +19,7 @@ const addAuditLogObject = (currentObject, original) => {
     changes = changes.reduce((obj, change) => {
       const key = change.path.join(".");
       if (options.exclude?.includes(key)) return obj;
+      if (options.include && !options.include?.includes(key)) return obj;
       if (change.kind === "A") {
         if (!obj[key] && change.path.length) {
           const data = {
