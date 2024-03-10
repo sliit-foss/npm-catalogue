@@ -2,6 +2,8 @@
 
 #### A rework of the [mongoose-audit-log](https://www.npmjs.com/package/mongoose-audit-log) package to support newer versions of mongoose and more flexible options<br>
 
+#### !IMPORTANT - The behaviour of this is different from the original `mongoose-audit-log` package and cannot be considered as a drop in replacement for it.
+
 It is a mongoose plugin to manage an audit log of changes to a MongoDB database.
 
 ## Features

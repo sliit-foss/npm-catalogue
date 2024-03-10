@@ -5,8 +5,7 @@ type auditType = "add" | "edit" | "delete";
 interface Audit {
   entity_id: any;
   entity: string;
-  collection: string;
-  changes: any;
+  changes: { [key: string]: any };
   user: any;
   created_at: string;
 }
@@ -20,6 +19,8 @@ interface PluginOptions {
   exclude?: string[];
   /**  Called before persisting the audit is saved. Use this to use your own audit model instead of the default one. */
   onAudit?: (audit: Audit) => Promise<any>;
+  /**  By default audit logs are persisted asynchronously in the background. Change this to false if you want it to be synchronous" */
+  background?: boolean;
 }
 
 /** Registers the plugin with the provided options. */

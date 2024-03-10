@@ -4,7 +4,6 @@ const auditSchema = new mongoose.Schema(
   {
     entity_id: {},
     entity: String,
-    collection: String,
     changes: {},
     user: {
       type: mongoose.Schema.Types.Mixed,
