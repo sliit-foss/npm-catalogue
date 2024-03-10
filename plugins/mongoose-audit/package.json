@@ -1,6 +1,6 @@
 {
   "name": "@sliit-foss/mongoose-audit",
-  "version": "0.3.0-blizzard.0",
+  "version": "0.3.1-blizzard.0",
   "description": "A rework of the mongoose-audit-log package to support newer versions of mongoose and more flexible options",
   "main": "dist/index.js",
   "types": "types/index.d.ts",
