@@ -15,7 +15,7 @@
   "dependencies": {
     "deep-diff": "1.0.2",
     "dot-object": "2.1.4",
-    "lodash": "4.17.10"
+    "lodash": "4.17.21"
   },
   "peerDependencies": {
     "mongoose": ">=5"
