@@ -1,6 +1,6 @@
 import mongoose from "mongoose";
 
-type auditType = "add" | "edit" | "delete";
+type auditType = "Add" | "Edit" | "Delete";
 
 interface Audit {
   entity_id: any;
