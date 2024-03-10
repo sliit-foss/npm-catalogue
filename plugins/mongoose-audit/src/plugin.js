@@ -8,8 +8,6 @@ import { extractArray, filter, flattenObject } from "./utils";
 const options = {
   getUser: () => undefined,
   types: [AuditType.Add, AuditType.Edit, AuditType.delete],
-  exclude: [],
-  onAudit: undefined,
   background: true
 };
 
@@ -21,6 +19,7 @@ const addAuditLogObject = (currentObject, original) => {
     changes = changes.reduce((obj, change) => {
       const key = change.path.join(".");
       if (options.exclude?.includes(key)) return obj;
+      if (options.include && !options.include?.includes(key)) return obj;
       if (change.kind === "A") {
         if (!obj[key] && change.path.length) {
           const data = {
@@ -84,6 +83,7 @@ const addAuditLog = async (currentObject) => {
 const addUpdate = async (query, multi) => {
   const updated = flattenObject(query._update);
   let counter = 0;
+  if (query.clone) query = query.clone()
   const originalDocs = await query.find(query._conditions).lean(true)
   const promises = originalDocs.map((original) => {
     if (!multi && counter++) {
@@ -110,6 +110,7 @@ const addDelete = async (currentObject, options) => {
 };
 
 const addFindAndDelete = async (query) => {
+  if (query.clone) query = query.clone()
   const originalDocs = await query.find().lean(true)
   const promises = originalDocs.map((original) => {
     return addDelete(original, query.options)
