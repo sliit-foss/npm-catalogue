@@ -3,3 +3,10 @@ export const AuditType = {
   Edit: "Edit",
   Delete: "Delete"
 };
+
+export const ChangeAuditType = {
+  N: AuditType.Add,
+  D: AuditType.Delete,
+  E: AuditType.Edit,
+  A: AuditType.Edit,
+}
