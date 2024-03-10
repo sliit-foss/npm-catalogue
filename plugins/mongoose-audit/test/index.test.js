@@ -1,8 +1,16 @@
 import { default as mongoose } from "mongoose";
+import { exec } from "child_process";
+import { promisify } from "util";
 import { plugin, Audit } from "../src";
 import { AuditType } from "../src/constants";
 
+jest.setTimeout(120000)
+
+const execute = promisify(exec)
+
 const connectToDatabase = async () => {
+  await execute("docker run -d -p 27017:27017 mongo:5.0")
+  await new Promise((resolve) => setTimeout(resolve, 3000))
   await mongoose.connect("mongodb://localhost:27017/test")
 };
 
