@@ -20,6 +20,9 @@
   "peerDependencies": {
     "mongoose": ">=5"
   },
+  "devDependencies": {
+    "mongoose": "^5"
+  },
   "author": "SLIIT FOSS",
   "license": "MIT",
   "repository": {
