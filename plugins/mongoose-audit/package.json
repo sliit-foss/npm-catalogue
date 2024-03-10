@@ -10,10 +10,12 @@
     "bump-version": "bash ../../scripts/bump-version.sh --name=@sliit-foss/express-http-context",
     "lint": "bash ../../scripts/lint.sh",
     "release": "bash ../../scripts/release.sh",
-    "test": "if [ \"$CI\" = \"true\" ]; then \n bash ../../scripts/test/test.sh; else \n echo \"Skipping as it is not a CI environemnt\"; fi"
+    "test": "if [ \"$CI\" = \"true\" ]; then \n bash ../../scripts/test/test.sh; else \n echo \"Skipping as it is not a CI environment\"; fi"
   },
   "dependencies": {
-    "deep-diff": "^1.0.2"
+    "deep-diff": "1.0.2",
+    "dot-object": "2.1.4",
+    "lodash": "4.17.10"
   },
   "peerDependencies": {
     "mongoose": ">=5"
