@@ -1,4 +1,6 @@
 import { default as mongoose } from "mongoose";
+import { exec } from "child_process";
+import { promisify } from "util";
 import { plugin, Audit } from "../src";
 import { AuditType } from "../src/constants";
 
