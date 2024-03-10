@@ -1,0 +1,45 @@
+{
+  "name": "@sliit-foss/mongoose-audit",
+  "version": "0.0.0",
+  "description": "A rework of the mongoose-audit-log package to support newer versions of mongoose and more flexible options",
+  "main": "dist/index.js",
+  "types": "types/index.d.ts",
+  "scripts": {
+    "build": "node ../../scripts/esbuild.config.js",
+    "build:watch": "bash ../../scripts/esbuild.watch.sh",
+    "bump-version": "bash ../../scripts/bump-version.sh --name=@sliit-foss/express-http-context",
+    "lint": "bash ../../scripts/lint.sh",
+    "release": "bash ../../scripts/release.sh",
+    "test": "if [ \"$CI\" = \"true\" ]; then \n bash ../../scripts/test/test.sh; else \n echo \"Skipping as it is not a CI environment\"; fi"
+  },
+  "dependencies": {
+    "deep-diff": "1.0.2",
+    "dot-object": "2.1.4",
+    "lodash": "4.17.10"
+  },
+  "peerDependencies": {
+    "mongoose": ">=5"
+  },
+  "devDependencies": {
+    "mongoose": "^5"
+  },
+  "author": "SLIIT FOSS",
+  "license": "MIT",
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/sliit-foss/npm-catalogue.git"
+  },
+  "homepage": "https://github.com/sliit-foss/npm-catalogue/blob/main/plugins/mongoose-audit/readme.md",
+  "keywords": [
+    "mongoose",
+    "mongoose-plugin",
+    "audit",
+    "log",
+    "trail",
+    "history",
+    "version"
+  ],
+  "bugs": {
+    "url": "https://github.com/sliit-foss/npm-catalogue/issues"
+  }
+}

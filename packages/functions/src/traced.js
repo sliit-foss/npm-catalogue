@@ -7,7 +7,8 @@ const logger = moduleLogger("tracer");
 
 export const _traced = (fn, loggable = {}, fnName, layer, fallible) => {
   let startTime;
-  const disableTracing = process.env.DISABLE_FUNCTION_TRACING === "true" || process.env.DISABLE_FUNCTION_TRACING === "1";
+  const disableTracing =
+    process.env.DISABLE_FUNCTION_TRACING === "true" || process.env.DISABLE_FUNCTION_TRACING === "1";
   if (!disableTracing) {
     fnName = fnName ?? _fnName(fn, layer);
     logger.info(`${fnName} execution initiated`, loggable);
