@@ -12,7 +12,7 @@ const options = {
 };
 
 const addAuditLogObject = (currentObject, original) => {
-  const user = currentObject.__user || options.getUser?.() || "Unknown User";
+  const user = currentObject.__user || options.getUser?.() || "Unknown";
   delete currentObject.__user;
   let changes = deepDiff(JSON.parse(JSON.stringify(original ?? {})), JSON.parse(JSON.stringify(currentObject ?? {})), filter);
   if (changes?.length) {
