@@ -71,7 +71,7 @@ describe("audit", function () {
       const entry = audit[0];
       expect(entry.changes["name"].to).toBe("Lucky");
       expect(entry.changes["name"].type).toBe(AuditType.Add);
-      expect(entry.user).toBe("Unknown User")
+      expect(entry.user).toBe("Unknown")
       expect(entry.entity).toBe("Test")
     })
   });
