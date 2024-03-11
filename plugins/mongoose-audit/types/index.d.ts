@@ -21,7 +21,7 @@ export interface Options {
   include?: string[];
   /**  Called before persisting the audit is saved. Use this to use your own audit model instead of the default one. */
   onAudit?: (audit: Audit) => Promise<any>;
-  /**  By default audit logs are persisted asynchronously in the background. Change this to false if you want it to be synchronous" */
+  /**  By default audit logs are persisted asynchronously in the background. Change this to false if you want it to be synchronous." */
   background?: boolean;
 }
 
