@@ -7,15 +7,23 @@ const mongooseFilterQuery = (req, res, next) => {
     if (req.query.filter) {
       Object.keys(req.query.filter).forEach((key) => {
         const value = req.query.filter[key];
-        const complexOp = complexOperators.find((op) => value.startsWith(`${op}(`));
-        if (complexOp) {
-          const values = replaceOperator(value, complexOp)?.split(",");
-          req.query.filter[`$${complexOp}`] = values.map((subValue) => ({
-            [key]: mapValue(subValue)
-          }));
-          delete req.query.filter[key];
+        if (complexOperators.includes(key)) {
+          req.query.filter[`$${key}`] = value.split(",").map((kv) => {
+            const [key, value] = kv.split("=")
+            return { [key]: mapValue(value) }
+          })
+          delete req.query.filter[key]
         } else {
-          req.query.filter[key] = mapValue(value);
+          const complexOp = complexOperators.find((op) => value.startsWith(`${op}(`));
+          if (complexOp) {
+            const values = replaceOperator(value, complexOp)?.split(",");
+            req.query.filter[`$${complexOp}`] = values.map((subValue) => ({
+              [key]: mapValue(subValue)
+            }));
+            delete req.query.filter[key];
+          } else {
+            req.query.filter[key] = mapValue(value);
+          }
         }
       });
     } else {
