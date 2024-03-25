@@ -5,6 +5,8 @@ import {
   basicFilterResult,
   complexFilterReq,
   complexFilterResult,
+  complexRootKeyFilterReq,
+  complexRootKeyFilterResult,
   sortsReq,
   sortResult,
   includeReq,
@@ -23,6 +25,10 @@ describe("test mongoose-filter-query", () => {
     test("complex", async () => {
       mongooseFilterQuery(complexFilterReq, {}, () => {});
       expect(complexFilterReq.query.filter).toEqual(complexFilterResult);
+    });
+    test("complex as root key", async () => {
+      mongooseFilterQuery(complexRootKeyFilterReq, {}, () => {});
+      expect(complexRootKeyFilterReq.query.filter).toEqual(complexRootKeyFilterResult);
     });
     test("undefined", async () => {
       mongooseFilterQuery(sortsReq, {}, () => {});
