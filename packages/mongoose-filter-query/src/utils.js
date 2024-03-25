@@ -1,3 +1,5 @@
+const complexOperators = ["and", "or"];
+
 export const replaceOperator = (value, operator) => {
   value = value.replace(`${operator}(`, "").slice(0, -1);
   if (isNaN(value)) {
@@ -38,3 +40,30 @@ export const mapValue = (value) => {
   }
   return value;
 };
+
+export const mapFilters = (filter = {}) => {
+  if (filter) {
+    Object.keys(filter).forEach((key) => {
+      const value = filter[key];
+      if (complexOperators.includes(key)) {
+        filter[`$${key}`] = value.split(",").map((kv) => {
+          const [key, value] = kv.split("=")
+          return { [key]: mapValue(value) }
+        })
+        delete filter[key]
+      } else {
+        const complexOp = complexOperators.find((op) => value.startsWith(`${op}(`));
+        if (complexOp) {
+          const values = replaceOperator(value, complexOp)?.split(",");
+          filter[`$${complexOp}`] = values.map((subValue) => ({
+            [key]: mapValue(subValue)
+          }));
+          delete filter[key];
+        } else {
+          filter[key] = mapValue(value);
+        }
+      }
+    });
+  }
+  return filter;
+}
