@@ -46,6 +46,20 @@ export const complexFilterResult = {
   $or: [{ lastName: { $eq: "Doe" } }, { lastName: { $ne: "John" } }]
 };
 
+export const complexRootKeyFilterReq = {
+  query: {
+    filter: {
+      or: "firstName=eq(John),lastName=eq(Doe)",
+      and: "age=gt(20),firstName=eq(John)"
+    }
+  }
+};
+
+export const complexRootKeyFilterResult = {
+  $or: [{ firstName: { $eq: "John" } }, { lastName: { $eq: "Doe" } }],
+  $and: [{ age: { $gt: 20 } }, { firstName: { $eq: "John" } }],
+};
+
 export const sortsReq = {
   query: {
     sort: {

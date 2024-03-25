@@ -116,10 +116,22 @@ console.log(data);
 - This will return all users with a first name of John, Eric or matches the given regular expression<br><br>
 
 ```javascript
+"http://localhost:3000/api/users?filter[or]=first_name=eq(John),last_name=eq(Eric)";
+```
+
+- This will return all users with a first name of John or a last name of Eric<br><br>
+
+```javascript
 "http://localhost:3000/api/users?filter[age]=and(gt(20),lt(30))";
 ```
 
 - This will return all users with an age which is between 20 and 30<br><br>
+
+```javascript
+"http://localhost:3000/api/users?filter[and]=age=gt(20),first_name=eq(John)";
+```
+
+- This will return all users with an age greater than 20 and a first name of John<br><br>
 
 ## Multiple Filters<br><br>
 
