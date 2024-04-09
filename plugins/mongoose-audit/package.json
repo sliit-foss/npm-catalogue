@@ -1,6 +1,6 @@
 {
   "name": "@sliit-foss/mongoose-audit",
-  "version": "1.0.1",
+  "version": "1.0.2",
   "description": "A rework of the mongoose-audit-log package to support newer versions of mongoose and more flexible options",
   "main": "dist/index.js",
   "types": "types/index.d.ts",
