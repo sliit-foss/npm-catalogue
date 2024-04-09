@@ -35,14 +35,14 @@ const addAuditLogObject = (currentObject, original) => {
           }
           set(obj, key, data)
         }
-      } else if (typeof change.lhs === "object") {
+      } else if (change.lhs && typeof change.lhs === "object") {
         Object.entries(dot(change.lhs)).forEach(([subKeys, value]) => {
           set(obj, `${key}.${subKeys}`, {
             from: value,
             type: ChangeAuditType[change.kind]
           })
         })
-      } else if (typeof change.rhs === "object") {
+      } else if (change.rhs && typeof change.rhs === "object") {
         Object.entries(dot(change.rhs)).forEach(([subKeys, value]) => {
           set(obj, `${key}.${subKeys}`, {
             to: value,
