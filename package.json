@@ -8,11 +8,11 @@
   ],
   "scripts": {
     "build": "turbo run build",
+    "prepare": "lefthook install",
     "bump-version": "turbo run bump-version",
     "dev": "turbo run dev",
     "lint": "turbo run lint",
-    "format:fix": "prettier --write \"**/*.{js,ts,tsx,md}\" --cache",
-    "format": "prettier --check .",
+    "format": "prettier --write \"**/*.{js,ts,tsx,md}\" --cache",
     "release": "turbo run release",
     "submodules:load": "git submodule update --init",
     "submodules:sync": "git submodule update --recursive --remote",
@@ -31,12 +31,12 @@
     "turbo": "1.7.3"
   },
   "devDependencies": {
-    "@commitlint/cli": "^19.2.1",
-    "@commitlint/config-conventional": "^19.1.0",
+    "@commitlint/cli": "19.2.1",
+    "@commitlint/config-conventional": "19.1.0",
     "@sliit-foss/eslint-config-internal": "workspace:*",
     "eslint": "8.33.0",
     "eslint-config-turbo": "0.0.7",
-    "lefthook": "^1.6.10",
+    "lefthook": "1.6.10",
     "nodemon": "2.0.21",
     "prettier": "2.8.3"
   },
