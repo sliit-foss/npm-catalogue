@@ -1,14 +1,14 @@
-commit-msg:
-  commands:
-    commitlint:
-      run: npx commitlint --edit --color
-
 pre-commit:
   parallel: true
   commands:
     format:
-      glob: "*.{css,html,json,less,md,scss,yaml,yml,ts,tsx}"
-      run: npx prettier --write --log-level error {staged_files} && git add {staged_files}
+      glob: "*.{css,html,json,less,md,scss,yaml,yml,js,jsx,ts,tsx}"
+      run: npx prettier --write --cache --log-level error {staged_files} && git add {staged_files}
     code:
       glob: "*.{js,jsx,ts,tsx}"
-      run: npx eslint {staged_files} --fix && git add {staged_files}
+      run: npx eslint --cache {staged_files} --fix && git add {staged_files}
+
+commit-msg:
+  commands:
+    commitlint:
+      run: npx commitlint --edit --color
