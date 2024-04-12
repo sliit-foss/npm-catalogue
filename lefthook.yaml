@@ -6,7 +6,7 @@ pre-commit:
       run: npx prettier --write --cache --log-level error {staged_files} && git add {staged_files}
     code:
       glob: "*.{js,jsx,ts,tsx}"
-      run: npx eslint {staged_files} --fix && git add {staged_files}
+      run: npx eslint --cache {staged_files} --fix && git add {staged_files}
 
 commit-msg:
   commands:
