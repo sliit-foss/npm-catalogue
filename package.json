@@ -38,7 +38,8 @@
     "eslint-config-turbo": "0.0.7",
     "husky": "8.0.3",
     "nodemon": "2.0.21",
-    "prettier": "2.8.3"
+    "prettier": "2.8.3",
+    "lint-staged": "^15.2.2"
   },
   "engines": {
     "node": ">=14.0.0"
