@@ -14,7 +14,7 @@
     "test": "bash ../../scripts/test/test.sh"
   },
   "devDependencies": {
-    "express": "^4.16.2"
+    "express": "^4.19.2"
   },
   "author": "SLIIT FOSS",
   "license": "MIT",
