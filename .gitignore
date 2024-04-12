@@ -53,3 +53,7 @@ p*/**/LICENSE
 
 p*/**/node_modules/
 p*/**/logs/.turbo
+
+#non-pnpm lock files
+yarn.lock
+package-lock.json
