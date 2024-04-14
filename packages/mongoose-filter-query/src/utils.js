@@ -47,10 +47,10 @@ export const mapFilters = (filter = {}) => {
       const value = filter[key];
       if (complexOperators.includes(key)) {
         filter[`$${key}`] = value.split(",").map((kv) => {
-          const [key, value] = kv.split("=")
-          return { [key]: mapValue(value) }
-        })
-        delete filter[key]
+          const [key, value] = kv.split("=");
+          return { [key]: mapValue(value) };
+        });
+        delete filter[key];
       } else {
         const complexOp = complexOperators.find((op) => value.startsWith(`${op}(`));
         if (complexOp) {
@@ -66,4 +66,4 @@ export const mapFilters = (filter = {}) => {
     });
   }
   return filter;
-}
+};
