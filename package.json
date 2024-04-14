@@ -8,11 +8,11 @@
   ],
   "scripts": {
     "build": "turbo run build",
-    "prepare": "lefthook install",
     "bump-version": "turbo run bump-version",
     "dev": "turbo run dev",
     "lint": "turbo run lint",
     "format": "prettier --write \"**/*.{js,ts,tsx,md}\" --cache",
+    "prepare": "lefthook install",
     "release": "turbo run release",
     "submodules:load": "git submodule update --init",
     "submodules:sync": "git submodule update --recursive --remote",
