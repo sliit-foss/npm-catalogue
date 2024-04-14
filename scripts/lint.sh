@@ -1,1 +1,1 @@
-eslint src --ext .js --fix
+eslint src --ext .js --fix --cache
