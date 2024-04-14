@@ -18,7 +18,7 @@ yarn add @sliit-foss/http-logger
 
 ```js
 # using require
-const httpLogger = require("@sliit-foss/http-logger");
+const httpLogger = require("@sliit-foss/http-logger").default;
 
 # using import
 import httpLogger from "@sliit-foss/http-logger";

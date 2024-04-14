@@ -18,7 +18,7 @@ yarn add @sliit-foss/service-connector
 
 ```js
 # using require
-const serviceConnector = require("@sliit-foss/service-connector");
+const serviceConnector = require("@sliit-foss/service-connector").default;
 
 # using import
 import serviceConnector from "@sliit-foss/service-connector";
