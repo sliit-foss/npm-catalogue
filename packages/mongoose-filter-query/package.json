@@ -11,6 +11,9 @@
     "release": "bash ../../scripts/release.sh",
     "test": "bash ../../scripts/test/test.sh"
   },
+  "peerDependencies": {
+    "bson": ">=4"
+  },
   "author": "SLIIT FOSS",
   "license": "MIT",
   "repository": {
