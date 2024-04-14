@@ -1,0 +1,14 @@
+pre-commit:
+  parallel: true
+  commands:
+    format:
+      glob: "*.{css,html,json,less,md,scss,yaml,yml,js,jsx,ts,tsx}"
+      run: npx prettier --write --cache {staged_files} && git add {staged_files}
+    lint:
+      glob: "*.{js,jsx,ts,tsx}"
+      run: npm run lint && git add {staged_files}
+
+commit-msg:
+  commands:
+    commitlint:
+      run: npx commitlint --edit --color

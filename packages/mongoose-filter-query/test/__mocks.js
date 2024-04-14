@@ -57,7 +57,7 @@ export const complexRootKeyFilterReq = {
 
 export const complexRootKeyFilterResult = {
   $or: [{ firstName: { $eq: "John" } }, { lastName: { $eq: "Doe" } }],
-  $and: [{ age: { $gt: 20 } }, { firstName: { $eq: "John" } }],
+  $and: [{ age: { $gt: 20 } }, { firstName: { $eq: "John" } }]
 };
 
 export const sortsReq = {

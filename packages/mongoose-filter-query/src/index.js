@@ -2,8 +2,8 @@ import { mapFilters } from "./utils";
 
 const mongooseFilterQuery = (req, res, next) => {
   try {
-    req.query.filter = mapFilters(req.query.filter) ?? {}
-    mapFilters(req.query.secondaryFilter)
+    req.query.filter = mapFilters(req.query.filter) ?? {};
+    mapFilters(req.query.secondaryFilter);
     if (req.query.sort) {
       Object.keys(req.query.sort).forEach((key) => {
         const dir = req.query.sort[key];
