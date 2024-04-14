@@ -5,6 +5,9 @@ export const replaceOperator = (value, operator) => {
   if (isNaN(value)) {
     if (!isNaN(Date.parse(value))) {
       value = new Date(value);
+    } else if (/^[0-9a-fA-F]{24}$/.test(value)) {
+      const ObjectId = require("bson").ObjectId;
+      value = new ObjectId(value);
     }
   } else {
     value = Number(value);
