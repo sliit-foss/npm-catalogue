@@ -5,6 +5,7 @@
   "main": "dist/index.js",
   "scripts": {
     "build": "node ../../scripts/esbuild.config.js",
+    "types": "types/index.d.ts",
     "build:watch": "bash ../../scripts/esbuild.watch.sh",
     "bump-version": "bash ../../scripts/bump-version.sh --name=@sliit-foss/http-logger",
     "lint": "bash ../../scripts/lint.sh",
