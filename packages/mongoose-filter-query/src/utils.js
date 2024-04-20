@@ -43,6 +43,7 @@ export const mapValue = (value) => {
   } else if (value.startsWith("exists(")) {
     return { $exists: parseOperatorValue(value, "exists") === "true" };
   }
+  if (value === "true" || value === "false") return value === "true"
   return value;
 };
 
