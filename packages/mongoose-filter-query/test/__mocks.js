@@ -29,7 +29,7 @@ export const basicFilterResult = {
   birthdate: { $lte: new Date("2000-01-01") },
   isAlive: { $exists: true },
   isVerified: { $eq: true },
-  isDeleted: "false"
+  isDeleted: false
 };
 
 export const complexFilterReq = {
