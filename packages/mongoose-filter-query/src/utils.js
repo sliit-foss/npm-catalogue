@@ -1,10 +1,15 @@
 const complexOperators = ["and", "or"];
 
-export const replaceOperator = (value, operator) => {
-  value = value.replace(`${operator}(`, "").slice(0, -1);
+const replaceOperator = (value, operator) => value.replace(`${operator}(`, "").slice(0, -1)
+
+const parseOperatorValue = (value, operator) => {
+  value = replaceOperator(value, operator);
   if (isNaN(value)) {
     if (!isNaN(Date.parse(value))) {
       value = new Date(value);
+    } else if (/^[0-9a-fA-F]{24}$/.test(value)) {
+      const ObjectId = require("bson").ObjectId;
+      value = new ObjectId(value);
     }
   } else {
     value = Number(value);
@@ -14,30 +19,31 @@ export const replaceOperator = (value, operator) => {
 
 export const mapValue = (value) => {
   if (value.startsWith("eq(")) {
-    value = replaceOperator(value, "eq");
+    value = parseOperatorValue(value, "eq");
     if (value === "true" || value === "false") {
       return { $eq: value === "true" };
     }
     return { $eq: value };
   } else if (value.startsWith("ne(")) {
-    return { $ne: replaceOperator(value, "ne") };
+    return { $ne: parseOperatorValue(value, "ne") };
   } else if (value.startsWith("gt(")) {
-    return { $gt: replaceOperator(value, "gt") };
+    return { $gt: parseOperatorValue(value, "gt") };
   } else if (value.startsWith("gte(")) {
-    return { $gte: replaceOperator(value, "gte") };
+    return { $gte: parseOperatorValue(value, "gte") };
   } else if (value.startsWith("lt(")) {
-    return { $lt: replaceOperator(value, "lt") };
+    return { $lt: parseOperatorValue(value, "lt") };
   } else if (value.startsWith("lte(")) {
-    return { $lte: replaceOperator(value, "lte") };
+    return { $lte: parseOperatorValue(value, "lte") };
   } else if (value.startsWith("in(")) {
-    return { $in: replaceOperator(value, "in").split(",") };
+    return { $in: parseOperatorValue(value, "in").split(",") };
   } else if (value.startsWith("nin(")) {
-    return { $nin: replaceOperator(value, "nin").split(",") };
+    return { $nin: parseOperatorValue(value, "nin").split(",") };
   } else if (value.startsWith("reg(")) {
     return { $regex: new RegExp(replaceOperator(value, "reg")) };
   } else if (value.startsWith("exists(")) {
-    return { $exists: replaceOperator(value, "exists") === "true" };
+    return { $exists: parseOperatorValue(value, "exists") === "true" };
   }
+  if (value === "true" || value === "false") return value === "true"
   return value;
 };
 
@@ -54,7 +60,7 @@ export const mapFilters = (filter = {}) => {
       } else {
         const complexOp = complexOperators.find((op) => value.startsWith(`${op}(`));
         if (complexOp) {
-          const values = replaceOperator(value, complexOp)?.split(",");
+          const values = parseOperatorValue(value, complexOp)?.split(",");
           filter[`$${complexOp}`] = values.map((subValue) => ({
             [key]: mapValue(subValue)
           }));

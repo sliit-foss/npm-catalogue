@@ -1,6 +1,6 @@
 {
   "name": "@sliit-foss/mongoose-filter-query",
-  "version": "5.0.0",
+  "version": "5.0.3",
   "description": "Middleware which implements a standardized format and maps an incoming http request's query params to a format which is supported by mongoose",
   "main": "dist/index.js",
   "scripts": {
@@ -10,6 +10,9 @@
     "lint": "bash ../../scripts/lint.sh",
     "release": "bash ../../scripts/release.sh",
     "test": "bash ../../scripts/test/test.sh"
+  },
+  "peerDependencies": {
+    "bson": ">=4"
   },
   "author": "SLIIT FOSS",
   "license": "MIT",
