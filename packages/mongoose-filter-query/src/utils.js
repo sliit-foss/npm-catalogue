@@ -39,7 +39,8 @@ export const mapValue = (value) => {
   } else if (value.startsWith("nin(")) {
     return { $nin: parseOperatorValue(value, "nin").split(",") };
   } else if (value.startsWith("reg(")) {
-    return { $regex: new RegExp(replaceOperator(value, "reg")) };
+    const [regex, modifiers] = replaceOperator(value, "reg").split("...[")
+    return { $regex: new RegExp(regex, modifiers?.slice(0, -1)) };
   } else if (value.startsWith("exists(")) {
     return { $exists: parseOperatorValue(value, "exists") === "true" };
   }
