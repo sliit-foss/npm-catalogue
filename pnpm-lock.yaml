@@ -147,6 +147,9 @@ importers:
       axios:
         specifier: 1.6.0
         version: 1.6.0
+      axios-retry:
+        specifier: 4.1.0
+        version: 4.1.0(axios@1.6.0)
       chalk:
         specifier: 4.1.2
         version: 4.1.2
@@ -3340,6 +3343,16 @@ packages:
     engines: {node: '>= 0.4'}
     dev: true
 
+  /axios-retry@4.1.0(axios@1.6.0):
+    resolution:
+      { integrity: sha512-svdth4H00yhlsjBbjfLQ/sMLkXqeLxhiFC1nE1JtkN/CIssGxqk0UwTEdrVjwA2gr3yJkAulwvDSIm4z4HyPvg== }
+    peerDependencies:
+      axios: 0.x || 1.x
+    dependencies:
+      axios: 1.6.0
+      is-retry-allowed: 2.2.0
+    dev: false
+
   /axios@1.6.0:
     resolution: {integrity: sha512-EZ1DYihju9pwVB+jg67ogm+Tmqc6JmhamRN6I4Zt8DfZu5lbcQGw3ozH9lFejSJgs/ibaef3A9PMXPLeefFGJg==}
     dependencies:
@@ -5518,6 +5531,12 @@ packages:
     engines: {node: '>=0.10.0'}
     dependencies:
       is-unc-path: 1.0.0
+    dev: false
+
+  /is-retry-allowed@2.2.0:
+    resolution:
+      { integrity: sha512-XVm7LOeLpTW4jV19QSH38vkswxoLud8sQ57YwJVTPWdiaI9I8keEhGFpBlslyVsgdQy4Opg8QOLb8YRgsyZiQg== }
+    engines: { node: ">=10" }
     dev: false
 
   /is-shared-array-buffer@1.0.2:
