@@ -1,4 +1,5 @@
 import { InternalAxiosRequestConfig, AxiosResponse, CreateAxiosDefaults, AxiosInstance } from "axios";
+import { IAxiosRetryConfig } from "axios-retry";
 
 declare module "axios" {
   interface AxiosInstance {
@@ -20,6 +21,13 @@ declare module "axios" {
      * const data = await instance.get('https://example.com/users').then(resolve);
      */
     resolve: (response: AxiosResponse) => any;
+    /**
+     * @description Enables request retrying. Uses `axios-retry` under the hood
+     * @param config The axios retry config
+     * @example
+     * instance.enableRetry()
+     */
+    enableRetry: (config?: IAxiosRetryConfig) => AxiosInstance;
   }
 }
 
