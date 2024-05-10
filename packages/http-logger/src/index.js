@@ -21,7 +21,7 @@ const httpLogger =
       if (Array.isArray(loggable)) {
         additionalInfo = generateInfoObject(req, loggable);
       } else {
-        additionalInfo = loggable({ headers: req.headers, body: req.body });
+        additionalInfo = loggable(req);
       }
     }
 
