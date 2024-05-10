@@ -1,4 +1,5 @@
 import axios from "axios";
+import axiosRetry from "axios-retry";
 import chalk from "chalk";
 import context from "express-http-context";
 import createError from "http-errors";
@@ -59,6 +60,7 @@ const serviceConnector = ({ service, headerIntercepts, loggable, logs = true, ..
         );
       const customError = createError(error.response?.status ?? 500, errorMessage, { response: error.response });
       customError.response = error.response;
+      customError.config = error.response.config;
       return Promise.reject(customError);
     }
   );
@@ -75,6 +77,13 @@ const serviceConnector = ({ service, headerIntercepts, loggable, logs = true, ..
     });
     if (!res) return response;
     return res.status(response.status).json(response.data);
+  };
+  instance.enableRetry = (options) => {
+    axiosRetry(instance, {
+      retryDelay: (retryCount) => retryCount * 1000,
+      ...options
+    });
+    return instance;
   };
   return instance;
 };
