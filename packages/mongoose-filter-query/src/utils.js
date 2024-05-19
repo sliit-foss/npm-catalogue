@@ -1,9 +1,9 @@
 const complexOperators = ["and", "or"];
 
-const replaceOperator = (value, operator) => value.replace(`${operator}(`, "").slice(0, -1)
+const replaceOperator = (value, operator) => value.replace(`${operator}(`, "").slice(0, -1);
 
 const parseOperatorValue = (value, operator) => {
-  value = replaceOperator(value, operator);
+  if (operator) value = replaceOperator(value, operator);
   if (isNaN(value)) {
     if (!isNaN(Date.parse(value))) {
       value = new Date(value);
@@ -35,16 +35,24 @@ export const mapValue = (value) => {
   } else if (value.startsWith("lte(")) {
     return { $lte: parseOperatorValue(value, "lte") };
   } else if (value.startsWith("in(")) {
-    return { $in: parseOperatorValue(value, "in").split(",") };
+    return {
+      $in: replaceOperator(value, "in")
+        .split(",")
+        .map((v) => parseOperatorValue(v))
+    };
   } else if (value.startsWith("nin(")) {
-    return { $nin: parseOperatorValue(value, "nin").split(",") };
+    return {
+      $nin: replaceOperator(value, "nin")
+        .split(",")
+        .map((v) => parseOperatorValue(v))
+    };
   } else if (value.startsWith("reg(")) {
-    const [regex, modifiers] = replaceOperator(value, "reg").split("...[")
+    const [regex, modifiers] = replaceOperator(value, "reg").split("...[");
     return { $regex: new RegExp(regex, modifiers?.slice(0, -1)) };
   } else if (value.startsWith("exists(")) {
     return { $exists: parseOperatorValue(value, "exists") === "true" };
   }
-  if (value === "true" || value === "false") return value === "true"
+  if (value === "true" || value === "false") return value === "true";
   return value;
 };
 
