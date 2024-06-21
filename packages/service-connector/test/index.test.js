@@ -122,3 +122,19 @@ describe("service-connector resolver", () => {
     expect(response).toStrictEqual(mockData.data);
   });
 });
+
+describe("service-connector retry", () => {
+  test("successful request with retry", async () => {
+    let retries = 0;
+    await serviceConnector()
+      .enableRetry({
+        retryCondition: () => true,
+        onRetry: async () => {
+          retries++;
+        }
+      })
+      .get("https://google.com/123")
+      .catch(() => {});
+    expect(retries).toStrictEqual(3);
+  });
+});
