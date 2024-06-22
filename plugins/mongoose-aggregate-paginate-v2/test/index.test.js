@@ -46,7 +46,7 @@ beforeAll(async () => {
             });
             books.push(book);
         }
-        await Book.create(books);
+        return Book.create(books);
     });
 });
 
