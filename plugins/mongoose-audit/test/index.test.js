@@ -7,7 +7,7 @@ import { AuditType } from "../src/constants";
 const execute = promisify(exec);
 
 const setupMongoServer = async (done) => {
-  await execute("docker run -d -p 27017:27017 --name audit-test mongo:4.2.8");
+  await execute("docker run -d -p 27018:27017 --name audit-test mongo:4.2.8");
   mongoose.connect("mongodb://localhost:27018/audit-test", { useNewUrlParser: true }).then(done).catch(done);
 };
 
