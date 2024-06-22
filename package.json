@@ -12,7 +12,7 @@
     "dev": "turbo run dev",
     "lint": "turbo run lint",
     "format": "prettier --write \"**/*.{js,ts,tsx,md}\" --cache",
-    "prepare": "husky install",
+    "prepare": "lefthook install",
     "release": "turbo run release",
     "submodules:load": "git submodule update --init",
     "submodules:sync": "git submodule update --recursive --remote",
@@ -31,14 +31,14 @@
     "turbo": "1.7.3"
   },
   "devDependencies": {
-    "@commitlint/cli": "17.4.2",
-    "@commitlint/config-conventional": "17.4.2",
+    "@commitlint/cli": "19.2.1",
+    "@commitlint/config-conventional": "19.1.0",
     "@sliit-foss/eslint-config-internal": "workspace:*",
     "eslint": "8.33.0",
     "eslint-config-turbo": "0.0.7",
-    "husky": "8.0.3",
+    "lefthook": "1.6.10",
     "nodemon": "2.0.21",
-    "prettier": "2.8.3"
+    "prettier": "3.2.5"
   },
   "engines": {
     "node": ">=14.0.0"

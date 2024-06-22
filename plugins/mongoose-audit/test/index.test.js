@@ -1,17 +1,17 @@
-import { default as mongoose } from "mongoose";
 import { exec } from "child_process";
 import { promisify } from "util";
+import { default as mongoose } from "mongoose";
 import { plugin, Audit } from "../src";
 import { AuditType } from "../src/constants";
 
-jest.setTimeout(120000)
+jest.setTimeout(120000);
 
-const execute = promisify(exec)
+const execute = promisify(exec);
 
 const connectToDatabase = async () => {
-  await execute("docker run -d -p 27017:27017 mongo:5.0")
-  await new Promise((resolve) => setTimeout(resolve, 3000))
-  await mongoose.connect("mongodb://localhost:27017/test")
+  await execute("docker run -d -p 27017:27017 mongo:5.0");
+  await new Promise((resolve) => setTimeout(resolve, 3000));
+  await mongoose.connect("mongodb://localhost:27017/test");
 };
 
 const createTestModel = () => {
@@ -47,13 +47,12 @@ const cleanup = async () => {
   await Promise.all([
     mongoose.connection.collections[TestObject.collection.collectionName].drop(),
     mongoose.connection.collections[Audit.collection.collectionName].drop()
-  ]).catch(() => { });
-}
+  ]).catch(() => {});
+};
 
 beforeAll(connectToDatabase);
 
 describe("audit", function () {
-
   afterEach(cleanup);
 
   const auditUser = "Jack";
@@ -62,7 +61,7 @@ describe("audit", function () {
 
   beforeEach(async () => {
     test = new TestObject({ name: "Lucky", number: 7 });
-    await test.save()
+    await test.save();
   });
 
   it("should create values for newly created entity", async () => {
@@ -71,9 +70,9 @@ describe("audit", function () {
       const entry = audit[0];
       expect(entry.changes["name"].to).toBe("Lucky");
       expect(entry.changes["name"].type).toBe(AuditType.Add);
-      expect(entry.user).toBe("Unknown")
-      expect(entry.entity).toBe("Test")
-    })
+      expect(entry.user).toBe("Unknown");
+      expect(entry.entity).toBe("Test");
+    });
   });
 
   it("should create values for changes on siblings (non-entities)", async () => {
@@ -89,7 +88,7 @@ describe("audit", function () {
         expect(entry.changes.child.name.type).toBe(AuditType.Add);
         expect(entry.changes.child.number.to).toBe(expectedNumber);
         expect(entry.changes.child.number.type).toBe(AuditType.Add);
-      })
+      });
     });
   });
 
@@ -102,7 +101,7 @@ describe("audit", function () {
       result.child = undefined;
       result.__user = auditUser;
       return result.save().then(async () => {
-        const audit = await Audit.find({ entity_id: test._id })
+        const audit = await Audit.find({ entity_id: test._id });
         expect(audit.length).toBe(3);
         const entry = audit[2];
         expect(entry.changes.child.name.from).toBe(expectedName);
@@ -111,8 +110,7 @@ describe("audit", function () {
         expect(entry.changes.child.number.from).toBe(expectedNumber);
         expect(entry.changes.child.number.to).toBe(undefined);
         expect(entry.changes.child.number.type).toBe(AuditType.Delete);
-      }
-      );
+      });
     });
   });
 
@@ -121,11 +119,11 @@ describe("audit", function () {
     test.entity = { array: [].concat(expectedValues) };
     test.__user = auditUser;
     await test.save().then(async () => {
-      const audit = await Audit.find({ entity_id: test._id })
+      const audit = await Audit.find({ entity_id: test._id });
       expect(audit.length).toBe(2);
       const entry = audit[1];
       expect(entry.changes.entity.array.from.length).toBe(0);
-      expect(entry.changes.entity.array.to).toEqual(expectedValues)
+      expect(entry.changes.entity.array.to).toEqual(expectedValues);
       expect(entry.changes.entity.array.type).toBe(AuditType.Add);
     });
   });
@@ -139,7 +137,7 @@ describe("audit", function () {
       filled.entity.array = [].concat(expectedValues);
       filled.__user = auditUser;
       await filled.save().then(async () => {
-        const audit = await Audit.find({ entity_id: test._id })
+        const audit = await Audit.find({ entity_id: test._id });
         expect(audit.length).toBe(3);
         const entry = audit[2];
         expect(entry.changes.entity.array.from).toEqual(previousValues);
@@ -158,7 +156,7 @@ describe("audit", function () {
       filled.entity.array = [].concat(expectedValues);
       filled.__user = auditUser;
       await filled.save().then(async () => {
-        const audit = await Audit.find({ entity_id: test._id })
+        const audit = await Audit.find({ entity_id: test._id });
         expect(audit.length).toBe(3);
         const entry = audit[2];
         expect(entry.changes.entity.array.from).toEqual(previousValues);
@@ -177,7 +175,7 @@ describe("audit", function () {
       filled.entity.array = [].concat(expectedValues);
       filled.__user = auditUser;
       await filled.save().then(async () => {
-        const audit = await Audit.find({ entity_id: test._id })
+        const audit = await Audit.find({ entity_id: test._id });
         expect(audit.length).toBe(3);
         const entry = audit[2];
         expect(entry.changes.entity.array.from).toEqual(previousValues);
@@ -191,7 +189,7 @@ describe("audit", function () {
     test.empty = "test";
     test.__user = auditUser;
     await test.save().then(async () => {
-      const audit = await Audit.find({ entity_id: test._id })
+      const audit = await Audit.find({ entity_id: test._id });
       expect(audit.length).toBe(2);
       expect(audit[1].changes.empty.type).toBe(AuditType.Add);
     });
@@ -201,7 +199,7 @@ describe("audit", function () {
     test.name = undefined;
     test.__user = auditUser;
     await test.save().then(async () => {
-      const audit = await Audit.find({ entity_id: test._id })
+      const audit = await Audit.find({ entity_id: test._id });
       expect(audit.length).toBe(2);
       expect(audit[1].changes.name.type).toBe("Delete");
     });
@@ -256,15 +254,15 @@ describe("audit", function () {
           expect(items.length).toBe(2);
           expect(items[0].number).toBe(expected);
           expect(items[1].number).toBe(expected);
-        })
-    }
+        });
+    };
     it("on class", async () => {
-      await expector(() => TestObject.update({}, { number: expected }, { __user: auditUser, multi: true }))
+      await expector(() => TestObject.update({}, { number: expected }, { __user: auditUser, multi: true }));
     });
     it("for updateMany", async () => {
-      await expector(() => TestObject.updateMany({}, { number: expected }, { __user: auditUser }))
+      await expector(() => TestObject.updateMany({}, { number: expected }, { __user: auditUser }));
     });
-  })
+  });
 
   it("should create audit trail for update only for first elem if not multi", async () => {
     const test2 = new TestObject({ name: "Unlucky", number: 13 });
@@ -282,7 +280,7 @@ describe("audit", function () {
         expect(items.length).toBe(2);
         expect(items[0].number).toBe(expected);
         expect(items[1].number).toBe(test2.number);
-      })
+      });
   });
 
   it("should create audit trail for update on instance", async () => {
@@ -304,7 +302,7 @@ describe("audit", function () {
         expect(items.length).toBe(2);
         expect(items[0].number).toBe(expected);
         expect(items[1].number).toBe(test2.number);
-      })
+      });
   });
 
   it("should create audit trail on update with $set", async () => {
@@ -321,7 +319,7 @@ describe("audit", function () {
         expect(items.length).toBe(2);
         expect(items[0].number).toBe(expected);
         expect(items[1].number).toBe(test2.number);
-      })
+      });
   });
 
   it("should create audit trail on update with $set if multi", async () => {
@@ -337,7 +335,7 @@ describe("audit", function () {
         expect(items.length).toBe(2);
         expect(items[0].number).toBe(expected);
         expect(items[1].number).toBe(expected);
-      })
+      });
   });
 
   it("should create audit trail on updateOne", async () => {
@@ -359,7 +357,7 @@ describe("audit", function () {
         expect(items.length).toBe(2);
         expect(items[0].number).toBe(expected);
         expect(items[1].number).toBe(test2.number);
-      })
+      });
   });
 
   it("should create audit trail on findOneAndUpdate", async () => {
@@ -381,7 +379,7 @@ describe("audit", function () {
         expect(items.length).toBe(2);
         expect(items[0].number).toBe(expected);
         expect(items[1].number).toBe(test2.number);
-      })
+      });
   });
 
   it("should create audit trail on replaceOne", async () => {
@@ -407,7 +405,7 @@ describe("audit", function () {
         expect(items[0].number).toBe(expected);
         expect(items[0].__v).toBe(1);
         expect(items[1].number).toBe(test2.number);
-      })
+      });
   });
 
   const expectDeleteValues = (entry) => {
@@ -424,14 +422,27 @@ describe("audit", function () {
   };
 
   it("should create audit trail on remove", async () => {
-    await test
-      .remove({ __user: auditUser })
+    await test.remove({ __user: auditUser }).then(async () => {
+      const audit = await Audit.find({});
+      expect(audit.length).toBe(2);
+      expectDeleteValues(audit[1]);
+      const items = await TestObject.find({});
+      expect(items.length).toBe(0);
+    });
+  });
+
+  it("should create audit trail on findOneAndRemove only for one item", async () => {
+    const test2 = new TestObject({ name: "Unlucky", number: 13 });
+    await test2
+      .save()
+      .then(() => TestObject.findOneAndRemove({ _id: test._id }, { __user: auditUser }))
       .then(async () => {
-        const audit = await Audit.find({})
-        expect(audit.length).toBe(2);
-        expectDeleteValues(audit[1]);
+        const audit = await Audit.find({});
+        expect(audit.length).toBe(3);
+        expectDeleteValues(audit[2]);
         const items = await TestObject.find({});
-        expect(items.length).toBe(0);
+        expect(items.length).toBe(1);
+        expect(items[0]._id.toString()).toBe(test2._id.toString());
       });
   });
 
@@ -441,27 +452,12 @@ describe("audit", function () {
       .save()
       .then(() => TestObject.findOneAndRemove({ _id: test._id }, { __user: auditUser }))
       .then(async () => {
-        const audit = await Audit.find({})
+        const audit = await Audit.find({});
         expect(audit.length).toBe(3);
         expectDeleteValues(audit[2]);
         const items = await TestObject.find({});
         expect(items.length).toBe(1);
         expect(items[0]._id.toString()).toBe(test2._id.toString());
-      })
-  });
-
-  it("should create audit trail on findOneAndRemove only for one item", async () => {
-    const test2 = new TestObject({ name: "Unlucky", number: 13 });
-    await test2
-      .save()
-      .then(() => TestObject.findOneAndRemove({ _id: test._id }, { __user: auditUser }))
-      .then(async () => {
-        const audit = await Audit.find({})
-        expect(audit.length).toBe(3);
-        expectDeleteValues(audit[2]);
-        const items = await TestObject.find({});
-        expect(items.length).toBe(1);
-        expect(items[0]._id.toString()).toBe(test2._id.toString());
-      })
+      });
   });
 });

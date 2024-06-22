@@ -1,6 +1,6 @@
 import { default as deepDiff } from "deep-diff";
 import { dot } from "dot-object";
-import { isEmpty, set } from "lodash"
+import { isEmpty, set } from "lodash";
 import { default as Audit } from "./model";
 import { AuditType, ChangeAuditType } from "./constants";
 import { extractArray, filter, flattenObject } from "./utils";
@@ -14,7 +14,11 @@ const options = {
 const addAuditLogObject = (currentObject, original) => {
   const user = currentObject.__user || options.getUser?.() || "Unknown";
   delete currentObject.__user;
-  let changes = deepDiff(JSON.parse(JSON.stringify(original ?? {})), JSON.parse(JSON.stringify(currentObject ?? {})), filter);
+  let changes = deepDiff(
+    JSON.parse(JSON.stringify(original ?? {})),
+    JSON.parse(JSON.stringify(currentObject ?? {})),
+    filter
+  );
   if (changes?.length) {
     changes = changes.reduce((obj, change) => {
       const key = change.path.join(".");
@@ -33,30 +37,30 @@ const addAuditLogObject = (currentObject, original) => {
           } else if (data.to.length) {
             data.type = AuditType.Add;
           }
-          set(obj, key, data)
+          set(obj, key, data);
         }
-      } else if (typeof change.lhs === "object") {
+      } else if (change.lhs && typeof change.lhs === "object") {
         Object.entries(dot(change.lhs)).forEach(([subKeys, value]) => {
           set(obj, `${key}.${subKeys}`, {
             from: value,
             type: ChangeAuditType[change.kind]
-          })
-        })
-      } else if (typeof change.rhs === "object") {
+          });
+        });
+      } else if (change.rhs && typeof change.rhs === "object") {
         Object.entries(dot(change.rhs)).forEach(([subKeys, value]) => {
           set(obj, `${key}.${subKeys}`, {
             to: value,
             type: ChangeAuditType[change.kind]
-          })
-        })
+          });
+        });
       } else {
         set(obj, key, {
           from: change.lhs,
           to: change.rhs,
           type: ChangeAuditType[change.kind]
-        })
+        });
       }
-      return obj
+      return obj;
     }, {});
     if (isEmpty(changes)) return;
     const audit = {
@@ -74,8 +78,8 @@ const addAuditLogObject = (currentObject, original) => {
 };
 
 const addAuditLog = async (currentObject) => {
-  const original = await currentObject.constructor.findOne({ _id: currentObject._id }).lean()
-  const result = addAuditLogObject(currentObject, original)
+  const original = await currentObject.constructor.findOne({ _id: currentObject._id }).lean();
+  const result = addAuditLogObject(currentObject, original);
   /* istanbul ignore else */
   if (!options.background) await result;
 };
@@ -83,16 +87,16 @@ const addAuditLog = async (currentObject) => {
 const addUpdate = async (query, multi) => {
   const updated = flattenObject(query._update);
   let counter = 0;
-  if (query.clone) query = query.clone()
-  const originalDocs = await query.find(query._conditions).lean(true)
+  if (query.clone) query = query.clone();
+  const originalDocs = await query.find(query._conditions).lean(true);
   const promises = originalDocs.map((original) => {
     if (!multi && counter++) {
-      return
+      return;
     }
     const currentObject = Object.assign({ __user: query.options.__user }, original, updated);
     currentObject.constructor.modelName = query.model.modelName;
     return addAuditLogObject(currentObject, original);
-  })
+  });
   /* istanbul ignore else */
   if (!options.background) await Promise.allSettled(promises);
 };
@@ -104,17 +108,17 @@ const addDelete = async (currentObject, options) => {
       __user: options.__user
     },
     JSON.parse(JSON.stringify(currentObject))
-  )
+  );
   /* istanbul ignore else */
   if (!options.background) await result;
 };
 
 const addFindAndDelete = async (query) => {
-  if (query.clone) query = query.clone()
-  const originalDocs = await query.find().lean(true)
+  if (query.clone) query = query.clone();
+  const originalDocs = await query.find().lean(true);
   const promises = originalDocs.map((original) => {
-    return addDelete(original, query.options)
-  })
+    return addDelete(original, query.options);
+  });
   /* istanbul ignore else */
   if (!options.background) await Promise.allSettled(promises);
 };

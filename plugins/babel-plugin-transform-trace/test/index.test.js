@@ -11,7 +11,7 @@ const transformCode = (code, ignore = [], clean = false) => {
           plugin,
           {
             "ignore-functions": ignore,
-            clean: clean
+            "clean": clean
           }
         ]
       ]

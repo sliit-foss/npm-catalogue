@@ -41,8 +41,10 @@ yarn-error.log*
 
 .vscode
 
-packages/automatic-versioning/
+packages/automatic-versioning/tmp
 packages/timekeeper/babel.config.js
+
+.eslintcache
 
 p*/**/dist/
 
@@ -53,3 +55,7 @@ p*/**/LICENSE
 
 p*/**/node_modules/
 p*/**/logs/.turbo
+
+#non-pnpm lock files
+yarn.lock
+package-lock.json

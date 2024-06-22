@@ -29,7 +29,7 @@ export const basicFilterResult = {
   birthdate: { $lte: new Date("2000-01-01") },
   isAlive: { $exists: true },
   isVerified: { $eq: true },
-  isDeleted: "false"
+  isDeleted: false
 };
 
 export const complexFilterReq = {
@@ -57,7 +57,7 @@ export const complexRootKeyFilterReq = {
 
 export const complexRootKeyFilterResult = {
   $or: [{ firstName: { $eq: "John" } }, { lastName: { $eq: "Doe" } }],
-  $and: [{ age: { $gt: 20 } }, { firstName: { $eq: "John" } }],
+  $and: [{ age: { $gt: 20 } }, { firstName: { $eq: "John" } }]
 };
 
 export const sortsReq = {
