@@ -40,7 +40,7 @@ var myModel = require("/models/samplemodel");
 
 const options = {
   page: 1,
-  limit: 10,
+  limit: 10
 };
 
 var myAggregate = myModel.aggregate();
@@ -138,7 +138,7 @@ Please note that the above properties can be renamed by setting customLabels att
 ```javascript
 const options = {
   page: 1,
-  limit: 10,
+  limit: 10
 };
 
 // Define your aggregate.
@@ -228,13 +228,9 @@ if(!err) {
 ### Using `offset` and `limit`
 
 ```javascript
-Model.aggregatePaginate(
-  aggregate,
-  { offset: 30, limit: 10 },
-  function (err, result) {
-    // result
-  }
-);
+Model.aggregatePaginate(aggregate, { offset: 30, limit: 10 }, function (err, result) {
+  // result
+});
 ```
 
 ### Using `countQuery`
@@ -248,7 +244,7 @@ var countAggregate = Model.aggregate();
 
 // Set the count aggregate query
 const options = {
-  countQuery: countAggregate,
+  countQuery: countAggregate
 };
 
 Model.aggregatePaginate(aggregate, options)
@@ -267,13 +263,13 @@ Model.aggregatePaginate(aggregate, options)
 const pipeline = [
   {
     $match: {
-      status: "active",
-    },
+      status: "active"
+    }
   },
   {
     $sort: {
-      date: -1,
-    },
+      date: -1
+    }
   },
   "__PREPAGINATE__",
   {
@@ -281,8 +277,8 @@ const pipeline = [
       from: "authors",
       localField: "author",
       foreignField: "_id",
-      as: "author",
-    },
+      as: "author"
+    }
   }
 ];
 Model.aggregatePaginate(pipeline, options)
@@ -306,8 +302,8 @@ let BookSchema = new mongoose.Schema({
   date: Date,
   author: {
     type: mongoose.Schema.ObjectId,
-    ref: "Author",
-  },
+    ref: "Author"
+  }
 });
 
 BookSchema.plugin(mongooseAggregatePaginate);
@@ -316,7 +312,7 @@ let Book = mongoose.model("Book", BookSchema);
 
 // Like this.
 Book.aggregatePaginate.options = {
-  limit: 20,
+  limit: 20
 };
 ```
 
