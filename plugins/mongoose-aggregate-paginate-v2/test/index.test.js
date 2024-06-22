@@ -9,10 +9,6 @@ jest.setTimeout(120000)
 
 const execute = promisify(exec);
 
-const connectToDatabase = async () => {
-
-};
-
 const AuthorSchema = new mongoose.Schema({
     name: String
 });
@@ -268,13 +264,5 @@ describe("mongoose-paginate", function () {
                 expect(result.pageCount).toEqual(5);
             });
         });
-    });
-
-    afterAll(async function () {
-        await mongoose.connection.db.dropDatabase();
-    });
-
-    afterAll(async function () {
-        await mongoose.disconnect();
     });
 });
