@@ -8,10 +8,7 @@ import mongooseAggregatePaginate from "../src";
 const execute = promisify(exec);
 
 const connectToDatabase = async () => {
-    await execute("docker run -d -p 27017:27017 mongo:5.0")
-    await new Promise((resolve) => setTimeout(resolve, 3000))
-    await mongoose.connect("mongodb://localhost:27017/test")
-    await mongoose.connection.db.dropDatabase();
+
 };
 
 const AuthorSchema = new mongoose.Schema({
@@ -33,30 +30,29 @@ BookSchema.plugin(mongooseAggregatePaginate);
 
 const Book = mongoose.model("Book", BookSchema);
 
-beforeAll(connectToDatabase);
+beforeAll(async () => {
+    await execute("docker run -d -p 27017:27017 mongo:5.0")
+    await new Promise((resolve) => setTimeout(resolve, 3000))
+    await mongoose.connect("mongodb://localhost:27017/test")
+    await mongoose.connection.db.dropDatabase();
+    let book, books = [];
+    const date = new Date();
+    await Author.create({
+        name: "Arthur Conan Doyle"
+    }).then(async function (author) {
+        for (let i = 1; i <= 100; i++) {
+            book = new Book({
+                title: "Book #" + i,
+                date: new Date(date.getTime() + i),
+                author: author._id
+            });
+            books.push(book);
+        }
+        await Book.create(books);
+    });
+});
 
 describe("mongoose-paginate", function () {
-    beforeAll(function () {
-        let book,
-            books = [];
-        let date = new Date();
-        return Author.create({
-            name: "Arthur Conan Doyle"
-        }).then(function (author) {
-            for (let i = 1; i <= 100; i++) {
-                book = new Book({
-                    title: "Book #" + i,
-                    date: new Date(date.getTime() + i),
-                    author: author._id
-                });
-                books.push(book);
-            }
-            return Book.create(books);
-        });
-    });
-
-    afterEach(function () { });
-
     it("promise return test", function () {
         var aggregate = Book.aggregate([
             {
