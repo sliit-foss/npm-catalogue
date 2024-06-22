@@ -32,7 +32,6 @@ beforeAll(async () => {
     await execute("docker run -d -p 27017:27017 mongo:5.0")
     await new Promise((resolve) => setTimeout(resolve, 3000))
     await mongoose.connect("mongodb://localhost:27017/test")
-    await mongoose.connection.db.dropDatabase();
     let book, books = [];
     const date = new Date();
     return Author.create({
@@ -48,6 +47,12 @@ beforeAll(async () => {
         }
         return Book.create(books);
     });
+});
+
+afterAll(async () => {
+    await mongoose.disconnect()
+    await execute("docker stop $(docker ps -q)")
+    await execute("docker rm $(docker ps -aq)")
 });
 
 describe("mongoose-paginate", function () {
@@ -67,7 +72,7 @@ describe("mongoose-paginate", function () {
         expect(promise.then).toBeInstanceOf(Function);
     });
 
-    it("callback test", async (done)  =>{
+    it("callback test", (done) => {
         var aggregate = Book.aggregate([
             {
                 $match: {
@@ -77,8 +82,7 @@ describe("mongoose-paginate", function () {
                 }
             }
         ]);
-
-        await aggregate.paginateExec({}, function (err, result) {
+        aggregate.paginateExec({}, function (err, result) {
             expect(err).toBeNull();
             expect(result).toBeInstanceOf(Object);
             done();
