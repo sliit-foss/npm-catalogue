@@ -67,7 +67,7 @@ describe("mongoose-paginate", function () {
         expect(promise.then).toBeInstanceOf(Function);
     });
 
-    it("callback test", function (done) {
+    it("callback test", async (done)  =>{
         var aggregate = Book.aggregate([
             {
                 $match: {
@@ -78,7 +78,7 @@ describe("mongoose-paginate", function () {
             }
         ]);
 
-        aggregate.paginateExec({}, function (err, result) {
+        await aggregate.paginateExec({}, function (err, result) {
             expect(err).toBeNull();
             expect(result).toBeInstanceOf(Object);
             done();
