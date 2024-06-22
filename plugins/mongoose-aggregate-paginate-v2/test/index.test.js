@@ -68,7 +68,6 @@ describe("mongoose-paginate", function () {
         ]);
 
         let promise = aggregate.paginateExec({});
-        // let promise = Book.aggregatePaginate(aggregate, {});
         expect(promise.then).toBeInstanceOf(Function);
     });
 
