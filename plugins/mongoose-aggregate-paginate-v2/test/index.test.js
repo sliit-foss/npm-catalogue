@@ -64,7 +64,7 @@ describe("mongoose-paginate", function () {
 
         let promise = aggregate.paginateExec({});
         // let promise = Book.aggregatePaginate(aggregate, {});
-        expect(promise.then).to.be.an.instanceof(Function);
+        expect(promise.then).toBeInstanceOf(Function);
     });
 
     it("callback test", function (done) {
@@ -79,8 +79,8 @@ describe("mongoose-paginate", function () {
         ]);
 
         aggregate.paginateExec({}, function (err, result) {
-            expect(err).to.be.null;
-            expect(result).to.be.an.instanceOf(Object);
+            expect(err).toBeNull();
+            expect(result).toBeInstanceOf(Object);
             done();
         });
     });
@@ -112,7 +112,7 @@ describe("mongoose-paginate", function () {
             ])
         };
         return Book.aggregatePaginate(aggregate, options).then((result) => {
-            expect(result.docs).to.have.length(10);
+            expect(result.docs).toHaveLength(10);
             expect(result.docs[0].title).toEqual("Book #41");
             expect(result.totalDocs).toEqual(100);
             expect(result.limit).toEqual(10);
@@ -152,7 +152,7 @@ describe("mongoose-paginate", function () {
                 allowDiskUse: true
             };
             return Book.aggregatePaginate(aggregate, options).then((result) => {
-                expect(result.docs).to.have.length(10);
+                expect(result.docs).toHaveLength(10);
                 expect(result.docs[0].title).toEqual("Book #41");
                 expect(result.totalDocs).toEqual(100);
                 expect(result.limit).toEqual(10);
