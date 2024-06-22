@@ -35,7 +35,7 @@ beforeAll(async () => {
     await mongoose.connection.db.dropDatabase();
     let book, books = [];
     const date = new Date();
-    await Author.create({
+    return Author.create({
         name: "Arthur Conan Doyle"
     }).then(async function (author) {
         for (let i = 1; i <= 100; i++) {
