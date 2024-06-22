@@ -3344,8 +3344,7 @@ packages:
     dev: true
 
   /axios-retry@4.1.0(axios@1.6.0):
-    resolution:
-      { integrity: sha512-svdth4H00yhlsjBbjfLQ/sMLkXqeLxhiFC1nE1JtkN/CIssGxqk0UwTEdrVjwA2gr3yJkAulwvDSIm4z4HyPvg== }
+    resolution: {integrity: sha512-svdth4H00yhlsjBbjfLQ/sMLkXqeLxhiFC1nE1JtkN/CIssGxqk0UwTEdrVjwA2gr3yJkAulwvDSIm4z4HyPvg==}
     peerDependencies:
       axios: 0.x || 1.x
     dependencies:
@@ -5534,9 +5533,8 @@ packages:
     dev: false
 
   /is-retry-allowed@2.2.0:
-    resolution:
-      { integrity: sha512-XVm7LOeLpTW4jV19QSH38vkswxoLud8sQ57YwJVTPWdiaI9I8keEhGFpBlslyVsgdQy4Opg8QOLb8YRgsyZiQg== }
-    engines: { node: ">=10" }
+    resolution: {integrity: sha512-XVm7LOeLpTW4jV19QSH38vkswxoLud8sQ57YwJVTPWdiaI9I8keEhGFpBlslyVsgdQy4Opg8QOLb8YRgsyZiQg==}
+    engines: {node: '>=10'}
     dev: false
 
   /is-shared-array-buffer@1.0.2:
