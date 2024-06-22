@@ -5,6 +5,8 @@ import { exec } from "child_process";
 import { promisify } from "util";
 import mongooseAggregatePaginate from "../src";
 
+jest.setTimeout(120000)
+
 const execute = promisify(exec);
 
 const connectToDatabase = async () => {
