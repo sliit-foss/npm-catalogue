@@ -1,0 +1,35 @@
+{
+  "name": "json-hash",
+  "version": "1.0.0",
+  "description": "Hash JS objects reliablly on both Node.js and browser",
+  "main": "dist/index.js",
+  "scripts": {
+    "build": "node ../../scripts/esbuild.config.js",
+    "build:watch": "bash ../../scripts/esbuild.watch.sh",
+    "bump-version": "bash ../../scripts/bump-version.sh --name=@sliit-foss/json-hash",
+    "lint": "bash ../../scripts/lint.sh",
+    "release": "bash ../../scripts/release.sh",
+    "test": "bash ../../scripts/test/test.sh"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/sliit-foss/npm-catalogue.git"
+  },
+  "dependencies": {
+    "json-stable-stringify": "1.1.1"
+  },
+  "devDependencies": {
+    "lodash": "4.17.10"
+  },
+  "keywords": [
+    "json",
+    "hash",
+    "hashing",
+    "object-hash"
+  ],
+  "author": "SLIIT FOSS",
+  "license": "MIT",
+  "bugs": {
+    "url": "https://github.com/sliit-foss/npm-catalogue/issues"
+  }
+}
