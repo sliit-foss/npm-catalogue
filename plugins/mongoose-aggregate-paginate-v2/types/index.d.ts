@@ -79,7 +79,7 @@ declare function mongooseAggregatePaginate(schema: mongoose.Schema): void;
 
 export default mongooseAggregatePaginate;
 
-export const PREPAGINATION_PLACEHOLDER: string
+export const PREPAGINATION_PLACEHOLDER: string;
 
 declare namespace _ {
   const aggregatePaginate: { options: mongoose.PaginateOptions };

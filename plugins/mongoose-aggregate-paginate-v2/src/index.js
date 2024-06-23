@@ -1,7 +1,7 @@
 import mongoose from "mongoose";
 import aggregatePaginate, { PREPAGINATION_PLACEHOLDER } from "./core";
 
-export { PREPAGINATION_PLACEHOLDER }
+export { PREPAGINATION_PLACEHOLDER };
 
 /**
  * @param {Schema} schema
