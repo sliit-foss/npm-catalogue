@@ -16,6 +16,7 @@ const mongooseFilterQuery = (req, res, next) => {
     }
     req.query.include = req.query.include?.split(",");
     req.query.select = req.query.select?.split(",")?.join(" ");
+    req.query.prepaginate = req.query.prepaginate === "true";
   } catch (e) {
     console.error("[ FilterQuery ] - Failed to parse query", e);
   }
