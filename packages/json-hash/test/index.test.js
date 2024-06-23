@@ -1,16 +1,15 @@
 import { cloneDeep } from "lodash";
-import { computeHash } from "../src";
-import { getNodeJSAlgoName, isAvailableAlgo } from "../src/algorthms";
+import { computeHash, getNodeJSAlgoName } from "../src";
 
 describe("json-hash-node-js", () => {
   const objectToHash = { name: "Siri", age: 30, country: "Sri Lanka" };
 
   beforeAll(() => {
-    global.unit_tests_running = true;
+    console.log("Running tests for json-hash on Node.js");
   });
 
   afterAll(() => {
-    global.unit_tests_running = false;
+    console.log("Ending tests for json-hash on Node.js");
   });
 
   //tests for getNodeJSAlgoName
@@ -26,16 +25,7 @@ describe("json-hash-node-js", () => {
     expect(getNodeJSAlgoName("")).toBe(undefined);
   });
 
-  //tests for isAvailableAlgo
-  it("should-return-true-if-algo-name-is-available", () => {
-    expect(isAvailableAlgo("SHA-1")).toBe(true);
-  });
-
-  it("should-return-false-if-algo-name-is-not-available", () => {
-    expect(isAvailableAlgo("NIKE")).toBe(false);
-  });
-
-  // tests for compute hash
+  // tests for computeHash
 
   // without sorting
   it("should-compute-hash-with-SHA-1", () => {
@@ -92,11 +82,11 @@ describe("json-hash-browser", () => {
   const objectToHash = { name: "Siri", age: 30, country: "Sri Lanka" };
 
   beforeAll(() => {
-    global.unit_tests_running = true;
+    console.log("Running tests for json-hash on browser environment");
   });
 
   afterAll(() => {
-    global.unit_tests_running = false;
+    console.log("Ending tests for json-hash on browser environment");
   });
 
   //tests for getNodeJSAlgoName
@@ -112,16 +102,7 @@ describe("json-hash-browser", () => {
     expect(getNodeJSAlgoName("")).toBe(undefined);
   });
 
-  //tests for isAvailableAlgo
-  it("should-return-true-if-algo-name-is-available", () => {
-    expect(isAvailableAlgo("SHA-1")).toBe(true);
-  });
-
-  it("should-return-false-if-algo-name-is-not-available", () => {
-    expect(isAvailableAlgo("NIKE")).toBe(false);
-  });
-
-  // tests for compute hash
+  // tests for computeHash
 
   // without sorting
   it("should-compute-hash-with-SHA-1", () => {

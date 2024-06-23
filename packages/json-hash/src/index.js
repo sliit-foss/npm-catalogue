@@ -1,7 +1,18 @@
-import { getNodeJSAlgoName, isAvailableAlgo } from "./algorithms.js";
+export const getNodeJSAlgoName = (algorithm) => {
+  const algos = {
+    "SHA-1": "sha1",
+    "SHA-256": "sha256",
+    "SHA-384": "sha384",
+    "SHA-512": "sha512"
+  };
+
+  return algos[algorithm];
+};
 
 export const computeHash = async (obj, { algorithm = "SHA-1", sort = false }) => {
-  if (!isAvailableAlgo(algorithm)) {
+  const nodeJSAlgoName = getNodeJSAlgoName(algorithm);
+
+  if (nodeJSAlgoName === undefined) {
     throw new Error("Provided algorithm is not available");
   }
 
@@ -29,7 +40,7 @@ export const computeHash = async (obj, { algorithm = "SHA-1", sort = false }) =>
   // For Node.js
   if (typeof global !== "undefined" && global.crypto) {
     const { createHash } = await import("crypto");
-    const hash = createHash(getNodeJSAlgoName(algorithm)).update(obj).digest("hex");
+    const hash = createHash(nodeJSAlgoName).update(obj).digest("hex");
     return hash;
   }
 };
