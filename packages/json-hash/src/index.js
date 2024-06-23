@@ -33,15 +33,3 @@ export const computeHash = async (obj, { algorithm = "SHA-1", sort = false }) =>
     return hash;
   }
 };
-
-// (async () => {
-//   const obj = { name: "John", age: 30 };
-//   const algorithm = "SHA-256";
-
-//   try {
-//     const hash = await computeHash(obj, { algorithm, sort: true });
-//     console.log(`Hash (${algorithm}):`, hash);
-//   } catch (error) {
-//     console.error(error);
-//   }
-// })();
