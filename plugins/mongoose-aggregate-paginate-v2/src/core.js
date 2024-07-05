@@ -86,7 +86,7 @@ export function aggregatePaginate(query, options, callback) {
   const allowDiskUse = options.allowDiskUse || false;
   const isPaginationEnabled = options.pagination === false ? false : true;
 
-  const q = this.aggregate();
+  let q = this.aggregate();
 
   if (allowDiskUse) {
     q.allowDiskUse(true);
@@ -120,7 +120,13 @@ export function aggregatePaginate(query, options, callback) {
   let promise;
 
   if (options.useFacet && !options.countQuery) {
-    const [pipeline, countPipeline] = constructPipelines();
+    let [pipeline, countPipeline] = constructPipelines();
+    const match = pipeline[0]?.$match;
+    if (match) {
+      pipeline.shift();
+      countPipeline.shift();
+      q = q.match(match);
+    }
     promise = q
       .facet({
         docs: pipeline,
