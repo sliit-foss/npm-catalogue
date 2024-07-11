@@ -27,7 +27,7 @@ export const mapValue = (value) => {
   } else if (value.startsWith("ne(")) {
     value = parseOperatorValue(value, "ne");
     if (value === "true" || value === "false") {
-      return { $eq: value === "true" };
+      return { $ne: value === "true" };
     }
     return { $ne: value };
   } else if (value.startsWith("gt(")) {
