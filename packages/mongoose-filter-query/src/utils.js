@@ -25,7 +25,11 @@ export const mapValue = (value) => {
     }
     return { $eq: value };
   } else if (value.startsWith("ne(")) {
-    return { $ne: parseOperatorValue(value, "ne") };
+    value = parseOperatorValue(value, "ne");
+    if (value === "true" || value === "false") {
+      return { $eq: value === "true" };
+    }
+    return { $ne: value };
   } else if (value.startsWith("gt(")) {
     return { $gt: parseOperatorValue(value, "gt") };
   } else if (value.startsWith("gte(")) {
