@@ -5,8 +5,7 @@ on:
       - development
   workflow_dispatch:
 
-permissions:
-  id-token: write
+permissions: write-all
 
 jobs:
   release:
