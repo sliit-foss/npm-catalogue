@@ -10,8 +10,8 @@ runs:
     - name: Setup Node
       uses: actions/setup-node@v3
       with:
-        node-version: '16.x'
-        registry-url: 'https://registry.npmjs.org'
+        node-version: "16.x"
+        registry-url: "https://registry.npmjs.org"
 
     - name: Configure git
       run: |
@@ -23,7 +23,7 @@ runs:
       shell: bash
 
     - name: Install dependencies
-      run: npm install -g pnpm@8 && pnpm install --production --ignore-scripts
+      run: npm install -g pnpm@9.6.0 && pnpm install --production --ignore-scripts
       shell: bash
 
     - name: Create .npmrc
