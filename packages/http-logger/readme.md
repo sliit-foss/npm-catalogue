@@ -45,14 +45,15 @@ app.use(httpLogger({
 }));
 
 // or
+import { pick, omit} from 'loadash';
 
 app.use(httpLogger({
   whitelists: ["/public/*"],
-  loggable: ({headers, body} => {
+  loggable: ( (req) => {
     // Pick the properties you want to log
     return {
-      headers,
-      body
+      headers: pick(req.headers, ['x-user-email', 'user-agent']),
+      payload: omit(req.body, ['password', 'new_password', 'old_password'])
     }
   }),
 }));

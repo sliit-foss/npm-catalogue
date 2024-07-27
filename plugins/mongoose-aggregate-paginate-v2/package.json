@@ -1,50 +1,50 @@
 {
-    "name": "@sliit-foss/mongoose-aggregate-paginate-v2",
-    "version": "2.0.0-blizzard.0",
-    "description": "A cursor based custom aggregate pagination library for Mongoose with customizable labels.",
-    "main": "dist/index.js",
-    "types": "types/index.d.ts",
-    "scripts": {
-        "build": "node ../../scripts/esbuild.config.js",
-        "build:watch": "bash ../../scripts/esbuild.watch.sh",
-        "bump-version": "bash ../../scripts/bump-version.sh --name=@sliit-foss/express-http-context",
-        "lint": "bash ../../scripts/lint.sh",
-        "release": "bash ../../scripts/release.sh",
-        "test": "if [ \"$CI\" = \"true\" ]; then \n bash ../../scripts/test/test.sh; else \n echo \"Skipping as it is not a CI environemnt\"; fi"
-    },
-    "repository": {
-        "type": "git",
-        "url": "git+https://github.com/sliit-foss/npm-catalogue.git"
-    },
-    "keywords": [
-        "aggregate",
-        "aggregate-paginate",
-        "aggregate-pagination",
-        "mongoose-aggregate",
-        "mongoose",
-        "pagination",
-        "plugin",
-        "mongodb",
-        "paginate",
-        "paging",
-        "next",
-        "prev",
-        "nextpage",
-        "prevpage",
-        "total",
-        "paginator",
-        "plugin"
-    ],
-    "author": "SLIIT FOSS",
-    "license": "MIT",
-    "bugs": {
-        "url": "https://github.com/sliit-foss/npm-catalogue/issues"
-    },
-    "homepage": "https://github.com/sliit-foss/npm-catalogue/blob/main/plugins/mongoose-aggregate-paginate-v2#readme",
-    "peerDependencies": {
-        "mongoose": ">=7.0.0"
-    },
-    "engines": {
-        "node": ">=4.0.0"
-    }
+  "name": "@sliit-foss/mongoose-aggregate-paginate-v2",
+  "version": "2.0.1",
+  "description": "A cursor based custom aggregate pagination library for Mongoose with customizable labels.",
+  "main": "dist/index.js",
+  "types": "types/index.d.ts",
+  "scripts": {
+    "build": "node ../../scripts/esbuild.config.js",
+    "build:watch": "bash ../../scripts/esbuild.watch.sh",
+    "bump-version": "bash ../../scripts/bump-version.sh --name=@sliit-foss/express-http-context",
+    "lint": "bash ../../scripts/lint.sh",
+    "release": "bash ../../scripts/release.sh",
+    "test": "if [ \"$CI\" = \"true\" ]; then \n bash ../../scripts/test/test.sh; else \n echo \"Skipping as it is not a CI environemnt\"; fi"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/sliit-foss/npm-catalogue.git"
+  },
+  "keywords": [
+    "aggregate",
+    "aggregate-paginate",
+    "aggregate-pagination",
+    "mongoose-aggregate",
+    "mongoose",
+    "pagination",
+    "plugin",
+    "mongodb",
+    "paginate",
+    "paging",
+    "next",
+    "prev",
+    "nextpage",
+    "prevpage",
+    "total",
+    "paginator",
+    "plugin"
+  ],
+  "author": "SLIIT FOSS",
+  "license": "MIT",
+  "bugs": {
+    "url": "https://github.com/sliit-foss/npm-catalogue/issues"
+  },
+  "homepage": "https://github.com/sliit-foss/npm-catalogue/blob/main/plugins/mongoose-aggregate-paginate-v2#readme",
+  "peerDependencies": {
+    "mongoose": ">=7.0.0"
+  },
+  "engines": {
+    "node": ">=4.0.0"
+  }
 }
