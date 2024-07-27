@@ -5,6 +5,9 @@ on:
       - main
   workflow_dispatch:
 
+permissions:
+  id-token: write
+
 jobs:
   release:
     runs-on: ubuntu-latest
