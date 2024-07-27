@@ -3,7 +3,9 @@
   "version": "0.0.8-blizzard.3",
   "description": "CLI tool for automated function tracing",
   "main": "dist/index.js",
-  "bin": "dist/index.js",
+  "bin": {
+    "timekeeper": "dist/index.js"
+  },
   "scripts": {
     "build": "node ../../scripts/esbuild.config.js",
     "build:watch": "bash ../../scripts/esbuild.watch.sh",
