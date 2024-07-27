@@ -20,7 +20,7 @@ const runner = async (p, options) => {
   });
   fs.writeFileSync(configPath, `module.exports = ${JSON.stringify(config)}`);
   await exec(
-    `npx -p @babel/core@7 -p @babel/node@7 -p @sliit-foss/babel-plugin-transform-trace@0.3.0 -p @sliit-foss/functions@2.10.0 babel-node --config-file=${configPath} ${p}`
+    `npx -p @babel/core@7 -p @babel/node@7 -p @sliit-foss/babel-plugin-transform-trace@0.3.0 -p @sliit-foss/functions@2.7.0 babel-node --config-file=${configPath} ${p}`
   ).then(({ stdout, stderr }) => {
     if (stdout) console.log(stdout);
     if (stderr) console.error(stderr.red);
