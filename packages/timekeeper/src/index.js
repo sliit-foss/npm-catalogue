@@ -8,7 +8,7 @@ import { default as run } from "./runner";
 
 require("@colors/colors");
 
-program.name("timekeeper").description("CLI tool for automated function tracing").version(version);
+program.name("timekeeper").description("CLI tool for automated function execution tracing").version(version);
 
 program
   .option("--ignore-functions <string>", "comma separated list of functions to skip tracing")
