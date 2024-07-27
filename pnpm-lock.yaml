@@ -177,24 +177,9 @@ importers:
 
   packages/timekeeper:
     dependencies:
-      "@babel/cli":
-        specifier: 7.23.4
-        version: 7.23.4(@babel/core@7.23.6)
-      "@babel/core":
-        specifier: 7.23.6
-        version: 7.23.6
-      "@babel/preset-env":
-        specifier: 7.23.6
-        version: 7.23.6(@babel/core@7.23.6)
       "@colors/colors":
         specifier: 1.5.0
         version: 1.5.0
-      "@sliit-foss/babel-plugin-transform-trace":
-        specifier: 0.1.2
-        version: 0.1.2(@babel/core@7.23.6)(@sliit-foss/functions@2.2.4)
-      "@sliit-foss/functions":
-        specifier: 2.2.4
-        version: 2.2.4
       commander:
         specifier: 11.1.0
         version: 11.1.0
@@ -262,14 +247,6 @@ packages:
     resolution:
       { integrity: sha512-30iZtAPgz+LTIYoeivqYo853f02jBYSd5uGnGpkFV0M3xOt9aN73erkgYAmZU43x4VfqcnLxW9Kpg3R5LC4YYw== }
     engines: { node: ">=6.0.0" }
-
-  "@babel/cli@7.23.4":
-    resolution:
-      { integrity: sha512-j3luA9xGKCXVyCa5R7lJvOMM+Kc2JEnAEIgz2ggtjQ/j5YUVgfsg/WsG95bbsgq7YLHuiCOzMnoSasuY16qiCw== }
-    engines: { node: ">=6.9.0" }
-    hasBin: true
-    peerDependencies:
-      "@babel/core": ^7.0.0-0
 
   "@babel/code-frame@7.24.7":
     resolution:
@@ -1666,10 +1643,6 @@ packages:
     resolution:
       { integrity: sha512-iUKgm52T8HOE/makSxjqoWhe95ZJA1/G1sYsGev2JDKUSS14KAgg1LHb+Ba+IPow0xflbnSkOsZcO08C7w1gYw== }
 
-  "@nicolo-ribaudo/chokidar-2@2.1.8-no-fsevents.3":
-    resolution:
-      { integrity: sha512-s88O1aVtXftvp5bCPB7WnmXc5IwOZZ7YPuwNPt+GtOOXpPvad1LfbmjYv+qII7zP6RU2QGnqve27dnLycEnyEQ== }
-
   "@nodelib/fs.scandir@2.1.5":
     resolution:
       { integrity: sha512-vq24Bq3ym5HEQm2NKCr3yXDwjc7vTsEThRDnkp2DK9p1uqLR+DHurm/NOTo0KG7HYHU7eppKZj3MyqYuMBf62g== }
@@ -1737,24 +1710,9 @@ packages:
     resolution:
       { integrity: sha512-V4BG07kuYSUkTCSBHG8G8TNhM+F19jXFWnQtzj+we8DrkpSBCee9Z3Ms8yiGer/dlmhe35/Xdgyo3/0rQKg7YA== }
 
-  "@sliit-foss/babel-plugin-transform-trace@0.1.2":
-    resolution:
-      { integrity: sha512-gPBHSKntcVPByI5ZTomwp5qVAe+pj3V/ZnAzO0wMN1S+6If9w/sRG1OqrTR+HcWYjoCwRMJ0sRpA8bA7iIoqMA== }
-    peerDependencies:
-      "@babel/core": ^7.0.0-0
-      "@sliit-foss/functions": 2.2.1
-
-  "@sliit-foss/functions@2.2.4":
-    resolution:
-      { integrity: sha512-Paf2cDYSYK45lxYW3vRV5n/PAVRQlc63Q50l/P5VaFAdVfvKWnEJ0nksgG+V839dTroMSkteLc65voxbQE27pQ== }
-
   "@sliit-foss/functions@2.7.0":
     resolution:
       { integrity: sha512-xL2XMTQQgDnObC3NSgzt9HPmd5GlJFVHm9SLxi/2rFJoYWzYOwLdEbw5Ssyn0WSL/N+PxFYG49DUDESt9aYyzQ== }
-
-  "@sliit-foss/module-logger@1.1.5":
-    resolution:
-      { integrity: sha512-bKpKi0Yp/ZDYP3yaZTT2zw2f2c49qIkCK5NLKE+qs4UctZtWc1cRSDZZVDP/QAEQ7UMeIECFKX5l+ig8obMvlQ== }
 
   "@sliit-foss/module-logger@1.3.0":
     resolution:
@@ -4990,11 +4948,6 @@ packages:
     resolution:
       { integrity: sha512-bLGGlR1QxBcynn2d5YmDX4MGjlZvy2MRBDRNHLJ8VI6l6+9FUiyTFNJ0IveOSP0bcXgVDPRcfGqA0pjaqUpfVg== }
 
-  slash@2.0.0:
-    resolution:
-      { integrity: sha512-ZYKh3Wh2z1PpEXWr0MpSBZ0V6mZHAQfYevttO11c51CaWjGTaadiKZ+wVt1PbMlDV5qhMFslpZCemhwOK7C89A== }
-    engines: { node: ">=6" }
-
   slash@3.0.0:
     resolution:
       { integrity: sha512-g9Q1haeby36OSStwb4ntCGGGaKsaVSjQ68fBxoQcutl5fS1vuY18H3wSt3jFyFtrkx+Kz0V1G85A4MyAdDMi2Q== }
@@ -5606,20 +5559,6 @@ snapshots:
     dependencies:
       "@jridgewell/gen-mapping": 0.3.5
       "@jridgewell/trace-mapping": 0.3.25
-
-  "@babel/cli@7.23.4(@babel/core@7.23.6)":
-    dependencies:
-      "@babel/core": 7.23.6
-      "@jridgewell/trace-mapping": 0.3.25
-      commander: 4.1.1
-      convert-source-map: 2.0.0
-      fs-readdir-recursive: 1.1.0
-      glob: 7.2.3
-      make-dir: 2.1.0
-      slash: 2.0.0
-    optionalDependencies:
-      "@nicolo-ribaudo/chokidar-2": 2.1.8-no-fsevents.3
-      chokidar: 3.6.0
 
   "@babel/code-frame@7.24.7":
     dependencies:
@@ -7272,9 +7211,6 @@ snapshots:
 
   "@js-sdsl/ordered-map@4.4.2": {}
 
-  "@nicolo-ribaudo/chokidar-2@2.1.8-no-fsevents.3":
-    optional: true
-
   "@nodelib/fs.scandir@2.1.5":
     dependencies:
       "@nodelib/fs.stat": 2.0.5
@@ -7320,29 +7256,11 @@ snapshots:
     dependencies:
       "@sinonjs/commons": 3.0.1
 
-  "@sliit-foss/babel-plugin-transform-trace@0.1.2(@babel/core@7.23.6)(@sliit-foss/functions@2.2.4)":
-    dependencies:
-      "@babel/core": 7.23.6
-      "@babel/helper-plugin-utils": 7.21.5
-      "@babel/template": 7.20.7
-      "@sliit-foss/functions": 2.2.4
-
-  "@sliit-foss/functions@2.2.4":
-    dependencies:
-      "@sliit-foss/module-logger": 1.1.5
-      express-http-context: 1.2.4
-
   "@sliit-foss/functions@2.7.0":
     dependencies:
       "@sliit-foss/module-logger": 1.3.0
       chalk: 4.1.2
       express-http-context: 1.2.4
-
-  "@sliit-foss/module-logger@1.1.5":
-    dependencies:
-      express-http-context: 1.2.4
-      winston: 3.8.2
-      winston-daily-rotate-file: 4.7.1(winston@3.8.2)
 
   "@sliit-foss/module-logger@1.3.0":
     dependencies:
@@ -10437,8 +10355,6 @@ snapshots:
       semver: 7.0.0
 
   sisteransi@1.0.5: {}
-
-  slash@2.0.0: {}
 
   slash@3.0.0: {}
 
