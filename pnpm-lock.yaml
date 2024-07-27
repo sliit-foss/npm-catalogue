@@ -183,6 +183,9 @@ importers:
       "@colors/colors":
         specifier: 1.5.0
         version: 1.5.0
+      "@sliit-foss/actions-exec-wrapper":
+        specifier: 1.1.2
+        version: 1.1.2
       "@sliit-foss/babel-plugin-transform-trace":
         specifier: 0.3.0
         version: 0.3.0(@babel/core@7.24.7)(@sliit-foss/functions@2.7.0)
@@ -1912,6 +1915,10 @@ packages:
   "@sinonjs/fake-timers@10.3.0":
     resolution:
       { integrity: sha512-V4BG07kuYSUkTCSBHG8G8TNhM+F19jXFWnQtzj+we8DrkpSBCee9Z3Ms8yiGer/dlmhe35/Xdgyo3/0rQKg7YA== }
+
+  "@sliit-foss/actions-exec-wrapper@1.1.2":
+    resolution:
+      { integrity: sha512-KuRHjtybPS5Y+5oH6n7T4QkTqpcvFcsr4QKo8iObC4HQALnNFeRFwaZNyJGkJ9QR4gDR58wv8QX9NmhRafZ3XQ== }
 
   "@sliit-foss/babel-plugin-transform-trace@0.3.0":
     resolution:
@@ -8193,6 +8200,10 @@ snapshots:
   "@sinonjs/fake-timers@10.3.0":
     dependencies:
       "@sinonjs/commons": 3.0.1
+
+  "@sliit-foss/actions-exec-wrapper@1.1.2":
+    dependencies:
+      "@actions/exec": 1.1.1
 
   "@sliit-foss/babel-plugin-transform-trace@0.3.0(@babel/core@7.24.7)(@sliit-foss/functions@2.7.0)":
     dependencies:

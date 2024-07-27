@@ -2,9 +2,7 @@
 
 import { default as fs } from "fs";
 import { default as path } from "path";
-import { default as util } from "util";
-
-const exec = util.promisify(require("child_process").exec);
+import { default as exec } from "@sliit-foss/actions-exec-wrapper";
 
 const config = {
   presets: ["@babel/preset-env"],
@@ -19,12 +17,7 @@ const runner = async (p, options) => {
     "clean": options.clean ?? false
   });
   fs.writeFileSync(configPath, `module.exports = ${JSON.stringify(config)}`);
-  await exec(`npx -p @babel/core@7 -p @babel/node@7 babel-node --config-file=${configPath} ${p}`).then(
-    ({ stdout, stderr }) => {
-      if (stdout) console.log(stdout);
-      if (stderr) console.error(stderr.red);
-    }
-  );
+  await exec(`npx -p @babel/core@7 -p @babel/node@7 babel-node --config-file=${configPath} ${p}`);
 };
 
 export default runner;
