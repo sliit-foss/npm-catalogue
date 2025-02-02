@@ -11,7 +11,7 @@ const generateInfoObject = (req, properties) =>
   }, {});
 
 const httpLogger =
-  ({ whitelists = [], loggable } = {}) =>
+  ({ whitelists = [], loggable, onFinish: onFinishExternal } = {}) =>
   (req, res, next) => {
     const info = generateInfoObject(req, defaultProperties);
 
@@ -45,6 +45,8 @@ const httpLogger =
       }
 
       logger.info("request completed", info);
+
+      onFinishExternal?.();
     };
 
     res.on("finish", onFinish);
