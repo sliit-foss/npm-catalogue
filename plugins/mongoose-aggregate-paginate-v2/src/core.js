@@ -29,7 +29,8 @@ const defaultOptions = {
   options: {},
   pagination: true,
   countQuery: null,
-  useFacet: true
+  useFacet: true,
+  experimentalOptimizeFacet: false
 };
 
 export const PREPAGINATION_PLACEHOLDER = "__PREPAGINATE__";
@@ -117,22 +118,41 @@ export function aggregatePaginate(query, options, callback) {
     return [cleanedPipeline, countPipeline];
   }
 
+  function constructOptimizedPipelines() {
+    const facetPipeline = [];
+    if (isPaginationEnabled) {
+      facetPipeline.push({ $skip: skip }, { $limit: limit });
+    }
+    return [pipeline.filter((stage) => stage !== PREPAGINATION_PLACEHOLDER), facetPipeline, [{ $count: "count" }]];
+  }
+
   let promise;
 
   if (options.useFacet && !options.countQuery) {
-    let [pipeline, countPipeline] = constructPipelines();
-    const match = pipeline[0]?.$match;
-    if (match) {
-      pipeline.shift();
-      countPipeline.shift();
-      q = q.match(match);
+    if (options.experimentalOptimizeFacet) {
+      const [pipeline, documentPipeline, countPipeline] = constructOptimizedPipelines();
+      promise = q
+        .append(pipeline)
+        .facet({
+          docs: documentPipeline,
+          count: countPipeline
+        })
+        .then(([{ docs, count }]) => [docs, count]);
+    } else {
+      const [pipeline, countPipeline] = constructPipelines();
+      const match = pipeline[0]?.$match;
+      if (match) {
+        pipeline.shift();
+        countPipeline.shift();
+        q = q.match(match);
+      }
+      promise = q
+        .facet({
+          docs: pipeline,
+          count: countPipeline
+        })
+        .then(([{ docs, count }]) => [docs, count]);
     }
-    promise = q
-      .facet({
-        docs: pipeline,
-        count: countPipeline
-      })
-      .then(([{ docs, count }]) => [docs, count]);
   } else {
     const [pipeline] = constructPipelines();
 
