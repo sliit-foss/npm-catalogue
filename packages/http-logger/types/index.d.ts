@@ -6,6 +6,7 @@ import { RequestHandler, Request } from "express";
 type HttpLoggerOptions = {
   whitelists?: string[];
   loggable?: string[] | ((req: Request) => object);
+  onFinish?: () => void | Promise<void>;
 };
 
 /**

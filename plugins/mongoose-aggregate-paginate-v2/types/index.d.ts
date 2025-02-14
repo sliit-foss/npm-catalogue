@@ -30,6 +30,8 @@ declare module "mongoose" {
     allowDiskUse?: boolean | undefined;
     countQuery?: object | undefined;
     useFacet?: boolean | undefined;
+    /* If `true`, optimizes the aggregation pipeline by moving the common stages within the facet higher up in the pipeline. This cannot be used along with the __PREPAGINATE__ placeholder. (Default: `false`) */
+    experimentalOptimizeFacet?: boolean | undefined;
   }
 
   interface QueryPopulateOptions {
