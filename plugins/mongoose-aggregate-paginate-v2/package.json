@@ -1,6 +1,6 @@
 {
   "name": "@sliit-foss/mongoose-aggregate-paginate-v2",
-  "version": "2.0.1",
+  "version": "2.1.0-blizzard.0",
   "description": "A cursor based custom aggregate pagination library for Mongoose with customizable labels.",
   "main": "dist/index.js",
   "types": "types/index.d.ts",
