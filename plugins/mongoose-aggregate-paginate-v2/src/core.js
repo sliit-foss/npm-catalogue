@@ -29,8 +29,7 @@ const defaultOptions = {
   options: {},
   pagination: true,
   countQuery: null,
-  useFacet: true,
-  experimentalOptimizeFacet: false
+  useFacet: true
 };
 
 export const PREPAGINATION_PLACEHOLDER = "__PREPAGINATE__";
@@ -87,7 +86,7 @@ export function aggregatePaginate(query, options, callback) {
   const allowDiskUse = options.allowDiskUse || false;
   const isPaginationEnabled = options.pagination === false ? false : true;
 
-  let q = this.aggregate();
+  const q = this.aggregate();
 
   if (allowDiskUse) {
     q.allowDiskUse(true);
@@ -118,38 +117,27 @@ export function aggregatePaginate(query, options, callback) {
     return [cleanedPipeline, countPipeline];
   }
 
-  function constructOptimizedPipelines() {
-    const facetPipeline = [];
-    if (isPaginationEnabled) {
-      facetPipeline.push({ $skip: skip }, { $limit: limit });
-    }
-    return [pipeline.filter((stage) => stage !== PREPAGINATION_PLACEHOLDER), facetPipeline, [{ $count: "count" }]];
-  }
-
   let promise;
 
   if (options.useFacet && !options.countQuery) {
-    if (options.experimentalOptimizeFacet) {
-      const [pipeline, documentPipeline, countPipeline] = constructOptimizedPipelines();
+    const prepaginationIndex = pipeline.findIndex((stage) => stage === PREPAGINATION_PLACEHOLDER);
+    if (prepaginationIndex !== -1) {
       promise = q
-        .append(pipeline)
+        .append(pipeline.slice(0, prepaginationIndex))
         .facet({
-          docs: documentPipeline,
-          count: countPipeline
+          docs: [
+            ...(isPaginationEnabled ? [{ $skip: skip }, { $limit: limit }] : []),
+            ...pipeline.slice(prepaginationIndex + 1)
+          ],
+          count: [{ $count: "count" }]
         })
         .then(([{ docs, count }]) => [docs, count]);
     } else {
-      const [pipeline, countPipeline] = constructPipelines();
-      const match = pipeline[0]?.$match;
-      if (match) {
-        pipeline.shift();
-        countPipeline.shift();
-        q = q.match(match);
-      }
       promise = q
+        .append(pipeline)
         .facet({
-          docs: pipeline,
-          count: countPipeline
+          docs: isPaginationEnabled ? [{ $skip: skip }, { $limit: limit }] : [],
+          count: [{ $count: "count" }]
         })
         .then(([{ docs, count }]) => [docs, count]);
     }

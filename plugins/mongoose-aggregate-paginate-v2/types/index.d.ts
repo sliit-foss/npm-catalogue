@@ -25,13 +25,11 @@ declare module "mongoose" {
     page?: number | undefined;
     limit?: number | undefined;
     customLabels?: CustomLabels | undefined;
-    /* If pagination is set to `false`, it will return all docs without adding limit condition. (Default: `true`) */
+    /** If pagination is set to `false`, it will return all docs without adding limit condition. (Default: `true`) **/
     pagination?: boolean | undefined;
     allowDiskUse?: boolean | undefined;
     countQuery?: object | undefined;
     useFacet?: boolean | undefined;
-    /* If `true`, optimizes the aggregation pipeline by moving the common stages within the facet higher up in the pipeline. This cannot be used along with the __PREPAGINATE__ placeholder. (Default: `false`) */
-    experimentalOptimizeFacet?: boolean | undefined;
   }
 
   interface QueryPopulateOptions {
