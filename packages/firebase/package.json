@@ -13,7 +13,7 @@
     "test:original": "bash ../../scripts/test/conditional-test/test.sh -k FIREBASE_CONFIG"
   },
   "dependencies": {
-    "firebase": "9.4.1"
+    "firebase": "10.9.0"
   },
   "author": "SLIIT FOSS",
   "license": "MIT",
