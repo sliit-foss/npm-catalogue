@@ -22,7 +22,7 @@
   },
   "devDependencies": {
     "@types/lodash": "4.17.15",
-    "mongoose": "^5"
+    "mongoose": "^6"
   },
   "author": "SLIIT FOSS",
   "license": "MIT",
