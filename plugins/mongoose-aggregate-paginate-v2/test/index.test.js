@@ -29,9 +29,9 @@ BookSchema.plugin(mongooseAggregatePaginate);
 const Book = mongoose.model("Book", BookSchema);
 
 beforeAll(async () => {
-  if (!process.env.GITHUB_ACTIONS) await execute("docker run -d -p 27017:27017 mongo:5.0");
+  await execute("docker run -d -p 27020:27017 mongo:5.0");
   await new Promise((resolve) => setTimeout(resolve, 3000));
-  await mongoose.connect("mongodb://localhost:27017/test");
+  await mongoose.connect("mongodb://127.0.0.1:27020/test");
   let book,
     books = [];
   const date = new Date();
@@ -52,10 +52,8 @@ beforeAll(async () => {
 
 afterAll(async () => {
   await mongoose.disconnect();
-  if (!process.env.GITHUB_ACTIONS) {
-    await execute("docker stop $(docker ps -q)");
-    await execute("docker rm $(docker ps -aq)");
-  }
+  await execute("docker stop $(docker ps -q)");
+  await execute("docker rm $(docker ps -aq)");
 });
 
 describe("mongoose-paginate", function () {

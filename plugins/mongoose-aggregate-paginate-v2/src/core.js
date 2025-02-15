@@ -96,11 +96,8 @@ export function aggregatePaginate(query, options, callback) {
     pipeline.push({ $sort: sort });
   }
 
-  function constructPipelines() {
+  function constructPipeline() {
     let cleanedPipeline = pipeline.filter((stage) => stage !== PREPAGINATION_PLACEHOLDER);
-
-    const countPipeline = [...cleanedPipeline, { $count: "count" }];
-
     if (isPaginationEnabled) {
       let foundPrepagination = false;
       cleanedPipeline = pipeline.flatMap((stage) => {
@@ -114,7 +111,7 @@ export function aggregatePaginate(query, options, callback) {
         cleanedPipeline.push({ $skip: skip }, { $limit: limit });
       }
     }
-    return [cleanedPipeline, countPipeline];
+    return cleanedPipeline;
   }
 
   let promise;
@@ -142,7 +139,7 @@ export function aggregatePaginate(query, options, callback) {
         .then(([{ docs, count }]) => [docs, count]);
     }
   } else {
-    const [pipeline] = constructPipelines();
+    const pipeline = constructPipeline();
 
     const countQuery = options.countQuery ? options.countQuery : this.aggregate(pipeline);
 
