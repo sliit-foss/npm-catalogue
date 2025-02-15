@@ -27,7 +27,6 @@ describe("module-logger", () => {
     const mLogger = moduleLogger("file-logger");
     expect(() => mLogger.info("hello-world")).not.toThrow(Error);
     expect(fs.existsSync("./logs")).toBe(true);
-    fs.rmSync("./logs", { recursive: true });
   });
   it("should-throw-error-when-both-default-transports-are-disable", () => {
     configure({

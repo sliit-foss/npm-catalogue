@@ -86,7 +86,7 @@ export function aggregatePaginate(query, options, callback) {
   const allowDiskUse = options.allowDiskUse || false;
   const isPaginationEnabled = options.pagination === false ? false : true;
 
-  let q = this.aggregate();
+  const q = this.aggregate();
 
   if (allowDiskUse) {
     q.allowDiskUse(true);
@@ -96,11 +96,8 @@ export function aggregatePaginate(query, options, callback) {
     pipeline.push({ $sort: sort });
   }
 
-  function constructPipelines() {
+  function constructPipeline() {
     let cleanedPipeline = pipeline.filter((stage) => stage !== PREPAGINATION_PLACEHOLDER);
-
-    const countPipeline = [...cleanedPipeline, { $count: "count" }];
-
     if (isPaginationEnabled) {
       let foundPrepagination = false;
       cleanedPipeline = pipeline.flatMap((stage) => {
@@ -114,27 +111,35 @@ export function aggregatePaginate(query, options, callback) {
         cleanedPipeline.push({ $skip: skip }, { $limit: limit });
       }
     }
-    return [cleanedPipeline, countPipeline];
+    return cleanedPipeline;
   }
 
   let promise;
 
   if (options.useFacet && !options.countQuery) {
-    let [pipeline, countPipeline] = constructPipelines();
-    const match = pipeline[0]?.$match;
-    if (match) {
-      pipeline.shift();
-      countPipeline.shift();
-      q = q.match(match);
+    const prepaginationIndex = pipeline.findIndex((stage) => stage === PREPAGINATION_PLACEHOLDER);
+    if (prepaginationIndex !== -1) {
+      promise = q
+        .append(pipeline.slice(0, prepaginationIndex))
+        .facet({
+          docs: [
+            ...(isPaginationEnabled ? [{ $skip: skip }, { $limit: limit }] : []),
+            ...pipeline.slice(prepaginationIndex + 1)
+          ],
+          count: [{ $count: "count" }]
+        })
+        .then(([{ docs, count }]) => [docs, count]);
+    } else {
+      promise = q
+        .append(pipeline)
+        .facet({
+          docs: isPaginationEnabled ? [{ $skip: skip }, { $limit: limit }] : [],
+          count: [{ $count: "count" }]
+        })
+        .then(([{ docs, count }]) => [docs, count]);
     }
-    promise = q
-      .facet({
-        docs: pipeline,
-        count: countPipeline
-      })
-      .then(([{ docs, count }]) => [docs, count]);
   } else {
-    const [pipeline] = constructPipelines();
+    const pipeline = constructPipeline();
 
     const countQuery = options.countQuery ? options.countQuery : this.aggregate(pipeline);
 

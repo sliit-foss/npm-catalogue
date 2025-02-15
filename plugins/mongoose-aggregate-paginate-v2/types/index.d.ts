@@ -5,6 +5,8 @@
 // and LiRen Tu <https://github.com/tuliren> for their contribution
 
 declare module "mongoose" {
+  type PrePaginatePipelineStage = PipelineStage | "__PREPAGINATE__";
+
   interface CustomLabels<T = string | undefined | boolean> {
     totalDocs?: T | undefined;
     docs?: T | undefined;
@@ -25,7 +27,7 @@ declare module "mongoose" {
     page?: number | undefined;
     limit?: number | undefined;
     customLabels?: CustomLabels | undefined;
-    /* If pagination is set to `false`, it will return all docs without adding limit condition. (Default: `true`) */
+    /** If pagination is set to `false`, it will return all docs without adding limit condition. (Default: `true`) **/
     pagination?: boolean | undefined;
     allowDiskUse?: boolean | undefined;
     countQuery?: object | undefined;
@@ -64,7 +66,7 @@ declare module "mongoose" {
 
   interface AggregatePaginateModel<D> extends Model<D> {
     aggregatePaginate<T>(
-      query?: Aggregate<T[]> | PipelineStage[],
+      query?: Aggregate<T[]> | PrePaginatePipelineStage[],
       options?: PaginateOptions,
       callback?: (err: any, result: AggregatePaginateResult<T>) => void
     ): Promise<AggregatePaginateResult<T>>;
