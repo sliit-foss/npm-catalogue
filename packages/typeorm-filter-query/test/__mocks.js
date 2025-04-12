@@ -1,16 +1,4 @@
-import {
-  Between,
-  ILike,
-  In,
-  IsNull,
-  LessThan,
-  LessThanOrEqual,
-  Like,
-  MoreThan,
-  MoreThanOrEqual,
-  Not,
-  Raw
-} from "typeorm";
+import { Between, ILike, In, IsNull, LessThan, LessThanOrEqual, Like, MoreThan, MoreThanOrEqual, Not } from "typeorm";
 
 export const basicFilterReq = {
   query: {
@@ -31,7 +19,9 @@ export const basicFilterReq = {
       isDeleted: "false",
       spouse: "exists(false)",
       followersCount: "between(10,100)"
-    }
+    },
+    page: "1",
+    limit: "8"
   }
 };
 
@@ -96,7 +86,7 @@ export const selectReq = {
   }
 };
 
-export const selectResult = "first_name last_name";
+export const selectResult = ["first_name", "last_name"];
 
 export const req = {
   query: {

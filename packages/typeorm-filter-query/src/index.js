@@ -19,8 +19,13 @@ const typeormFilterQuery = (req, _, next) => {
       req.query.sort = {};
     }
     req.query.include = req.query.include?.split(",");
-    req.query.select = req.query.select?.split(",")?.join(" ");
-    req.query.prepaginate = req.query.prepaginate === "true";
+    req.query.select = req.query.select?.split(",");
+    if (req.query.page) {
+      req.query.page = parseInt(req.query.page);
+    }
+    if (req.query.limit) {
+      req.query.limit = parseInt(req.query.limit);
+    }
   } catch (e) {
     console.error("[ FilterQuery ] - Failed to parse query", e);
   }
