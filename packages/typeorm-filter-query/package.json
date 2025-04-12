@@ -1,6 +1,6 @@
 {
   "name": "@sliit-foss/typeorm-filter-query",
-  "version": "0.0.0",
+  "version": "0.1.0-blizzard.0",
   "description": "Middleware which implements a standardized format and maps an incoming http request's query params to a format which is supported by typeorm",
   "main": "dist/index.js",
   "scripts": {
