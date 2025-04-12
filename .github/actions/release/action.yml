@@ -49,8 +49,17 @@ runs:
 
     - name: Publish packages on NPM
       run: |
-        pnpm --filter @sliit-foss/automatic-versioning build && npm i -g ./packages/automatic-versioning
-        pnpm release
+        pnpm --filter @sliit-foss/automatic-versioning build
+        cd ./packages/automatic-versioning
+        PACKAGE_TGZ=$(npm pack)
+        npm i -g "$PACKAGE_TGZ"
+        rm "$PACKAGE_TGZ"
+        cd ../..
+        if [ "$GITHUB_EVENT_NAME" = "workflow_dispatch" ]; then
+          pnpm release --force
+        else
+          pnpm release
+        fi
       shell: bash
 
     - name: Cleanup
