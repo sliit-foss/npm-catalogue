@@ -1,5 +1,5 @@
 import fs from "fs";
-import { configure, moduleLogger, transports } from "../src";
+import { configure, moduleLogger, winston } from "../src";
 
 describe("module-logger", () => {
   beforeAll(() => {
@@ -43,7 +43,7 @@ describe("module-logger", () => {
   it("should-take-overriden-transports", () => {
     configure({
       transportOverrides: [
-        new transports.Http({
+        new winston.transports.Http({
           host: "localhost",
           port: 8080,
           path: "/logs"
