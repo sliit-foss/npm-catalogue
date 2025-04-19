@@ -1,8 +1,10 @@
 import crypto from "crypto";
 import chalk from "chalk";
-import context from "express-http-context";
+import context from "@sliit-foss/express-http-context";
 import * as winston from "winston";
 import "winston-daily-rotate-file";
+
+export { winston };
 
 let _logger;
 
@@ -84,13 +86,21 @@ const _createLogger = () => {
   _logger.exitOnError = false;
 };
 
-export * from "winston";
+type DeepPartial<T> = {
+  [K in keyof T]?: T[K] extends object ? DeepPartial<T[K]> : T[K];
+};
 
-export const configure = (userConfig) => {
+/**
+ * Configures the module logger with a given user configuration.
+ */
+export const configure = (userConfig: DeepPartial<typeof _defaultConfig>) => {
   _defaultConfig = Object.assign(_defaultConfig, userConfig);
 };
 
-export const moduleLogger = (moduleName) => {
+/**
+ * Returns a modularized logger instance for a given module name.
+ */
+export const moduleLogger = (moduleName?: string): winston.Logger => {
   if (global.unit_tests_running || !_logger) _createLogger();
   const prefix = moduleName ? `[${moduleName}] - ` : "";
   return {
