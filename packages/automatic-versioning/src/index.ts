@@ -7,7 +7,7 @@ import { program, Option } from "commander";
 import { version } from "../package.json";
 import { defaultRunner, tagBasedRunner } from "./types";
 
-require("@colors/colors");
+import "@colors/colors";
 
 program
   .name("automatic-versioning")

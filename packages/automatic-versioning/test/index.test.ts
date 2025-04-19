@@ -41,11 +41,11 @@ describe("default", () => {
     await executeVersionScript();
     expect(getPackageVersion()).toBe("0.0.0");
   });
-  it("no diff", async () => {
+  it("bypass empty commit", async () => {
     await commit("Feat!: test commit");
     await commit("Patch: empty commit", true);
     await executeVersionScript();
-    expect(getPackageVersion()).toBe("0.0.0");
+    expect(getPackageVersion()).toBe("1.0.0");
   });
   it("recursive", async () => {
     await commit("Feat!: test commit");
@@ -114,6 +114,11 @@ describe("default", () => {
         setPackageVersion("0.1.0-blizzard.5");
         await executeVersionScript("--prerelease-tag=blizzard");
         expect(getPackageVersion()).toBe("0.1.0");
+      });
+      it("disable auto sync", async () => {
+        await commit("Feat!: test commit");
+        await executeVersionScript("--disable-auto-sync --prerelease-tag=blizzard --prerelease=true");
+        expect(getPackageVersion()).toBe("1.0.0-blizzard.0");
       });
     });
   });
