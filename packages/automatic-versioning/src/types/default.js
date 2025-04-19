@@ -54,7 +54,7 @@ const runner = (
   prereleaseBranch,
   ignorePrefixes
 ) => {
-  return run("git show --first-parent ./").then(async (diff) => {
+  return run("git log -p -1 -- ./").then(async (diff) => {
     if (diff) {
       console.info(`Diff found, running versioning for ${name}`.green);
       const { commitMessage, commitPrefix, noBump } = await getCommitPrefix(recursive, ignorePrefixes);
