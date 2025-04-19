@@ -2,11 +2,10 @@
 
 import run from "../utils/runner";
 
-const getCommitPrefix = async (recursive, ignorePrefixes, n = 1) => {
+const getCommitPrefix = async (recursive: boolean, ignorePrefixes: string[], n: number = 1) => {
   const log = await run(`git show -s --format='%s' -${n} ./`);
   const commits = log?.split("\n") || [];
-  commits.splice(-1);
-  const commitMessage = commits.pop()?.trim()?.slice(1, -1);
+  const commitMessage = commits.pop()?.trim().replace(/^'|'$/g, "");
   let commitPrefix = commitMessage?.includes(":") ? commitMessage?.split(":")?.[0]?.trim()?.toLowerCase() : "";
   if (commitPrefix?.includes("https")) commitPrefix = "";
   if (commitPrefix?.includes("(")) {
@@ -22,20 +21,10 @@ const getCommitPrefix = async (recursive, ignorePrefixes, n = 1) => {
 const getCurrentVersion = async () =>
   (await run("npm version"))?.split(",")?.[0]?.split(":")?.[1]?.replace(/'/g, "")?.trim();
 
-const getPackageVersion = async (name, disableAutoSync) => {
+const getPackageVersion = (name: string, disableAutoSync: boolean) => {
   if (!disableAutoSync) {
     try {
-      const versions = await run(`npm view ${name} time`).then((res) =>
-        res
-          .replace(/{|}|,|'/g, "")
-          .trim()
-          .split("\n")
-          .filter((v) => !v.includes("modified:") && !v.includes("created:"))
-      );
-      versions.sort(
-        (v1, v2) => new Date(v1.trim().split(" ")[1]).getTime() - new Date(v2.trim().split(" ")[1]).getTime()
-      );
-      return versions.pop().split(":")?.[0].trim();
+      return run(`npm view ${name} version`);
     } catch (e) {
       return getCurrentVersion();
     }
@@ -45,14 +34,14 @@ const getPackageVersion = async (name, disableAutoSync) => {
 };
 
 const runner = (
-  name,
-  noCommit,
-  recursive = false,
-  disableAutoSync,
-  prerelease,
-  prereleaseTag,
-  prereleaseBranch,
-  ignorePrefixes
+  name: string,
+  noCommit: boolean,
+  recursive: boolean = false,
+  disableAutoSync: boolean,
+  prerelease: boolean,
+  prereleaseTag: string,
+  prereleaseBranch: string,
+  ignorePrefixes: string[]
 ) => {
   return run("git log -p -1 -- ./").then(async (diff) => {
     if (diff) {
@@ -114,7 +103,7 @@ const runner = (
         });
       } else {
         console.info(`No bump found in commit message, skipping versioning and editing commit message`.yellow);
-        await run(`git commit --amend -m "${commitMessage.replace(/--no-bump/g, "")}"`).then(() =>
+        await run(`git commit --amend -m "${commitMessage?.replace(/--no-bump/g, "")}"`).then(() =>
           console.info("Successfully edited commit message".green)
         );
       }
