@@ -43,6 +43,9 @@ importers:
       turbo:
         specifier: 1.7.3
         version: 1.7.3
+      typescript:
+        specifier: 5.8.3
+        version: 5.8.3
     devDependencies:
       "@commitlint/cli":
         specifier: 19.2.1
@@ -80,9 +83,6 @@ importers:
       prettier:
         specifier: 3.2.5
         version: 3.2.5
-      typescript:
-        specifier: 5.8.3
-        version: 5.8.3
 
   packages/actions-exec-wrapper:
     dependencies:
