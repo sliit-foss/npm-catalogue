@@ -16,6 +16,9 @@ importers:
       "@sliit-foss/automatic-versioning":
         specifier: workspace:*
         version: link:packages/automatic-versioning
+      "@types/node":
+        specifier: 22.14.1
+        version: 22.14.1
       dotenv-cli:
         specifier: 7.0.0
         version: 7.0.0
@@ -59,9 +62,6 @@ importers:
       "@types/jest":
         specifier: 29.5.14
         version: 29.5.14
-      "@types/node":
-        specifier: 22.14.1
-        version: 22.14.1
       "@typescript-eslint/eslint-plugin":
         specifier: 6.16.0
         version: 6.16.0(@typescript-eslint/parser@6.16.0(eslint@8.33.0)(typescript@5.8.3))(eslint@8.33.0)(typescript@5.8.3)
