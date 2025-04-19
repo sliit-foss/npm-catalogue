@@ -1,0 +1,1 @@
+npx tsc --declaration --emitDeclarationOnly --outDir ./dist ./src/index.ts
