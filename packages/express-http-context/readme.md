@@ -10,7 +10,7 @@ Get and set request-scoped context anywhere. This is just an unopinionated, idio
 
 ## How to use it
 
-Install: `bun install --save express-http-context`
+Install: `bun install --save @sliit-foss/express-http-context`
 
 Use the middleware immediately before the first middleware that needs to have access to the context.
 You won't have access to the context in any middleware "used" before this one.
@@ -21,7 +21,7 @@ BEFORE you use this middleware.
 
 ```js
 const express = require("express");
-const httpContext = require("express-http-context");
+const httpContext = require("@sliit-foss/express-http-context");
 
 const app = express();
 // Use any third party middleware that does not need access to the context here, e.g.
@@ -49,7 +49,7 @@ app.use((req, res, next) => {
 Get them from code that doesn't have access to the express `req` object:
 
 ```js
-const httpContext = require("express-http-context");
+const httpContext = require("@sliit-foss/express-http-context");
 
 // Somewhere deep in the Todo Service
 function createTodoItem(title, content, callback) {
@@ -61,7 +61,7 @@ function createTodoItem(title, content, callback) {
 You can access the store directly as follows
 
 ```js
-const store = require("express-http-context").store;
+const store = require("@sliit-foss/express-http-context").store;
 ```
 
 ## Troubleshooting
