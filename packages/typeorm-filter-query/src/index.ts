@@ -1,8 +1,9 @@
+import type { NextFunction } from "express";
 import { mapFilters, configureDriver } from "./utils";
 
 export { configureDriver };
 
-const typeormFilterQuery = (req, _, next) => {
+const typeormFilterQuery = (req: any, _: any, next: NextFunction) => {
   try {
     req.query.filter = mapFilters(req.query.filter) ?? {};
     mapFilters(req.query.secondaryFilter);
