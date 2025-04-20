@@ -1,1 +1,1 @@
-npx tsc --declaration --emitDeclarationOnly --esModuleInterop --resolveJsonModule --outDir ./dist --rootDir ./src ./src/index.ts
+npx tsc --declaration --emitDeclarationOnly --esModuleInterop --resolveJsonModule --downlevelIteration --outDir ./dist --rootDir ./src ./src/index.ts
