@@ -16,6 +16,9 @@
     "@sliit-foss/module-logger": "2.0.0",
     "chalk": "4.1.2"
   },
+  "optionalDependencies": {
+    "express": "*"
+  },
   "devDependencies": {
     "@types/express": "*"
   },
