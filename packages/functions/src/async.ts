@@ -5,15 +5,9 @@ import { _traced } from "./traced";
 
 const logger = moduleLogger("tracer");
 
-declare module "express" {
-  interface Response {
-    errorLogged?: boolean;
-  }
-}
-
 const _asyncHandler =
   (fn: RequestHandler, trace = false) =>
-  async (req: Request, res: Response, next: NextFunction) => {
+  async (req: Request, res: Response & Record<string, any>, next: NextFunction) => {
     let fnName: string;
     try {
       if (trace) {
@@ -54,7 +48,7 @@ export const tracedAsyncHandler = (fn: RequestHandler): RequestHandler => _async
  */
 export const fallibleAsyncHandler =
   (fn: RequestHandler): RequestHandler =>
-  async (req, res: Response, next) => {
+  async (req, res: Response & Record<string, any>, next) => {
     try {
       await _traced(fn.bind(this, req, res, next), {}, _fnName(fn), null, true);
       if (!res.headersSent) next();
