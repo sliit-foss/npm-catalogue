@@ -1,8 +1,8 @@
 const complexOperators = ["and", "or"];
 
-const replaceOperator = (value, operator) => value.replace(`${operator}(`, "").slice(0, -1);
+const replaceOperator = (value: string, operator: string) => value.replace(`${operator}(`, "").slice(0, -1);
 
-const parseOperatorValue = (value, operator) => {
+const parseOperatorValue = (value: any, operator?: string) => {
   if (operator) value = replaceOperator(value, operator);
   if (isNaN(value)) {
     if (!isNaN(Date.parse(value))) {
@@ -17,7 +17,7 @@ const parseOperatorValue = (value, operator) => {
   return value;
 };
 
-export const mapValue = (value) => {
+export const mapValue = (value: string) => {
   if (value.startsWith("eq(")) {
     value = parseOperatorValue(value, "eq");
     if (value === "true" || value === "false") {

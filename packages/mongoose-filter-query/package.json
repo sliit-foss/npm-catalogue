@@ -4,7 +4,7 @@
   "description": "Middleware which implements a standardized format and maps an incoming http request's query params to a format which is supported by mongoose",
   "main": "dist/index.js",
   "scripts": {
-    "build": "node ../../scripts/esbuild.config.js",
+    "build": "node ../../scripts/esbuild.config.js && bash ../../scripts/build-types.sh",
     "build:watch": "bash ../../scripts/esbuild.watch.sh",
     "bump-version": "bash ../../scripts/bump-version.sh --name=@sliit-foss/mongoose-filter-query",
     "lint": "bash ../../scripts/lint.sh",
@@ -12,7 +12,11 @@
     "test": "bash ../../scripts/test/test.sh"
   },
   "peerDependencies": {
+    "express": "*",
     "bson": ">=4"
+  },
+  "devDependencies": {
+    "@types/express": "*"
   },
   "author": "SLIIT FOSS",
   "license": "MIT",
