@@ -1,3 +1,5 @@
+import { Request } from "express";
+
 export const basicFilterReq = {
   query: {
     filter: {
@@ -60,7 +62,7 @@ export const complexRootKeyFilterResult = {
   $and: [{ age: { $gt: 20 } }, { firstName: { $eq: "John" } }]
 };
 
-export const sortsReq: Record<string, any> = {
+export const sortsReq: Partial<Request<any, any, any, Record<string, any>>> = {
   query: {
     sort: {
       name: "1",
@@ -94,7 +96,7 @@ export const selectReq = {
 
 export const selectResult = "first_name last_name";
 
-export const req: Record<string, any> = {
+export const req: Partial<Request<any, any, any, Record<string, any>>> = {
   query: {
     filter: {
       name: "Aka"
