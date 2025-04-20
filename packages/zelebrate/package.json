@@ -1,6 +1,6 @@
 {
   "name": "@sliit-foss/zelebrate",
-  "version": "0.0.0",
+  "version": "0.1.0-blizzard.0",
   "description": "Express middleware which wraps around the zod validation library to provide a simple way to validate request bodies, query parameters, and headers.",
   "main": "dist/index.js",
   "scripts": {
