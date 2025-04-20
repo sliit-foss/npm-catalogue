@@ -1,6 +1,7 @@
+import { NextFunction } from "express";
 import { mapFilters } from "./utils";
 
-const mongooseFilterQuery = (req, res, next) => {
+const mongooseFilterQuery = (req: any, _: any, next: NextFunction) => {
   try {
     req.query.filter = mapFilters(req.query.filter) ?? {};
     mapFilters(req.query.secondaryFilter);

@@ -60,7 +60,7 @@ export const complexRootKeyFilterResult = {
   $and: [{ age: { $gt: 20 } }, { firstName: { $eq: "John" } }]
 };
 
-export const sortsReq = {
+export const sortsReq: Record<string, any> = {
   query: {
     sort: {
       name: "1",
@@ -94,7 +94,7 @@ export const selectReq = {
 
 export const selectResult = "first_name last_name";
 
-export const req = {
+export const req: Record<string, any> = {
   query: {
     filter: {
       name: "Aka"
