@@ -1,6 +1,6 @@
 import chalk from "chalk";
 
-export const coloredString = (value, key) => {
+export const coloredString = (value: string, key?: string) => {
   // istanbul ignore next
   switch (key ?? value) {
     case "url":
