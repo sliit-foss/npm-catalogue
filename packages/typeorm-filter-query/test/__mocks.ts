@@ -1,3 +1,4 @@
+import { Request } from "express";
 import { Between, ILike, In, IsNull, LessThan, LessThanOrEqual, Like, MoreThan, MoreThanOrEqual, Not } from "typeorm";
 
 export const basicFilterReq = {
@@ -54,7 +55,7 @@ export const complexRootKeyFilterReq = {
 
 export const complexRootKeyFilterResult = [{ firstName: "John" }, { lastName: "Doe" }];
 
-export const sortsReq: Record<string, any> = {
+export const sortsReq: Partial<Request<any, any, any, Record<string, any>>> = {
   query: {
     sort: {
       name: "1",
@@ -72,7 +73,7 @@ export const sortResult = {
   height: -1
 };
 
-export const includeReq: Record<string, any> = {
+export const includeReq = {
   query: {
     include: "posts,comments"
   }
@@ -80,7 +81,7 @@ export const includeReq: Record<string, any> = {
 
 export const includeResult = ["posts", "comments"];
 
-export const selectReq: Record<string, any> = {
+export const selectReq = {
   query: {
     select: "first_name,last_name"
   }
@@ -88,7 +89,7 @@ export const selectReq: Record<string, any> = {
 
 export const selectResult = ["first_name", "last_name"];
 
-export const req: Record<string, any> = {
+export const req: Partial<Request<any, any, any, Record<string, any>>> = {
   query: {
     filter: {
       name: "Aka"

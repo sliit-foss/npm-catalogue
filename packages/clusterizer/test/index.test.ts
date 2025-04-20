@@ -34,7 +34,7 @@ describe("test clusterizer", () => {
     expect(cluster.fork).toHaveBeenCalledTimes(cpus().length);
   });
   test("custom logger", () => {
-    const logger = { info: jest.fn() };
+    const logger = { info: jest.fn(), error: jest.fn() };
     clusterize(app, { logger });
     expect(logger.info).toHaveBeenCalledTimes(1);
   });

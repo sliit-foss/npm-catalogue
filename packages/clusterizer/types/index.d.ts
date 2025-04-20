@@ -14,7 +14,7 @@ interface ClusterizerOptions {
    * This defaults to the number of cores in your machine.
    * Providing a number of workers higher than this core count will have no effect on the cluster.
    */
-  workers?: Number;
+  workers?: number;
   /**
    * A callback function to be executed once the master process is spawned.
    */
