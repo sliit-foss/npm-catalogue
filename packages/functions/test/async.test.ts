@@ -1,15 +1,16 @@
 const { mockLogger } = require("./__mocks__");
 
-const { asyncHandler, tracedAsyncHandler, fallibleAsyncHandler, plainAsyncHandler } = require("../src");
-const { coloredFnName } = require("../src/utils");
+import { Request, Response } from "express";
+import { asyncHandler, tracedAsyncHandler, fallibleAsyncHandler, plainAsyncHandler } from "../src";
+import { coloredFnName } from "../src/utils";
 
 beforeEach(() => {
   jest.clearAllMocks();
 });
 
 describe("asyncHandler", () => {
-  const mockReq = {};
-  const mockRes = {};
+  const mockReq = {} as Request;
+  const mockRes = {} as Response;
   const mockNext = jest.fn();
 
   test("test async handler", async () => {

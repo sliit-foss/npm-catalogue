@@ -1,6 +1,6 @@
 import chalk from "chalk";
 
-export const fnName = (fn, prefix) => {
+export const fnName = (fn: Function, prefix?: string) => {
   let name = fn.name;
   while (1) {
     const replaced = name?.replace("bound", "");
@@ -12,4 +12,5 @@ export const fnName = (fn, prefix) => {
   return coloredFnName(name, prefix);
 };
 
-export const coloredFnName = (fn, prefix) => chalk.bold(chalk.magentaBright(prefix ? `${prefix} >>> ${fn}` : fn));
+export const coloredFnName = (fn: string, prefix?: string) =>
+  chalk.bold(chalk.magentaBright(prefix ? `${prefix} >>> ${fn}` : fn));
