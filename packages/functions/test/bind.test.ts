@@ -1,6 +1,6 @@
 const { mockLogger } = require("./__mocks__");
 
-const { bindKey } = require("../src");
+import { bindKey } from "../src";
 
 describe("bindKey", () => {
   test("test-successfull-bind", async () => {
