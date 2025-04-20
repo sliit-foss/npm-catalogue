@@ -1,3 +1,4 @@
+import type { RequestHandler, Request, Response, NextFunction } from "express";
 import { moduleLogger } from "@sliit-foss/module-logger";
 
 const logger = moduleLogger("framework");
@@ -5,14 +6,28 @@ const logger = moduleLogger("framework");
 const defaultProperties = ["path", "method", "query", "params"];
 
 const generateInfoObject = (req, properties) =>
-  properties.reduce((acc, prop) => {
-    acc[prop] = req[prop];
-    return acc;
-  }, {});
+  properties.reduce(
+    (acc, prop) => {
+      acc[prop] = req[prop];
+      return acc;
+    },
+    {} as Record<string, unknown>
+  );
 
-const httpLogger =
-  ({ whitelists = [], loggable, onFinish: onFinishExternal } = {}) =>
-  (req, res, next) => {
+type HttpLoggerOptions = {
+  whitelists?: string[];
+  loggable?: string[] | ((req: Request) => object);
+  onFinish?: () => void | Promise<void>;
+};
+
+/**
+ * @description Creates a HTTP logging middleware for Express.js
+ * @param options Add options to customize logging
+ * @returns A middleware function which will log http requests
+ */
+export const httpLogger =
+  ({ whitelists = [], loggable, onFinish: onFinishExternal }: HttpLoggerOptions = {}): RequestHandler =>
+  (req: Request, res: Response, next: NextFunction) => {
     const info = generateInfoObject(req, defaultProperties);
 
     let additionalInfo;
@@ -29,7 +44,7 @@ const httpLogger =
 
     logger.info(`request initiated`, { ...info, ...additionalInfo });
 
-    const onFinish = (err) => {
+    const onFinish = (err?: Error) => {
       res.removeListener("error", onFinish);
       res.removeListener("finish", onFinish);
 
