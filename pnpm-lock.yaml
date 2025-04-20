@@ -212,6 +212,28 @@ importers:
         specifier: "*"
         version: 4.17.21
 
+  packages/zelebrate:
+    dependencies:
+      escape-html:
+        specifier: 1.0.3
+        version: 1.0.3
+      express:
+        specifier: "*"
+        version: 4.19.2
+      lodash:
+        specifier: 4.17.21
+        version: 4.17.21
+      zod:
+        specifier: 3.24.3
+        version: 3.24.3
+    devDependencies:
+      "@types/express":
+        specifier: "*"
+        version: 4.17.21
+      "@types/lodash":
+        specifier: 4.17.15
+        version: 4.17.15
+
   plugins/babel-plugin-transform-trace:
     dependencies:
       "@babel/helper-plugin-utils":
@@ -5688,6 +5710,10 @@ packages:
       { integrity: sha512-9bnSc/HEW2uRy67wc+T8UwauLuPJVn28jb+GtJY16iiKWyvmYJRXVT4UamsAEGQfPohgr2q4Tq0sQbQlxTfi1g== }
     engines: { node: ">=12.20" }
 
+  zod@3.24.3:
+    resolution:
+      { integrity: sha512-HhY1oqzWCQWuUqvBFnsyrtZRhyPeR7SUGv+C4+MsisMuVfSPx8HpwWqH8tRahSlt6M3PiFAcoeFhZAqIXTxoSg== }
+
 snapshots:
   "@actions/exec@1.1.1":
     dependencies:
@@ -10831,3 +10857,5 @@ snapshots:
   yocto-queue@0.1.0: {}
 
   yocto-queue@1.0.0: {}
+
+  zod@3.24.3: {}
