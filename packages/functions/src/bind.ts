@@ -19,6 +19,25 @@ export const bindKey = (object: Record<any, any>, key: string, ...partials: any[
   return temp[key];
 };
 
+/**
+ * @description Creates and returns a function that passes on the object context to the method at object[key] which is type safe.
+ * @param object The object to invoke the method on
+ * @param key The method to invoke
+ * @returns Returns the new bound function
+ * @example
+ * const object = {
+ *    name: 'John',
+ *    greet: function(greeting: string, punctuation: string) {
+ *       return greeting + ' ' + this.name + punctuation;
+ *    }
+ * };
+ * console.log(preserveContext(object, 'greet')('hello', '!')); // => 'hello John!'
+ */
+export const preserveContext = function <T, K extends keyof T>(obj: T, method: K) {
+  return (obj[method] as Function).bind(obj) as T[K];
+};
+
 export default {
-  bindKey
+  bindKey,
+  preserveContext
 };
