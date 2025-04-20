@@ -1,6 +1,6 @@
 {
   "name": "@sliit-foss/http-logger",
-  "version": "1.4.0",
+  "version": "2.0.0",
   "description": "Http logging middleware for Express.js",
   "main": "dist/index.js",
   "scripts": {
