@@ -31,11 +31,22 @@ declare module "axios" {
   }
 }
 
-interface ServiceConnectorOptions extends CreateAxiosDefaults {
+export interface ServiceConnectorOptions extends CreateAxiosDefaults {
+  /**
+   * @description The name of the service. This is used to identify the service in logs
+   */
   service?: string;
   headerIntercepts?: (config: InternalAxiosRequestConfig) => Record<string, string> | Promise<Record<string, string>>;
+  /**
+   * @description A function to decide what exactly you want logged from the axios response
+   */
   loggable?: (response: AxiosResponse) => Record<string, string>;
   logs?: boolean;
+  /**
+   * @description The context key which contains a correlation ID for the request if present. This is used to track the request across multiple services
+   * @defaultValue "correlationId"
+   */
+  traceKey?: string;
 }
 /**
  * @description Creates a wrapper around axios with extended support for logging and error handling
@@ -48,6 +59,6 @@ interface ServiceConnectorOptions extends CreateAxiosDefaults {
  * });
  * instance.get('/users');
  */
-function serviceConnector(options: ServiceConnectorOptions): AxiosInstance;
+export declare function serviceConnector(options: ServiceConnectorOptions): AxiosInstance;
 
 export default serviceConnector;

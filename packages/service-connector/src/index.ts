@@ -1,12 +1,20 @@
 import axios from "axios";
 import axiosRetry from "axios-retry";
 import chalk from "chalk";
-import context from "express-http-context";
+import context from "@sliit-foss/express-http-context";
 import createError from "http-errors";
 import { moduleLogger } from "@sliit-foss/module-logger";
+import type { ServiceConnectorOptions } from "../types";
 import { formatLogs, coloredString } from "./helpers";
 
-const serviceConnector = ({ service, headerIntercepts, loggable, logs = true, ...axiosOptions } = {}) => {
+const serviceConnector = ({
+  service,
+  headerIntercepts,
+  loggable,
+  logs = true,
+  traceKey,
+  ...axiosOptions
+}: ServiceConnectorOptions = {}) => {
   const logger = moduleLogger(chalk.bold(service ?? "Service-Connector"));
   const instance = axios.create(axiosOptions);
   instance.interceptors.request.use(async (config) => {
@@ -17,21 +25,23 @@ const serviceConnector = ({ service, headerIntercepts, loggable, logs = true, ..
         )}: ${coloredString(`${config.baseURL ?? ""}${config.url}`, "url-value")}`,
         formatLogs(loggable, config)
       );
-    config.headers["x-correlation-id"] = context.get("correlationId");
+    config.headers["x-correlation-id"] = context.get(traceKey ?? "correlationId");
     if (headerIntercepts) {
       let intercepts = headerIntercepts(config);
-      if (intercepts instanceof Promise)
-        intercepts = await intercepts.catch((e) =>
+      if (intercepts instanceof Promise) {
+        intercepts = await intercepts.catch((e) => {
           logger.error(
             `Failed to intercept headers - ${coloredString("method")}: ${coloredString(
               config.method
             )} - ${coloredString("url")}: ${coloredString(`${config.baseURL ?? ""}${config.url}`, "url-value")}`,
             e?.message
-          )
-        );
+          );
+          return {};
+        });
+      }
       config.headers = {
         ...config.headers,
-        ...intercepts
+        ...(intercepts as any)
       };
     }
     return config;
