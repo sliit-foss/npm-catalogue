@@ -23,14 +23,9 @@ const getCurrentVersion = async () =>
 
 const getPackageVersion = (name: string, disableAutoSync: boolean) => {
   if (!disableAutoSync) {
-    try {
-      return run(`npm view ${name} version`);
-    } catch (e) {
-      return getCurrentVersion();
-    }
-  } else {
-    return getCurrentVersion();
+    return run(`npm view ${name} version`).catch(getCurrentVersion);
   }
+  return getCurrentVersion();
 };
 
 const runner = (
