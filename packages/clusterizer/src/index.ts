@@ -1,11 +1,15 @@
 import cluster from "node:cluster";
 import { cpus } from "node:os";
+import { ClusterizerOptions } from "../types";
 
 const cpuCount = cpus().length;
 
 const logPrefix = "Clusterizer -";
 
-const clusterize = async (app, { logger, workers, onMaster, onWorker, onWorkerExit } = {}) => {
+const clusterize = async (
+  app: () => any,
+  { logger, workers, onMaster, onWorker, onWorkerExit }: ClusterizerOptions = {}
+) => {
   if (!logger) logger = console;
   try {
     workers = workers ?? cpuCount;
