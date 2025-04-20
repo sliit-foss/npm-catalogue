@@ -44,12 +44,13 @@ yarn-error.log*
 .eslintcache
 
 packages/automatic-versioning/tmp
+packages/module-logger/logs
 
 p*/**/dist/
 
 p*/**/.npmignore
 p*/**/.babelrc
-p*/**/jest.config.js
+p*/**/jest.config.ts
 p*/**/LICENSE
 
 p*/**/node_modules/

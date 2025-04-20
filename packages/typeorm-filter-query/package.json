@@ -1,10 +1,10 @@
 {
   "name": "@sliit-foss/typeorm-filter-query",
-  "version": "0.1.0-blizzard.1",
+  "version": "0.1.1",
   "description": "Middleware which implements a standardized format and maps an incoming http request's query params to a format which is supported by typeorm",
   "main": "dist/index.js",
   "scripts": {
-    "build": "node ../../scripts/esbuild.config.js",
+    "build": "node ../../scripts/esbuild.config.js && bash ../../scripts/build-types.sh",
     "build:watch": "bash ../../scripts/esbuild.watch.sh",
     "bump-version": "bash ../../scripts/bump-version.sh --name=@sliit-foss/typeorm-filter-query",
     "lint": "bash ../../scripts/lint.sh",
@@ -12,7 +12,11 @@
     "test": "bash ../../scripts/test/test.sh"
   },
   "peerDependencies": {
+    "express": "*",
     "typeorm": ">=0.2.0"
+  },
+  "devDependencies": {
+    "@types/express": "*"
   },
   "author": "SLIIT FOSS",
   "license": "MIT",

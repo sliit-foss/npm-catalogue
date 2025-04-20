@@ -1,11 +1,10 @@
 {
   "name": "@sliit-foss/module-logger",
-  "version": "1.3.1",
+  "version": "2.0.0",
   "description": "A modularized logger wrapped around winston to make working with nodeJS microservices easier.",
   "main": "dist/index.js",
-  "types": "types/index.d.ts",
   "scripts": {
-    "build": "node ../../scripts/esbuild.config.js",
+    "build": "node ../../scripts/esbuild.config.js && bash ../../scripts/build-types.sh",
     "build:watch": "bash ../../scripts/esbuild.watch.sh",
     "bump-version": "bash ../../scripts/bump-version.sh --name=@sliit-foss/module-logger",
     "lint": "bash ../../scripts/lint.sh",
@@ -13,8 +12,8 @@
     "test": "bash ../../scripts/test/test.sh"
   },
   "dependencies": {
+    "@sliit-foss/express-http-context": "2.0.0",
     "chalk": "4.1.2",
-    "express-http-context": "1.2.4",
     "winston": "3.8.2",
     "winston-daily-rotate-file": "4.7.1"
   },

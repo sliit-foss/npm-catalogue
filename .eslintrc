@@ -3,8 +3,35 @@
     "@sliit-foss/eslint-config-internal",
     "turbo"
   ],
-  "ignorePatterns": ["packages/templates/src/stacks/**"],
+  "parser": "@typescript-eslint/parser",
+  "plugins": [
+    "@typescript-eslint"
+  ],
+  "ignorePatterns": [
+    "packages/templates/src/stacks/**"
+  ],
   "rules": {
+    "@typescript-eslint/ban-types": "off",
+    "@typescript-eslint/no-explicit-any": "off",
+    "@typescript-eslint/no-namespace": "off",
+    "@typescript-eslint/no-var-requires": "off",
+    "@typescript-eslint/no-unused-vars": [
+      "error",
+      {
+        "argsIgnorePattern": "^_"
+      }
+    ],
     "no-constant-condition": "off"
-  }
+  },
+  "overrides": [
+    {
+      "files": [
+        "*.ts"
+      ],
+      "rules": {
+        "no-unused-vars": "off",
+        "no-undef": "off"
+      }
+    }
+  ]
 }

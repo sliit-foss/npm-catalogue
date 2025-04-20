@@ -1,6 +1,6 @@
 # @sliit-foss/module-logger
 
-### A modularized logger to make working with nodeJS microservices easier. <br/> <br/> <small>This package is wrapped around [winston](https://www.npmjs.com/package/winston) and exposes all of its functions and properties.</small>
+### A modularized logger to make working with NodeJS microservices easier. <br/> <br/> <small>This package is wrapped around [winston](https://www.npmjs.com/package/winston) and exposes all of its functions and properties through an import named `winston`.</small>
 
 <br/>
 

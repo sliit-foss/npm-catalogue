@@ -1,1 +1,1 @@
-shx cp ../../.babelrc ../../jest.config.js . && dotenv -- jest --coverage --verbose --runInBand --forceExit --detectOpenHandles && rimraf .babelrc jest.config.js
+shx cp ../../.babelrc ../../jest.config.ts . && dotenv -- jest --coverage --verbose --runInBand --detectOpenHandles --forceExit && rimraf .babelrc jest.config.ts

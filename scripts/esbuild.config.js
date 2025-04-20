@@ -1,11 +1,12 @@
+const esbuild = require("esbuild");
 const execSync = require("child_process").execSync;
 const { globPlugin } = require("esbuild-plugin-glob");
 
 execSync("npx rimraf ./dist && mkdir dist");
 
-require("esbuild")
+esbuild
   .build({
-    entryPoints: ["./src/**/*.js"],
+    entryPoints: ["./src/**/*.js", "./src/**/*.ts"],
     bundle: false,
     outdir: "./dist",
     platform: "node",

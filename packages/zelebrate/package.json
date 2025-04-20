@@ -1,0 +1,42 @@
+{
+  "name": "@sliit-foss/zelebrate",
+  "version": "0.0.0",
+  "description": "Express middleware which wraps around the zod validation library to provide a simple way to validate request bodies, query parameters, and headers.",
+  "main": "dist/index.js",
+  "scripts": {
+    "build": "node ../../scripts/esbuild.config.js && bash ../../scripts/build-types.sh",
+    "build:watch": "bash ../../scripts/esbuild.watch.sh",
+    "bump-version": "bash ../../scripts/bump-version.sh --name=@sliit-foss/zelebrate",
+    "lint": "bash ../../scripts/lint.sh",
+    "release": "bash ../../scripts/release.sh",
+    "test": "bash ../../scripts/test/test.sh"
+  },
+  "dependencies": {
+    "escape-html": "1.0.3",
+    "lodash": "4.17.21",
+    "zod": "3.24.3"
+  },
+  "peerDependencies": {
+    "express": "*"
+  },
+  "devDependencies": {
+    "@types/express": "*",
+    "@types/lodash": "4.17.15"
+  },
+  "author": "SLIIT FOSS",
+  "license": "MIT",
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/sliit-foss/npm-catalogue.git"
+  },
+  "homepage": "https://github.com/sliit-foss/npm-catalogue/blob/main/packages/zelebrate/readme.md",
+  "keywords": [
+    "zod",
+    "validation",
+    "express",
+    "middleware"
+  ],
+  "bugs": {
+    "url": "https://github.com/sliit-foss/npm-catalogue/issues"
+  }
+}
