@@ -1,8 +1,12 @@
 /* eslint-disable turbo/no-undeclared-env-vars */
 
-const supportedDrivers = ["mysql", "postgres", "postgresql"];
+export enum SupportedDriver {
+  mysql = "mysql",
+  postgres = "postgres",
+  postgresql = "postgresql"
+}
 
-export const getDriverFromConnectionStringOrDefault = () => {
+export const getDriverFromConnectionStringOrDefault = (): SupportedDriver => {
   const connectionStr =
     process.env.DB_CONNECTION_STRING ||
     process.env.DATABASE_URL ||
@@ -15,24 +19,20 @@ export const getDriverFromConnectionStringOrDefault = () => {
     process.env.MYSQL_CONNECTION ||
     process.env.POSTGRES_CONNECTION;
 
-  if (!connectionStr) return "mysql";
+  if (!connectionStr) return SupportedDriver.mysql;
 
   const url = new URL(connectionStr);
   const driver = url.protocol.replace(":", "");
-  if (supportedDrivers.includes(driver)) {
-    return driver;
+  if (SupportedDriver[driver]) {
+    return SupportedDriver[driver];
   }
   throw new Error(
-    `Unsupported driver in connection string: ${driver}. Supported drivers are: ${supportedDrivers.join(", ")}`
+    `Unsupported driver in connection string: ${driver}. Supported drivers are: ${Object.values(SupportedDriver).join(", ")}`
   );
 };
 
 export let driver = getDriverFromConnectionStringOrDefault();
 
-export const configureDriver = (newDriver) => {
-  if (supportedDrivers.includes(newDriver)) {
-    driver = newDriver;
-  } else {
-    throw new Error(`Unsupported driver: ${newDriver}. Supported drivers are: ${supportedDrivers.join(", ")}`);
-  }
+export const configureDriver = (newDriver: SupportedDriver | keyof typeof SupportedDriver) => {
+  driver = newDriver as SupportedDriver;
 };

@@ -12,7 +12,11 @@
     "test": "bash ../../scripts/test/test.sh"
   },
   "peerDependencies": {
+    "express": "*",
     "typeorm": ">=0.2.0"
+  },
+  "devDependencies": {
+    "@types/express": "*"
   },
   "author": "SLIIT FOSS",
   "license": "MIT",

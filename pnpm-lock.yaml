@@ -194,9 +194,16 @@ importers:
 
   packages/typeorm-filter-query:
     dependencies:
+      express:
+        specifier: "*"
+        version: 4.19.2
       typeorm:
         specifier: ">=0.2.0"
         version: 0.3.22(reflect-metadata@0.2.2)(ts-node@10.9.2(@types/node@22.14.1)(typescript@5.8.3))
+    devDependencies:
+      "@types/express":
+        specifier: "*"
+        version: 4.17.21
 
   plugins/babel-plugin-transform-trace:
     dependencies:

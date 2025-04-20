@@ -54,7 +54,7 @@ export const complexRootKeyFilterReq = {
 
 export const complexRootKeyFilterResult = [{ firstName: "John" }, { lastName: "Doe" }];
 
-export const sortsReq = {
+export const sortsReq: Record<string, any> = {
   query: {
     sort: {
       name: "1",
@@ -72,7 +72,7 @@ export const sortResult = {
   height: -1
 };
 
-export const includeReq = {
+export const includeReq: Record<string, any> = {
   query: {
     include: "posts,comments"
   }
@@ -80,7 +80,7 @@ export const includeReq = {
 
 export const includeResult = ["posts", "comments"];
 
-export const selectReq = {
+export const selectReq: Record<string, any> = {
   query: {
     select: "first_name,last_name"
   }
@@ -88,7 +88,7 @@ export const selectReq = {
 
 export const selectResult = ["first_name", "last_name"];
 
-export const req = {
+export const req: Record<string, any> = {
   query: {
     filter: {
       name: "Aka"

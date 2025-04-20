@@ -11,15 +11,15 @@ import {
   Not,
   Raw
 } from "typeorm";
-import { driver } from "./driver";
+import { driver, SupportedDriver } from "./driver";
 
 export * from "./driver";
 
 const complexOperators = ["and", "or"];
 
-const replaceOperator = (value, operator) => value.replace(`${operator}(`, "").slice(0, -1);
+const replaceOperator = (value: string, operator: string) => value.replace(`${operator}(`, "").slice(0, -1);
 
-const parseOperatorValue = (value, operator) => {
+const parseOperatorValue = (value: any, operator?: string) => {
   if (operator) value = replaceOperator(value, operator);
   if (isNaN(value)) {
     if (!isNaN(Date.parse(value))) {
@@ -31,7 +31,7 @@ const parseOperatorValue = (value, operator) => {
   return value;
 };
 
-export const mapValue = (value) => {
+export const mapValue = (value: string) => {
   if (value.startsWith("eq(")) {
     value = parseOperatorValue(value, "eq");
     if (value === "true" || value === "false") {
@@ -54,19 +54,20 @@ export const mapValue = (value) => {
     return LessThanOrEqual(parseOperatorValue(value, "lte"));
   } else if (value.startsWith("between(")) {
     return Between(
-      ...parseOperatorValue(value, "between")
+      ...(parseOperatorValue(value, "between")
         .split(",")
-        .map((v) => parseOperatorValue(v))
+        .map((v: any) => parseOperatorValue(v)) as [any, any])
     );
   } else if (value.startsWith("contains(")) {
-    if (driver === "postgres" || driver === "postgresql") {
+    if (driver === SupportedDriver.postgres || driver === SupportedDriver.postgresql) {
       return Raw((alias) => `:value = ANY(${alias})`, { value: replaceOperator(value, "contains") });
     }
     return Raw((alias) => `JSON_CONTAINS(${alias}, :val)`, { val: `"${replaceOperator(value, "contains")}"` });
   } else if (value.startsWith("excludes(")) {
-    if (driver === "postgres" || driver === "postgresql") {
+    if (driver === SupportedDriver.postgres || driver === SupportedDriver.postgresql) {
       return Raw((alias) => `NOT (:value = ANY(${alias}))`, { value: replaceOperator(value, "excludes") });
     }
+    /* istanbul ignore next */
     return Raw((alias) => `NOT JSON_CONTAINS(${alias}, :val)`, { val: `"${replaceOperator(value, "excludes")}"` });
   } else if (value.startsWith("in(")) {
     return In(
