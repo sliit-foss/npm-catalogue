@@ -14,7 +14,10 @@
  * const bound = bindKey(object, 'greet', 'hi');
  * console.log(bound('!')); // => 'hi John!'
  */
-export function bindKey(object: Record<any, any>, key: string, ...partials): Function;
+export const bindKey = (object: Record<any, any>, key: string, ...partials: any[]) => {
+  const temp = { [key]: object[key].bind(object, ...partials) };
+  return temp[key];
+};
 
 export default {
   bindKey

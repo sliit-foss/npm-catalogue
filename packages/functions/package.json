@@ -3,9 +3,8 @@
   "version": "2.10.0",
   "description": "Just a small set of utility functions",
   "main": "dist/index.js",
-  "types": "types/index.d.ts",
   "scripts": {
-    "build": "node ../../scripts/esbuild.config.js",
+    "build": "node ../../scripts/esbuild.config.js && bash ../../scripts/build-types.sh",
     "build:watch": "bash ../../scripts/esbuild.watch.sh",
     "bump-version": "bash ../../scripts/bump-version.sh --name=@sliit-foss/functions",
     "lint": "bash ../../scripts/lint.sh",
@@ -13,9 +12,12 @@
     "test": "bash ../../scripts/test/test.sh"
   },
   "dependencies": {
-    "@sliit-foss/module-logger": "1.3.1",
-    "chalk": "4.1.2",
-    "express-http-context": "1.2.4"
+    "@sliit-foss/express-http-context": "2.0.0",
+    "@sliit-foss/module-logger": "2.0.0",
+    "chalk": "4.1.2"
+  },
+  "devDependencies": {
+    "@types/express": "*"
   },
   "repository": {
     "type": "git",

@@ -1,3 +1,5 @@
+import context from "@sliit-foss/express-http-context";
+
 /**
  * @description Caches the result of a function within a request's context when invoked with the same key
  * @param key The key to cache the result against
@@ -13,7 +15,20 @@
  * });
  * console.log(result2); // => 'value'
  */
-export function cached(key: string, fn: Function): any;
+export const cached = (key: string, fn: Function) => {
+  let res = context.get(key);
+  if (!res) {
+    res = fn();
+    if (res instanceof Promise) {
+      return res.then((res) => {
+        context.set(key, res);
+        return res;
+      });
+    }
+    context.set(key, res);
+  }
+  return res;
+};
 
 export default {
   cached
