@@ -7,7 +7,7 @@ const cpuCount = cpus().length;
 const logPrefix = "Clusterizer -";
 
 const clusterize = async (
-  app: () => any,
+  app: Function,
   { logger, workers, onMaster, onWorker, onWorkerExit }: ClusterizerOptions = {}
 ) => {
   if (!logger) logger = console;
