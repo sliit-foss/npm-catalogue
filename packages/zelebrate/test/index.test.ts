@@ -64,7 +64,8 @@ describe("test zelebrate", () => {
         })
       }) as any;
       const req = {
-        method: "GET"
+        method: "GET",
+        body: {}
       } as any;
       await m(req, {}, next);
       expect(req.body).toEqual({});
