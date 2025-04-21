@@ -22,13 +22,20 @@ const getCurrentVersion = async () =>
   (await run("npm version"))?.split(",")?.[0]?.split(":")?.[1]?.replace(/'/g, "")?.trim();
 
 const getPackageVersion = (name: string, disableAutoSync: boolean, prereleaseTag?: string) => {
-  if (!disableAutoSync) {
-    if (prereleaseTag) {
-      return run(`npm view ${name} dist-tags.${prereleaseTag}`).catch(getCurrentVersion);
-    }
-    return run(`npm view ${name} version`).catch(getCurrentVersion);
+  if (disableAutoSync) return getCurrentVersion();
+
+  const getLatestStableVersion = () =>
+    run(`npm view ${name} version`)
+      .then((res) => res || getCurrentVersion())
+      .catch(getCurrentVersion);
+
+  if (prereleaseTag) {
+    return run(`npm view ${name} dist-tags.${prereleaseTag}`)
+      .then((res) => res || getLatestStableVersion())
+      .catch(getCurrentVersion);
   }
-  return getCurrentVersion();
+
+  return getLatestStableVersion();
 };
 
 const runner = (
