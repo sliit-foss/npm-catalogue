@@ -15,7 +15,7 @@ describe("asyncHandler", () => {
 
   test("test async handler", async () => {
     function testFunction() {
-      return "test";
+      return;
     }
     await asyncHandler(testFunction)(mockReq, mockRes, mockNext);
     expect(mockLogger.info).not.toHaveBeenCalled();
@@ -31,7 +31,7 @@ describe("asyncHandler", () => {
   });
   test("test traced async handler", async () => {
     await tracedAsyncHandler(function testTracedFunction() {
-      return "test";
+      return;
     })(mockReq, mockRes, mockNext);
     expect(mockLogger.info).toHaveBeenCalledWith(`${coloredFnName("testTracedFunction")} execution initiated`, {});
     expect(mockNext).toHaveBeenCalled();
