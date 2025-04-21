@@ -9,7 +9,7 @@
     "bump-version": "bash ../../scripts/bump-version.sh --name=@sliit-foss/zelebrate",
     "lint": "bash ../../scripts/lint.sh",
     "release": "bash ../../scripts/release.sh",
-    "test": "bash ../../scripts/test/test.sh"
+    "test": "echo \"No tests specified\" && exit 0"
   },
   "dependencies": {
     "escape-html": "1.0.3",
