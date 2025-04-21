@@ -1,4 +1,3 @@
-import { createRequest } from "node-mocks-http";
 import { Modes, Segments, z, zelebrate, ZelebrateError } from "../src";
 
 const next = jest.fn();
@@ -15,13 +14,13 @@ describe("test zelebrate", () => {
           age: z.number()
         })
       }) as any;
-      const req = createRequest({
+      const req = {
         method: "POST",
         body: {
           name: "John",
           age: 30
         }
-      });
+      };
       await m(req, {}, next);
       expect(req.body).toEqual({ name: "John", age: 30 });
       expect(next).toHaveBeenCalledWith(undefined);
@@ -33,13 +32,13 @@ describe("test zelebrate", () => {
           age: z.number()
         })
       }) as any;
-      const req = createRequest({
+      const req = {
         method: "POST",
         body: {
           name: "John",
           age: "King"
         }
-      });
+      };
       await m(req, {}, next);
       expect(next).toHaveBeenCalled();
 
@@ -64,9 +63,9 @@ describe("test zelebrate", () => {
           age: z.number()
         })
       }) as any;
-      const req = createRequest({
+      const req = {
         method: "GET"
-      });
+      } as any;
       await m(req, {}, next);
       expect(req.body).toEqual({});
       expect(next).toHaveBeenCalledWith(undefined);
@@ -85,7 +84,7 @@ describe("test zelebrate", () => {
       },
       { mode: Modes.FULL }
     ) as any;
-    const req = createRequest({
+    const req = {
       method: "POST",
       body: {
         name: "John",
@@ -94,7 +93,7 @@ describe("test zelebrate", () => {
       query: {
         id: "123"
       }
-    });
+    };
     await m(req, {}, next);
     expect(req.body).toEqual({ name: "John", age: 30 });
     expect(req.query).toEqual({ id: 123 });

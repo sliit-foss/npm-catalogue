@@ -21,8 +21,7 @@
   },
   "devDependencies": {
     "@types/express": "*",
-    "@types/lodash": "4.17.15",
-    "node-mocks-http": "1.16.2"
+    "@types/lodash": "4.17.15"
   },
   "author": "SLIIT FOSS",
   "license": "MIT",
