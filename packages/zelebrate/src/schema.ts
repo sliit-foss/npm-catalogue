@@ -17,7 +17,6 @@ export type RequestRules = {
 };
 
 export interface ZelebrateOptions {
-  reqContext?: boolean;
   mode?: Modes;
 }
 

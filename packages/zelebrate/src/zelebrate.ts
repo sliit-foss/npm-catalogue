@@ -14,8 +14,7 @@ const DEFAULT_ERRORS_OPTS: ErrorOptions = {
 };
 
 const DEFAULT_ZELEBRATE_OPTS: ZelebrateOptions = {
-  mode: Modes.PARTIAL,
-  reqContext: false
+  mode: Modes.PARTIAL
 };
 
 const validateSegment = (segment: Segments) => (spec: z.ZodObject<any>) => {
