@@ -19,7 +19,7 @@ export const setPackageVersion = (version: string) => {
 };
 
 export const resetPackageJson = () => {
-  fs.writeFileSync("./package.json", JSON.stringify({ name: "test", version: "0.0.0" }, null, 2));
+  fs.writeFileSync("./package.json", JSON.stringify({ name: "@sliit-foss/test", version: "0.0.0" }, null, 2));
 };
 
 export const executeVersionScript = async (args?: string) => {

@@ -21,11 +21,21 @@ const getCommitPrefix = async (recursive: boolean, ignorePrefixes: string[], n: 
 const getCurrentVersion = async () =>
   (await run("npm version"))?.split(",")?.[0]?.split(":")?.[1]?.replace(/'/g, "")?.trim();
 
-const getPackageVersion = (name: string, disableAutoSync: boolean) => {
-  if (!disableAutoSync) {
-    return run(`npm view ${name} version`).catch(getCurrentVersion);
+const getPackageVersion = (name: string, disableAutoSync: boolean, prereleaseTag?: string) => {
+  if (disableAutoSync) return getCurrentVersion();
+
+  const getLatestStableVersion = () =>
+    run(`npm view ${name} version`)
+      .then((res) => res || getCurrentVersion())
+      .catch(getCurrentVersion);
+
+  if (prereleaseTag) {
+    return run(`npm view ${name} dist-tags.${prereleaseTag}`)
+      .then((res) => res || getLatestStableVersion())
+      .catch(getCurrentVersion);
   }
-  return getCurrentVersion();
+
+  return getLatestStableVersion();
 };
 
 const runner = (
@@ -63,7 +73,7 @@ const runner = (
           }
           if (prerelease) {
             prerelease = false;
-            const currentVersion = await getPackageVersion(name, disableAutoSync);
+            const currentVersion = await getPackageVersion(name, disableAutoSync, prereleaseTag);
             if (currentVersion?.includes(prereleaseTag)) {
               await run(
                 `npm --workspaces-update=false --no-git-tag-version version --allow-same-version ${currentVersion}`

@@ -87,7 +87,9 @@ describe("default", () => {
     });
     describe("with prerelease branch", () => {
       const executePreleaseVersionScript = async () =>
-        executeVersionScript(`--prerelease-branch=${await getCurrentBranch()} --prerelease-tag=blizzard`);
+        executeVersionScript(
+          `--prerelease-branch=${await getCurrentBranch()} --prerelease-tag=blizzard --name=@sliit-foss/test`
+        );
       it("single prerelease", async () => {
         await commit("Feat: test commit");
         await executePreleaseVersionScript();
@@ -99,7 +101,7 @@ describe("default", () => {
         fs.writeFileSync("./test.txt", "some fix");
         await commit("Feat: test commit");
         await executePreleaseVersionScript();
-        expect(getPackageVersion()).toBe("0.2.0-blizzard.0");
+        expect(getPackageVersion()).toBe("0.1.0-blizzard.1");
       });
       it("multiple prereleases with patch", async () => {
         await commit("Feat: test commit");
@@ -107,7 +109,7 @@ describe("default", () => {
         fs.writeFileSync("./test.txt", "some fix");
         await commit("Fix: test commit");
         await executePreleaseVersionScript();
-        expect(getPackageVersion()).toBe("0.1.1-blizzard.0");
+        expect(getPackageVersion()).toBe("0.1.0-blizzard.1");
       });
       it("promote prerelease", async () => {
         await commit("Feat: test commit");
