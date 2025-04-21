@@ -9,7 +9,7 @@
     "bump-version": "bash ../../scripts/bump-version.sh --name=@sliit-foss/zelebrate",
     "lint": "bash ../../scripts/lint.sh",
     "release": "bash ../../scripts/release.sh",
-    "test": "echo \"No tests specified\" && exit 0"
+    "test": "bash ../../scripts/test/test.sh"
   },
   "dependencies": {
     "escape-html": "1.0.3",
@@ -21,7 +21,8 @@
   },
   "devDependencies": {
     "@types/express": "*",
-    "@types/lodash": "4.17.15"
+    "@types/lodash": "4.17.15",
+    "node-mocks-http": "1.16.2"
   },
   "author": "SLIIT FOSS",
   "license": "MIT",

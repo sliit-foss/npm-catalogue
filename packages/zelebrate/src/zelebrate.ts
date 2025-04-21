@@ -18,7 +18,7 @@ const DEFAULT_ZELEBRATE_OPTS: ZelebrateOptions = {
 };
 
 const validateSegment = (segment: Segments) => (spec: z.ZodObject<any>) => {
-  const finalValidate = (req: Request) => spec.parse(req[segment]);
+  const finalValidate = (req: Request) => spec.parseAsync(req[segment]);
   finalValidate.segment = segment;
   return finalValidate;
 };
@@ -29,15 +29,9 @@ const maybeValidateBody = (segment: Segments) => {
     const validateBody = validateOne(spec);
     const finalValidate = (req: Request) => {
       const method = req.method.toLowerCase();
-
       if (method === "get" || method === "head") {
-        // This resolve is to emulate how Zod validates when there isn't an error. I'm doing this to
-        // standardize the resolve value.
-        return Promise.resolve({
-          value: null
-        });
+        return null;
       }
-
       return validateBody(req);
     };
     finalValidate.segment = segment;
@@ -75,43 +69,36 @@ const REQ_VALIDATIONS = [
 // Lifted this idea from https://bit.ly/2vf3Xe0
 const partialValidate = (steps, req) =>
   steps.reduce(
-    (chain, validate) =>
-      chain.then(() =>
-        validate(req)
-          .then(({ value }) => {
-            if (value !== null) {
-              Object.defineProperty(req, validate.segment, {
-                value
-              });
-            }
-            return null;
-          })
-          .catch((e) => {
-            const error = new ZelebrateError();
-            error.details.set(validate.segment, e);
-            throw error;
-          })
-      ),
-    Promise.resolve(null)
+    (chain: Promise<void>, validate) =>
+      chain.then(async () => {
+        try {
+          const value = await validate(req);
+          if (value) {
+            Object.defineProperty(req, validate.segment, {
+              value
+            });
+          }
+        } catch (e) {
+          const error = new ZelebrateError();
+          error.details.set(validate.segment, e);
+          throw error;
+        }
+      }),
+    Promise.resolve()
   );
 
 const fullValidate = (steps, req: Request) => {
   const requestUpdates = [];
   const error = new ZelebrateError();
   return Promise.all(
-    steps.map((validate) =>
-      validate(req)
-        .then(({ value }) => {
-          if (value !== null) {
-            requestUpdates.push([validate.segment, value]);
-          }
-          return null;
-        })
-        .catch((e) => {
-          error.details.set(validate.segment, e);
-          return null;
-        })
-    )
+    steps.map(async (validate) => {
+      try {
+        const value = await validate(req);
+        if (value) requestUpdates.push([validate.segment, value]);
+      } catch (e) {
+        error.details.set(validate.segment, e);
+      }
+    })
   ).then(() => {
     if (error.details.size) {
       return Promise.reject(error);
@@ -121,7 +108,6 @@ const fullValidate = (steps, req: Request) => {
         value: result[1]
       });
     });
-    return null;
   });
 };
 
@@ -164,11 +150,11 @@ export const errors = (opts: ErrorOptions = {}) => {
 
     const validation = {};
     // eslint-disable-next-line no-restricted-syntax
-    for (const [segment, zodErrors] of err.details.entries()) {
+    for (const [segment, zodError] of err.details.entries()) {
       validation[segment] = {
         source: segment,
-        keys: zodErrors.map((e: any) => EscapeHtml(e.path.join("."))),
-        messages: zodErrors.map((e) => e.message)
+        keys: zodError.issues.map((e: any) => EscapeHtml(e.path.join("."))),
+        messages: zodError.issues.map((e) => e.message)
       };
     }
 
