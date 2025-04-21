@@ -7,6 +7,8 @@ import { Segments, Modes } from "./constants";
 import { RequestRules, ZelebrateOptions, ErrorOptions } from "./schema";
 import { ZelebrateError, isZelebrateError } from "./error";
 
+export { z };
+
 const DEFAULT_ERRORS_OPTS: ErrorOptions = {
   statusCode: 400
 };
