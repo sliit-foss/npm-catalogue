@@ -13,7 +13,7 @@ const DEFAULT_ERRORS_OPTS: ErrorOptions = {
   statusCode: 400
 };
 
-const DEFAULT_CELEBRATE_OPTS: ZelebrateOptions = {
+const DEFAULT_ZELEBRATE_OPTS: ZelebrateOptions = {
   mode: Modes.PARTIAL,
   reqContext: false
 };
@@ -131,9 +131,9 @@ const validateFns = {
   [Modes.PARTIAL]: partialValidate
 };
 
-export const celebrate = (requestRules: RequestRules, opts: ZelebrateOptions = {}) => {
+export const zelebrate = (requestRules: RequestRules, opts: ZelebrateOptions = {}) => {
   const finalOpts = {
-    ...DEFAULT_CELEBRATE_OPTS,
+    ...DEFAULT_ZELEBRATE_OPTS,
     ...opts
   };
   const middleware = (req: Request, res: Response, next: NextFunction) => {
@@ -184,4 +184,4 @@ export const errors = (opts: ErrorOptions = {}) => {
   };
 };
 
-export const celebrator = curry(flip(exports.celebrate), 3);
+export const zelebrator = curry(flip(zelebrate), 3);
