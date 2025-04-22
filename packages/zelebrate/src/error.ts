@@ -4,13 +4,13 @@ import { Segments } from "./constants";
 declare module "zod" {
   interface ZodError {
     /**
-     * Formats and prints the first issue in a human-readable way.
+     * Formats and returns the first issue in a human-readable way.
      */
-    prettyPrint(): string;
+    pretty(): string;
   }
 }
 
-ZodError.prototype.prettyPrint = function () {
+ZodError.prototype.pretty = function () {
   if (this.issues.length === 0) {
     return "No issues found";
   }
