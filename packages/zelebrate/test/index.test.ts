@@ -55,6 +55,7 @@ describe("test zelebrate", () => {
       expect(bodyDetails.issues[0].code).toEqual("invalid_type");
       expect(bodyDetails.issues[0].path).toEqual(["age"]);
       expect(bodyDetails.issues[0].message).toEqual("Expected number, received string");
+      expect(bodyDetails.pretty()).toEqual("Expected number but received string for `age`");
     });
     test("should do nothing if no body", async () => {
       const m = zelebrate({
