@@ -20,7 +20,7 @@
     "express": "*"
   },
   "devDependencies": {
-    "@types/express": "*"
+    "express": "*"
   },
   "repository": {
     "type": "git",
