@@ -2,7 +2,7 @@ import http from "http";
 import { z } from "zod";
 import { default as EscapeHtml } from "escape-html";
 import { curry, flip } from "lodash";
-import { NextFunction, Request, RequestHandler, Response } from "express";
+import type { NextFunction, Request, RequestHandler, Response } from "express";
 import { Segments, Modes } from "./constants";
 import { RequestRules, ZelebrateOptions, ErrorOptions } from "./schema";
 import { ZelebrateError, isZelebrateError } from "./error";
