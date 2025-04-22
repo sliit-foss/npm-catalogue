@@ -121,10 +121,6 @@ importers:
       express:
         specifier: "*"
         version: 4.19.2
-    devDependencies:
-      "@types/express":
-        specifier: "*"
-        version: 4.17.21
 
   packages/http-logger:
     dependencies:

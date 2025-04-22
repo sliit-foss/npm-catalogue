@@ -1,6 +1,6 @@
 const { mockLogger } = require("./__mocks__");
 
-import { Request, Response } from "express";
+import { Request, Response, NextFunction } from "express";
 import { asyncHandler, tracedAsyncHandler, fallibleAsyncHandler, plainAsyncHandler } from "../src";
 import { coloredFnName } from "../src/utils";
 
@@ -14,7 +14,7 @@ describe("asyncHandler", () => {
   const mockNext = jest.fn();
 
   test("test async handler", async () => {
-    function testFunction() {
+    function testFunction(_: Request, __: Response, ___: NextFunction) {
       return "test";
     }
     await asyncHandler(testFunction)(mockReq, mockRes, mockNext);
@@ -22,7 +22,7 @@ describe("asyncHandler", () => {
     expect(mockNext).toHaveBeenCalled();
   });
   test("test async handler with error", async () => {
-    function testFunction() {
+    function testFunction(_: Request, __: Response, ___: NextFunction) {
       throw new Error("test error");
     }
     await asyncHandler(testFunction)(mockReq, mockRes, mockNext);
@@ -30,27 +30,27 @@ describe("asyncHandler", () => {
     expect(mockNext).toHaveBeenCalled();
   });
   test("test traced async handler", async () => {
-    await tracedAsyncHandler(function testTracedFunction() {
+    await tracedAsyncHandler(function testTracedFunction(_: Request, __: Response, ___: NextFunction) {
       return "test";
     })(mockReq, mockRes, mockNext);
     expect(mockLogger.info).toHaveBeenCalledWith(`${coloredFnName("testTracedFunction")} execution initiated`, {});
     expect(mockNext).toHaveBeenCalled();
   });
   test("test fallible async handler", async () => {
-    await fallibleAsyncHandler(function testTracedFunction() {
+    await fallibleAsyncHandler(function testTracedFunction(_: Request, __: Response, ___: NextFunction) {
       throw new Error("test error");
     })(mockReq, mockRes, mockNext);
     expect(mockLogger.warn).toHaveBeenCalled();
     expect(mockNext).toHaveBeenCalled();
   });
   test("test plain async handler with async function", async () => {
-    await plainAsyncHandler(async () => {
+    await plainAsyncHandler(async (_: Request, __: Response, ___: NextFunction) => {
       throw new Error("test");
     })(mockReq, mockRes, mockNext);
     expect(mockNext).toHaveBeenCalled();
   });
   test("test plain async handler with normal function", async () => {
-    await plainAsyncHandler(() => {
+    await plainAsyncHandler((_: Request, __: Response, ___: NextFunction) => {
       throw new Error("test");
     })(mockReq, mockRes, mockNext);
     expect(mockNext).toHaveBeenCalled();
