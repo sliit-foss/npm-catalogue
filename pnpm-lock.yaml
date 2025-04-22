@@ -121,10 +121,6 @@ importers:
       express:
         specifier: "*"
         version: 5.1.0
-    devDependencies:
-      "@types/express":
-        specifier: "*"
-        version: 5.0.1
 
   packages/http-logger:
     dependencies:
@@ -238,9 +234,6 @@ importers:
       escape-html:
         specifier: 1.0.3
         version: 1.0.3
-      express:
-        specifier: "*"
-        version: 5.1.0
       lodash:
         specifier: 4.17.21
         version: 4.17.21
@@ -248,12 +241,12 @@ importers:
         specifier: 3.24.3
         version: 3.24.3
     devDependencies:
-      "@types/express":
-        specifier: "*"
-        version: 5.0.1
       "@types/lodash":
         specifier: 4.17.15
         version: 4.17.15
+      express:
+        specifier: "*"
+        version: 5.1.0
 
   plugins/babel-plugin-transform-trace:
     dependencies:

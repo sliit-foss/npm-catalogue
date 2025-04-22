@@ -20,7 +20,7 @@
     "express": "*"
   },
   "devDependencies": {
-    "@types/express": "*",
+    "express": "*",
     "@types/lodash": "4.17.15"
   },
   "author": "SLIIT FOSS",

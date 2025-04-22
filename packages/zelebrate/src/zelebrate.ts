@@ -2,7 +2,7 @@ import http from "http";
 import { z } from "zod";
 import { default as EscapeHtml } from "escape-html";
 import { curry, flip } from "lodash";
-import { NextFunction, Request, Response } from "express";
+import { NextFunction, Request, RequestHandler, Response } from "express";
 import { Segments, Modes } from "./constants";
 import { RequestRules, ZelebrateOptions, ErrorOptions } from "./schema";
 import { ZelebrateError, isZelebrateError } from "./error";
@@ -170,3 +170,23 @@ export const errors = (opts: ErrorOptions = {}) => {
 };
 
 export const zelebrator = curry(flip(zelebrate), 3);
+
+type InferIf<T> = T extends z.ZodTypeAny ? z.infer<T> : any;
+
+export function zelebrateStack<R extends RequestRules>(rules: R, opts: ZelebrateOptions = {}) {
+  return function (
+    ...handlers: Array<
+      (
+        req: Request<InferIf<R[Segments.PARAMS]>, any, InferIf<R[Segments.BODY]>, InferIf<R[Segments.QUERY]>> & {
+          headers: InferIf<R[Segments.HEADERS]>;
+          cookies: InferIf<R[Segments.COOKIES]>;
+          signedCookies: InferIf<R[Segments.SIGNEDCOOKIES]>;
+        },
+        res: Response,
+        next: NextFunction
+      ) => void
+    >
+  ) {
+    return [zelebrate(rules, opts), ...(handlers as RequestHandler[])];
+  };
+}

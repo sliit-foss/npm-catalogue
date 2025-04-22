@@ -1,4 +1,4 @@
-import { Modes, Segments, z, zelebrate, ZelebrateError } from "../src";
+import { Modes, Segments, z, zelebrate, ZelebrateError, zelebrateStack } from "../src";
 
 const next = jest.fn();
 
@@ -101,4 +101,29 @@ describe("test zelebrate", () => {
     expect(req.query).toEqual({ id: 123 });
     expect(next).toHaveBeenCalledWith(undefined);
   });
+});
+
+test("test celebrate stack", async () => {
+  const mockHandler = jest.fn();
+  const stack = zelebrateStack({
+    [Segments.BODY]: z.object({
+      name: z.string(),
+      age: z.number()
+    }),
+    [Segments.QUERY]: z.object({
+      id: z.coerce.number()
+    })
+  })(mockHandler);
+  const req = {
+    method: "POST",
+    body: {
+      name: "John",
+      age: 30
+    }
+  } as any;
+  expect(stack).toHaveLength(2);
+  await stack[0](req, {} as any, next);
+  expect(req.body).toEqual({ name: "John", age: 30 });
+  await stack[1](req, {} as any, next);
+  expect(mockHandler).toHaveBeenCalledWith(req, {}, next);
 });
