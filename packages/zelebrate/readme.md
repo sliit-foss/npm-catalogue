@@ -184,11 +184,12 @@ An enum containing all the available validation modes that zelebrate can support
 - `PARTIAL` - ends validation on the first failure.
 - `FULL` - validates the entire request object and collects all the validation failures in the result.
 
-### `new ZelebrateError([message])`
+### `new ZelebrateError([message], [status])`
 
 Creates a new `ZelebrateError` object. Extends the built in `Error` object.
 
 - `message` - optional `string` message. Defaults to `'Validation failed'`.
+- `status` - optional `number` status code. Defaults to `422`.
 
 `ZelebrateError` has the following public properties:
 

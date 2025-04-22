@@ -21,9 +21,11 @@ ZodError.prototype.pretty = function () {
 
 export class ZelebrateError extends Error {
   public details: Map<Segments, ZodError>;
-  constructor(message = "Validation failed") {
+  public status: number;
+  constructor(message = "Validation failed", status = 422) {
     super(message);
     this.details = new Map();
+    this.status = status;
   }
 }
 
