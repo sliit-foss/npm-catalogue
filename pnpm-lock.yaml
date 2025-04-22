@@ -240,13 +240,14 @@ importers:
       zod:
         specifier: 3.24.3
         version: 3.24.3
+    optionalDependencies:
+      express:
+        specifier: "*"
+        version: 5.1.0
     devDependencies:
       "@types/lodash":
         specifier: 4.17.15
         version: 4.17.15
-      express:
-        specifier: "*"
-        version: 5.1.0
 
   plugins/babel-plugin-transform-trace:
     dependencies:
