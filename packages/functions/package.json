@@ -1,6 +1,6 @@
 {
   "name": "@sliit-foss/functions",
-  "version": "2.10.0-blizzard.1",
+  "version": "3.1.0",
   "description": "Just a small set of utility functions",
   "main": "dist/index.js",
   "scripts": {
