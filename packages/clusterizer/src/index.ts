@@ -8,7 +8,7 @@ const clusterize = async (
   app: (pid: number) => any,
   { logger = console, workers, onMaster, onWorker, onWorkerExit }: ClusterizerOptions = {}
 ) => {
-  const logPrefix = logger !== console ? "Clusterizer - " : "";
+  const logPrefix = logger === console ? "Clusterizer - " : "";
   try {
     workers = workers ?? cpuCount;
 
