@@ -7,7 +7,7 @@ import { extractArray, filter, flattenObject } from "./utils";
 
 const options = {
   getUser: () => undefined,
-  types: [AuditType.Add, AuditType.Edit, AuditType.delete],
+  types: [AuditType.Add, AuditType.Edit, AuditType.Delete],
   background: true
 };
 
@@ -147,7 +147,7 @@ const plugin = (schema, opts = {}) => {
       return addUpdate(this, false);
     });
   }
-  if (options.types.includes(AuditType.delete)) {
+  if (options.types.includes(AuditType.Delete)) {
     schema.pre("remove", function (_, options) {
       return addDelete(this, options);
     });
