@@ -41,7 +41,7 @@ app.post(
   }),
   (req, res) => {
     // At this point, req.body has been validated and
-    // req.body.role is equal to req.body.role if provided in the POST or set to 'admin' by joi
+    // req.body.role is equal to req.body.role if provided in the POST or set to 'admin' by zod
   }
 );
 app.use(errors());
@@ -130,7 +130,7 @@ app.get(
   zelebrate({
     [Segments.HEADERS]: z
       .object({
-        name: Joi.string()
+        name: z.string()
       })
       .catchall(z.unknown())
   }),
