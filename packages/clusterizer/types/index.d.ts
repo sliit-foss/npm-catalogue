@@ -32,4 +32,4 @@ interface ClusterizerOptions {
 /**
  * Takes in a callback function (presumbly containing your server initialization code) and runs a Node.JS cluster with it.
  */
-export default function clusterize(app: Function, options?: ClusterizerOptions): void;
+export default function clusterize(app: (pid: number) => any, options?: ClusterizerOptions): void;

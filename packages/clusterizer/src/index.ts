@@ -7,7 +7,7 @@ const cpuCount = cpus().length;
 const logPrefix = "Clusterizer -";
 
 const clusterize = async (
-  app: Function,
+  app: (pid: number) => any,
   { logger, workers, onMaster, onWorker, onWorkerExit }: ClusterizerOptions = {}
 ) => {
   if (!logger) logger = console;
@@ -25,7 +25,7 @@ const clusterize = async (
         else logger.info(`${logPrefix} Worker ${worker.process.pid} died - code: ${code} - signal: ${signal}`);
       });
     } else {
-      await app();
+      await app(process.pid);
       if (onWorker) onWorker();
       else logger.info(`${logPrefix} Process ${process.pid} started`);
     }
