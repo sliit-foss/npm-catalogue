@@ -91,7 +91,7 @@ Returns a `function` with the middleware signature (`(req, res, next)`).
 - `[opts]` - an optional `object` with the following keys. Defaults to `{}`.
   - `mode` - optional [`Modes`](#modes) for controlling the validation mode zelebrate uses. Defaults to `partial`.
 
-### `zelebrator([opts], [joiOptions], schema)`
+### `zelebrator([opts], schema)`
 
 This is a curried version of `zelebrate` It is curried with `lodash.curryRight` so it can be called in all the various fashions that [API supports](https://lodash.com/docs/4.17.15#curryRight). Returns a `function` with the middleware signature (`(req, res, next)`).
 
