@@ -50,6 +50,16 @@ export const mapValue = (value: string) => {
         .split(",")
         .map((v) => parseOperatorValue(v))
     };
+  } else if (value.startsWith("any(")) {
+    const replaced = replaceOperator(value, "any");
+    const [k, v] = replaced.split("=");
+    return {
+      $elemMatch: !v
+        ? mapValue(replaced)
+        : mapFilters({
+            [k]: v
+          })
+    };
   } else if (value.startsWith("reg(")) {
     const [regex, modifiers] = replaceOperator(value, "reg").split("...[");
     return { $regex: new RegExp(regex, modifiers?.slice(0, -1)) };

@@ -14,7 +14,9 @@ export const basicFilterReq = {
       birthdate: "lte(2000-01-01)",
       isAlive: "exists(true)",
       isVerified: "eq(true)",
-      isDeleted: "false"
+      isDeleted: "false",
+      houses: "any(name=eq(House1))",
+      cars: "any(eq(Pajero))"
     }
   }
 };
@@ -31,7 +33,9 @@ export const basicFilterResult = {
   birthdate: { $lte: new Date("2000-01-01") },
   isAlive: { $exists: true },
   isVerified: { $eq: true },
-  isDeleted: false
+  isDeleted: false,
+  houses: { $elemMatch: { name: { $eq: "House1" } } },
+  cars: { $elemMatch: { $eq: "Pajero" } }
 };
 
 export const complexFilterReq = {
