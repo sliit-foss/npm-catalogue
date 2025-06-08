@@ -52,12 +52,12 @@ export const mapValue = (value: string) => {
     };
   } else if (value.startsWith("any(")) {
     const replaced = replaceOperator(value, "any");
-    const [k, v] = replaced.split("=");
+    const [k, ...v] = replaced.split("=");
     return {
-      $elemMatch: !v
+      $elemMatch: !v.length
         ? mapValue(replaced)
         : mapFilters({
-            [k]: v
+            [k]: v.join("=")
           })
     };
   } else if (value.startsWith("reg(")) {
