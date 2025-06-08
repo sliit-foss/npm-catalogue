@@ -76,8 +76,8 @@ export const mapFilters = (filter = {}) => {
       const value = filter[key];
       if (complexOperators.includes(key)) {
         filter[`$${key}`] = value.split(",").map((kv) => {
-          const [key, value] = kv.split("=");
-          return { [key]: mapValue(value) };
+          const [key, ...value] = kv.split("=");
+          return { [key]: mapValue(value.join("=")) };
         });
         delete filter[key];
       } else {
