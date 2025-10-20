@@ -4,6 +4,9 @@
   "description": "A script which will automatically increment your app package version in accordance with conventional commits",
   "main": "dist/index.js",
   "bin": "dist/index.js",
+  "files": [
+    "dist"
+  ],
   "scripts": {
     "build": "node ../../scripts/esbuild.config.js",
     "build:watch": "bash ../../scripts/esbuild.watch.sh",
