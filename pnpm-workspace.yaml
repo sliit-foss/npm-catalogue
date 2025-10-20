@@ -1,6 +1,7 @@
 packages:
   - "packages/*"
   - "plugins/*"
+  - "plugins/webpack-plugin-timekeeper"
   - "!packages/bashaway"
     # deprecated packages
   - "!packages/firebase"
