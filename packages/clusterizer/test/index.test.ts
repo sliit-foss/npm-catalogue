@@ -25,6 +25,30 @@ describe("test clusterizer", () => {
   beforeEach(() => {
     jest.clearAllMocks();
   });
+  test("worker branch", async () => {
+    // Mock isPrimary as false to test worker logic
+    const clusterModule = require("node:cluster");
+    clusterModule.isPrimary = false;
+    const logger = { info: jest.fn(), error: jest.fn() };
+    const appFn = jest.fn();
+    await require("../src").default(appFn, { logger });
+    expect(appFn).toHaveBeenCalledWith(expect.any(Number));
+    expect(logger.info).toHaveBeenCalledWith(expect.stringMatching(/Process \d+ started/));
+    // Reset isPrimary for other tests
+    clusterModule.isPrimary = true;
+  });
+
+  test("worker branch with onWorker callback", async () => {
+    const clusterModule = require("node:cluster");
+    clusterModule.isPrimary = false;
+    const logger = { info: jest.fn(), error: jest.fn() };
+    const appFn = jest.fn();
+    const onWorker = jest.fn();
+    await require("../src").default(appFn, { logger, onWorker });
+    expect(appFn).toHaveBeenCalledWith(expect.any(Number));
+    expect(onWorker).toHaveBeenCalledTimes(1);
+    clusterModule.isPrimary = true;
+  });
   test("2 workers", () => {
     clusterize(app, { workers: 2 });
     expect(cluster.fork).toHaveBeenCalledTimes(2);
@@ -53,5 +77,16 @@ describe("test clusterizer", () => {
     expect(onWorkerExit).toHaveBeenCalledTimes(0);
     mockEventEmitter.emit("exit", { process: { pid: 123 } }, 1, "SIGTERM");
     expect(onWorkerExit).toHaveBeenCalledTimes(1);
+  });
+
+  test("primary branch with onWorkerExit callback", () => {
+    const clusterModule = require("node:cluster");
+    clusterModule.isPrimary = true;
+    const logger = { info: jest.fn(), error: jest.fn() };
+    const appFn = jest.fn();
+    const onWorkerExit = jest.fn();
+    require("../src").default(appFn, { logger, onWorkerExit });
+    mockEventEmitter.emit("exit", { process: { pid: 456 } }, 2, "SIGKILL");
+    expect(onWorkerExit).toHaveBeenCalledWith({ process: { pid: 456 } }, 2, "SIGKILL");
   });
 });
