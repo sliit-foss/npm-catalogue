@@ -41,7 +41,7 @@
     "@typescript-eslint/eslint-plugin": "6.16.0",
     "@typescript-eslint/parser": "6.16.0",
     "@types/jest": "29.5.14",
-    "eslint": "8.33.0",
+    "eslint": "9.26.0",
     "eslint-config-turbo": "0.0.7",
     "lefthook": "1.6.10",
     "nodemon": "2.0.21",
