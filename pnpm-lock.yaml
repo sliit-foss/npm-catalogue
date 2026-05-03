@@ -104,6 +104,15 @@ importers:
 
   packages/clusterizer: {}
 
+  packages/env-guard:
+    dependencies:
+      commander:
+        specifier: 11.1.0
+        version: 11.1.0
+      dotenv:
+        specifier: 16.5.0
+        version: 16.5.0
+
   packages/express-http-context: {}
 
   packages/functions:
