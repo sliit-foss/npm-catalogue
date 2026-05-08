@@ -137,6 +137,8 @@ importers:
         specifier: 1.6.0
         version: 1.6.0
 
+  packages/lk-nic: {}
+
   packages/module-logger:
     dependencies:
       "@sliit-foss/express-http-context":
