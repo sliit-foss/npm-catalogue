@@ -54,4 +54,28 @@ describe("test clusterizer", () => {
     mockEventEmitter.emit("exit", { process: { pid: 123 } }, 1, "SIGTERM");
     expect(onWorkerExit).toHaveBeenCalledTimes(1);
   });
+
+  test("SIGTERM handler kills cluster workers", () => {
+    // ensure primary mode and set up a fake worker to be killed
+    (cluster as any).isPrimary = true;
+    const fakeKill = jest.fn();
+    (cluster as any).workers = {
+      "1": { process: { kill: fakeKill } }
+    };
+
+    const logger = { info: jest.fn(), error: jest.fn() };
+    // remove any previously registered SIGTERM handlers (tests register handlers)
+    const prev = process.listeners("SIGTERM");
+    process.removeAllListeners("SIGTERM");
+
+    clusterize(app, { logger, workers: 1 });
+
+    // emit SIGTERM to trigger the registered handler
+    process.emit("SIGTERM");
+
+    expect(fakeKill).toHaveBeenCalledTimes(1);
+
+    // restore previous listeners
+    prev.forEach((l) => process.on("SIGTERM", l));
+  });
 });
