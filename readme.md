@@ -94,4 +94,4 @@ Recently, npm permanently revoked all classic tokens and moved to shorter-lived 
 
 Before pushing to main, please make sure the access token exists in npm. 
 
-Newly created granular access tokens (GATs) have a default lifespan of 7 days and a maximum limit of 90 days for write-enabled tokens
+Newly created granular access tokens (GATs) have a default lifespan of 7 days and a maximum limit of 90 days for write-enabled tokens.
