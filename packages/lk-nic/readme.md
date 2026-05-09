@@ -87,7 +87,7 @@ normalizeNIC("85542-0159-v", { removeSeparators: true });
 // "855420159V"
 ```
 
-By default, normalization trims leading/trailing whitespace and uppercases `V`/`X`. It does not remove separators unless `removeSeparators` is enabled.
+By default, the normalization process trims leading/trailing whitespace and uppercases `V`/`X`. It does not remove separators unless `removeSeparators` is enabled.
 
 ## Parsing
 
